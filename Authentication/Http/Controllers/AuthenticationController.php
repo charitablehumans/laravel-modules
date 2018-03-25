@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Users\Http\Controllers;
+namespace Modules\Authentication\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
-class UsersController extends Controller
+class AuthenticationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('users::index');
+        return view('authentication::index');
     }
 
     /**
@@ -23,7 +23,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('users::create');
+        return view('authentication::create');
     }
 
     /**
@@ -41,7 +41,7 @@ class UsersController extends Controller
      */
     public function show()
     {
-        return view('users::show');
+        return view('authentication::show');
     }
 
     /**
@@ -50,7 +50,7 @@ class UsersController extends Controller
      */
     public function edit()
     {
-        return view('users::edit');
+        return view('authentication::edit');
     }
 
     /**
