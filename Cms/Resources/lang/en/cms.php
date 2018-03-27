@@ -75,6 +75,8 @@ return [
     'terms' => 'Terms',
     'trash' => 'Trash',
     'update' => 'Update',
+    'user' => 'User',
+    'user_addresses' => 'User Addresses',
     'users' => 'Users',
     'verification_success' => 'Verification Success',
     'verify' => 'Verify',

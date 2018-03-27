@@ -75,6 +75,8 @@ return [
     'terms' => 'Term',
     'trash' => 'Sampah',
     'update' => 'Perbarui',
+    'user' => 'User',
+    'user_addresses' => 'Alamat Pengguna',
     'users' => 'Pengguna',
     'verification_success' => 'Verifikasi Sukses',
     'verify' => 'Periksa',
