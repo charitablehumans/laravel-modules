@@ -38,7 +38,7 @@ class UserAddressesController extends Controller
         $userAddress = new UserAddresses;
         $userAddress->fill($request->input())->save();
         $request->input('primary') ? $userAddress->primaryUpdate($userAddress->id) : '';
-        flash(trans('cms.data_has_been_created'))->success()->important();
+        flash(trans('cms::cms.data_has_been_created'))->success()->important();
         return redirect()->back();
     }
 
@@ -67,7 +67,7 @@ class UserAddressesController extends Controller
         $userAddress = UserAddresses::findOrFail($id);
         $userAddress->fill($request->input())->save();
         $request->input('primary') ? $userAddress->primaryUpdate($userAddress->id) : '';
-        flash(trans('cms.data_has_been_updated'))->success()->important();
+        flash(trans('cms::cms.data_has_been_updated'))->success()->important();
         return redirect()->back();
     }
 
@@ -86,7 +86,7 @@ class UserAddressesController extends Controller
     {
         $userAddress = UserAddresses::findOrFail($id);
         $userAddress->delete();
-        flash(trans('cms.data_has_been_deleted'))->success()->important();
+        flash(trans('cms::cms.data_has_been_deleted'))->success()->important();
         return redirect()->route('backend.users.edit', [$userAddress->user_id, '#user_addresses']);
     }
 }
