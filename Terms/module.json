@@ -1,0 +1,16 @@
+{
+    "name": "Terms",
+    "alias": "terms",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Terms\\Providers\\TermsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
