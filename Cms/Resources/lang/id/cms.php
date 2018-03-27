@@ -6,6 +6,7 @@ return [
     'added' => 'Ditambahkan',
     'are_you_sure_to_delete_this' => 'Apakah kamu yakin untuk menghapus ini',
     'are_you_sure_to_delete_this_permanently' => 'Apakah kamu yakin untuk menghapus ini secara permanen',
+    'balance' => 'Saldo',
     'by' => 'Oleh',
     'caption' => 'Keterangan',
     'categories' => 'Kategori',
@@ -41,6 +42,7 @@ return [
     'menus' => 'Menu',
     'newer' => 'Lebih Baru',
     'next' => 'Berikutnya',
+    'no' => 'Tidak',
     'no_data' => 'Tidak ada data',
     'of' => 'Dari',
     'older' => 'Lebih Lama',
@@ -80,4 +82,5 @@ return [
     'users' => 'Pengguna',
     'verification_success' => 'Verifikasi Sukses',
     'verify' => 'Periksa',
+    'yes' => 'Ya',
 ];

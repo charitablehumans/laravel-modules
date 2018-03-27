@@ -6,6 +6,7 @@ return [
     'added' => 'Added',
     'are_you_sure_to_delete_this' => 'Are you sure to delete this',
     'are_you_sure_to_delete_this_permanently' => 'Are you sure to delete this permanently',
+    'balance' => 'Balance',
     'by' => 'By',
     'caption' => 'Caption',
     'categories' => 'Categories',
@@ -41,6 +42,7 @@ return [
     'menus' => 'Menus',
     'newer' => 'Newer',
     'next' => 'Next',
+    'no' => 'No',
     'no_data' => 'No data',
     'of' => 'Of',
     'older' => 'Older',
@@ -80,4 +82,5 @@ return [
     'users' => 'Users',
     'verification_success' => 'Verification Success',
     'verify' => 'Verify',
+    'yes' => 'Yes',
 ];
