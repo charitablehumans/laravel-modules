@@ -1,4 +1,4 @@
-@extends('cms::frontend/layouts/full')
+@extends('cms::frontend/default/layouts/full')
 
 @section('content')
     <div class="container">
