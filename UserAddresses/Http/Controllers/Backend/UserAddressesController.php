@@ -3,10 +3,9 @@
 namespace Modules\UserAddresses\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Models\Users;
 use Illuminate\Http\Request;
 use Modules\UserAddresses\Models\UserAddresses;
-// use Modules\Users\Models\Users;
+use Modules\Users\Models\Users;
 
 class UserAddressesController extends Controller
 {

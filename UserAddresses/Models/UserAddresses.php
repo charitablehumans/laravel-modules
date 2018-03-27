@@ -28,6 +28,6 @@ class UserAddresses extends Model
 
     public function user()
     {
-        return $this->belongsTo('\App\Http\Models\Users', 'user_id');
+        return $this->belongsTo('\Modules\Users\Models\Users', 'user_id');
     }
 }
