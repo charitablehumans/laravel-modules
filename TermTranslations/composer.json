@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/termtranslations",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\TermTranslations\\Providers\\TermTranslationsServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\TermTranslations\\": ""
+        }
+    }
+}

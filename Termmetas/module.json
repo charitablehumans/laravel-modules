@@ -1,0 +1,16 @@
+{
+    "name": "Termmetas",
+    "alias": "termmetas",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Termmetas\\Providers\\TermmetasServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}

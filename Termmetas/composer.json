@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/termmetas",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Termmetas\\Providers\\TermmetasServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Termmetas\\": ""
+        }
+    }
+}

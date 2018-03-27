@@ -1,0 +1,16 @@
+{
+    "name": "TermTranslations",
+    "alias": "termtranslations",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\TermTranslations\\Providers\\TermTranslationsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
