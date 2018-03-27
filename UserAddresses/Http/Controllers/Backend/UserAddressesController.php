@@ -33,7 +33,7 @@ class UserAddressesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(\Modules\UserAddresses\Http\Requests\Api\StoreRequest $request)
+    public function store(\Modules\UserAddresses\Http\Requests\Backend\StoreRequest $request)
     {
         $userAddress = new UserAddresses;
         $userAddress->fill($request->input())->save();
@@ -62,7 +62,7 @@ class UserAddressesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(\Modules\UserAddresses\Http\Requests\Api\UpdateRequest $request, $id)
+    public function update(\Modules\UserAddresses\Http\Requests\Backend\UpdateRequest $request, $id)
     {
         $userAddress = UserAddresses::findOrFail($id);
         $userAddress->fill($request->input())->save();

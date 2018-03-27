@@ -22,6 +22,8 @@ class UserAddresses extends Model
         $userAddress = self::findOrFail($id);
         $userAddress->primary = '1';
         $userAddress->save();
+
+        return $userAddress;
     }
 
     public function user()

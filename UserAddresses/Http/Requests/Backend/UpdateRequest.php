@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\UserAddresses\Http\Requests\Api;
+namespace Modules\UserAddresses\Http\Requests\Backend;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -14,6 +14,7 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
+            'user_id' => ['required', 'integer', 'digits_between:1,20', 'exists:users,id'],
             'name' => ['required', 'between:0,191'],
             'phone_number' => ['required', 'between:0,20'],
             'province_id' => ['required', 'integer', 'digits_between:1,20'],

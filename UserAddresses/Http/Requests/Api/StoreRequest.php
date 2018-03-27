@@ -14,7 +14,6 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => ['required', 'integer', 'digits_between:1,20', 'exists:users,id'],
             'name' => ['required', 'between:0,191'],
             'phone_number' => ['required', 'between:0,20'],
             'province_id' => ['required', 'integer', 'digits_between:1,20'],
