@@ -34,7 +34,7 @@ class Permission extends \Spatie\Permission\Models\Permission
     {
         if ($params['action'] == 'delete' && isset($params['action_id'])) {
             $this->search(['id_in' => $params['action_id']])->delete();
-            flash(__('cms.data_has_been_deleted'))->success()->important();
+            flash(trans('cms::cms.data_has_been_deleted'))->success()->important();
         }
         return $query;
     }
