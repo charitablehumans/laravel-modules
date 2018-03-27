@@ -35,7 +35,9 @@ class ProfileUpdateRequest extends FormRequest
                 'required', 'between:0,20',
                 Rule::unique('users', 'phone_number')->ignore(Auth::user()->id),
             ],
-            'password' => ['between:0,191'],
+            'password' => ['between:0,191'], 
+            'date_of_birth' => ['required', 'date'],
+            'address' => ['required'],
         ];
     }
 }
