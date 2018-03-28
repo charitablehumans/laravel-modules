@@ -26,6 +26,7 @@ return [
     'data_has_been_deleted' => 'Data telah dihapus',
     'data_has_been_updated' => 'Data telah diperbarui',
     'description' => 'Deskripsi',
+    'edit' => 'Sunting',
     'extension' => 'Ekstensi',
     'file_size' => 'Ukuran Berkas',
     'file_type' => 'Tipe Berkas',

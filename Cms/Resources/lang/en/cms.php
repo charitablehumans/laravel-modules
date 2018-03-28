@@ -26,6 +26,7 @@ return [
     'data_has_been_deleted' => 'Data has been deleted',
     'data_has_been_updated' => 'Data has been updated',
     'description' => 'Description',
+    'edit' => 'Edit',
     'extension' => 'Extension',
     'file_size' => 'File Size',
     'file_type' => 'File Type',
