@@ -1,0 +1,16 @@
+{
+    "name": "Tags",
+    "alias": "tags",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Tags\\Providers\\TagsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
