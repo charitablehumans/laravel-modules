@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['middleware' => 'web', 'prefix' => 'cms', 'namespace' => 'Modules\Cms\Http\Controllers'], function()
+Route::group(['middleware' => 'web'], function()
 {
-    Route::get('/', 'CmsController@index');
+    Route::get('locale/{locale?}', ['as' => 'locale.localeUpdate', 'uses' => '\Modules\Cms\Http\Controllers\Frontend\LocaleController@localeUpdate']);
 });
