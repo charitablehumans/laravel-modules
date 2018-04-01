@@ -33,7 +33,7 @@ class Posts extends Model
 
     public $translatedAttributes = ['title', 'name', 'excerpt', 'content'];
     public $translationForeignKey = 'post_id';
-    public $translationModel = 'App\Http\Models\PostTranslations';
+    public $translationModel = '\Modules\PostTranslations\Models\PostTranslations';
 
     protected static function boot()
     {
