@@ -1,0 +1,16 @@
+{
+    "name": "CustomLinks",
+    "alias": "customlinks",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\CustomLinks\\Providers\\CustomLinksServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
