@@ -2,10 +2,10 @@
 
 namespace Modules\Menus\Http\Controllers\Backend;
 
-use App\Http\Models\Posts;
 use Illuminate\Http\Request;
 use Modules\Categories\Models\Categories;
 use Modules\Menus\Models\Menus;
+use Modules\Posts\Models\Posts;
 use Modules\Termmetas\Models\Termmetas;
 
 class MenusController extends \Modules\Terms\Http\Controllers\Backend\TermsController

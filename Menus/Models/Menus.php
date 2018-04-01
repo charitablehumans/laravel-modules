@@ -2,9 +2,9 @@
 
 namespace Modules\Menus\Models;
 
-use App\Http\Models\Posts;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Categories\Models\Categories;
+use Modules\Posts\Models\Posts;
 use Modules\Tags\Models\Tags;
 use Modules\Terms\Models\Terms;
 use redzjovi\php\UrlHelper;
