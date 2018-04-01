@@ -1,0 +1,16 @@
+{
+    "name": "Pages",
+    "alias": "pages",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Pages\\Providers\\PagesServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
