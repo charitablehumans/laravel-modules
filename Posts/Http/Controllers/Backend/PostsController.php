@@ -3,8 +3,8 @@
 namespace Modules\Posts\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\Http\Models\Postmetas;
 use Illuminate\Http\Request;
+use Modules\Postmetas\Models\Postmetas;
 
 class PostsController extends Controller
 {

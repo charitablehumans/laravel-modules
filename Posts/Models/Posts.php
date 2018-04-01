@@ -2,10 +2,10 @@
 
 namespace Modules\Posts\Models;
 
-use App\Http\Models\Postmetas;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Categories\Models\Categories;
+use Modules\Postmetas\Models\Postmetas;
 use Modules\Tags\Models\Tags;
 use Modules\Users\Models\Users;
 
@@ -197,7 +197,7 @@ class Posts extends Model
 
     public function postmetas()
     {
-        return $this->hasMany('App\Http\Models\Postmetas', 'post_id', 'id');
+        return $this->hasMany('\Modules\Postmetas\Models\Postmetas', 'post_id', 'id');
     }
 
     public function scopeAction($query, $params)
