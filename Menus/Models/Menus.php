@@ -5,6 +5,7 @@ namespace Modules\Menus\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Categories\Models\Categories;
 use Modules\CustomLinks\Models\CustomLinks;
+use Modules\Pages\Models\Pages;
 use Modules\Posts\Models\Posts;
 use Modules\Tags\Models\Tags;
 use Modules\Terms\Models\Terms;
@@ -156,7 +157,7 @@ class Menus extends Terms
                 $this->setUrl($this->getUrl());
                 break;
             case 'page' :
-                $post = \App\Http\Models\Pages::findOrFail($this->id);
+                $post = Pages::findOrFail($this->id);
                 $this->setPost($post);
                 $this->setTitle($post->title);
                 $this->setUrl(url('pages/'.$post->name));
@@ -180,6 +181,11 @@ class Menus extends Terms
         }
 
         return $this->attributes['post'];
+    }
+
+    public function getPageIdOptions()
+    {
+        return (new Pages)->getPostIdOptions();
     }
 
     public function getPostIdOptions()

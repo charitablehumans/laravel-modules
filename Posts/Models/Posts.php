@@ -57,7 +57,7 @@ class Posts extends Model
 
     public function getAuthorIdOptions()
     {
-        $options = self::search(['sort' => 'author_name,ASC'])->get()->pluck('author_name', 'author_id')->toArray();
+        $options = self::search(['sort' => 'author_name:asc'])->get()->pluck('author_name', 'author_id')->toArray();
         return $options;
     }
 
@@ -75,7 +75,7 @@ class Posts extends Model
 
     public function getPostIdOptions()
     {
-        $options = self::search(['sort' => 'title,ASC'])->select([self::getTable().'.id', 'title'])->get()->pluck('title', 'id')->toArray();
+        $options = self::search(['sort' => 'title:asc'])->select([self::getTable().'.id', 'title'])->get()->pluck('title', 'id')->toArray();
         return $options;
     }
 
