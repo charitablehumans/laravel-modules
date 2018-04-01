@@ -36,7 +36,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     @php
-                    $term = \App\Http\Models\Menus::search(['slug' => 'frontend-default-top-left'])->firstOrFail();
+                    $term = \Modules\Menus\Models\Menus::search(['slug' => 'frontend-default-top-left'])->firstOrFail();
                     $nestable = $term->getTermmetaNestable();
                     @endphp
                     {!! $term->generateAsHtml($nestable, 'frontend-default-top') !!}
@@ -44,7 +44,7 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     @php
-                    $term = \App\Http\Models\Menus::search(['slug' => 'frontend-default-top-right'])->firstOrFail();
+                    $term = \Modules\Menus\Models\Menus::search(['slug' => 'frontend-default-top-right'])->firstOrFail();
                     $nestable = $term->getTermmetaNestable();
                     @endphp
                     {!! $term->generateAsHtml($nestable, 'frontend-default-top') !!}

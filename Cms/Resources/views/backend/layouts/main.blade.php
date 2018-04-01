@@ -100,14 +100,14 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">@lang('cms::cms.main')</li>
                 @php
-                $term = \App\Http\Models\Menus::search(['slug' => 'backend-main'])->firstOrFail();
+                $term = \Modules\Menus\Models\Menus::search(['slug' => 'backend-main'])->firstOrFail();
                 $nestable = $term->getTermmetaNestable();
                 @endphp
                 {!! $term->generateAsHtml($nestable, 'backend-master') !!}
 
                 <li class="header">@lang('cms::cms.masters')</li>
                 @php
-                $term = \App\Http\Models\Menus::search(['slug' => 'backend-master'])->firstOrFail();
+                $term = \Modules\Menus\Models\Menus::search(['slug' => 'backend-master'])->firstOrFail();
                 $nestable = $term->getTermmetaNestable();
                 @endphp
                 {!! $term->generateAsHtml($nestable, 'backend-master') !!}

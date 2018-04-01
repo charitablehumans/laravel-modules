@@ -1,6 +1,10 @@
 <?php
 
-Route::group(['middleware' => 'web', 'prefix' => 'menus', 'namespace' => 'Modules\Menus\Http\Controllers'], function()
-{
-    Route::get('/', 'MenusController@index');
+Route::group(['middleware' => ['web']], function () {
+    Route::group(['middleware' => ['auth']], function () {
+        Route::group(['middleware' => ['permission:backend menus']], function () {
+            Route::resource('backend/menus', '\Modules\Menus\Http\Controllers\Backend\MenusController', ['as' => 'backend']);
+            Route::get('backend/menus/{id}/delete', ['as' => 'backend.menus.delete', 'uses' => '\Modules\Menus\Http\Controllers\Backend\MenusController@delete']);
+        });
+    });
 });
