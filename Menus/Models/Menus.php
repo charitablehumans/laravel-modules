@@ -4,6 +4,7 @@ namespace Modules\Menus\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Categories\Models\Categories;
+use Modules\CustomLinks\Models\CustomLinks;
 use Modules\Posts\Models\Posts;
 use Modules\Tags\Models\Tags;
 use Modules\Terms\Models\Terms;
@@ -119,7 +120,7 @@ class Menus extends Terms
 
     public function getCustomLinkIdOptions()
     {
-        $tree = (new \App\Http\Models\CustomLinks)->getPostIdOptions();
+        $tree = (new CustomLinks)->getPostIdOptions();
         return $tree;
     }
 
@@ -149,7 +150,7 @@ class Menus extends Terms
                 $this->setUrl(url('categories/'.$term->slug));
                 break;
             case 'custom_link' :
-                $post = \App\Http\Models\CustomLinks::findOrFail($this->id);
+                $post = CustomLinks::findOrFail($this->id);
                 $this->setPost($post);
                 $this->setTitle($post->title);
                 $this->setUrl($this->getUrl());
