@@ -18,6 +18,7 @@ class CreatePostProductsTable extends Migration
             $table->string('status')->comment('{ always_available, limited_stock }');
             $table->bigInteger('stock');
             $table->bigInteger('sell_price');
+            $table->bigInteger('weight')->comment('grams');
             $table->timestamps();
         });
     }

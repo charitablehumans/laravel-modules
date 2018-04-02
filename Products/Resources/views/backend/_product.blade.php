@@ -27,6 +27,15 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label>@lang('validation.attributes.weight') in Grams (*)</label>
+            <input class="form-control input-sm text-right" name="post_products[weight]" required type="number" value="{{ $post->getPostProductWeight() }}" />
+            <i class="text-danger">{{ $errors->first('post_products[weight]') }}</i>
+        </div>
+    </div>
+</div>
 
 @push('scripts')
     <script>

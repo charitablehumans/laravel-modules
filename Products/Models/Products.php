@@ -49,8 +49,7 @@ class Products extends \Modules\Posts\Models\Posts
 
     public function getPostProductWeight()
     {
-        $weight = 0;
-        return $weight;
+        return $this->id ? $this->postProduct->getWeight() : (new PostProducts)->getWeight();
     }
 
     public function postProduct()

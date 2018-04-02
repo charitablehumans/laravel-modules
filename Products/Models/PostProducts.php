@@ -11,6 +11,7 @@ class PostProducts extends Model
         'status',
         'stock',
         'sell_price',
+        'weight',
     ];
 
     protected $table = 'post_products';
@@ -47,6 +48,13 @@ class PostProducts extends Model
     public function getStockUnlimited()
     {
         return $this->getStatusOptions() == 'always_available' ? '&#8734;' : '';
+    }
+
+    public function getWeight()
+    {
+        $weight = $this->weight;
+        $weight = request()->old('post_products.weight') ? request()->old('post_products.weight') : $weight;
+        return (int) $weight;
     }
 
     public function product()
