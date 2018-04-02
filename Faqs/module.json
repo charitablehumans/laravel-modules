@@ -1,0 +1,16 @@
+{
+    "name": "Faqs",
+    "alias": "faqs",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Faqs\\Providers\\FaqsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
