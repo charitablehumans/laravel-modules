@@ -1,4 +1,4 @@
-@extends(request()->query('layout') ? 'backend.layouts.'.request()->query('layout') : 'backend.layouts.main')
+@extends(request()->query('layout') ? 'cms::backend/layouts/'.request()->query('layout') : 'cms::backend/layouts/main')
 
 @section('title', trans('cms::cms.media'))
 @section('content_header', trans('cms::cms.media'))
@@ -104,7 +104,7 @@
                                     @if (in_array($post->mime_type, $post->mimeTypeImages)) data-fancybox="group" @endif
                                         href="{{ Storage::url($post->getPostmetaAttachedFile()) }}" target="_blank"
                                         >
-                                        <img class="media-object" src="{{ Storage::url($post->getPostmetaAttachedFileThumbnail()) }}" style="height: 32px; width: 32px;" />
+                                        <img class="contain img-responsive media-object" src="{{ Storage::url($post->getPostmetaAttachedFileThumbnail()) }}" style="height: 32px; width: 32px;" />
                                     </a>
                                 </td>
                                 <td>

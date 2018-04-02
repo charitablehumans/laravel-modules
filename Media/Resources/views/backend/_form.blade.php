@@ -51,7 +51,7 @@
                                 @if (in_array($post->mime_type, $post->mimeTypeImages)) data-fancybox="group" @endif
                                 href="{{ Storage::url($post->getPostmetaAttachedFile()) }}" target="_blank"
                             >
-                                <img class="media-object" src="{{ Storage::url($post->getPostmetaAttachedFileThumbnail()) }}" style="height: 150px; width: 150px;" />
+                                <img class="contain media-object" src="{{ Storage::url($post->getPostmetaAttachedFileThumbnail()) }}" style="height: 150px; width: 150px;" />
                             </a>
                         </div>
                         <div class="col-md-8">

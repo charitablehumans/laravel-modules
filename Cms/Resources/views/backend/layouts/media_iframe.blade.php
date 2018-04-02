@@ -34,7 +34,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/backend-app.js') }}"></script>
-    @include('media::backend/backend/_media_iframe_js')
+    @include('media::backend/_media_iframe_js')
     @stack('scripts')
 </body>
 </html>
