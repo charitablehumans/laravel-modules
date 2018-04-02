@@ -1,0 +1,16 @@
+{
+    "name": "Locations",
+    "alias": "locations",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Locations\\Providers\\LocationsServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
