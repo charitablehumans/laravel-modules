@@ -36,6 +36,8 @@ return [
     'forgot_password' => 'Lupa Kata Sandi',
     'icon' => 'Ikon',
     'images' => 'Gambar',
+    'location' => 'Lokasi',
+    'locations' => 'Lokasi',
     'login' => 'Masuk',
     'logout' => 'Keluar',
     'main' => 'Utama',

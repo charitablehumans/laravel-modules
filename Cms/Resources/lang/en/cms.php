@@ -36,6 +36,8 @@ return [
     'forgot_password' => 'Forgot Password',
     'icon' => 'Icon',
     'images' => 'Images',
+    'location' => 'Location',
+    'locations' => 'Locations',
     'login' => 'Login',
     'logout' => 'Logout',
     'main' => 'Main',
