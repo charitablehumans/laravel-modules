@@ -101,7 +101,7 @@
                     </template>
 
                     @foreach ($term->getTermmetaImagesId() as $imageId)
-                        @php $medium = \App\Http\Models\Media::find($imageId); @endphp
+                        @php $medium = \Modules\Media\Models\Media::find($imageId); @endphp
 
                         <li>
                             <input class="images_media_id" name="termmetas[images][]" type="hidden" value="{{ $imageId }}" />

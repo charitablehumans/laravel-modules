@@ -5,6 +5,7 @@ namespace Modules\Posts\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Categories\Models\Categories;
+use Modules\Media\Models\Media;
 use Modules\Postmetas\Models\Postmetas;
 use Modules\Tags\Models\Tags;
 use Modules\Users\Models\Users;
@@ -125,7 +126,7 @@ class Posts extends Model
         $imageId = $this->getPostmetaImageId();
 
         if ($imageId) {
-            $imageUrl = \App\Http\Models\Media::find($imageId)->getPostmetaAttachedFileThumbnail();
+            $imageUrl = Media::find($imageId)->getPostmetaAttachedFileThumbnail();
             $imageUrl = \Storage::url($imageUrl);
         } else {
             $imageUrl = asset('images/posts/default.png');
@@ -139,7 +140,7 @@ class Posts extends Model
         $imageId = $this->getPostmetaImageId();
 
         if ($imageId) {
-            $imageUrl = \App\Http\Models\Media::find($imageId)->getPostmetaAttachedFile();
+            $imageUrl = Media::find($imageId)->getPostmetaAttachedFile();
             $imageUrl = \Storage::url($imageUrl);
         } else {
             $imageUrl = asset('images/posts/default.png');

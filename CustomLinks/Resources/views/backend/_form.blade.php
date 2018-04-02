@@ -105,7 +105,7 @@
                     </template>
 
                     @foreach ($post->getPostmetaImagesId() as $imageId)
-                        @php $medium = \App\Http\Models\Media::find($imageId); @endphp
+                        @php $medium = \Modules\Media\Models\Media::find($imageId); @endphp
                         <li>
                             <input class="images_media_id" name="postmetas[images][]" type="hidden" value="{{ $imageId }}" />
                             <div style="position: relative;">
