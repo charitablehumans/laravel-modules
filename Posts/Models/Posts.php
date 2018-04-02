@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Modules\Categories\Models\Categories;
 use Modules\Media\Models\Media;
 use Modules\Postmetas\Models\Postmetas;
-use Modules\Tags\Models\Tags;
 use Modules\Users\Models\Users;
 
 class Posts extends Model
@@ -184,7 +183,7 @@ class Posts extends Model
 
     public function getTagIdOptions()
     {
-        $options = (new Tags)->getTagIdOptions();
+        $options = (new \Modules\Tags\Models\Tags)->getTagIdOptions();
         return $options;
     }
 

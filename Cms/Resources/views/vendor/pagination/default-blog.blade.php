@@ -5,14 +5,14 @@
 
         @else
             <li class="previous">
-                <a href="{{ $paginator->previousPageUrl() }}" rel="@lang('cms.previous')">&larr; @lang('cms.newer')</a>
+                <a href="{{ $paginator->previousPageUrl() }}" rel="@lang('cms::cms.previous')">&larr; @lang('cms::cms.newer')</a>
             </li>
         @endif
 
         {{-- Next Page Link --}}
         @if ($paginator->hasMorePages())
             <li class="next">
-                <a href="{{ $paginator->nextPageUrl() }}" rel="@lang('cms.next')">@lang('cms.older') &rarr;</a>
+                <a href="{{ $paginator->nextPageUrl() }}" rel="@lang('cms::cms.next')">@lang('cms::cms.older') &rarr;</a>
             </li>
         @endif
     </ul>

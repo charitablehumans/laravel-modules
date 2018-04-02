@@ -1,13 +1,13 @@
-@extends('backend.layouts.main')
+@extends('cms::backend/layouts/main')
 
-@section('title', __('cms.edit'))
-@section('content_header', __('cms.edit'))
+@section('title', trans('cms::cms.edit'))
+@section('content_header', trans('cms::cms.edit'))
 @section('breadcrumb')
     <ol class="breadcrumb">
         <li>
-            <a href="{{ route('backend.medium-categories.index', request()->query()) }}">@lang('cms.medium_categories')</a>
+            <a href="{{ route('backend.medium-categories.index', request()->query()) }}">@lang('cms::cms.medium_categories')</a>
         </li>
-        <li class="active">@lang('cms.edit')</li>
+        <li class="active">@lang('cms::cms.edit')</li>
     </ol>
 @endsection
 
