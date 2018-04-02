@@ -7,6 +7,7 @@ use Modules\Categories\Models\Categories;
 use Modules\CustomLinks\Models\CustomLinks;
 use Modules\Pages\Models\Pages;
 use Modules\Posts\Models\Posts;
+use Modules\Products\Models\Products;
 use Modules\Tags\Models\Tags;
 use Modules\Terms\Models\Terms;
 use redzjovi\php\UrlHelper;
@@ -17,8 +18,9 @@ class Menus extends Terms
         'taxonomy' => 'menu',
     ];
 
-    // custom attribute
-    protected $post, $icon, $title, $type, $url, $permission;
+    // custom attribute menu
+    public $post, $icon, $title, $type, $url, $permission;
+    public $content, $excerpt, $image_thumbnail_url, $image_url, $metas, $others, $template;
 
     protected static function boot()
     {
@@ -26,6 +28,40 @@ class Menus extends Terms
 
         $table = (new Terms)->getTable();
         static::addGlobalScope('taxonomy', function (Builder $builder) use ($table) { $builder->where($table.'.taxonomy', 'menu'); });
+    }
+
+    public function generateAsArray($nestable)
+    {
+        $data = [];
+
+        foreach ($nestable as $i => $item) {
+            $this->attributes = $item;
+            $this->getPost();
+
+            $data[$i] = [
+                'content' => $this->getContent(),
+                'excerpt' => $this->getExcerpt(),
+                'icon' => $this->getIcon(),
+                'id' => $this->id,
+                'image_thumbnail_url' => $this->getImageThumbnailUrl(),
+                'image_url' => $this->getImageUrl(),
+                'metas' => collect($this->getMetas())->pluck('value', 'key'),
+                'others' => $this->getOthers(),
+                'template' => $this->getTemplate(),
+                'title' => $this->getTitle(),
+                'type' => $this->getType(),
+                'url' => $this->getUrl(),
+                'permission' => $this->getPermission(),
+
+                'item' => $item,
+            ];
+
+            if (isset($item['children']) && is_array($item['children'])) {
+                $data[$i]['children'] = $this->generateAsArray($item['children']);
+            }
+        }
+
+        return $data;
     }
 
     public function generateAsHtml($nestable, $template = 'backend_menu_form')
@@ -119,15 +155,45 @@ class Menus extends Terms
         return $tree;
     }
 
+    public function getContent()
+    {
+        return $this->attributes['content'];
+    }
+
     public function getCustomLinkIdOptions()
     {
         $tree = (new CustomLinks)->getPostIdOptions();
         return $tree;
     }
 
+    public function getExcerpt()
+    {
+        return $this->attributes['excerpt'];
+    }
+
     public function getIcon()
     {
         return $this->attributes['icon'];
+    }
+
+    public function getImageUrl()
+    {
+        return $this->attributes['image_url'];
+    }
+
+    public function getImageThumbnailUrl()
+    {
+        return $this->attributes['image_thumbnail_url'];
+    }
+
+    public function getMetas()
+    {
+        return $this->attributes['metas'];
+    }
+
+    public function getOthers()
+    {
+        return $this->attributes['others'];
     }
 
     public function getPermission()
@@ -145,37 +211,92 @@ class Menus extends Terms
     {
         switch ($this->getType()) {
             case 'category' :
-                $term = \Modules\Categories\Models\Categories::findOrFail($this->id);
+                $term = Categories::findOrFail($this->id);
+                $this->setContent($term->description);
+                $this->setExcerpt('');
+                $this->setImageThumbnailUrl($term->getTermmetaImageThumbnailUrl());
+                $this->setImageUrl($term->getTermmetaImageUrl());
+                $this->setMetas($term->termmetas);
+                $this->setOthers('');
                 $this->setPost($term);
+                $this->setTemplate($term->getTermmetaTemplate());
                 $this->setTitle($term->name);
                 $this->setUrl(url('categories/'.$term->slug));
                 break;
             case 'custom_link' :
                 $post = CustomLinks::findOrFail($this->id);
+                $this->setContent($post->content);
+                $this->setExcerpt($post->excerpt);
+                $this->setImageThumbnailUrl($post->getPostmetaImageThumbnailUrl());
+                $this->setImageUrl($post->getPostmetaImageUrl());
+                $this->setMetas($post->postmetas);
+                $this->setOthers('');
                 $this->setPost($post);
+                $this->setTemplate($post->getPostmetaTemplate());
                 $this->setTitle($post->title);
                 $this->setUrl($this->getUrl());
                 break;
             case 'page' :
                 $post = Pages::findOrFail($this->id);
+                $this->setContent($post->content);
+                $this->setExcerpt($post->excerpt);
+                $this->setImageThumbnailUrl($post->getPostmetaImageThumbnailUrl());
+                $this->setImageUrl($post->getPostmetaImageUrl());
+                $this->setMetas($post->postmetas);
+                $this->setOthers('');
                 $this->setPost($post);
+                $this->setTemplate($post->getPostmetaTemplate());
                 $this->setTitle($post->title);
                 $this->setUrl(url('pages/'.$post->name));
                 break;
             case 'post' :
                 $post = Posts::findOrFail($this->id);
+                $this->setContent($post->content);
+                $this->setExcerpt($post->excerpt);
+                $this->setImageThumbnailUrl($post->getPostmetaImageThumbnailUrl());
+                $this->setImageUrl($post->getPostmetaImageUrl());
+                $this->setMetas($post->postmetas);
+                $this->setOthers('');
                 $this->setPost($post);
+                $this->setTemplate($post->getPostmetaTemplate());
+                $this->setTitle($post->title);
+                $this->setUrl(url('posts/'.$post->name));
+                break;
+            case 'product' :
+                $post = Products::findOrFail($this->id);
+                $this->setContent($post->content);
+                $this->setExcerpt($post->excerpt);
+                $this->setImageThumbnailUrl($post->getPostmetaImageThumbnailUrl());
+                $this->setImageUrl($post->getPostmetaImageUrl());
+                $this->setMetas($post->postmetas);
+                $this->setOthers(['product' => $post->postProduct]);
+                $this->setPost($post);
+                $this->setTemplate($post->getPostmetaTemplate());
                 $this->setTitle($post->title);
                 $this->setUrl(url('posts/'.$post->name));
                 break;
             case 'tag' :
                 $term = Tags::findOrFail($this->id);
+                $this->setContent($post->description);
+                $this->setExcerpt('');
+                $this->setImageThumbnailUrl($term->getTermmetaImageThumbnailUrl());
+                $this->setImageUrl($term->getTermmetaImageUrl());
+                $this->setMetas($term->termmetas);
+                $this->setOthers('');
                 $this->setPost($term);
+                $this->setTemplate($term->getTermmetaTemplate());
                 $this->setTitle($term->name);
                 $this->setUrl(url('tags/'.$term->name));
                 break;
             default :
+                $this->setContent('');
+                $this->setExcerpt('');
+                $this->setImageThumbnailUrl('');
+                $this->setImageUrl('');
+                $this->setMetas('');
+                $this->setOthers('');
                 $this->setPost('');
+                $this->setTemplate('');
                 $this->setTitle('');
                 $this->setUrl('');
         }
@@ -194,10 +315,21 @@ class Menus extends Terms
         return $options;
     }
 
+    public function getProductIdOptions()
+    {
+        $options = (new Products)->getPostIdOptions();
+        return $options;
+    }
+
     public function getTagIdOptions()
     {
         $options = (new Tags)->getTagIdOptions();
         return $options;
+    }
+
+    public function getTemplate()
+    {
+        return $this->attributes['template'];
     }
 
     public function getTitle()
@@ -215,9 +347,44 @@ class Menus extends Terms
         return UrlHelper::isRelative($this->attributes['url']) ? url($this->attributes['url']) : $this->attributes['url'];
     }
 
+    public function setContent($value)
+    {
+        $this->attributes['content'] = $value;
+    }
+
+    public function setExcerpt($value)
+    {
+        $this->attributes['excerpt'] = $value;
+    }
+
+    public function setImageThumbnailUrl($value)
+    {
+        $this->attributes['image_thumbnail_url'] = $value;
+    }
+
+    public function setImageUrl($value)
+    {
+        $this->attributes['image_url'] = $value;
+    }
+
+    public function setMetas($value)
+    {
+        $this->attributes['metas'] = $value;
+    }
+
+    public function setOthers($value)
+    {
+        $this->attributes['others'] = $value;
+    }
+
     public function setPost($value)
     {
         $this->attributes['post'] = $value;
+    }
+
+    public function setTemplate($value)
+    {
+        $this->attributes['template'] = $value;
     }
 
     public function setTitle($value)

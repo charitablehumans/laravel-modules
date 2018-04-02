@@ -60,6 +60,9 @@
             @include('menus::backend/_accordion/_custom_links', ['term' => $term])
             @include('menus::backend/_accordion/_pages', ['term' => $term])
             @include('menus::backend/_accordion/_posts', ['term' => $term])
+            @if (config('cms.menus.accordion.products'))
+                @include('menus::backend/_accordion/_products', ['term' => $term])
+            @endif
             @include('menus::backend/_accordion/_tags', ['term' => $term])
         </div>
     </div>
