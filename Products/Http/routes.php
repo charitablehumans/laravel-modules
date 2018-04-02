@@ -1,6 +1,11 @@
 <?php
 
-Route::group(['middleware' => 'web', 'prefix' => 'products', 'namespace' => 'Modules\Products\Http\Controllers'], function()
-{
-    Route::get('/', 'ProductsController@index');
+Route::group(['middleware' => ['web']], function () {
+    Route::group(['middleware' => ['auth']], function () {
+        Route::group(['middleware' => ['permission:backend products']], function () {
+            Route::resource('backend/products', '\Modules\Products\Http\Controllers\Backend\ProductsController', ['as' => 'backend']);
+            Route::get('backend/products/{id}/delete', ['as' => 'backend.products.delete', 'uses' => '\Modules\Products\Http\Controllers\Backend\ProductsController@delete']);
+            Route::get('backend/products/{id}/trash', ['as' => 'backend.products.trash', 'uses' => '\Modules\Products\Http\Controllers\Backend\ProductsController@trash']);
+        });
+    });
 });

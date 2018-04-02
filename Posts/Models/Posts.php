@@ -239,22 +239,6 @@ class Posts extends Model
 
         // postmetas
         isset($params['category_id']) ? $query->join((new Postmetas)->getTable().' AS postmetas_category_id', 'postmetas_category_id.post_id', '=', self::getTable().'.id')->where('postmetas_category_id.key', 'categories')->where('postmetas_category_id.value', 'LIKE', '%"'.$params['category_id'].'"%') : ('');
-        if (isset($params['product_price'])) {
-            $query->join((new Postmetas)->getTable().' AS postmetas_product_price', 'postmetas_product_price.post_id', '=', self::getTable().'.id')->where('postmetas_product_price.key', 'product_price');
-            if (isset($params['product_price_operator'])) {
-                $query->where('postmetas_product_price.value', $params['product_price_operator'], $params['product_price']);
-            } else {
-                $query->where('postmetas_product_price.value', $params['product_price']);
-            }
-        }
-        if (isset($params['product_stock'])) {
-            $query->join((new Postmetas)->getTable().' AS postmetas_product_stock', 'postmetas_product_stock.post_id', '=', self::getTable().'.id')->where('postmetas_product_stock.key', 'product_stock');
-            if (isset($params['product_stock_operator'])) {
-                $query->where('postmetas_product_stock.value', $params['product_stock_operator'], $params['product_stock']);
-            } else {
-                $query->where('postmetas_product_stock.value', $params['product_stock']);
-            }
-        }
 
         // post_translations
         isset($params['locale']) ? $query->whereTranslation('locale', $params['locale']) : '';

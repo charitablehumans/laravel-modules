@@ -1,18 +1,18 @@
 <?php
 
-namespace Modules\Locations\Http\Controllers\Backend;
+namespace Modules\Products\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use Modules\Locations\Models\PostLocations;
 use Modules\Postmetas\Models\Postmetas;
+use Modules\Products\Models\PostProducts;
 
-class LocationsController extends \Modules\Posts\Http\Controllers\Backend\PostsController
+class ProductsController extends \Modules\Posts\Http\Controllers\Backend\PostsController
 {
     protected $model;
 
     public function __construct()
     {
-        $this->model = new \Modules\Locations\Models\Locations;
+        $this->model = new \Modules\Products\Models\Products;
     }
 
     /**
@@ -27,11 +27,11 @@ class LocationsController extends \Modules\Posts\Http\Controllers\Backend\PostsC
         $request->query('limit') ?: $request->query->set('limit', 10);
 
         $data['model'] = $this->model;
-        $data['posts'] = $this->model::with(['author', 'postmetas'])->select($this->model->getTable().'.*')->search($request->query())->paginate($request->query('limit'));
+        $data['posts'] = $this->model::with(['author', 'postmetas', 'postProduct'])->select($this->model->getTable().'.*')->search($request->query())->paginate($request->query('limit'));
 
         if ($request->query('action')) { $this->model->action($request->query()); return redirect()->back(); }
 
-        return view('locations::backend/index', $data);
+        return view('products::backend/index', $data);
     }
 
     /**
@@ -43,7 +43,7 @@ class LocationsController extends \Modules\Posts\Http\Controllers\Backend\PostsC
     {
         $data['post'] = $this->model;
         $data['post_translation'] = $this->model;
-        return view('locations::backend/create', $data);
+        return view('products::backend/create', $data);
     }
 
     /**
@@ -61,8 +61,8 @@ class LocationsController extends \Modules\Posts\Http\Controllers\Backend\PostsC
             $attributes[$languageCode] = $request->input();
         }
         $post->fill($attributes)->save();
-        (new PostLocations)->sync($request->input('post_locations'), $post->id);
         (new Postmetas)->sync($request->input('postmetas'), $post->id);
+        (new PostProducts)->sync($request->input('post_products'), $post->id);
         flash(trans('cms::cms.data_has_been_created'))->success()->important();
         return redirect()->back();
     }
@@ -77,7 +77,7 @@ class LocationsController extends \Modules\Posts\Http\Controllers\Backend\PostsC
     {
         $data['post'] = $post = $this->model::findOrFail($id);
         $data['post_translation'] = $post->translateOrNew($request->query('locale'));
-        return view('locations::backend/edit', $data);
+        return view('products::backend/edit', $data);
     }
 
     /**
@@ -94,10 +94,10 @@ class LocationsController extends \Modules\Posts\Http\Controllers\Backend\PostsC
         $attributes['author_id'] = auth()->user()->id;
         $attributes[$request->input('locale')] = $request->input();
         $post->fill($attributes)->save();
-        (new PostLocations)->sync($request->input('post_locations'), $post->id);
         (new Postmetas)->sync($request->input('postmetas'), $post->id);
+        (new PostProducts)->sync($request->input('post_products'), $post->id);
         flash(trans('cms::cms.data_has_been_updated'))->success()->important();
-        if ($post->status == 'trash' && ! auth()->user()->can('backend locations trash')) { return redirect()->route('backend.locations.index'); }
+        if ($post->status == 'trash' && ! auth()->user()->can('backend products trash')) { return redirect()->route('backend.products.index'); }
         return redirect()->back();
     }
 }
