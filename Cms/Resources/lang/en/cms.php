@@ -28,6 +28,8 @@ return [
     'description' => 'Description',
     'edit' => 'Edit',
     'extension' => 'Extension',
+    'faq' => 'FAQ',
+    'faqs' => 'FAQ',
     'file_size' => 'File Size',
     'file_type' => 'File Type',
     'file_url' => 'File Url',

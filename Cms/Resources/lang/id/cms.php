@@ -28,6 +28,8 @@ return [
     'description' => 'Deskripsi',
     'edit' => 'Sunting',
     'extension' => 'Ekstensi',
+    'faq' => 'FAQ',
+    'faqs' => 'FAQ',
     'file_size' => 'Ukuran Berkas',
     'file_type' => 'Tipe Berkas',
     'file_url' => 'Url Berkas',
