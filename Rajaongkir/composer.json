@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/rajaongkir",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Rajaongkir\\Providers\\RajaongkirServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\Rajaongkir\\": ""
+        }
+    }
+}
