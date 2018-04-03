@@ -1,0 +1,16 @@
+{
+    "name": "Geocodes",
+    "alias": "geocodes",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Geocodes\\Providers\\GeocodesServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
