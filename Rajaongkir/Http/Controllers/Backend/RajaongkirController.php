@@ -1,10 +1,11 @@
 <?php
 
-namespace Modules\Rajaongkir\Http\Controllers;
+namespace Modules\Rajaongkir\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Rajaongkir\Models\Rajaongkir;
 
 class RajaongkirController extends Controller
 {
@@ -14,6 +15,23 @@ class RajaongkirController extends Controller
      */
     public function index()
     {
+        $rajaongkir = new Rajaongkir;
+
+        $provinces = $rajaongkir->getProvinces();
+        dump($provinces);
+
+        $province = $rajaongkir->getProvinces(['id' => 1]);
+        dump($province);
+
+        $cities = $rajaongkir->getCities();
+        dump($cities);
+
+        $cities = $rajaongkir->getCities(['province' => 21]);
+        dump($cities);
+
+        $city = $rajaongkir->getCities(['id' => 1]);
+        dump($city);
+
         return view('rajaongkir::index');
     }
 
