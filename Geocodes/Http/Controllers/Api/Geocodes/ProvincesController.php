@@ -67,7 +67,7 @@ class ProvincesController extends Controller
      */
     public function index(Request $request)
     {
-        $provinces = Provinces::search($request->query())->orderBy('name')->paginate((int) $request->query('per_page'));
+        $provinces = Provinces::search($request->query())->orderBy('name');
         $provinces = $request->query('per_page') ? $provinces->paginate((int) $request->query('per_page')) : $provinces->get();
         return \Modules\Geocodes\Transformers\Api\GeocodeResource::collection($provinces);
     }

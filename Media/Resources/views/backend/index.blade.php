@@ -55,7 +55,7 @@
                             <th><input class="table_row_checkbox_all" type="checkbox" /></th>
                             <th></th>
                             <th>@lang('validation.attributes.locale')</th>
-                            <th>@lang('validation.attributes.name') <input class="form-control input-sm" name="title" type="text" value="{{ request()->query('title') }}" /></th>
+                            <th>@lang('validation.attributes.name') <input class="form-control input-sm" name="title_like" type="text" value="{{ request()->query('title_like') }}" /></th>
                             <th>
                                 @lang('validation.attributes.mime_type')
                                 <select class="form-control input-sm" name="mime_type">
