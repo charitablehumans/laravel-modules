@@ -16,8 +16,6 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
-        $couriers = (new Rajaongkir)->getCouriersId();
-
         return [
             // 'origin' => [
             //     'required', 'integer', 'digits_between:1,20',
@@ -32,10 +30,6 @@ class StoreRequest extends FormRequest
                 }),
             ],
             'weight' => ['required', 'integer', 'digits_between:1,20'],
-            'courier' => [
-                'required',
-                Rule::in($couriers),
-            ],
         ];
     }
 

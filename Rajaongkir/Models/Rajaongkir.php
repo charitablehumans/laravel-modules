@@ -66,7 +66,7 @@ class Rajaongkir extends Model
 
     /**
      * [getCostCourier description]
-     * @param array $data
+     * @param array $formParams
      * [
      *      'origin' => '155', // regency_id
      *      'destination' => '447', // regency_id
@@ -92,6 +92,57 @@ class Rajaongkir extends Model
         }
 
         return $results;
+    }
+
+    /**
+     * [getCosts description]
+     * @param array $formParams
+     * [
+     *      'origin' => '155', // regency_id
+     *      'destination' => '447', // regency_id
+     *      'weight' => '1000', // grams
+     * ]
+     * @param array $couriers
+     * [
+     *      'jne',
+     *      'tiki',
+     * ]
+     * @return [type] [description]
+     */
+    public function getCosts($formParams = [], $couriers = [])
+    {
+        $costs = [];
+
+        foreach ($couriers as $courier) {
+            try {
+                $client = new Client();
+                $options['headers'] = ['Key' => env('RAJAONGKIR_KEY')];
+                $formParams['courier'] = $courier;
+                $formParams ? $options['form_params'] = $formParams : '';
+                $response = $client->post($this->getCostUrl(), $options);
+
+                $contents = json_decode($response->getBody()->getContents(), true);
+                $results = $contents['rajaongkir']['results'][0];
+
+                foreach ($results['costs'] as $result) {
+                    $costs[] = [
+                        'code' => $results['code'],
+                        'name' => $results['name'],
+                        'service' => $result['service'],
+                        'description' => $result['description'],
+                        'cost' => $result['cost'][0]['value'],
+                        'etd' => $result['cost'][0]['etd'],
+                        'note' => $result['cost'][0]['note'],
+                    ];
+                }
+            } catch (ClientException $e) {
+                // $response = $e->getResponse();
+                // $contents = json_decode($response->getBody()->getContents(), true);
+                $costs = false;
+            }
+        }
+
+        return $costs;
     }
 
     public function getCostUrl()

@@ -6,7 +6,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Models\Permission;
 
-class PermissionsSeederTableSeeder extends Seeder
+class PermissionsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -21,6 +21,8 @@ class PermissionsSeederTableSeeder extends Seeder
         app()['cache']->forget('spatie.permission.cache');
 
         // create permissions
+        Permission::create(['name' => 'api rajaongkir']);
+
         Permission::create(['name' => 'backend categories']);
         Permission::create(['name' => 'backend cnr balances']);
         Permission::create(['name' => 'backend content']);
@@ -55,6 +57,7 @@ class PermissionsSeederTableSeeder extends Seeder
         Permission::create(['name' => 'backend products']);
         Permission::create(['name' => 'backend products delete']);
         Permission::create(['name' => 'backend products trash']);
+        Permission::create(['name' => 'backend rajaongkir']);
         Permission::create(['name' => 'backend roles']);
         Permission::create(['name' => 'backend tags']);
         Permission::create(['name' => 'backend user addresses']);
