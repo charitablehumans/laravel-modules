@@ -31,6 +31,7 @@ class PermissionsSeederTableSeeder extends Seeder
         Permission::create(['name' => 'backend faqs']);
         Permission::create(['name' => 'backend faqs delete']);
         Permission::create(['name' => 'backend faqs trash']);
+        Permission::create(['name' => 'backend geocodes']);
         Permission::create(['name' => 'backend locations']);
         Permission::create(['name' => 'backend locations delete']);
         Permission::create(['name' => 'backend locations trash']);
