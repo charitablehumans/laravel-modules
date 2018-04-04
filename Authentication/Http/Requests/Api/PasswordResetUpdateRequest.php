@@ -4,7 +4,7 @@ namespace Modules\Authentication\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PasswordResetStoreRequest extends FormRequest
+class PasswordResetUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

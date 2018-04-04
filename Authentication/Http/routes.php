@@ -7,7 +7,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('authentication/password/forgot', ['as' => 'frontend.authentication.passwordForgot', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@passwordForgot']);
     Route::post('authentication/password/forgot', ['as' => 'frontend.authentication.passwordForgotStore', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@passwordForgotStore']);
     Route::get('authentication/password/reset', ['as' => 'frontend.authentication.passwordReset', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@passwordReset']);
-    Route::post('authentication/password/reset', ['as' => 'frontend.authentication.passwordResetStore', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@passwordResetStore']);
+    Route::put('authentication/password/reset', ['as' => 'frontend.authentication.passwordResetUpdate', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@passwordResetUpdate']);
     Route::get('authentication/register', ['as' => 'frontend.authentication.register', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@register']);
     Route::post('authentication/register', ['as' => 'frontend.authentication.registerStore', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@registerStore']);
     Route::group(['middleware' => ['auth']], function () {

@@ -7,8 +7,9 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">@lang('cms::cms.reset_password')</div>
                     <div class="panel-body">
-                        <form action="{{ route('frontend.authentication.passwordResetStore') }}" class="form-horizontal" method="post">
+                        <form action="{{ route('frontend.authentication.passwordResetUpdate') }}" class="form-horizontal" method="post">
                             {{ csrf_field() }}
+                            {{ method_field('PUT') }}
 
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="email">@lang('validation.attributes.email')</label>

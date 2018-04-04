@@ -67,7 +67,7 @@ class AuthenticationController extends Controller
         return view('authentication::frontend/password/reset', $data);
     }
 
-    public function passwordResetStore(\Modules\Authentication\Http\Requests\Api\PasswordResetStoreRequest $request)
+    public function passwordResetUpdate(\Modules\Authentication\Http\Requests\Api\PasswordResetUpdateRequest $request)
     {
         $user = Users::where('email', $request->input('email'))->where('verification_code', $request->input('verification_code'))->firstOrFail();
         $user->password = Hash::make($request->input('password'));
