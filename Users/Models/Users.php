@@ -121,6 +121,7 @@ class Users extends \App\User
     {
         return $this->hasMany('\Modules\UserAddresses\Models\UserAddresses', 'user_id')->orderBy('primary', 'desc')->latest();
     }
+
     public function userGames()
     {
         return $this->hasMany('\App\Http\Models\Cnr\UsersGames', 'user_id', 'id');

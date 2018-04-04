@@ -18,8 +18,8 @@ class CreateUserAddressesTable extends Migration
             $table->bigInteger('user_id');
             $table->string('name');
             $table->string('phone_number', 20);
-            $table->bigInteger('province_id');
-            $table->bigInteger('regency_id');
+            $table->bigInteger('province_id')->comment('geocodes.id');
+            $table->bigInteger('regency_id')->comment('geocodes.id');
             $table->bigInteger('district_id');
             $table->string('postal_code', 10);
             $table->text('address');

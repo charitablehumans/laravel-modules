@@ -5,9 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <meta name="api.geocodes.regencies.index" content="{{ route('api.geocodes.regencies.index') }}" />
+    <meta name="access_token" content="{{ auth()->check() ? auth()->user()->access_token : '' }}" />
     <meta name="app_name" content="{{ config('app.name') }}" />
     <meta name="app_url" content="{{ config('app.url') }}" />
-    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta name="csrf_token" content="{{ csrf_token() }}" />
 
     <title>@yield('title', config('app.name', 'Laravel'))</title>
 

@@ -118,8 +118,8 @@
                                             </td>
                                             <td>
                                                 {{ $userAddress->address }}<br />
-                                                {{ $userAddress->district_id }}, {{ $userAddress->regency_id }}<br />
-                                                {{ $userAddress->province_id }}, {{ $userAddress->postal_code }}
+                                                {{ $userAddress->district_id }}, {{ optional($userAddress->regency)->name }}<br />
+                                                {{ optional($userAddress->province)->name }}, {{ $userAddress->postal_code }}
                                             </td>
                                             <td align="center">
                                                 @if ($userAddress->primary == '1')

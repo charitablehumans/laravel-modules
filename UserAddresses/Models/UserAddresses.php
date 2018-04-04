@@ -13,6 +13,17 @@ class UserAddresses extends Model
 
     protected $table = 'user_addresses';
 
+    public function getRegencyIdOptions()
+    {
+        $provinceId = $this->id ? $this->province_id : null;
+        return (new \Modules\Geocodes\Models\Geocodes\Regencies)->getIdOptions($provinceId);
+    }
+
+    public function getProvinceIdOptions()
+    {
+        return (new \Modules\Geocodes\Models\Geocodes\Provinces)->getIdOptions();
+    }
+
     public function primaryUpdate($id)
     {
         $userAddress = self::findOrFail($id);
@@ -24,6 +35,16 @@ class UserAddresses extends Model
         $userAddress->save();
 
         return $userAddress;
+    }
+
+    public function province()
+    {
+        return $this->belongsTo('\Modules\Geocodes\Models\Geocodes\Provinces', 'province_id');
+    }
+
+    public function regency()
+    {
+        return $this->belongsTo('\Modules\Geocodes\Models\Geocodes\Regencies', 'regency_id');
     }
 
     public function user()

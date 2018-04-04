@@ -134,6 +134,11 @@ class UserAddressesController extends Controller
         $userAddress = new UserAddresses;
         $userAddress->user_id = \Auth::user()->id;
         $userAddress->fill($request->input())->save();
+
+        if ($request->input('primary')) {
+            $userAddress = $userAddress->primaryUpdate($userAddress->id);
+        }
+
         return new \Modules\UserAddresses\Http\Resources\Api\UserAddress($userAddress);
     }
 

@@ -3,6 +3,8 @@
 namespace Modules\UserAddresses\Http\Requests\Backend;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Modules\Geocodes\Models\Geocodes;
 
 class StoreRequest extends FormRequest
 {
@@ -13,12 +15,24 @@ class StoreRequest extends FormRequest
      */
     public function rules()
     {
+        $input = $this->input();
+
         return [
             'user_id' => ['required', 'integer', 'digits_between:1,20', 'exists:users,id'],
             'name' => ['required', 'between:0,191'],
             'phone_number' => ['required', 'between:0,20'],
-            'province_id' => ['required', 'integer', 'digits_between:1,20'],
-            'regency_id' => ['required', 'integer', 'digits_between:1,20'],
+            'province_id' => [
+                'required', 'integer', 'digits_between:1,20',
+                Rule::exists((new Geocodes)->getTable(), 'id')->where(function ($query) {
+                    $query->where('type', 'province');
+                }),
+            ],
+            'regency_id' => [
+                'required', 'integer', 'digits_between:1,20',
+                Rule::exists((new Geocodes)->getTable(), 'id')->where(function ($query) use ($input) {
+                    $query->where('type', 'regency')->where('parent_id', $input['province_id']);
+                }),
+            ],
             'district_id' => ['required', 'integer', 'digits_between:1,20'],
             'postal_code' => ['required', 'between:0,10'],
             'address' => ['required'],
