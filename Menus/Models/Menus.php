@@ -143,7 +143,7 @@ class Menus extends Terms
 
             $data['item'] = $item;
             $data['menu'] = $this;
-            $html .= \Illuminate\Support\Facades\View::make('menus::frontend/default/_templates/_frontend_top', $data)->render();
+            $html .= \Illuminate\Support\Facades\View::make('menus::frontend/default/menus/_templates/_frontend_top', $data)->render();
         }
 
         return $html;
