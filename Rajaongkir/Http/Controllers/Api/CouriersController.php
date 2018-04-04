@@ -1,12 +1,13 @@
 <?php
 
-namespace Modules\Geocodes\Http\Controllers;
+namespace Modules\Rajaongkir\Http\Controllers\Api;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Rajaongkir\Models\Rajaongkir;
 
-class GeocodesController extends Controller
+class CouriersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,9 @@ class GeocodesController extends Controller
      */
     public function index()
     {
-        return view('geocodes::index');
+        $rajaongkir = new Rajaongkir;
+        $couriers = $rajaongkir->getCouriers();
+        return response()->json($couriers);
     }
 
     /**
@@ -23,7 +26,7 @@ class GeocodesController extends Controller
      */
     public function create()
     {
-        return view('geocodes::create');
+        //
     }
 
     /**
@@ -41,7 +44,7 @@ class GeocodesController extends Controller
      */
     public function show()
     {
-        return view('geocodes::show');
+        //
     }
 
     /**
@@ -50,7 +53,7 @@ class GeocodesController extends Controller
      */
     public function edit()
     {
-        return view('geocodes::edit');
+        //
     }
 
     /**
@@ -60,6 +63,7 @@ class GeocodesController extends Controller
      */
     public function update(Request $request)
     {
+        //
     }
 
     /**
@@ -68,5 +72,6 @@ class GeocodesController extends Controller
      */
     public function destroy()
     {
+        //
     }
 }

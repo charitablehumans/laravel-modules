@@ -1,5 +1,13 @@
 <?php
 
+Route::group(['middleware' => ['api']], function () {
+    Route::group(['middleware' => ['authApi']], function () {
+        Route::post('api/rajaongkir/cost', ['as' => 'api.rajaongkir.cost.store', 'uses' => '\Modules\Rajaongkir\Http\Controllers\Api\CostController@store']);
+        Route::post('api/rajaongkir/cost/courier', ['as' => 'api.rajaongkir.cost.courierStore', 'uses' => '\Modules\Rajaongkir\Http\Controllers\Api\CostController@courierStore']);
+        Route::get('api/rajaongkir/couriers', ['as' => 'api.rajaongkir.couriers.index', 'uses' => '\Modules\Rajaongkir\Http\Controllers\Api\CouriersController@index']);
+    });
+});
+
 Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => ['auth']], function () {
         // Route::group(['middleware' => ['permission:backend rajaongkir']], function () {
