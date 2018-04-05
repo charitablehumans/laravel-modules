@@ -85,6 +85,8 @@ return [
     'search' => 'Search',
     'send_password_reset_link' => 'Send Password Reset Link',
     'sort' => 'Sort',
+    'store' => 'Store',
+    'store_name' => 'Store Name',
     'sync' => 'Sync',
     'tag' => 'Tag',
     'tags' => 'Tags',

@@ -54,36 +54,50 @@
             <i class="text-danger">{{ $errors->first('address') }}</i>
         </div>
 
-        @if (config('cms.users.balance') || config('cms.users.game_token'))
-            <div class="row">
-                @if (config('cms.users.balance'))
-                    <div class="col-md-3">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">@lang('validation.attributes.balance') (*)</div>
-                            <div class="panel-body">
-                                <div class="form-group">
-                                    <input class="form-control input-sm text-right" name="balance" required type="number" value="{{ request()->old('balance', $user->balance) }}" />
-                                    <i class="text-danger">{{ $errors->first('balance') }}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endif
-                @if (config('cms.users.game_token'))
-                    <div class="col-md-3">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">@lang('validation.attributes.game_token') (*)</div>
-                            <div class="panel-body">
-                                <div class="form-group">
-                                    <input class="form-control input-sm text-right" name="game_token" required type="number" value="{{ request()->old('game_token', $user->game_token) }}" />
-                                    <i class="text-danger">{{ $errors->first('game_token') }}</i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endif
-            </div>
+        @if (config('cms.users.store_id'))
+            @can ('backend users store all')
+                <div class="form-group">
+                    <label>@lang('cms::cms.store')</label>
+                    <select class="form-control select2" data-allow-clear="true" data-placeholder="" name="store_id">
+                        <option value=""></option>
+                        @foreach ($user->getStoreIdOptions() as $storeId => $storeName)
+                            <option {{ $storeId == request()->old('store_id', $user->store_id) ? 'selected' : '' }} value="{{ $storeId }}">{{ $storeName }}</option>
+                        @endforeach
+                    </select>
+                    <i class="text-danger">{{ $errors->first('store_id') }}</i>
+                </div>
+            @endcan
         @endif
+
+        <div class="row">
+            @if (config('cms.users.balance'))
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">@lang('validation.attributes.balance') (*)</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <input class="form-control input-sm text-right" name="balance" required type="number" value="{{ request()->old('balance', $user->balance) }}" />
+                                <i class="text-danger">{{ $errors->first('balance') }}</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            @if (config('cms.users.game_token'))
+                <div class="col-md-3">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">@lang('validation.attributes.game_token') (*)</div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <input class="form-control input-sm text-right" name="game_token" required type="number" value="{{ request()->old('game_token', $user->game_token) }}" />
+                                <i class="text-danger">{{ $errors->first('game_token') }}</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        </div>
 
         @if (config('cms.user_addresses') && $user->id)
             <div class="row" id="user_addresses">

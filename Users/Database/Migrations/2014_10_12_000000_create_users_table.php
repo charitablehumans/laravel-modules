@@ -14,7 +14,7 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id')->comment('{ store_id, user_id }');
             $table->string('name')->comment('profile');
             $table->string('email')->comment('profile')->unique();
             $table->string('phone_number', 20)->comment('profile');
@@ -25,7 +25,8 @@ class CreateUsersTable extends Migration
             $table->string('verification_code', 6);
             $table->date('date_of_birth')->comment('profile');
             $table->longText('address')->comment('profile');
-            $table->bigInteger('balance')->default(0)->comment('balance');
+            $table->bigInteger('store_id')->default(0)->comment('store.user.id');
+            $table->bigInteger('balance')->default(0)->comment('store.balance');
             $table->bigInteger('game_token')->default(0)->comment('game');
             $table->timestamps();
         });

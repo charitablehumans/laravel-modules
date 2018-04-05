@@ -85,6 +85,8 @@ return [
     'search' => 'Cari',
     'send_password_reset_link' => 'Kirim Tautan Ulang Sandi',
     'sort' => 'Urut',
+    'store' => 'Toko',
+    'store_name' => 'Nama Toko',
     'sync' => 'Sinkronisasi',
     'tag' => 'Tag',
     'tags' => 'Tag',

@@ -59,6 +59,7 @@ class RolesSeeder extends Seeder
             'backend tags',
             'backend user addresses',
             'backend users',
+            'backend users store all',
         ]);
     }
 }

@@ -18,7 +18,7 @@
                 <table class="table table-bordered table-condensed table-striped">
                     <thead>
                         <tr>
-                            <th class="text-right" colspan="8">
+                            <th class="text-right" colspan="9">
                                 <div class="form-inline">
                                     <div class="form-group">
                                         @lang('cms::cms.per_page')
@@ -36,6 +36,12 @@
                                             <option {{ request()->query('sort') == 'email:desc' ? 'selected' : '' }} value="email:desc">@lang('validation.attributes.email') (Z-A)</option>
                                             <option {{ request()->query('sort') == 'verified:asc' ? 'selected' : '' }} value="verified:asc">@lang('validation.attributes.verified') (↓)</option>
                                             <option {{ request()->query('sort') == 'verified:desc' ? 'selected' : '' }} value="verified:desc">@lang('validation.attributes.verified') (↑)</option>
+                                            @if (config('cms.users.store_id'))
+                                                @can ('backend users store all')
+                                                    <option {{ request()->query('sort') == 'store_name:asc' ? 'selected' : '' }} value="store_name:asc">@lang('cms::cms.store_name') (↓)</option>
+                                                    <option {{ request()->query('sort') == 'store_name:desc' ? 'selected' : '' }} value="store_name:desc">@lang('cms::cms.store_name') (↑)</option>
+                                                @endcan
+                                            @endif
                                             @if (config('cms.users.balance'))
                                                 <option {{ request()->query('sort') == 'balance:asc' ? 'selected' : '' }} value="balance:asc">@lang('cms::cms.balance') (↓)</option>
                                                 <option {{ request()->query('sort') == 'balance:desc' ? 'selected' : '' }} value="balance:desc">@lang('cms::cms.balance') (↑)</option>
@@ -51,43 +57,56 @@
                         </tr>
                         <tr>
                             <th><input class="table_row_checkbox_all" type="checkbox" /></th>
-                            <th>@lang('validation.attributes.name') <input class="form-control input-sm" name="name" type="text" value="{{ request()->query('name') }}" /></th>
-                            <th>@lang('validation.attributes.email') <input class="form-control input-sm" name="email" type="text" value="{{ request()->query('email') }}" /></th>
+                            <th>@lang('validation.attributes.name') <input class="form-control" name="name" type="text" value="{{ request()->query('name') }}" /></th>
+                            <th>@lang('validation.attributes.email') <input class="form-control" name="email" type="text" value="{{ request()->query('email') }}" /></th>
                             <th>
                                 @lang('validation.attributes.verified')
-                                <select class="form-control input-sm" name="verified">
+                                <select class="form-control" name="verified">
                                     <option value=""></option>
                                     @foreach ($model->getVerifiedOptions() as $verifiedId => $verifiedName)
                                         <option {{ (string) $verifiedId == request()->query('verified') ? 'selected' : '' }} value="{{ $verifiedId }}">{{ $verifiedName }}</option>
                                     @endforeach
                                 </select>
                             </th>
+                            @if (config('cms.users.store_id'))
+                                @can ('backend users store all')
+                                    <th>
+                                        @lang('cms::cms.store')
+                                        <select class="form-control select2" data-allow-clear="true" data-placeholder="" name="store_id">
+                                            <option value=""></option>
+                                            @foreach ($model->getStoreIdOptions() as $storeId => $storeName)
+                                                <option {{ (string) $storeId == request()->query('store_id') ? 'selected' : '' }} value="{{ $storeId }}">{{ $storeName }}</option>
+                                            @endforeach
+                                        </select>
+                                    </th>
+                                @endcan
+                            @endif
                             @if (config('cms.users.balance'))
                                 <th>
                                     @lang('cms::cms.balance')
-                                    <select class="form-control input-sm" name="balance_amount_operator">
+                                    <select class="form-control" name="balance_amount_operator">
                                         <option value="">=</option>
                                         <option {{ request()->query('balance_amount_operator') == '>' ? 'selected' : '' }} value=">">></option>
                                         <option {{ request()->query('balance_amount_operator') == '<' ? 'selected' : '' }} value="<"><</option>
                                     </select>
-                                    <input class="form-control input-sm text-right" name="balance_amount" type="number" value="{{ request()->query('balance_amount') }}" />
+                                    <input class="form-control text-right" name="balance_amount" type="number" value="{{ request()->query('balance_amount') }}" />
                                 </th>
                             @endif
                             @if (config('cms.users.game_token'))
                                 <th>
                                     @lang('validation.attributes.game_token')
-                                    <select class="form-control input-sm" name="game_token_operator">
+                                    <select class="form-control" name="game_token_operator">
                                         <option value="">=</option>
                                         <option {{ request()->query('game_token_operator') == '>' ? 'selected' : '' }} value=">">></option>
                                         <option {{ request()->query('game_token_operator') == '<' ? 'selected' : '' }} value="<"><</option>
                                     </select>
-                                    <input class="form-control input-sm text-right" name="game_token" type="number" value="{{ request()->query('game_token') }}" />
+                                    <input class="form-control text-right" name="game_token" type="number" value="{{ request()->query('game_token') }}" />
                                 </th>
                             @endif
                             @can('backend roles')
                                 <th>
                                     @lang('cms::cms.roles')
-                                    <select class="form-control input-sm" name="role_id">
+                                    <select class="form-control" name="role_id">
                                         <option value=""></option>
                                         @foreach ($role->getNameOptionsAttribute() as $key => $role)
                                             <option {{ $key == request()->query('role_id') ? 'selected' : '' }} value="{{ $key }}">{{ $role }}</option>
@@ -108,6 +127,11 @@
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>{{ $user->getVerifiedName() }}</td>
+                                @if (config('cms.users.store_id'))
+                                    @can ('backend users store all')
+                                        <td>{{ optional($user->store)->name }}</td>
+                                    @endcan
+                                @endif
                                 @if (config('cms.users.balance'))
                                     <td align="right">{{ number_format($user->balance) }}</td>
                                 @endif
@@ -129,13 +153,13 @@
                             </tr>
                         @empty
                             <tr>
-                                <td align="center" colspan="8">@lang('cms::cms.no_data')</td>
+                                <td align="center" colspan="9">@lang('cms::cms.no_data')</td>
                             </tr>
                         @endforelse
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="8">
+                            <td colspan="9">
                                 <select class="input-sm" name="action">
                                     <option value="">@lang('cms::cms.action')</option>
                                     <option value="delete">@lang('cms::cms.delete')</option>
@@ -144,7 +168,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" colspan="8">{{ $users->appends(request()->query())->links('cms::vendor.pagination.default-2') }}</td>
+                            <td align="center" colspan="9">{{ $users->appends(request()->query())->links('cms::vendor.pagination.default-2') }}</td>
                         </tr>
                     </tfoot>
                 </table>

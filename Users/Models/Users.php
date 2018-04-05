@@ -23,6 +23,7 @@ class Users extends \App\User
         'verification_code',
         'date_of_birth',
         'address',
+        'store_id',
         'balance',
         'game_token',
     ];
@@ -37,6 +38,12 @@ class Users extends \App\User
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function getStoreIdOptions()
+    {
+        $options = self::search(['role_name' => 'store', 'sort' => 'name:asc'])->get()->pluck('name', 'id');
+        return $options;
+    }
 
     public function getVerifiedOptions()
     {
@@ -71,6 +78,7 @@ class Users extends \App\User
         isset($params['name']) ? $query->where('name', 'like', '%'.$params['name'].'%') : '';
         isset($params['email']) ? $query->where('email', 'like', '%'.$params['email'].'%') : '';
         isset($params['verified']) ? $query->where('verified', $params['verified']) : '';
+        isset($params['store_id']) ? $query->where('store_id', $params['store_id']) : '';
         if (isset($params['balance'])) {
             if (isset($params['balance_operator'])) {
                 $query->where('balance', $params['balance_operator'], $params['balance']);
@@ -97,6 +105,11 @@ class Users extends \App\User
         }
 
         return $query;
+    }
+
+    public function store()
+    {
+        return $this->belongsTo('\Modules\Users\Models\Users', 'store_id');
     }
 
     public function syncPermissions(...$permissions)
