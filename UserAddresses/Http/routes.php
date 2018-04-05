@@ -1,8 +1,8 @@
 <?php
 
 Route::group(['middleware' => ['authApi']], function () {
+    Route::put('api/user-addresses/{id}/primary', ['as' => 'api.user-addresses.primaryUpdate', 'uses' => '\Modules\UserAddresses\Http\Controllers\Api\UserAddressesController@primaryUpdate']);
     Route::resource('api/user-addresses', '\Modules\UserAddresses\Http\Controllers\Api\UserAddressesController', ['as' => 'api']);
-    Route::put('api/user-addresses/{id}/primary', ['as' => 'backend.user-addresses.primaryUpdate', 'uses' => '\Modules\UserAddresses\Http\Controllers\Api\UserAddressesController@primaryUpdate']);
 });
 
 Route::group(['middleware' => ['web']], function () {
