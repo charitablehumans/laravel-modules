@@ -34,11 +34,8 @@ class CostController extends Controller
      */
     public function store(\Modules\Rajaongkir\Http\Requests\Api\Cost\StoreRequest $request)
     {
-        $formParams = $request->input();
-        $formParams['origin'] = 155;
-
         $rajaongkir = new Rajaongkir;
-        $costs = $rajaongkir->getCosts($formParams, $rajaongkir->getCouriersId());
+        $costs = $rajaongkir->getCosts($request->input(), $rajaongkir->getCouriersId());
         return response()->json($costs);
     }
 
@@ -81,11 +78,8 @@ class CostController extends Controller
 
     public function courierStore(\Modules\Rajaongkir\Http\Requests\Api\Cost\CourierStoreRequest $request)
     {
-        $formParams = $request->input();
-        $formParams['origin'] = 155;
-
         $rajaongkir = new Rajaongkir;
-        $cost = $rajaongkir->getCostCourier($formParams);
+        $cost = $rajaongkir->getCostCourier($request->input());
         return response()->json($cost);
     }
 }

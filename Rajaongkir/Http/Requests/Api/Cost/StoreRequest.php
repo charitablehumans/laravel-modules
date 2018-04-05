@@ -17,12 +17,12 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'origin' => [
-            //     'required', 'integer', 'digits_between:1,20',
-            //     Rule::exists((new Geocodes)->getTable(), 'rajaongkir_id')->where(function ($query) {
-            //         $query->where('type', 'regency');
-            //     }),
-            // ],
+            'origin' => [
+                'required', 'integer', 'digits_between:1,20',
+                Rule::exists((new Geocodes)->getTable(), 'rajaongkir_id')->where(function ($query) {
+                    $query->where('type', 'regency');
+                }),
+            ],
             'destination' => [
                 'required', 'integer', 'digits_between:1,20',
                 Rule::exists((new Geocodes)->getTable(), 'rajaongkir_id')->where(function ($query) {
