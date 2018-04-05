@@ -27,6 +27,19 @@ class Products extends \Modules\Posts\Models\Posts
         static::addGlobalScope('status_deleted', function (Builder $builder) { \Auth::check() && \Auth::user()->can('backend products trash') ?: $builder->where('status', '<>', 'trash'); });
     }
 
+    public function getAuthorId()
+    {
+        $authorId = 0;
+
+        if ($this->id) {
+            $authorId = $this->author_id;
+        } else if (\Auth::check()) {
+            $authorId = \Auth::user()->store ? \Auth::user()->store->id : 0;
+        }
+
+        return $authorId;
+    }
+
     public function getPostProductSellPrice()
     {
         return $this->id ? $this->postProduct->getSellPrice() : (new PostProducts)->getSellPrice();
@@ -60,6 +73,12 @@ class Products extends \Modules\Posts\Models\Posts
     public function scopeSearch($query, $params)
     {
         $query = parent::scopeSearch($query, $params);
+
+        if (isset($params['product_ownership']) && $params['product_ownership'] === true) {
+            if (\Auth::check() && \Auth::user()->can('backend products store all') === false) {
+                $query->where('author_id', $this->getAuthorId());
+            }
+        }
 
         // post_products
         if (isset($params['post_product_stock'])) {

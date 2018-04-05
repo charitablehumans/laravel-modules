@@ -25,6 +25,7 @@ class ProductsController extends \Modules\Posts\Http\Controllers\Backend\PostsCo
         $request->query('locale') ?: $request->query->set('locale', config('app.locale'));
         $request->query('sort') ?: $request->query->set('sort', 'updated_at:desc');
         $request->query('limit') ?: $request->query->set('limit', 10);
+        $request->query->set('product_ownership', true);
 
         $data['model'] = $this->model;
         $data['posts'] = $this->model::with(['author', 'postmetas', 'postProduct'])->select($this->model->getTable().'.*')->search($request->query())->paginate($request->query('limit'));
@@ -56,7 +57,7 @@ class ProductsController extends \Modules\Posts\Http\Controllers\Backend\PostsCo
     {
         $post = $this->model;
         $attributes = collect($request->input())->only($post->getFillable())->toArray();
-        $attributes['author_id'] = auth()->user()->id;
+        $attributes['author_id'] = $post->getAuthorId();
         foreach (config('app.languages') as $languageCode => $languageName) {
             $attributes[$languageCode] = $request->input();
         }
@@ -91,7 +92,7 @@ class ProductsController extends \Modules\Posts\Http\Controllers\Backend\PostsCo
     {
         $post = $this->model::findOrFail($id);
         $attributes = collect($request->input())->only($post->getFillable())->toArray();
-        $attributes['author_id'] = auth()->user()->id;
+        $attributes['author_id'] = $post->getAuthorId();
         $attributes[$request->input('locale')] = $request->input();
         $post->fill($attributes)->save();
         (new Postmetas)->sync($request->input('postmetas'), $post->id);
