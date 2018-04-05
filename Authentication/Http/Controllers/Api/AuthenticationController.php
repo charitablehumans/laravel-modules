@@ -2,14 +2,12 @@
 
 namespace Modules\Authentication\Http\Controllers\Api;
 
-use App\Http\Controllers\ApiController;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Modules\Users\Models\Users;
 
-class AuthenticationController extends ApiController
+class AuthenticationController extends Controller
 {
     /**
      * @SWG\Post(
@@ -27,9 +25,9 @@ class AuthenticationController extends ApiController
      */
     public function login(\Modules\Authentication\Http\Requests\Api\LoginStoreRequest $request)
     {
-        if (Auth::attempt($request->only('email', 'password'))) {
-            $user = Auth::user();
-            $user->access_token = Hash::make(time());
+        if (\Auth::attempt($request->only('email', 'password'))) {
+            $user = \Auth::user();
+            $user->access_token = \Hash::make(time());
             $user->save();
 
             $data['access_token'] = $user->access_token;
@@ -80,7 +78,7 @@ class AuthenticationController extends ApiController
     public function passwordReset(\Modules\Authentication\Http\Requests\Api\PasswordResetStoreRequest $request)
     {
         $user = Users::where('email', $request->input('email'))->where('verification_code', $request->input('verification_code'))->firstOrFail();
-        $user->password = Hash::make($request->input('password'));
+        $user->password = \Hash::make($request->input('password'));
         $user->save();
 
         return response()->json();
@@ -104,7 +102,7 @@ class AuthenticationController extends ApiController
     {
         $user = new Users;
         $user->fill($request->input());
-        $user->password = Hash::make($user->password);
+        $user->password = \Hash::make($user->password);
         $user->verification_code = rand(111111, 999999);
         $user->save();
 
@@ -129,8 +127,8 @@ class AuthenticationController extends ApiController
      */
     public function verified(\Modules\Authentication\Http\Requests\Api\LoginStoreRequest $request)
     {
-        if (Auth::attempt($request->only('email', 'password'))) {
-            $data['verified'] = Auth::user()->verified;
+        if (\Auth::attempt($request->only('email', 'password'))) {
+            $data['verified'] = \Auth::user()->verified;
             return response()->json($data);
         } else {
             return response()->json(['message' => trans('auth.failed')], Response::HTTP_UNAUTHORIZED);

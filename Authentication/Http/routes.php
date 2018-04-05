@@ -1,5 +1,14 @@
 <?php
 
+Route::group(['middleware' => ['api']], function () {
+    Route::post('api/authentication/login', ['as' => 'api.authentication.login', 'uses' => '\Modules\Authentication\Http\Controllers\Api\AuthenticationController@login']);
+    Route::post('api/authentication/password/forgot', ['as' => 'api.authentication.passwordForgot', 'uses' => '\Modules\Authentication\Http\Controllers\Api\AuthenticationController@passwordForgot']);
+    Route::post('api/authentication/password/reset', ['as' => 'api.authentication.passwordReset', 'uses' => '\Modules\Authentication\Http\Controllers\Api\AuthenticationController@passwordReset']);
+    Route::post('api/authentication/register', ['as' => 'api.authentication.register', 'uses' => '\Modules\Authentication\Http\Controllers\Api\AuthenticationController@register']);
+    Route::post('api/authentication/verified', ['as' => 'api.authentication.verified', 'uses' => '\Modules\Authentication\Http\Controllers\Api\AuthenticationController@verified']);
+    Route::post('api/authentication/verify', ['as' => 'api.authentication.verify', 'uses' => '\Modules\Authentication\Http\Controllers\Api\AuthenticationController@verify']);
+});
+
 Route::group(['middleware' => ['web']], function () {
     Route::get('authentication/login', ['as' => 'frontend.authentication.login', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@login']);
     Route::post('authentication/login', ['as' => 'frontend.authentication.loginStore', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@loginStore']);
