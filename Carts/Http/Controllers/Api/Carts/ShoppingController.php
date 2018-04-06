@@ -74,7 +74,7 @@ class ShoppingController extends Controller
 
         $cart->sync();
 
-        return new \App\Http\Resources\API\CartResource($cart);
+        return new \Modules\Carts\Transformers\Api\CartResource($cart);
     }
 
     /**
@@ -152,7 +152,7 @@ class ShoppingController extends Controller
 
         $cart->sync();
 
-        return new \App\Http\Resources\API\CartResource($cart);
+        return new \Modules\Carts\Transformers\Api\CartResource($cart);
     }
 
     /**
@@ -243,7 +243,7 @@ class ShoppingController extends Controller
 
         $cart->sync();
 
-        return new \App\Http\Resources\API\CartResource($cart);
+        return new \Modules\Carts\Transformers\Api\CartResource($cart);
     }
 
     /**
@@ -310,6 +310,6 @@ class ShoppingController extends Controller
 
         $cart = Carts::findOrFail($cartId)->sync();
 
-        return new \App\Http\Resources\API\CartResource($cart);
+        return new \Modules\Carts\Transformers\Api\CartResource($cart);
     }
 }

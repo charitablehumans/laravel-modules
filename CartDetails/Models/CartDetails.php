@@ -32,6 +32,7 @@ class CartDetails extends Model
         $product = Products::findOrFail($data['post_id']);
 
         $cartDetail = self::firstOrNew(['cart_id' => $cartId, 'post_id' => $product->id]);
+        $cartDetail->seller_id += $product->author_id;
         $cartDetail->quantity += $data['quantity'];
         $cartDetail->price = $product->getPostProductSellPrice();
         $cartDetail->weight = $product->getPostProductWeight();
