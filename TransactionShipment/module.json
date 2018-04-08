@@ -1,0 +1,16 @@
+{
+    "name": "TransactionShipment",
+    "alias": "transactionshipment",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\TransactionShipment\\Providers\\TransactionShipmentServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
