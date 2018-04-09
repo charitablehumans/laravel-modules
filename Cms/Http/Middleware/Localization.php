@@ -15,9 +15,16 @@ class Localization
      */
     public function handle($request, Closure $next)
     {
-        if ($request->expectsJson() && $locale = $request->header('Accept-Language')) {
-            app()->setLocale($locale);
-        } else if ($locale = $request->session()->get('locale')) {
+        $locale = false;
+        $locales = array_keys(config('app.languages'));
+
+        if ($request->expectsJson()) {
+            $locale = $request->header('Accept-Language') ? $request->header('Accept-Language') : $locale;
+        } else {
+            $locale = $request->session()->get('locale') ? $request->session()->get('locale') : $locale;
+        }
+
+        if (in_array($locale, $locales)) {
             app()->setLocale($locale);
         }
 
