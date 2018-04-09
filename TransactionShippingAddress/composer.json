@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/transactionshippingaddress",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\TransactionShippingAddress\\Providers\\TransactionShippingAddressServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\TransactionShippingAddress\\": ""
+        }
+    }
+}

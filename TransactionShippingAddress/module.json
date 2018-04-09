@@ -1,0 +1,16 @@
+{
+    "name": "TransactionShippingAddress",
+    "alias": "transactionshippingaddress",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\TransactionShippingAddress\\Providers\\TransactionShippingAddressServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
