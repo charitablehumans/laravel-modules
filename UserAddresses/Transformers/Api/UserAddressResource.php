@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\UserAddresses\Http\Resources\Api;
+namespace Modules\UserAddresses\Transformers\Api;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class UserAddress extends Resource
+class UserAddressResource extends Resource
 {
     /**
      * Transform the resource into an array.
@@ -20,6 +20,7 @@ class UserAddress extends Resource
             'name' => $this->name,
             'phone_number' => $this->phone_number,
             'province_id' => (int) $this->province_id,
+            'province' => $this->province,
             'regency_id' => (int) $this->regency_id,
             'regency' => $this->regency,
             'district_id' => (int) $this->district_id,

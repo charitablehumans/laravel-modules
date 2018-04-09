@@ -40,14 +40,14 @@ class PostProducts extends Model
 
     public function getStock()
     {
-        $stock = $this->stock;
+        $stock = $this->getStatus() == 'always_available' ? 999999999 : $this->stock;
         $stock = request()->old('post_products.stock') ? request()->old('post_products.stock') : $stock;
         return (int) $stock;
     }
 
     public function getStockUnlimited()
     {
-        return $this->getStatusOptions() == 'always_available' ? '&#8734;' : '';
+        return $this->getStatus() == 'always_available' ? '&#8734;' : '';
     }
 
     public function getWeight()

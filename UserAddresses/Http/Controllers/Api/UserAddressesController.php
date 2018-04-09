@@ -69,7 +69,7 @@ class UserAddressesController extends Controller
     public function index()
     {
         $userAddresses = UserAddresses::where('user_id', \Auth::user()->id)->orderBy('primary', 'desc')->latest()->paginate();
-        return \Modules\UserAddresses\Http\Resources\Api\UserAddress::collection($userAddresses);
+        return \Modules\UserAddresses\Transformers\Api\UserAddressResource::collection($userAddresses);
     }
 
     /**
@@ -139,7 +139,7 @@ class UserAddressesController extends Controller
             $userAddress = $userAddress->primaryUpdate($userAddress->id);
         }
 
-        return new \Modules\UserAddresses\Http\Resources\Api\UserAddress($userAddress);
+        return new \Modules\UserAddresses\Transformers\Api\UserAddressResource($userAddress);
     }
 
     /**
@@ -185,7 +185,7 @@ class UserAddressesController extends Controller
     public function show($id)
     {
         $userAddress = UserAddresses::where('id', $id)->where('user_id', \Auth::user()->id)->firstOrFail();
-        return new \Modules\UserAddresses\Http\Resources\Api\UserAddress($userAddress);
+        return new \Modules\UserAddresses\Transformers\Api\UserAddressResource($userAddress);
     }
 
     /**
@@ -251,7 +251,7 @@ class UserAddressesController extends Controller
     {
         $userAddress = UserAddresses::where('id', $id)->where('user_id', \Auth::user()->id)->firstOrFail();
         $userAddress->fill($request->input())->save();
-        return new \Modules\UserAddresses\Http\Resources\Api\UserAddress($userAddress);
+        return new \Modules\UserAddresses\Transformers\Api\UserAddressResource($userAddress);
     }
 
     /**
@@ -322,6 +322,6 @@ class UserAddressesController extends Controller
     {
         $userAddress = UserAddresses::where('id', $id)->where('user_id', \Auth::user()->id)->firstOrFail();
         $userAddress = $userAddress->primaryUpdate($userAddress->id);
-        return new \Modules\UserAddresses\Http\Resources\Api\UserAddress($userAddress);
+        return new \Modules\UserAddresses\Transformers\Api\UserAddressResource($userAddress);
     }
 }

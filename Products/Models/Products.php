@@ -40,6 +40,11 @@ class Products extends \Modules\Posts\Models\Posts
         return $authorId;
     }
 
+    public function getPostProductDiscount()
+    {
+        return 0;
+    }
+
     public function getPostProductSellPrice()
     {
         return $this->id ? $this->postProduct->getSellPrice() : (new PostProducts)->getSellPrice();
@@ -75,7 +80,7 @@ class Products extends \Modules\Posts\Models\Posts
         $query = parent::scopeSearch($query, $params);
 
         if (isset($params['product_ownership']) && $params['product_ownership'] === true) {
-            if (\Auth::check() && \Auth::user()->can('backend products store all') === false) {
+            if (\Auth::check() && \Auth::user()->can('backend products all') === false) {
                 $query->where('author_id', $this->getAuthorId());
             }
         }
