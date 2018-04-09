@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\TransactionBillingAddress\Http\Requests\Api;
+namespace Modules\TransactionShippingAddress\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
@@ -9,7 +9,7 @@ use Modules\UserAddresses\Models\UserAddresses;
 class StoreRequest extends FormRequest
 {
     /**
-     * Get the validation rules that apply to the request.
+     * Get the validation rules that apply to the request. 
      *
      * @return array
      */

@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\TransactionBillingAddress\Transformers\Api;
+namespace Modules\TransactionShippingAddress\Http\Resources\Api;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-class TransactionBillingAddressResource extends Resource
+class TransactionShippingAddressResource extends Resource
 {
     /**
      * Transform the resource into an array.

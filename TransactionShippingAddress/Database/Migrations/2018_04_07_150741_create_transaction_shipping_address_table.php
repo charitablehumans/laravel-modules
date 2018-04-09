@@ -2,9 +2,9 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Modules\TransactionBillingAddress\Models\TransactionBillingAddress;
+use Modules\TransactionShippingAddress\Models\TransactionShippingAddress;
 
-class CreateTransactionBillingAddressTable extends Migration
+class CreateTransactionShippingAddressTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateTransactionBillingAddressTable extends Migration
      */
     public function up()
     {
-        \Schema::create((new TransactionBillingAddress)->getTable(), function (Blueprint $table) {
+        \Schema::create((new TransactionShippingAddress)->getTable(), function (Blueprint $table) {
             $table->bigincrements('id');
             $table->bigInteger('transaction_id')->comment('transactions.id');
             $table->string('name');
@@ -35,6 +35,6 @@ class CreateTransactionBillingAddressTable extends Migration
      */
     public function down()
     {
-        \Schema::dropIfExists((new TransactionBillingAddress)->getTable());
+        \Schema::dropIfExists((new TransactionShippingAddress)->getTable());
     }
 }

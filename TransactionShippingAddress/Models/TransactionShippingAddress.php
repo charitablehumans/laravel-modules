@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\TransactionBillingAddress\Models;
+namespace Modules\TransactionShippingAddress\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TransactionBillingAddress extends Model
+class TransactionShippingAddress extends Model
 {
     protected $fillable = [
         // 'id',
@@ -18,7 +18,7 @@ class TransactionBillingAddress extends Model
         'postal_code',
     ];
 
-    protected $table = 'transaction_billing_address';
+    protected $table = 'transaction_shipping_address';
 
     public function province()
     {
