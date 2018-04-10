@@ -76,7 +76,7 @@ class ProductsController extends \Modules\Posts\Http\Controllers\Backend\PostsCo
      */
     public function edit($id, Request $request)
     {
-        $data['post'] = $post = $this->model::findOrFail($id);
+        $data['post'] = $post = $this->model::search(['id' => $id, 'product_ownership' => true])->firstOrFail();
         $data['post_translation'] = $post->translateOrNew($request->query('locale'));
         return view('products::backend/edit', $data);
     }
