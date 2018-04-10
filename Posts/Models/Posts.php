@@ -123,9 +123,10 @@ class Posts extends Model
     public function getPostmetaImageThumbnailUrl()
     {
         $imageId = $this->getPostmetaImageId();
+        $medium = Media::find($imageId);
 
-        if ($imageId) {
-            $imageUrl = Media::find($imageId)->getPostmetaAttachedFileThumbnail();
+        if ($medium) {
+            $imageUrl = $medium->getPostmetaAttachedFileThumbnail();
             $imageUrl = \Storage::url($imageUrl);
         } else {
             $imageUrl = asset('images/posts/default.png');
@@ -137,9 +138,10 @@ class Posts extends Model
     public function getPostmetaImageUrl()
     {
         $imageId = $this->getPostmetaImageId();
-
-        if ($imageId) {
-            $imageUrl = Media::find($imageId)->getPostmetaAttachedFile();
+        $medium = Media::find($imageId);
+        
+        if ($medium) {
+            $imageUrl = $medium->getPostmetaAttachedFile();
             $imageUrl = \Storage::url($imageUrl);
         } else {
             $imageUrl = asset('images/posts/default.png');
