@@ -30,9 +30,14 @@ class Terms extends Model
     {
         parent::boot();
 
-        self::deleting(function ($model) {
+        self::saved(function ($model) {
+            \Cache::forget('terms-'.$model->id);
+        });
+
+        self::deleted(function ($model) {
             $model->termmetas->each(function ($termmeta) { $termmeta->delete(); });
             $model->deleteTranslations();
+            \Cache::forget('terms-'.$model->id);
         });
     }
 

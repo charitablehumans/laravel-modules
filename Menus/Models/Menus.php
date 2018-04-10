@@ -211,7 +211,9 @@ class Menus extends Terms
     {
         switch ($this->getType()) {
             case 'category' :
-                $term = Categories::findOrFail($this->id);
+                $term = \Cache::remember('terms-'.$this->id, 1440, function () {
+                    return Categories::findOrFail($this->id);
+                });
                 $this->setContent($term->description);
                 $this->setExcerpt('');
                 $this->setImageThumbnailUrl($term->getTermmetaImageThumbnailUrl());
@@ -224,7 +226,9 @@ class Menus extends Terms
                 $this->setUrl(url('categories/'.$term->slug));
                 break;
             case 'custom_link' :
-                $post = CustomLinks::findOrFail($this->id);
+                $post = \Cache::remember('posts-'.$this->id, 1440, function () {
+                    return CustomLinks::findOrFail($this->id);
+                });
                 $this->setContent($post->content);
                 $this->setExcerpt($post->excerpt);
                 $this->setImageThumbnailUrl($post->getPostmetaImageThumbnailUrl());
@@ -237,7 +241,9 @@ class Menus extends Terms
                 $this->setUrl($this->getUrl());
                 break;
             case 'page' :
-                $post = Pages::findOrFail($this->id);
+                $post = \Cache::remember('posts-'.$this->id, 1440, function () {
+                    return Pages::findOrFail($this->id);
+                });
                 $this->setContent($post->content);
                 $this->setExcerpt($post->excerpt);
                 $this->setImageThumbnailUrl($post->getPostmetaImageThumbnailUrl());
@@ -250,7 +256,9 @@ class Menus extends Terms
                 $this->setUrl(url('pages/'.$post->name));
                 break;
             case 'post' :
-                $post = Posts::findOrFail($this->id);
+                $post = \Cache::remember('posts-'.$this->id, 1440, function () {
+                    return Posts::findOrFail($this->id);
+                });
                 $this->setContent($post->content);
                 $this->setExcerpt($post->excerpt);
                 $this->setImageThumbnailUrl($post->getPostmetaImageThumbnailUrl());
@@ -263,7 +271,9 @@ class Menus extends Terms
                 $this->setUrl(url('posts/'.$post->name));
                 break;
             case 'product' :
-                $post = Products::findOrFail($this->id);
+                $post = \Cache::remember('posts-'.$this->id, 1440, function () {
+                    return Products::findOrFail($this->id);
+                });
                 $this->setContent($post->content);
                 $this->setExcerpt($post->excerpt);
                 $this->setImageThumbnailUrl($post->getPostmetaImageThumbnailUrl());
@@ -276,7 +286,9 @@ class Menus extends Terms
                 $this->setUrl(url('posts/'.$post->name));
                 break;
             case 'tag' :
-                $term = Tags::findOrFail($this->id);
+                $term = \Cache::remember('terms-'.$this->id, 1440, function () {
+                    return Tags::findOrFail($this->id);
+                });
                 $this->setContent($post->description);
                 $this->setExcerpt('');
                 $this->setImageThumbnailUrl($term->getTermmetaImageThumbnailUrl());

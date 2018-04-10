@@ -39,9 +39,14 @@ class Posts extends Model
     {
         parent::boot();
 
-        self::deleting(function ($model) {
+        self::saved(function ($model) {
+            \Cache::forget('posts-'.$model->id);
+        });
+
+        self::deleted(function ($model) {
             $model->postmetas->each(function ($postmeta) { $postmeta->delete(); });
             $model->translations->each(function ($translation) { $translation->delete(); });
+            \Cache::forget('posts-'.$model->id);
             \Storage::deleteDirectory('media/original/'.$model->id);
             \Storage::deleteDirectory('media/thumbnail/'.$model->id);
         });
@@ -122,14 +127,17 @@ class Posts extends Model
 
     public function getPostmetaImageThumbnailUrl()
     {
-        $imageId = $this->getPostmetaImageId();
-        $medium = Media::find($imageId);
+        $imageUrl = asset('images/posts/default.png');
 
-        if ($medium) {
-            $imageUrl = $medium->getPostmetaAttachedFileThumbnail();
-            $imageUrl = \Storage::url($imageUrl);
-        } else {
-            $imageUrl = asset('images/posts/default.png');
+        if ($imageId = $this->getPostmetaImageId()) {
+            $medium = \Cache::remember('posts-'.$imageId, 1440, function () use ($imageId) {
+                return Media::find($imageId);
+            });
+
+            if ($medium) {
+                $imageUrl = $medium->getPostmetaAttachedFileThumbnail();
+                $imageUrl = \Storage::url($imageUrl);
+            }
         }
 
         return $imageUrl;
@@ -137,14 +145,17 @@ class Posts extends Model
 
     public function getPostmetaImageUrl()
     {
-        $imageId = $this->getPostmetaImageId();
-        $medium = Media::find($imageId);
-        
-        if ($medium) {
-            $imageUrl = $medium->getPostmetaAttachedFile();
-            $imageUrl = \Storage::url($imageUrl);
-        } else {
-            $imageUrl = asset('images/posts/default.png');
+        $imageUrl = asset('images/posts/default.png');
+
+        if ($imageId = $this->getPostmetaImageId()) {
+            $medium = \Cache::remember('posts-'.$imageId, 1440, function () use ($imageId) {
+                return Media::find($imageId);
+            });
+
+            if ($medium) {
+                $imageUrl = $medium->getPostmetaAttachedFile();
+                $imageUrl = \Storage::url($imageUrl);
+            }
         }
 
         return $imageUrl;
