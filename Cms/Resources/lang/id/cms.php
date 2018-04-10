@@ -47,6 +47,7 @@ return [
     'location' => 'Lokasi',
     'locations' => 'Lokasi',
     'login' => 'Masuk',
+    'login_with' => 'Masuk dengan',
     'logout' => 'Keluar',
     'main' => 'Utama',
     'masters' => 'Master',

@@ -10,12 +10,12 @@
                         <form action="{{ route('frontend.authentication.loginStore') }}" class="form-horizontal" method="post">
                             {{ csrf_field() }}
 
-                            <div class="form-group hidden">
-                                <label for="name" class="col-md-4 control-label">Login With</label>
+                            <div class="form-group">
+                                <label for="name" class="col-md-4 control-label">@lang('cms::cms.login_with')</label>
                                 <div class="col-md-6">
-                                    <a href="{{ url('login/facebook') }}" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
-                                    <a href="{{ url('login/github') }}" class="btn btn-social-icon btn-github"><i class="fa fa-github"></i></a>
-                                    <a href="{{ url('login/google') }}" class="btn btn-social-icon btn-google"><i class="fa fa-google"></i></a>
+                                    <a href="{{ route('frontend.authentication.loginSocial', 'facebook') }}" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
+                                    <a href="{{ route('frontend.authentication.loginSocial', 'github') }}" class="btn btn-social-icon btn-github"><i class="fa fa-github"></i></a>
+                                    <a href="{{ route('frontend.authentication.loginSocial', 'google') }}" class="btn btn-social-icon btn-google"><i class="fa fa-google"></i></a>
                                 </div>
                             </div>
 

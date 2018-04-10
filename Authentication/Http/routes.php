@@ -12,6 +12,8 @@ Route::group(['middleware' => ['api']], function () {
 Route::group(['middleware' => ['web']], function () {
     Route::get('authentication/login', ['as' => 'frontend.authentication.login', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@login']);
     Route::post('authentication/login', ['as' => 'frontend.authentication.loginStore', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@loginStore']);
+    Route::get('authentication/login/{social}', ['as' => 'frontend.authentication.loginSocial', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\SocialiteController@redirectToProvider'])->where('social', 'facebook|github|google');
+    Route::get('authentication/login/{social}/callback', ['as' => 'frontend.authentication.loginSocialCallback', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\SocialiteController@handleProviderCallback'])->where('social', 'facebook|github|google');
     Route::post('authentication/logout', ['as' => 'frontend.authentication.logoutStore', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@logoutStore']);
     Route::get('authentication/password/forgot', ['as' => 'frontend.authentication.passwordForgot', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@passwordForgot']);
     Route::post('authentication/password/forgot', ['as' => 'frontend.authentication.passwordForgotStore', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@passwordForgotStore']);

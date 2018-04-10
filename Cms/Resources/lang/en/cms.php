@@ -47,6 +47,7 @@ return [
     'location' => 'Location',
     'locations' => 'Locations',
     'login' => 'Login',
+    'login_with' => 'Login with',
     'logout' => 'Logout',
     'main' => 'Main',
     'masters' => 'Masters',
