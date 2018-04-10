@@ -129,7 +129,7 @@ class ProvincesController extends Controller
     public function show($id)
     {
         $userAddress = UserAddresses::where('id', $id)->where('user_id', \Auth::user()->id)->firstOrFail();
-        return new \Modules\UserAddresses\Transformers\Api\UserAddressResource($userAddress);
+        return new \Modules\UserAddresses\Http\Resources\Api\UserAddressResource($userAddress);
     }
 
     /**
