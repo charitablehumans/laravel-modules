@@ -61,6 +61,11 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'backend rajaongkir']);
         Permission::create(['name' => 'backend roles']);
         Permission::create(['name' => 'backend tags']);
+        Permission::create(['name' => 'backend transactions']);
+        Permission::create(['name' => 'backend transactions purchases']);
+        Permission::create(['name' => 'backend transactions purchases all']);
+        Permission::create(['name' => 'backend transactions sales']);
+        Permission::create(['name' => 'backend transactions sales all']);
         Permission::create(['name' => 'backend user addresses']);
         Permission::create(['name' => 'backend users']);
         Permission::create(['name' => 'backend users store all']);

@@ -1,20 +1,36 @@
 <?php
 
-namespace Modules\Transactions\Http\Controllers;
+namespace Modules\Transactions\Http\Controllers\Backend\Transactions;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
-class TransactionsController extends Controller
+class SalesController extends Controller
 {
+    protected $model;
+
+    public function __construct()
+    {
+        $this->model = new \Modules\Transactions\Models\Transactions\Sales;
+    }
+
     /**
      * Display a listing of the resource.
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('transactions::index');
+        $request->query->set('sales_ownership', true);
+        $request->query('sort') ?: $request->query->set('sort', 'created_at:desc');
+        $request->query('limit') ?: $request->query->set('limit', 10);
+
+        $data['model'] = $this->model;
+        $data['transactions'] = $this->model::select($this->model->getTable().'.*')->search($request->query())->paginate($request->query('limit'));
+
+        if ($request->query('action')) { $this->model->action($request->query()); return redirect()->back(); }
+
+        return view('transactions::backend/sales/index', $data);
     }
 
     /**
@@ -68,5 +84,12 @@ class TransactionsController extends Controller
      */
     public function destroy()
     {
+    }
+
+    public function reject($id)
+    {
+        (new $this->model)->reject($id);
+        flash(trans('cms::cms.data_has_been_returned'))->success()->important();
+        return redirect()->back();
     }
 }
