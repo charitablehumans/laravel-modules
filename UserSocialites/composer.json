@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/usersocialites",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\UserSocialites\\Providers\\UserSocialitesServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\UserSocialites\\": ""
+        }
+    }
+}

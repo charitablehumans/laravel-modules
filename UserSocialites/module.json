@@ -1,0 +1,16 @@
+{
+    "name": "UserSocialites",
+    "alias": "usersocialites",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\UserSocialites\\Providers\\UserSocialitesServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
