@@ -151,6 +151,7 @@
 
                     @foreach ($post->getPostmetaImagesId() as $imageId)
                         @php $medium = \Modules\Media\Models\Media::find($imageId); @endphp
+                        @if($medium)
                         <li>
                             <input class="images_media_id" name="postmetas[images][]" type="hidden" value="{{ $imageId }}" />
                             <div style="position: relative;">
@@ -160,6 +161,7 @@
                                 <button class="close template_close" type="button"><span>&times;</span></button>
                             </div>
                         </li>
+                        @endif
                     @endforeach
                 </ul>
             </div>
