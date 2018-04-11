@@ -26,9 +26,13 @@ class SocialiteController extends Controller
      */
     public function handleProviderCallback($provider)
     {
-        $userSocial = \Socialite::driver($provider)->user();
+        $socialite = \Socialite::driver($provider)->user();
 
-        if ($user = (new UserSocialites)->findOrCreate($userSocial, $provider)) {
+        if ($user = (new UserSocialites)->findOrCreate($socialite, $provider)) {
+            if ($roleDefault = \Config::get('cms.users.role_default')) {
+                $user->assignRole($roleDefault);
+            }
+
             \Auth::login($user);
             return redirect()->route('frontend');
         }

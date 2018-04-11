@@ -13,7 +13,7 @@
                             <div class="form-group hidden">
                                 <label for="name" class="col-md-4 control-label">Login With</label>
                                 <div class="col-md-6">
-                                    <a href="{{ route('frontend.authentication.loginSocial', 'facebook')) }}" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
+                                    <a href="{{ route('frontend.authentication.loginSocial', 'facebook') }}" class="btn btn-social-icon btn-facebook"><i class="fa fa-facebook"></i></a>
                                     <a href="{{ route('frontend.authentication.loginSocial', 'github') }}" class="btn btn-social-icon btn-github"><i class="fa fa-github"></i></a>
                                     <a href="{{ route('frontend.authentication.loginSocial', 'google') }}" class="btn btn-social-icon btn-google"><i class="fa fa-google"></i></a>
                                 </div>

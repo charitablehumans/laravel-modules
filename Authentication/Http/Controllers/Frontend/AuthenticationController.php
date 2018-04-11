@@ -4,8 +4,6 @@ namespace Modules\Authentication\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Modules\Users\Models\Users;
 
 class AuthenticationController extends Controller
@@ -22,7 +20,7 @@ class AuthenticationController extends Controller
             'password' => ['required', 'string'],
         ]);
 
-        if (Auth::attempt($request->only('email', 'password'), $request->has('remember'))) {
+        if (\Auth::attempt($request->only('email', 'password'), $request->has('remember'))) {
             return redirect()->intended(route('frontend'));
         } else {
             return redirect()->back()->withErrors(['email' => [trans('auth.failed')]]);
@@ -37,7 +35,7 @@ class AuthenticationController extends Controller
      */
     public function logoutStore(Request $request)
     {
-        Auth::logout();
+        \Auth::logout();
 
         $request->session()->invalidate();
 
@@ -70,11 +68,9 @@ class AuthenticationController extends Controller
     public function passwordResetUpdate(\Modules\Authentication\Http\Requests\Api\PasswordResetUpdateRequest $request)
     {
         $user = Users::where('email', $request->input('email'))->where('verification_code', $request->input('verification_code'))->firstOrFail();
-        $user->password = Hash::make($request->input('password'));
+        $user->password = \Hash::make($request->input('password'));
         $user->save();
-
         flash(trans('passwords.reset'))->success()->important();
-
         return redirect()->route('frontend.authentication.login');
     }
 
@@ -87,11 +83,16 @@ class AuthenticationController extends Controller
     {
         $user = new Users();
         $user->fill($request->input());
-        $user->password = Hash::make($user->password);
+        $user->password = \Hash::make($user->password);
         $user->verified = 0;
         $user->verification_code = rand(111111, 999999);
         $user->save();
-        Auth::login($user);
+
+        if ($roleDefault = \Config::get('cms.users.role_default')) {
+            $user->assignRole($roleDefault);
+        }
+
+        \Auth::login($user);
         return redirect()->route('frontend');
     }
 
