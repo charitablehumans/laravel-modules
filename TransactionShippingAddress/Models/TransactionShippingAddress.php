@@ -16,6 +16,7 @@ class TransactionShippingAddress extends Model
         'regency_id',
         'district_id',
         'postal_code',
+        'address',
     ];
 
     protected $table = 'transaction_shipping_address';
