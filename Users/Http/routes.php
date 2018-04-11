@@ -1,10 +1,11 @@
 <?php
 
-// Route::group(['middleware' => 'web', 'prefix' => 'users', 'namespace' => 'Modules\Users\Http\Controllers'], function()
-// {
-//     Route::get('/', 'UsersController@index');
-// });
-
+Route::group(['middleware' => ['api']], function () {
+    Route::group(['middleware' => ['authApi', 'userVerified']], function () {
+        Route::get('api/users/profile', ['as' => 'api.users.profile', 'uses' => '\Modules\Users\Http\Controllers\Api\UsersController@profile']);
+        Route::put('api/users/profile', ['as' => 'api.users.profileUpdate', 'uses' => '\Modules\Users\Http\Controllers\Api\UsersController@profileUpdate']);
+    });
+});
 
 Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => ['auth']], function () {

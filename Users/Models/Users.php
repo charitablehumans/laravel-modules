@@ -39,6 +39,19 @@ class Users extends \App\User
         'password', 'remember_token',
     ];
 
+    public function getProfileCompleted()
+    {
+        $completed = 1;
+
+        $completed = empty($this->name) ? 0 : $completed;
+        $completed = empty($this->email) ? 0 : $completed;
+        $completed = empty($this->phone_number) ? 0 : $completed;
+        $completed = empty($this->date_of_birth) ? 0 : $completed;
+        $completed = empty($this->address) ? 0 : $completed;
+
+        return $completed;
+    }
+
     public function getStoreIdOptions()
     {
         $options = self::search(['role_name' => 'store', 'sort' => 'name:asc'])->get()->pluck('name', 'id');

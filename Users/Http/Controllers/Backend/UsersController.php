@@ -2,9 +2,8 @@
 
 namespace Modules\Users\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Routing\Controller;
 use Modules\Permissions\Models\Permission;
 use Modules\Roles\Models\Role;
 use Modules\Users\Models\Users;
@@ -46,7 +45,7 @@ class UsersController extends Controller
      */
     public function store(\Modules\Users\Http\Requests\Backend\StoreRequest $request)
     {
-        $request->merge(['password' => Hash::make($request->input('password'))]);
+        $request->merge(['password' => \Hash::make($request->input('password'))]);
 
         $user = new Users;
         $user->fill($request->input())->save();
@@ -80,7 +79,7 @@ class UsersController extends Controller
     public function update(\Modules\Users\Http\Requests\Backend\UpdateRequest $request, $id)
     {
         $user = Users::findOrFail($id);
-        $request->input('password') ? $request->merge(['password' => Hash::make($request->input('password'))]) : $request->request->remove('password');
+        $request->input('password') ? $request->merge(['password' => \Hash::make($request->input('password'))]) : $request->request->remove('password');
         $user->fill($request->input())->save();
         auth()->user()->can('backend roles') ? $user->syncRoles($request->input('roles')) : '';
         auth()->user()->can('backend permissions') ? $user->syncPermissions($request->input('permissions')) : '';
