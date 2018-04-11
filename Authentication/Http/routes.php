@@ -5,6 +5,7 @@ Route::group(['middleware' => ['api']], function () {
     Route::post('api/authentication/password/forgot', ['as' => 'api.authentication.passwordForgot', 'uses' => '\Modules\Authentication\Http\Controllers\Api\AuthenticationController@passwordForgot']);
     Route::post('api/authentication/password/reset', ['as' => 'api.authentication.passwordReset', 'uses' => '\Modules\Authentication\Http\Controllers\Api\AuthenticationController@passwordReset']);
     Route::post('api/authentication/register', ['as' => 'api.authentication.register', 'uses' => '\Modules\Authentication\Http\Controllers\Api\AuthenticationController@register']);
+    Route::post('api/authentication/socialite/register', ['as' => 'api.authentication.socialite.registerStore', 'uses' => '\Modules\Authentication\Http\Controllers\Api\SocialiteController@registerStore']);
     Route::post('api/authentication/verified', ['as' => 'api.authentication.verified', 'uses' => '\Modules\Authentication\Http\Controllers\Api\AuthenticationController@verified']);
     Route::post('api/authentication/verify', ['as' => 'api.authentication.verify', 'uses' => '\Modules\Authentication\Http\Controllers\Api\AuthenticationController@verify']);
 });

@@ -5,7 +5,6 @@ namespace Modules\Authentication\Http\Controllers\Frontend;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
-use Modules\UserSocialites\Models\UserSocialites;
 
 class SocialiteController extends Controller
 {
@@ -28,7 +27,7 @@ class SocialiteController extends Controller
     {
         $socialite = \Socialite::driver($provider)->user();
 
-        if ($user = (new UserSocialites)->findOrCreate($socialite, $provider)) {
+        if ($user = (new \Modules\UserSocialites\Models\UserSocialites)->findOrCreate($socialite, $provider)) {
             if ($roleDefault = \Config::get('cms.users.role_default')) {
                 $user->assignRole($roleDefault);
             }

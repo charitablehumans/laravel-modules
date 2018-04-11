@@ -29,16 +29,13 @@ class UserSocialites extends Model
     public function findOrCreate($socialite, $provider)
     {
         $user = Users::firstOrCreate(['email' => $socialite->email]);
-        $user->name = $socialite->getName();
+        $user->name = $socialite->name;
         $user->save();
 
-        $usersSocialite = self::firstOrCreate(['user_id' => $user->id, 'client_id' => $socialite->id]);
-        $usersSocialite->provider = $provider;
-        $usersSocialite->client_id = $socialite->id;
-        $usersSocialite->provider = $provider;
-        $usersSocialite->email = $socialite->email;
-        $usersSocialite->data = json_encode($socialite->user);
-        $usersSocialite->save();
+        $userSocialite = self::firstOrCreate(['user_id' => $user->id, 'provider' => $provider, 'client_id' => $socialite->id]);
+        $userSocialite->email = $socialite->email;
+        $userSocialite->data = json_encode($socialite->user);
+        $userSocialite->save();
 
         return $user;
     }
