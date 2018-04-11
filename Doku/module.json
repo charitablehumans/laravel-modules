@@ -1,0 +1,16 @@
+{
+    "name": "Doku",
+    "alias": "doku",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Doku\\Providers\\DokuServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
