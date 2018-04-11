@@ -39,6 +39,16 @@ class Users extends \App\User
         'password', 'remember_token',
     ];
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::deleted(function ($model) {
+            $model->userAddresses->each(function ($userAddress) { $userAddress->delete(); });
+            $model->userSocialites->each(function ($userSocialite) { $userSocialite->delete(); });
+        });
+    }
+
     public function getProfileCompleted()
     {
         $completed = 1;
@@ -151,5 +161,10 @@ class Users extends \App\User
     public function userGames()
     {
         return $this->hasMany('\App\Http\Models\Cnr\UsersGames', 'user_id', 'id');
+    }
+
+    public function userSocialites()
+    {
+        return $this->hasMany('\Modules\UserSocialites\Models\UserSocialites', 'user_id');
     }
 }

@@ -28,6 +28,9 @@ class SocialiteController extends Controller
         $socialite = \Socialite::driver($provider)->user();
 
         if ($user = (new \Modules\UserSocialites\Models\UserSocialites)->findOrCreate($socialite, $provider)) {
+            $user->verified = 1;
+            $user->save();
+
             if ($roleDefault = \Config::get('cms.users.role_default')) {
                 $user->assignRole($roleDefault);
             }
