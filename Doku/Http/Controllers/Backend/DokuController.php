@@ -1,10 +1,12 @@
 <?php
 
-namespace Modules\Doku\Http\Controllers;
+namespace Modules\Doku\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Doku\Models\DokuTransactions;
+use Modules\Transactions\Models\Transactions;
 
 class DokuController extends Controller
 {
@@ -14,7 +16,7 @@ class DokuController extends Controller
      */
     public function index()
     {
-        return view('doku::index');
+        return view('doku::backend/index');
     }
 
     /**
@@ -23,7 +25,8 @@ class DokuController extends Controller
      */
     public function create()
     {
-        return view('doku::create');
+        $data['transactions'] = Transactions::orderBy('id')->get();
+        return view('doku::backend/create', $data);
     }
 
     /**
@@ -31,8 +34,21 @@ class DokuController extends Controller
      * @param  Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(\Modules\Doku\Http\Requests\Backend\StoreRequest $request)
     {
+        // 1. Transform to be parameter doku
+        $dokuTransactionTransform = (new DokuTransactions)->transform($request->input('id'));
+
+        // 2. Insert into doku_transactions
+        $dokuTransaction = DokuTransactions::firstOrCreate(['STOREID' => $dokuTransactionTransform->STOREID, 'TRANSIDMERCHANT' => $dokuTransactionTransform->TRANSIDMERCHANT]);
+        $dokuTransaction->fill($dokuTransactionTransform->getAttributes())->save();
+
+        // 3. Insert into doku_transaction_logs
+        //
+
+        $data['dokuTransaction'] = $dokuTransaction;
+        $data['transaction'] = Transactions::findOrFail($request->input('id'));
+        return view('doku::backend/store', $data);
     }
 
     /**
