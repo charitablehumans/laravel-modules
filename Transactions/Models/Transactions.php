@@ -18,14 +18,15 @@ class Transactions extends Model
         'receipt_number',
         'due_date',
         'payment',
-        'payment_status',
-
         'payment_date',
+
+        'payment_status',
+        'payment_type',
         'total_sell_price',
         'total_discount',
         'total_weight',
-        'total_shipping_cost', // round(total_weight) * transactions_shipments.cost * transactions_shipments.distance
 
+        'total_shipping_cost', // round(total_weight) * transactions_shipments.cost * transactions_shipments.distance
         'grand_total', // total_price - total_discount + total_shipping_cost
         'notes',
     ];
