@@ -15,7 +15,7 @@ class CreateDokuTransactionsTable extends Migration
     {
         \Schema::create((new DokuTransactions)->getTable(), function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('transction_id')->comment('transactions.id');
+            $table->bigInteger('transaction_id')->comment('transactions.id');
             $table->string('BASKET', 250)->comment('Show transaction description. It uses separation for fields and other descriptions. Sample below *');
             $table->string('STOREID', 8)->comment('Unique ID of merchant/store *');
             $table->string('TRANSIDMERCHANT', 14)->comment('Invoice Numbering / Order Numbering from Merchant *');

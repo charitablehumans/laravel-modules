@@ -5,6 +5,7 @@ namespace Modules\Doku\Http\Controllers\Api;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Doku\Models\DokuTransactionLogs;
 use Modules\Doku\Models\DokuTransactions;
 use Modules\Transactions\Models\Transactions;
 
@@ -41,7 +42,9 @@ class DokuController extends Controller
     public function verifyStore(Request $request)
     {
         // 1. Insert into doku_transaction_logs
-        //
+        $log = $request->input();
+        $log['type'] = 'verify';
+        (new DokuTransactionLogs)->createLog($log);
 
         // 2.1 If doku_transactions is found
         if ($dokuTransaction = DokuTransactions
@@ -69,7 +72,9 @@ class DokuController extends Controller
     public function notifyStore(Request $request)
     {
         // 1. Insert into doku_transaction_logs
-        //
+        $log = $request->input();
+        $log['type'] = 'notify';
+        (new DokuTransactionLogs)->createLog($log);
 
         // 2.1 If doku_transactions is found
         if ($dokuTransaction = DokuTransactions
@@ -104,7 +109,9 @@ class DokuController extends Controller
     public function redirectStore(Request $request)
     {
         // 1. Insert into doku_transaction_logs
-        //
+        $log = $request->input();
+        $log['type'] = 'redirect';
+        (new DokuTransactionLogs)->createLog($log);
 
         // 2.1 If doku_transactions is found
         if ($dokuTransaction = DokuTransactions
@@ -118,6 +125,11 @@ class DokuController extends Controller
 
     public function cancel(Request $request)
     {
+        // 1. Insert into doku_transaction_logs
+        $log = $request->input();
+        $log['type'] = 'cancel';
+        (new DokuTransactionLogs)->createLog($log);
+
         return redirect()->route(\Config::get('doku.cancel_route'));
     }
 }
