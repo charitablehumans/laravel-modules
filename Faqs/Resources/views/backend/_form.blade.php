@@ -142,7 +142,7 @@
                             <input class="images_media_id" name="postmetas[images][]" type="hidden" value="$images_media_id" />
                             <div style="position: relative;">
                                 <a class="images_media_attached_file" data-fancybox="group" href="$images_media_attached_file" target="_blank">
-                                    <img class="images_media_attached_file_thumbnail media-object" src="$images_media_attached_file_thumbnail" style="height: 64px; width: 64px;" />
+                                    <img class="contain images_media_attached_file_thumbnail media-object" src="$images_media_attached_file_thumbnail" style="height: 64px; width: 64px;" />
                                 </a>
                                 <button class="close template_close" type="button"><span>&times;</span></button>
                             </div>
@@ -155,7 +155,7 @@
                                 <input class="images_media_id" name="postmetas[images][]" type="hidden" value="{{ $imageId }}" />
                                 <div style="position: relative;">
                                     <a class="images_media_attached_file" data-fancybox="group" href="{{ Storage::url($medium->getPostmetaAttachedFile()) }}" target="_blank">
-                                        <img class="images_media_attached_file_thumbnail media-object" src="{{ Storage::url($medium->getPostmetaAttachedFileThumbnail()) }}" style="height: 64px; width: 64px;" />
+                                        <img class="contain images_media_attached_file_thumbnail media-object" src="{{ Storage::url($medium->getPostmetaAttachedFileThumbnail()) }}" style="height: 64px; width: 64px;" />
                                     </a>
                                     <button class="close template_close" type="button"><span>&times;</span></button>
                                 </div>
