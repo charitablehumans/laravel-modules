@@ -1,0 +1,16 @@
+{
+    "name": "DokuMyshortcart",
+    "alias": "dokumyshortcart",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\DokuMyshortcart\\Providers\\DokuMyshortcartServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
