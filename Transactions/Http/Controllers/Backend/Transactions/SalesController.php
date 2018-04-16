@@ -55,9 +55,10 @@ class SalesController extends Controller
      * Show the specified resource.
      * @return Response
      */
-    public function show()
+    public function show($id)
     {
-        return view('transactions::show');
+        $data['transaction'] = $this->model::search(['id' => $id, 'sales_ownership' => true])->firstOrFail();
+        return view('transactions::backend/sales/show', $data);
     }
 
     /**
@@ -74,8 +75,14 @@ class SalesController extends Controller
      * @param  Request $request
      * @return Response
      */
-    public function update(Request $request)
+    public function update($id, Request $request)
     {
+        $transaction = $this->model::search(['id' => $id, 'sales_ownership' => true])->firstOrFail();
+        $transaction->fill($request->input());
+        $transaction->save();
+        $request->has('receipt_number') && $request->has('send') ? (new $this->model)->send($id) : '';
+        flash(trans('cms::cms.data_has_been_updated'))->success()->important();
+        return redirect()->back();
     }
 
     /**
@@ -84,6 +91,13 @@ class SalesController extends Controller
      */
     public function destroy()
     {
+    }
+
+    public function process($id)
+    {
+        (new $this->model)->process($id);
+        flash(trans('cms::cms.data_has_been_processed'))->success()->important();
+        return redirect()->back();
     }
 
     public function reject($id)

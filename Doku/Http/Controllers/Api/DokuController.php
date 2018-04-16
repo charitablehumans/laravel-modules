@@ -84,6 +84,7 @@ class DokuController extends Controller
             // 2.2 If payment success
             if ($request->input('RESULT') == 'Success') {
                 $transaction = $dokuTransaction->transaction;
+                $transaction->status = 'new';
                 $transaction->payment_date = date('Y-m-d H:i:s');
                 $transaction->payment_status = 1;
                 $transaction->payment_type = $request->input('PTYPE');

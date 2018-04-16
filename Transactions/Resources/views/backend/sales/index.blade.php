@@ -95,15 +95,18 @@
                                 @can('backend transactions sales all')
                                     <td>{{ $transaction->sender->name }}</td>
                                 @endcan
-                                <td>{{ $transaction->number }}</td>
+                                <td>
+                                    <a href="{{ route('backend.transactions.sales.show', $transaction->id) }}" target="_blank">
+                                        {{ $transaction->number }}
+                                    </a>
+                                </td>
                                 <td>@lang('cms::cms.'.$transaction->status)</td>
                                 <td>{{ $transaction->receipt_number }}</td>
                                 <td>{{ number_format($transaction->grand_total) }}</td>
                                 <td>{{ $transaction->created_at }}</td>
                                 <td align="center">
-                                    {{-- <a class="btn btn-default btn-xs" href="{{ route('backend.transactions.edit', [$transaction->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a> --}}
-                                    {{-- <a class="btn btn-danger btn-xs" href="{{ route('backend.transactions.trash', $transaction->id) }}" onclick="return confirm('@lang('cms::cms.are_you_sure_to_delete_this')?')"><i class="fa fa-trash-o"></i></a> --}}
                                     @if (in_array($transaction->status, ['new']))
+                                        <a class="btn btn-primary btn-xs" href="{{ route('backend.transactions.sales.process', $transaction->id) }}">@lang('cms::cms.process')</a>
                                         <a class="btn btn-danger btn-xs" href="{{ route('backend.transactions.sales.reject', $transaction->id) }}" onclick="return confirm('@lang('cms::cms.are_you_sure_to_reject_this')?')">@lang('cms::cms.reject')</a>
                                     @endcan
                                 </td>
@@ -114,7 +117,7 @@
                             </tr>
                         @endforelse
                     </tbody>
-                    <tfoot class="hidden">
+                    <tfoot>
                         <tr>
                             <td colspan="8">
                                 <select class="input-sm" name="action">

@@ -47,15 +47,14 @@ class Transactions extends Model
 
     public function getStatusOptions()
     {
-        return [
-            'pending' => trans('cms::cms.pending'),
-            'new' => trans('cms::cms.new'),
-            'processed' => trans('cms::cms.processed'),
-            'sent' => trans('cms::cms.sent'),
-            'received' => trans('cms::cms.received'),
-            'finished' => trans('cms::cms.finished'),
-            'returned' => trans('cms::cms.returned'),
-        ];
+        $statusOptions['pending'] = trans('cms::cms.pending');
+        $statusOptions['new'] = trans('cms::cms.new');
+        $statusOptions['processed'] = trans('cms::cms.processed');
+        $statusOptions['sent'] = trans('cms::cms.sent');
+        \Config::get('cms.transactions.status_options.received') ? $statusOptions['received'] = trans('cms::cms.received') : '';
+        \Config::get('cms.transactions.status_options.finished') ? $statusOptions['finished'] = trans('cms::cms.finished') : '';
+        \Config::get('cms.transactions.status_options.returned') ? $statusOptions['returned'] = trans('cms::cms.returned') : '';
+        return $statusOptions;
     }
 
     public function getTotalDiscount()
@@ -111,16 +110,16 @@ class Transactions extends Model
         return $totalWeight;
     }
 
+    public function process($id)
+    {
+        $transaction = self::search(['id' => $id, 'status' => 'new'])->firstOrFail();
+        $transaction->status = 'processed';
+        $transaction->save();
+    }
+
     public function receiver()
     {
         return $this->belongsTo('\Modules\Users\Models\Users', 'receiver_id');
-    }
-
-    public function reject($id)
-    {
-        $transaction = self::findOrFail($id);
-        $transaction->status = 'returned';
-        $transaction->save();
     }
 
     public function scopeSearch($query, $params)
@@ -176,6 +175,14 @@ class Transactions extends Model
         }
 
         return $query;
+    }
+
+    public function send($id)
+    {
+        $transaction = self::where('id', $id)->whereIn('status', ['processed', 'sent'])->firstOrFail();
+        $transaction->status = 'sent';
+        $transaction->save();
+        return $transaction;
     }
 
     public function sender()
