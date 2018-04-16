@@ -11,8 +11,9 @@ $('.media_choose').each(function () {
             }
 
         } else {
-
-            var content = window.parent.document.getElementById('images_template').innerHTML
+            var content = window.parent.document
+                .getElementById(this.getAttribute('data-fancybox_to')+'_template')
+                .innerHTML
                 .replace('$images_media_id', this.getAttribute('data-media_id'))
                 .replace('$images_media_attached_file', this.getAttribute('data-attached_file'))
                 .replace('$images_media_attached_file_thumbnail', this.getAttribute('data-attached_file_thumbnail'));
