@@ -2,10 +2,9 @@
 
 namespace Modules\Users\Rules;
 
-use Modules\Users\Models\Users;
 use Illuminate\Contracts\Validation\Rule;
 
-class BalanceUserCheck implements Rule
+class BalanceCheck implements Rule
 {
     protected $attributes;
 
@@ -28,7 +27,7 @@ class BalanceUserCheck implements Rule
      */
     public function passes($attribute, $value)
     {
-        $user = Users::where('phone_number', $this->attributes['phone_number'])->firstOrFail();
+        $user = \Modules\Users\Models\Users::where('id', $this->attributes['id'])->firstOrFail();
 
         if ($user->balance >= $value) {
             return true;

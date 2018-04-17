@@ -20,6 +20,10 @@ class StoreRequest extends FormRequest
                 'required', 'integer', 'digits_between:1,20',
                 Rule::exists((new Users)->getTable(), 'id'),
             ],
+            'balance' => [
+                'integer',
+                new \Modules\Users\Rules\BalanceCheck(['id' => \Auth::user()->id]),
+            ],
             'transaction_details' => ['required'],
         ];
     }

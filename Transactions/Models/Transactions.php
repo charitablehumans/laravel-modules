@@ -29,7 +29,9 @@ class Transactions extends Model
         'total_weight',
         'total_shipping_cost', // round(total_weight) * transactions_shipments.cost * transactions_shipments.distance
         'payment_fee',
-        'grand_total', // total_price - total_discount + total_shipping_cost + payment_fee
+        'balance',
+        'grand_total', // total_price - total_discount + total_shipping_cost + payment_fee - balance
+
         'notes',
     ];
 
@@ -38,7 +40,7 @@ class Transactions extends Model
     public function getGrandTotal()
     {
         $grandTotal = 0;
-        $grandTotal = $this->getTotalSellPrice() - $this->getTotalDiscount() + $this->getTotalShippingCost() + $this->payment_fee;
+        $grandTotal = $this->getTotalSellPrice() - $this->getTotalDiscount() + $this->getTotalShippingCost() + $this->payment_fee - $this->balance;
         return $grandTotal;
     }
 
@@ -221,13 +223,13 @@ class Transactions extends Model
         return $this->hasMany('\Modules\TransactionDetails\Models\TransactionDetails', 'transaction_id');
     }
 
-    public function transactionShippingAddress()
-    {
-        return $this->hasOne('\Modules\TransactionShippingAddress\Models\TransactionShippingAddress', 'transaction_id');
-    }
-
     public function transactionShipment()
     {
         return $this->hasOne('\Modules\TransactionShipment\Models\TransactionShipment', 'transaction_id');
+    }
+
+    public function transactionShippingAddress()
+    {
+        return $this->hasOne('\Modules\TransactionShippingAddress\Models\TransactionShippingAddress', 'transaction_id');
     }
 }

@@ -35,6 +35,7 @@ class TransactionResource extends Resource
             'total_weight' => (int) $this->total_weight,
             'total_shipping_cost' => (int) $this->total_shipping_cost,
             'payment_fee' => (int) $this->payment_fee,
+            'balance' => (int) $this->balance,
             'grand_total' => (int) $this->grand_total,
             'notes' => $this->notes,
             'created_at' => $this->created_at,

@@ -76,6 +76,9 @@ class DokuMyshortcartTransactions extends Model
         if ($transaction->payment_fee) {
             $basket .= trans('cms::cms.payment_fee').','.$transaction->payment_fee.',1,'.$transaction->payment_fee.';';
         }
+        if ($transaction->balance) {
+            $basket .= trans('cms::cms.balance').',-'.$transaction->balance.',1,-'.$transaction->balance.';';
+        }
 
         $this->transaction_id = $transaction->id;
         $this->BASKET = $basket;

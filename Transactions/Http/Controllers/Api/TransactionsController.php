@@ -48,6 +48,7 @@ class TransactionsController extends Controller
             $transaction = new Transactions;
             $transaction->fill($request->input());
             $transaction->receiver_id = \Auth::user()->id;
+            $transaction->due_date = \Carbon\Carbon::now()->addDay();
             $transaction->save();
 
             // 3. Validate all input
@@ -124,6 +125,17 @@ class TransactionsController extends Controller
             }
 
             // 5. If has not errors, return 200
+            if ($request->has('balance')) {
+                // 5.1 Update balance in users
+                $user = \Auth::user();
+                $user->balance -= $request->input('balance');
+                $user->save();
+
+                // 5.2 Insert user_balances
+                //
+            }
+
+            // 5.3 Update transactions
             $transaction->number = $transaction->id;
             $transaction->sync()->save();
             $transaction = Transactions::findOrfail($transaction->id);

@@ -121,6 +121,12 @@
                                         <td align="right">{{ number_format($transaction->payment_fee) }}</td>
                                     </tr>
                                 @endif
+                                @if ($transaction->balance)
+                                    <tr>
+                                        <td align="right" colspan="4">@lang('cms::cms.balance')</td>
+                                        <td align="right">-{{ number_format($transaction->balance) }}</td>
+                                    </tr>
+                                @endif
                                 <tr>
                                     <td align="right" colspan="4">@lang('validation.attributes.grand_total')</td>
                                     <td align="right">{{ number_format($transaction->grand_total) }}</td>

@@ -35,7 +35,9 @@ class CreateTransactionsTable extends Migration
             $table->bigInteger('total_weight');
             $table->bigInteger('total_shipping_cost')->comment('round(total_weight) * transactions_shipments.cost * transactions_shipments.distance');
             $table->bigInteger('payment_fee');
-            $table->bigInteger('grand_total')->comment('total_price - total_discount + total_shipping_cost + payment_fee');
+            $table->bigInteger('balance');
+            $table->bigInteger('grand_total')->comment('total_price - total_discount + total_shipping_cost + payment_fee - balance');
+            
             $table->text('notes')->nullable();
 
             $table->timestamps();
