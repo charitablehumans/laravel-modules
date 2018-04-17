@@ -1,0 +1,16 @@
+{
+    "name": "UserBalanceHistories",
+    "alias": "userbalancehistories",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\UserBalanceHistories\\Providers\\UserBalanceHistoriesServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
