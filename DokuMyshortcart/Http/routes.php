@@ -9,11 +9,18 @@ Route::group(['middleware' => [CheckIpAddressDokuMyshortcart::class]], function(
     Route::post('api/doku-myshortcart/redirect', ['as' => 'api.doku-myshortcart.redirectStore', 'uses' => '\Modules\DokuMyshortcart\Http\Controllers\Api\DokuMyshortcartController@redirectStore']);
     Route::post('api/doku-myshortcart/cancel', ['as' => 'api.doku-myshortcart.cancel', 'uses' => '\Modules\DokuMyshortcart\Http\Controllers\Api\DokuMyshortcartController@cancel']);
 });
+Route::group(['middleware' => ['api']], function() {
+    Route::post('api/doku-myshortcart/transactions/purchases', ['as' => 'api.doku-myshortcart.transactions.purchases.store', 'uses' => '\Modules\DokuMyshortcart\Http\Controllers\Api\DokuMyshortcart\Transactions\PurchasesController@store']);
+});
 
 Route::group(['middleware' => ['web']], function() {
     Route::group(['middleware' => ['auth']], function() {
         Route::resource('backend/doku-myshortcart', '\Modules\DokuMyshortcart\Http\Controllers\Backend\DokuMyshortcartController', ['as' => 'backend'])
             ->except(['index', 'show', 'edit', 'update', 'destroy']);
+        Route::get('backend/doku-myshortcart-payment-methods/{id}/delete', ['as' => 'backend.doku-myshortcart-payment-methods.delete', 'uses' => '\Modules\DokuMyshortcart\Http\Controllers\Backend\DokuMyshortcartPaymentMethodsController@delete']);
+        Route::get('backend/doku-myshortcart-payment-methods/{id}/trash', ['as' => 'backend.doku-myshortcart-payment-methods.trash', 'uses' => '\Modules\DokuMyshortcart\Http\Controllers\Backend\DokuMyshortcartPaymentMethodsController@trash']);
+        Route::resource('backend/doku-myshortcart-payment-methods', '\Modules\DokuMyshortcart\Http\Controllers\Backend\DokuMyshortcartPaymentMethodsController', ['as' => 'backend'])
+            ->except(['show', 'destroy']);
         Route::get('doku-myshortcart/redirect', ['as' => 'frontend.doku-myshortcart.redirect', 'uses' => '\Modules\DokuMyshortcart\Http\Controllers\Frontend\DokuMyshortcartController@redirect']);
     });
 });

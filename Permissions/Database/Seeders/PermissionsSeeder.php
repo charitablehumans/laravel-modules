@@ -30,6 +30,7 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'backend custom links delete']);
         Permission::create(['name' => 'backend custom links trash']);
         Permission::create(['name' => 'backend dashboard']);
+        Permission::create(['name' => 'backend doku myshortcart payment methods']);
         Permission::create(['name' => 'backend faqs']);
         Permission::create(['name' => 'backend faqs delete']);
         Permission::create(['name' => 'backend faqs trash']);

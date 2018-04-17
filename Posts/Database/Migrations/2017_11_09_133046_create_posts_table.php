@@ -16,7 +16,7 @@ class CreatePostsTable extends Migration
         \Schema::create((new Posts)->getTable(), function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('author_id');
-            $table->string('type')->comment('{ attachment, custom_link, faq, location, page, post, product }');
+            $table->string('type')->comment('{ attachment, custom_link, doku_myshortcart_payment_method, faq, location, page, post, product }');
             $table->string('mime_type', 100);
             $table->enum('status', ['draft', 'publish', 'trash'])->default('publish');
             $table->enum('comment_status', ['closed', 'open'])->default('open');

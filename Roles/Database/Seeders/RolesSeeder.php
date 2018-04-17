@@ -27,6 +27,7 @@ class RolesSeeder extends Seeder
             'backend custom links delete',
             'backend custom links trash',
             'backend dashboard',
+            'backend doku myshortcart payment methods',
             'backend faqs',
             'backend faqs delete',
             'backend faqs trash',

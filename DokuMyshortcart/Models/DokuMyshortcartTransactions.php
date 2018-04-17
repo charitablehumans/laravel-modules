@@ -3,6 +3,7 @@
 namespace Modules\DokuMyshortcart\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\DokuMyshortcart\Models\DokuMyshortcartPaymentMethods;
 use Modules\Transactions\Models\Transactions;
 
 class DokuMyshortcartTransactions extends Model
@@ -34,18 +35,31 @@ class DokuMyshortcartTransactions extends Model
 
         'SCOUNTRY',
         'BIRTHDATE',
+        'PAYMENTMETHODID',
     ];
 
     protected $table = 'doku_myshortcart_transactions';
+
+    public function getPaymentMethodIdOptions()
+    {
+        return (new DokuMyshortcartPaymentMethods)->getPaymentMethodIdOptions();
+    }
 
     public function transaction()
     {
         return $this->belongsTo('\Modules\Transactions\Models\Transactions', 'transaction_id');
     }
 
-    public function transform($transactionId)
+    public function transform($transactionId, $data)
     {
         $transaction = Transactions::findOrFail($transactionId);
+        if (isset($data['PAYMENTMETHODID'])) {
+            $paymentMethod = DokuMyshortcartPaymentMethods::select((new DokuMyshortcartPaymentMethods)->getTable().'.*')->search(['payment_method_id' => $data['PAYMENTMETHODID']])->firstOrFail();
+            $transaction->payment_fee_formula = $paymentMethod->getPostmetaPaymentFeeFormula();
+        } else {
+            $transaction->payment_fee_formula = 0;
+        }
+        $transaction->sync()->save();
 
         $basket = '';
         if ($transaction->transactionDetails) {
@@ -58,6 +72,9 @@ class DokuMyshortcartTransactions extends Model
             $weight = new \redzjovi\shipment\v1\delivery\Weight($transactionShipment->code);
             $totalWeight = $weight->roundUp($transaction->getTotalWeight() / 1000);
             $basket .= $transactionShipment->name.' '.$transactionShipment->service.','.$transactionShipment->cost.','.$totalWeight.','.($transactionShipment->cost * $totalWeight).';';
+        }
+        if ($transaction->payment_fee) {
+            $basket .= trans('cms::cms.payment_fee').','.$transaction->payment_fee.',1,'.$transaction->payment_fee.';';
         }
 
         $this->transaction_id = $transaction->id;
@@ -85,6 +102,7 @@ class DokuMyshortcartTransactions extends Model
 
         $this->SCOUNTRY = \Config::get('dokumyshortcart.SCOUNTRY');
         $this->BIRTHDATE = $transaction->receiver->date_of_birth;
+        $this->PAYMENTMETHODID = isset($data['PAYMENTMETHODID']) ? $data['PAYMENTMETHODID'] : '';
 
         return $this;
     }

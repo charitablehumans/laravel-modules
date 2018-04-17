@@ -40,6 +40,7 @@ class CreateDokuMyshortcartTransactionsTable extends Migration
 
             $table->string('SCOUNTRY', 4)->nullable()->comment('Shipping Information Country');
             $table->date('BIRTHDATE')->nullable()->comment('Customer birthdate');
+            $table->string('PAYMENTMETHODID', 2)->nullable()->comment('See payment channel code list');
 
             $table->timestamps();
         });

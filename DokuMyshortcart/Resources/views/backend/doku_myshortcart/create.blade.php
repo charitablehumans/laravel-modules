@@ -25,6 +25,15 @@
                     </select>
                     <i class="text-danger">{{ $errors->first('id') }}</i>
                 </div>
+                <div class="form-group">
+                    <label>PAYMENTMETHODID</label>
+                    <select class="form-control select2" data-allow-clear="true" data-placeholder="" name="PAYMENTMETHODID">
+                        <option></option>
+                        @foreach ($doku_myshortcart_transaction->getPaymentMethodIdOptions() as $paymentMethodId => $paymentMethodName)
+                            <option value="{{ $paymentMethodId }}">{{ $paymentMethodName }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
             <div class="box-footer">
                 <div class="form-group">

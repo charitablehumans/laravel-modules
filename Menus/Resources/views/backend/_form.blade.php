@@ -58,6 +58,9 @@
         <div aria-multiselectable="true" class="panel-group" id="accordion" role="tablist">
             @include('menus::backend/_accordion/_categories', ['term' => $term])
             @include('menus::backend/_accordion/_custom_links', ['term' => $term])
+            @if (config('cms.menus.accordion.doku_myshortcart_payment_methods'))
+                @include('menus::backend/_accordion/_doku_myshortcart_payment_methods', ['term' => $term])
+            @endif
             @include('menus::backend/_accordion/_pages', ['term' => $term])
             @include('menus::backend/_accordion/_posts', ['term' => $term])
             @if (config('cms.menus.accordion.products'))

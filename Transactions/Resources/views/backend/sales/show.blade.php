@@ -115,6 +115,12 @@
                                     <td align="right" colspan="4">@lang('cms::cms.total_shipping_cost') ({{ number_format($transaction->total_weight / 1000) }} kg)</td>
                                     <td align="right">{{ number_format($transaction->total_shipping_cost) }}</td>
                                 </tr>
+                                @if ($transaction->payment_fee)
+                                    <tr>
+                                        <td align="right" colspan="4">@lang('cms::cms.payment_fee')</td>
+                                        <td align="right">{{ number_format($transaction->payment_fee) }}</td>
+                                    </tr>
+                                @endif
                                 <tr>
                                     <td align="right" colspan="4">@lang('validation.attributes.grand_total')</td>
                                     <td align="right">{{ number_format($transaction->grand_total) }}</td>

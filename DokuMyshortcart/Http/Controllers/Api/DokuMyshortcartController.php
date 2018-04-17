@@ -19,7 +19,7 @@ class DokuMyshortcartController extends Controller
     public function store(\Modules\DokuMyshortcart\Http\Requests\Api\DokuMyshortcart\StoreRequest $request)
     {
         // 1. Transform to be parameter doku
-        $dokuMyshortcartTransactionTransform = (new DokuMyshortcartTransactions)->transform($request->input('id'));
+        $dokuMyshortcartTransactionTransform = (new DokuMyshortcartTransactions)->transform($request->input('id'), $request->input());
 
         // 2. Insert into doku_myshortcart_transactions
         $dokuMyshortcartTransaction = DokuMyshortcartTransactions::firstOrCreate(['STOREID' => $dokuMyshortcartTransactionTransform->STOREID, 'TRANSIDMERCHANT' => $dokuMyshortcartTransactionTransform->TRANSIDMERCHANT]);
@@ -28,9 +28,9 @@ class DokuMyshortcartController extends Controller
         // 3. Insert into doku_myshortcart_transaction_logs
         //
 
-        $data['dokuMyshortcartTransaction'] = $dokuMyshortcartTransaction;
+        $data['doku_myshortcart_transaction'] = $dokuMyshortcartTransaction;
         $data['transaction'] = Transactions::findOrFail($request->input('id'));
-        return view('dokumyshortcart::backend/store', $data);
+        return view('dokumyshortcart::backend/doku_myshortcart/store', $data);
     }
 
     /**

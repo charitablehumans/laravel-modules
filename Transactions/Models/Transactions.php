@@ -20,14 +20,16 @@ class Transactions extends Model
         'payment',
         'payment_date',
 
+        'payment_fee_formula',
         'payment_status',
         'payment_type',
         'total_sell_price',
         'total_discount',
-        'total_weight',
 
+        'total_weight',
         'total_shipping_cost', // round(total_weight) * transactions_shipments.cost * transactions_shipments.distance
-        'grand_total', // total_price - total_discount + total_shipping_cost
+        'payment_fee',
+        'grand_total', // total_price - total_discount + total_shipping_cost + payment_fee
         'notes',
     ];
 
@@ -36,8 +38,16 @@ class Transactions extends Model
     public function getGrandTotal()
     {
         $grandTotal = 0;
-        $grandTotal = $this->getTotalSellPrice() - $this->getTotalDiscount() + $this->getTotalShippingCost();
+        $grandTotal = $this->getTotalSellPrice() - $this->getTotalDiscount() + $this->getTotalShippingCost() + $this->payment_fee;
         return $grandTotal;
+    }
+
+    public function getPaymentFee()
+    {
+        $grandTotal = $this->getTotalSellPrice() - $this->getTotalDiscount() + $this->getTotalShippingCost();
+        $paymentFeeFormula = str_replace('total', $grandTotal, $this->payment_fee_formula);
+        $paymentFee = eval('return '.$paymentFeeFormula.';');
+        return $paymentFee;
     }
 
     public function getSenderIdOptions()
@@ -151,6 +161,11 @@ class Transactions extends Model
         isset($params['created_at_date']) ? $query->whereDate(self::getTable().'.created_at', '=', $params['created_at_date']) : '';
         isset($params['updated_at_date']) ? $query->whereDate(self::getTable().'.updated_at', '=', $params['updated_at_date']) : '';
 
+        if (isset($params['purchase_ownership']) && $params['purchase_ownership'] === true) {
+            if (\Auth::check() && \Auth::user()->can('backend transactions purchase all') === false) {
+                $query->where('receiver_id', \Auth()->user()->id);
+            }
+        }
         if (isset($params['sales_ownership']) && $params['sales_ownership'] === true) {
             if (\Auth::check() && \Auth::user()->can('backend transactions sales all') === false) {
                 $query->where('sender_id', \Auth()->user()->id);
@@ -196,6 +211,7 @@ class Transactions extends Model
         $this->total_discount = $this->getTotalDiscount();
         $this->total_weight = $this->getTotalWeight();
         $this->total_shipping_cost = $this->getTotalShippingCost();
+        $this->payment_fee = $this->getPaymentFee();
         $this->grand_total = $this->getGrandTotal();
         return $this;
     }

@@ -5,6 +5,7 @@ namespace Modules\Menus\Models;
 use Illuminate\Database\Eloquent\Builder;
 use Modules\Categories\Models\Categories;
 use Modules\CustomLinks\Models\CustomLinks;
+use Modules\DokuMyshortcart\Models\DokuMyshortcartPaymentMethods;
 use Modules\Pages\Models\Pages;
 use Modules\Posts\Models\Posts;
 use Modules\Products\Models\Products;
@@ -166,6 +167,11 @@ class Menus extends Terms
         return $tree;
     }
 
+    public function getDokuMyshortcartPaymentMethodIdOptions()
+    {
+        return (new DokuMyshortcartPaymentMethods)->getPostIdOptions();
+    }
+
     public function getExcerpt()
     {
         return $this->attributes['excerpt'];
@@ -228,6 +234,21 @@ class Menus extends Terms
             case 'custom_link' :
                 $post = \Cache::remember('posts-'.$this->id, 1440, function () {
                     return CustomLinks::findOrFail($this->id);
+                });
+                $this->setContent($post->content);
+                $this->setExcerpt($post->excerpt);
+                $this->setImageThumbnailUrl($post->getPostmetaImageThumbnailUrl());
+                $this->setImageUrl($post->getPostmetaImageUrl());
+                $this->setMetas($post->postmetas);
+                $this->setOthers('');
+                $this->setPost($post);
+                $this->setTemplate($post->getPostmetaTemplate());
+                $this->setTitle($post->title);
+                $this->setUrl($this->getUrl());
+                break;
+            case 'doku_myshortcart_payment_method' :
+                $post = \Cache::remember('posts-'.$this->id, 1440, function () {
+                    return DokuMyshortcartPaymentMethods::findOrFail($this->id);
                 });
                 $this->setContent($post->content);
                 $this->setExcerpt($post->excerpt);

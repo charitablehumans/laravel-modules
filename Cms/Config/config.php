@@ -9,7 +9,15 @@ return [
     ],
     'menus' => [
         'accordion' => [
+            'doku_myshortcart_payment_methods' => false,
             'products' => true,
+        ],
+    ],
+    'pages' => [
+        'postmetas' => [
+            'template_options' => [
+                'cnr_cash' => false,
+            ],
         ],
     ],
     'transactions' => [
