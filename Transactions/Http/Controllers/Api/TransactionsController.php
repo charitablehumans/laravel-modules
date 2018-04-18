@@ -6,12 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Illuminate\Validation\Rule;
-use Modules\Products\Models\Products;
 use Modules\TransactionDetails\Models\TransactionDetails;
 use Modules\Transactions\Models\Transactions;
-use Modules\TransactionShipment\Models\TransactionShipment;
-use Modules\TransactionShippingAddress\Models\TransactionShippingAddress;
-use Modules\UserAddresses\Models\UserAddresses;
 
 class TransactionsController extends Controller
 {
@@ -44,7 +40,7 @@ class TransactionsController extends Controller
         return \DB::transaction(function () use ($request) {
             $errors = false;
 
-            // 2. Create transaction
+            // 2. Insert transactions
             $transaction = new Transactions;
             $transaction->fill($request->input());
             $transaction->receiver_id = \Auth::user()->id;
@@ -73,8 +69,8 @@ class TransactionsController extends Controller
                         if ($validator->fails()) {
                             $errors['transaction_details'][$i] = $validator->errors();
                         } else {
-                            // 3.1.3 Get product
-                            $product = Products::findOrfail($transactionDetail['product_id']);
+                            // 3.1.3 Select products
+                            $product = \Modules\Products\Models\Products::findOrfail($transactionDetail['product_id']);
 
                             // 3.1.4 Create transaction_details
                             $transaction->transactionDetails()->saveMany([
@@ -99,9 +95,10 @@ class TransactionsController extends Controller
                     if ($validator->fails()) { // 3.2.2 If fail, set errors
                         $errors['transaction_shipment'] = $validator->errors();
                     } else {
-                        // 3.2.3 Create transactions_shipments
-                        $transactionShipment = new TransactionShipment(['transaction_id' => $transaction->id]);
-                        $transactionShipment->fill($request->input('transaction_shipment'))->save();
+                        // 3.2.3 Create transactions_shipment
+                        $transaction->transactionShipment()->save(
+                            new \Modules\TransactionShipment\Models\TransactionShipment($request->input('transaction_shipment'))
+                        );
                     }
 
                 // 3.3 transaction_shipping_address
@@ -110,12 +107,13 @@ class TransactionsController extends Controller
                     if ($validator->fails()) { // 3.3.2 If fail, set errors
                         $errors['transaction_shipping_address'] = $validator->errors();
                     } else {
-                        // 3.3.3 Get user_addresses
-                        $userAddress = UserAddresses::findOrfail($request->input('transaction_shipping_address.user_address_id'));
+                        // 3.3.3 Select user_addresses
+                        $userAddress = \Modules\UserAddresses\Models\UserAddresses::findOrfail($request->input('transaction_shipping_address.user_address_id'));
 
-                        // 3.3.4 Create transactions_shipments
-                        $transactionShippingAddress = new TransactionShippingAddress(['transaction_id' => $transaction->id]);
-                        $transactionShippingAddress->fill($userAddress->getAttributes())->save();
+                        // 3.3.4 Create transaction_shipping_address
+                        $transaction->transactionShippingAddress()->save(
+                            new \Modules\TransactionShippingAddress\Models\TransactionShippingAddress($userAddress->getAttributes())
+                        );
                     }
 
             // 4. If has errors, roll back, return 422
@@ -126,7 +124,7 @@ class TransactionsController extends Controller
 
             // 5. If has not errors, return 200
             if ($request->has('balance')) {
-                // 5.1 Insert user_balance_histories, update users.balance
+                // 5.1 Insert user_balance_histories, update users
                 $user = \Auth::user();
                 $user->balance -= $request->input('balance');
                 $user->userBalanceHistoryCreate(['type' => 'transaction_pending', 'reference_id' => $transaction->id]);
@@ -135,7 +133,10 @@ class TransactionsController extends Controller
 
             // 5.3 Update transactions
             $transaction->number = $transaction->id;
-            $transaction->sync()->save();
+            $transaction->sync();
+            $transaction->status = $transaction->grand_total > 0 ? 'pending' : 'new';
+            $transaction->save();
+
             $transaction = Transactions::findOrfail($transaction->id);
             return response()->json(new \Modules\Transactions\Http\Resources\Api\TransactionResource($transaction));
         });
