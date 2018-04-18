@@ -1,6 +1,4 @@
 <?php
 
-Route::group(['middleware' => 'web', 'prefix' => 'ravintola', 'namespace' => 'Modules\Ravintola\Http\Controllers'], function()
-{
-    Route::get('/', 'RavintolaController@index');
-});
+Route::post('api/ravintola/v1/voucher/query_voucher', ['uses' => '\Modules\Ravintola\Http\Controllers\Api\v1\Voucher\QueryVoucherController@store']);
+Route::post('api/ravintola/v1/voucher/validate_voucher', ['uses' => '\Modules\Ravintola\Http\Controllers\Api\v1\Voucher\ValidateVoucherController@store']);
