@@ -98,6 +98,7 @@ return [
     'reject' => 'Reject',
     'regency' => 'Regency',
     'register' => 'Register',
+    'related_media' => 'Related Media',
     'remember_me' => 'Remember Me',
     'reset' => 'Reset',
     'reset_password' => 'Reset Password',

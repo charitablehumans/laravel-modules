@@ -175,6 +175,21 @@ class Posts extends Model
         return $template;
     }
 
+    public function getPostmetaValues($key)
+    {
+        $imagesId = [];
+        $imagesId = $this->id && isset($this->postmetas->where('key', $key)->first()->value) ? json_decode($this->postmetas->where('key', $key)->first()->value, true) : $imagesId;
+        $imagesId = is_array(request()->old('postmetas.'.$key)) ? request()->old('postmetas.'.$key) : $imagesId;
+        return $imagesId;
+    }
+
+    public function getPostmetaValue($key)
+    {
+        $metaId = $this->getPostmetaIds($key);
+        $metaId = collect($metaId)->count() > 0 ? collect($metaId)->first() : false;
+        return $metaId;
+    }
+
     public function getStatusOptions()
     {
         $options = [

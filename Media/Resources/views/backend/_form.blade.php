@@ -146,4 +146,54 @@
             </div>
         </div>
     </div>
+    <div class="col-md-3">
+        <div class="box">
+            <div class="box-header with-border">
+                <h3 class="box-title">@lang('cms::cms.related_media')</h3>
+                <div class="box-tools pull-right">
+                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                        <i class="fa fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="box-body">
+                <input class="images_media_id" name="postmetas[related_media][]" type="hidden" value="" />
+                <u>
+                    <a
+                        data-fancybox
+                        data-type="iframe"
+                        href="{{ route('backend.media.index', ['fancybox_to' => 'related_media', 'layout' => 'media_iframe', 'mime_type_like' => 'image/']) }}"
+                    >@lang('cms::cms.choose')</a>
+                </u>
+                <ul class="list-inline sortable-list-group" id="related_media">
+                    <template class="hidden" id="images_template">
+                        <li>
+                            <input class="images_media_id" name="postmetas[related_media][]" type="hidden" value="$images_media_id" />
+                            <div style="position: relative;">
+                                <a class="images_media_attached_file" data-fancybox="group" href="$images_media_attached_file" target="_blank">
+                                    <img class="contain images_media_attached_file_thumbnail media-object" src="$images_media_attached_file_thumbnail" style="height: 64px; width: 64px;" />
+                                </a>
+                                <button class="close template_close" type="button"><span>&times;</span></button>
+                            </div>
+                        </li>
+                    </template>
+
+                    @foreach ($post->getPostMetaValues('related_media') as $imageId)
+                        @php $medium = \Modules\Media\Models\Media::find($imageId); @endphp
+                        @if($medium)
+                        <li>
+                            <input class="images_media_id" name="postmetas[related_media][]" type="hidden" value="{{ $imageId }}" />
+                            <div style="position: relative;">
+                                <a class="images_media_attached_file" data-fancybox="group" href="{{ Storage::url($medium->getPostmetaAttachedFile()) }}" target="_blank">
+                                    <img class="contain images_media_attached_file_thumbnail media-object" src="{{ Storage::url($medium->getPostmetaAttachedFileThumbnail()) }}" style="height: 64px; width: 64px;" />
+                                </a>
+                                <button class="close template_close" type="button"><span>&times;</span></button>
+                            </div>
+                        </li>
+                        @endif
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>

@@ -98,6 +98,7 @@ return [
     'reject' => 'Tolak',
     'regency' => 'Kabupaten',
     'register' => 'Daftar',
+    'related_media' => 'Media terkait',
     'remember_me' => 'Ingatkan Saya',
     'reset' => 'Atur Ulang',
     'reset_password' => 'Atur Ulang Kata Sandi',
