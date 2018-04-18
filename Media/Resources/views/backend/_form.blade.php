@@ -178,18 +178,17 @@
                         </li>
                     </template>
 
-                    @foreach ($post->getPostMetaValues('related_media') as $imageId)
-                        @php $medium = \Modules\Media\Models\Media::find($imageId); @endphp
-                        @if($medium)
-                        <li>
-                            <input class="images_media_id" name="postmetas[related_media][]" type="hidden" value="{{ $imageId }}" />
-                            <div style="position: relative;">
-                                <a class="images_media_attached_file" data-fancybox="group" href="{{ Storage::url($medium->getPostmetaAttachedFile()) }}" target="_blank">
-                                    <img class="contain images_media_attached_file_thumbnail media-object" src="{{ Storage::url($medium->getPostmetaAttachedFileThumbnail()) }}" style="height: 64px; width: 64px;" />
-                                </a>
-                                <button class="close template_close" type="button"><span>&times;</span></button>
-                            </div>
-                        </li>
+                    @foreach ($post->getPostMetaValues('related_media') as $mediumId)
+                        @if ($medium = \Modules\Media\Models\Media::find($mediumId))
+                            <li>
+                                <input class="images_media_id" name="postmetas[related_media][]" type="hidden" value="{{ $mediumId }}" />
+                                <div style="position: relative;">
+                                    <a class="images_media_attached_file" data-fancybox="group" href="{{ Storage::url($medium->getPostmetaAttachedFile()) }}" target="_blank">
+                                        <img class="contain images_media_attached_file_thumbnail media-object" src="{{ Storage::url($medium->getPostmetaAttachedFileThumbnail()) }}" style="height: 64px; width: 64px;" />
+                                    </a>
+                                    <button class="close template_close" type="button"><span>&times;</span></button>
+                                </div>
+                            </li>
                         @endif
                     @endforeach
                 </ul>
