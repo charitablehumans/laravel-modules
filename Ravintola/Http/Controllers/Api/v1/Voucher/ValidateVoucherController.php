@@ -62,8 +62,9 @@ class ValidateVoucherController extends Controller
         $ravintolaUserVoucher->transaction_deductible = $discount;
         $ravintolaUserVoucher->save();
 
-        // 5. Update user balance and insert user_balance_histories
+        // 5. Insert user_balance_histories, update users.balance
         $user->balance = $user->balance - $discount;
+        $user->userBalanceHistoryCreate(['type' => 'ravintola_voucher', 'reference_id' => $ravintolaUserVoucher->id]);
         $user->save();
 
         // 6. Response json ok

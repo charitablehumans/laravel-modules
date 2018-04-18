@@ -126,13 +126,11 @@ class TransactionsController extends Controller
 
             // 5. If has not errors, return 200
             if ($request->has('balance')) {
-                // 5.1 Update balance in users
+                // 5.1 Insert user_balance_histories, update users.balance
                 $user = \Auth::user();
                 $user->balance -= $request->input('balance');
+                $user->userBalanceHistoryCreate(['type' => 'transaction_pending', 'reference_id' => $transaction->id]);
                 $user->save();
-
-                // 5.2 Insert user_balances
-                //
             }
 
             // 5.3 Update transactions

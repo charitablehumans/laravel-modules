@@ -39,10 +39,8 @@ class Sales extends \Modules\Transactions\Models\Transactions
             $user->balance += $transaction->grand_total;
         }
 
-        // 3.3 Insert user_balances
-        //
-
-        // 3.4 Update user
+        // 3.3 Insert user_balance_histories, update user
+        $user->userBalanceHistoryCreate(['type' => 'transaction_returned', 'reference_id' => $transaction->id]);
         $user->save();
 
         // 4. Update transaction set status = 'returned'

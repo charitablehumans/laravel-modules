@@ -158,6 +158,20 @@ class Users extends \App\User
         return $this->hasMany('\Modules\UserAddresses\Models\UserAddresses', 'user_id')->orderBy('primary', 'desc')->latest();
     }
 
+    public function userBalanceHistories()
+    {
+        return $this->hasMany('\Modules\UserBalanceHistories\Models\UserBalanceHistories', 'user_id')->orderBy('created_at', 'desc')->latest();
+    }
+
+    public function userBalanceHistoryCreate($data = [])
+    {
+        $data['balance_start'] = $this->getOriginal('balance');
+        $data['balance'] = $this->balance - $this->getOriginal('balance');
+        $data['balance_end'] = $this->balance;
+        $this->userBalanceHistories()->save(new \Modules\UserBalanceHistories\Models\UserBalanceHistories($data));
+        return $this;
+    }
+
     public function userGames()
     {
         return $this->hasMany('\App\Http\Models\Cnr\UsersGames', 'user_id', 'id');
