@@ -185,7 +185,7 @@ class Posts extends Model
 
     public function getPostmetaValue($key)
     {
-        $metaId = $this->getPostmetaIds($key);
+        $metaId = $this->getPostmetaValues($key);
         $metaId = collect($metaId)->count() > 0 ? collect($metaId)->first() : false;
         return $metaId;
     }
