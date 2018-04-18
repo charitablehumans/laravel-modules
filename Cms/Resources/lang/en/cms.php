@@ -130,6 +130,7 @@ return [
     'update' => 'Update',
     'user' => 'User',
     'user_addresses' => 'User Addresses',
+    'user_balance_histories' => 'User Balance Histories',
     'users' => 'Users',
     'verification_success' => 'Verification Success',
     'verify' => 'Verify',

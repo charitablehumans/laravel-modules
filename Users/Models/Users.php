@@ -165,10 +165,13 @@ class Users extends \App\User
 
     public function userBalanceHistoryCreate($data = [])
     {
-        $data['balance_start'] = $this->getOriginal('balance');
-        $data['balance'] = $this->balance - $this->getOriginal('balance');
-        $data['balance_end'] = $this->balance;
-        $this->userBalanceHistories()->save(new \Modules\UserBalanceHistories\Models\UserBalanceHistories($data));
+        if ($this->getOriginal('balance') != $this->balance) {
+            $data['balance_start'] = $this->getOriginal('balance');
+            $data['balance'] = $this->balance - $this->getOriginal('balance');
+            $data['balance_end'] = $this->balance;
+            $this->userBalanceHistories()->save(new \Modules\UserBalanceHistories\Models\UserBalanceHistories($data));
+        }
+
         return $this;
     }
 

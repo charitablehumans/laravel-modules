@@ -71,9 +71,18 @@
 
         <div class="row">
             @if (config('cms.users.balance'))
-                <div class="col-md-3">
+                <div class="col-md-3" id="balance">
                     <div class="panel panel-default">
-                        <div class="panel-heading">@lang('validation.attributes.balance') (*)</div>
+                        <div class="panel-heading">
+                            @lang('validation.attributes.balance') (*)
+                            @if ($user->id)
+                                <a
+                                    data-fancybox
+                                    data-type="iframe"
+                                    href="{{ route('backend.user-balance-histories.index', ['layout' => 'media_iframe', 'user_id' => $user->id]) }}"
+                                >»</a>
+                            @endif
+                        </div>
                         <div class="panel-body">
                             <div class="form-group">
                                 <input class="form-control input-sm text-right" name="balance" required type="number" value="{{ request()->old('balance', $user->balance) }}" />

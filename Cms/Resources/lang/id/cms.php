@@ -130,6 +130,7 @@ return [
     'update' => 'Perbarui',
     'user' => 'User',
     'user_addresses' => 'Alamat Pengguna',
+    'user_balance_histories' => 'Riwayat Saldo Pengguna',
     'users' => 'Pengguna',
     'verification_success' => 'Verifikasi Sukses',
     'verify' => 'Periksa',

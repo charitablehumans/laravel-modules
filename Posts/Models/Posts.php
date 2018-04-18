@@ -261,8 +261,8 @@ class Posts extends Model
             });
         }
         isset($params['status']) ? $query->where('status', $params['status']) : '';
-        isset($params['created_at']) ? $query->where(self::getTable().'created_at', 'like', '%'.$params['created_at'].'%') : '';
-        isset($params['created_at_date']) ? $query->whereDate(self::getTable().'created_at', '=', $params['created_at_date']) : '';
+        isset($params['created_at']) ? $query->where(self::getTable().'.created_at', 'like', '%'.$params['created_at'].'%') : '';
+        isset($params['created_at_date']) ? $query->whereDate(self::getTable().'.created_at', '=', $params['created_at_date']) : '';
         isset($params['updated_at_date']) ? $query->whereDate(self::getTable().'.updated_at', '=', $params['updated_at_date']) : '';
 
         // postmetas

@@ -65,6 +65,7 @@ class RolesSeeder extends Seeder
             'backend transactions sales',
             'backend transactions sales all',
             'backend user addresses',
+            'backend user balance histories',
             'backend users',
             'backend users store all',
         ]);

@@ -48,7 +48,9 @@ class UsersController extends Controller
         $request->merge(['password' => \Hash::make($request->input('password'))]);
 
         $user = new Users;
-        $user->fill($request->input())->save();
+        $user->fill($request->input());
+        $user->userBalanceHistoryCreate(['type' => 'backend_users']);
+        $user->save();
         auth()->user()->can('backend roles') ? $user->syncRoles($request->input('roles')) : '';
         auth()->user()->can('backend permissions') ? $user->syncPermissions($request->input('permissions')) : '';
         flash(trans('cms::cms.data_has_been_created'))->success()->important();
@@ -80,7 +82,9 @@ class UsersController extends Controller
     {
         $user = Users::findOrFail($id);
         $request->input('password') ? $request->merge(['password' => \Hash::make($request->input('password'))]) : $request->request->remove('password');
-        $user->fill($request->input())->save();
+        $user->fill($request->input());
+        $user->userBalanceHistoryCreate(['type' => 'backend_users']);
+        $user->save();
         auth()->user()->can('backend roles') ? $user->syncRoles($request->input('roles')) : '';
         auth()->user()->can('backend permissions') ? $user->syncPermissions($request->input('permissions')) : '';
         flash(trans('cms::cms.data_has_been_updated'))->success()->important();
