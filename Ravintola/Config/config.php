@@ -1,5 +1,6 @@
 <?php
 
 return [
-    'name' => 'Ravintola'
+    'name' => 'Ravintola',
+    'SECRET_KEY' => env('RAVINTOLA_SECRET_KEY'),
 ];

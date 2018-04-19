@@ -28,6 +28,7 @@ class SignatureCheck implements Rule
     public function passes($attribute, $value)
     {
         $signature = '';
+        $signature .= \Config::get('ravintola.SECRET_KEY');
         $signature .= isset($this->attributes['pos_id']) ? $this->attributes['pos_id'] : '';
         $signature .= isset($this->attributes['outlet_code']) ? $this->attributes['outlet_code'] : '';
         $signature .= isset($this->attributes['verification_number']) ? $this->attributes['verification_number'] : '';
