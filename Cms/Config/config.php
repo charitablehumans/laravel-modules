@@ -16,6 +16,7 @@ return [
     'pages' => [
         'postmetas' => [
             'template_options' => [
+                'bank_accounts' => false,
                 'cnr_cash' => false,
             ],
         ],

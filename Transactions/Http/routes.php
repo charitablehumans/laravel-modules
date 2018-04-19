@@ -20,4 +20,5 @@ Route::group(['middleware' => ['web']], function () {
                 ->except(['create', 'edit', 'destroy']);
         });
     });
+    Route::get('frontend/transactions/purchases/payment/confirmation', ['as' => 'frontend.transactions.purchases.payment.confirmation.index', 'uses' => '\Modules\Transactions\Http\Controllers\Frontend\Transactions\Purchases\Payment\ConfirmationController@index']);
 });

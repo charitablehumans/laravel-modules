@@ -30,7 +30,7 @@ class SalesController extends Controller
 
         if ($request->query('action')) { $this->model->action($request->query()); return redirect()->back(); }
 
-        return view('transactions::backend/sales/index', $data);
+        return view('transactions::backend/transactions/sales/index', $data);
     }
 
     /**
@@ -58,7 +58,7 @@ class SalesController extends Controller
     public function show($id)
     {
         $data['transaction'] = $this->model::search(['id' => $id, 'sales_ownership' => true])->firstOrFail();
-        return view('transactions::backend/sales/show', $data);
+        return view('transactions::backend/transactions/sales/show', $data);
     }
 
     /**

@@ -120,7 +120,14 @@ class DokuMyshortcartController extends Controller
             ->first()
         ) {
             $data['id'] = $dokuMyshortcartTransaction->transaction->id;
-            return redirect()->route(\Config::get('dokumyshortcart.redirect_route'), $data);
+
+            if (in_array($request->input('PTYPE'), ['CREDIT CARD'])) {
+                // 2.2 If PTYPE in Creditcard, then redirect to redirect_route
+                return redirect()->route(\Config::get('dokumyshortcart.redirect_route'), $data);
+            } else {
+                // 2.3 redirect to payment_confirmation_route
+                return redirect()->route(\Config::get('dokumyshortcart.payment_confirmation_route'), $data);
+            }
         }
     }
 
