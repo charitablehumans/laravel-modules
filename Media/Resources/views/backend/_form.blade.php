@@ -166,7 +166,7 @@
                     >@lang('cms::cms.choose')</a>
                 </u>
                 <ul class="list-inline sortable-list-group" id="related_media">
-                    <template class="hidden" id="images_template">
+                    <template class="hidden" id="related_media_template">
                         <li>
                             <input class="images_media_id" name="postmetas[related_media][]" type="hidden" value="$images_media_id" />
                             <div style="position: relative;">
