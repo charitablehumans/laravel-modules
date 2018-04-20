@@ -33,6 +33,7 @@ return [
         'store_id' => true,
         'balance' => true,
         'game_token' => true,
+        'game_token_default' => 0,
 
         'role_default' => 'member',
         'user_socialites' => true,

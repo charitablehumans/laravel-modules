@@ -104,6 +104,7 @@ class AuthenticationController extends Controller
         $user->fill($request->input());
         $user->password = \Hash::make($user->password);
         $user->verification_code = rand(111111, 999999);
+        $user->game_token = \Config::get('cms.users.game_token_default');
         $user->save();
 
         $user->notify(new \Modules\Users\Notifications\VerificationCodeVerify($user));
