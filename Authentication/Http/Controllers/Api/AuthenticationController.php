@@ -107,6 +107,10 @@ class AuthenticationController extends Controller
         $user->game_token = \Config::get('cms.users.game_token_default');
         $user->save();
 
+        if ($roleDefault = \Config::get('cms.users.role_default')) {
+            $user->assignRole($roleDefault);
+        }
+
         $user->notify(new \Modules\Users\Notifications\VerificationCodeVerify($user));
 
         $data['verification_code'] = $user->verification_code;
