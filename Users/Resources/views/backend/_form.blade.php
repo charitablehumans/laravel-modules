@@ -108,7 +108,7 @@
             @endif
         </div>
 
-        @if (config('cms.user_addresses') && $user->id)
+        @if (config('cms.user_addresses') && auth()->user()->can('backend user addresses') && $user->id)
             <div class="row" id="user_addresses">
                 <div class="col-md-12">
                     <div class="box">
@@ -156,6 +156,55 @@
                                         </tr>
                                     @empty
                                         <tr><td align="center" colspan="4">@lang('cms::cms.no_data')</td></tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        @if (config('cms.users.user_socialites') && auth()->user()->can('backend user socialites') && $user->id)
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="box">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">@lang('cms::cms.user_socialites')</h3>
+                            <div class="box-tools pull-right">
+                                <button class="btn btn-box-tool" data-original-title="Collapse" data-toggle="tooltip" data-widget="collapse" type="button">
+                                    <i class="fa fa-minus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="box-body">
+                            <table class="table table-bordered table-condensed table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>@lang('validation.attributes.provider')</th>
+                                        <th>@lang('validation.attributes.client_id')</th>
+                                        <th>@lang('validation.attributes.code')</th>
+                                        <th>@lang('validation.attributes.email')</th>
+                                        <th>@lang('validation.attributes.username')</th>
+                                        <th>@lang('validation.attributes.data')</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($user->userSocialites as $i => $userSocialite)
+                                        <tr>
+                                            <td>{{ $userSocialite->provider }}</td>
+                                            <td>{{ $userSocialite->client_id }}</td>
+                                            <td>{{ $userSocialite->code }}</td>
+                                            <td>{{ $userSocialite->email }}</td>
+                                            <td>{{ $userSocialite->username }}</td>
+                                            <td>{{ $userSocialite->data }}</td>
+                                            <td align="center">
+                                                <a class="btn btn-danger btn-xs" href="{{ route('backend.user-socialites.delete', $userSocialite->id) }}" onclick="return confirm('@lang('cms::cms.are_you_sure_to_delete_this_permanently')?')"><i class="fa fa-trash-o"></i></a>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr><td align="center" colspan="7">@lang('cms::cms.no_data')</td></tr>
                                     @endforelse
                                 </tbody>
                             </table>

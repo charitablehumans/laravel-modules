@@ -136,6 +136,7 @@ return [
     'user' => 'User',
     'user_addresses' => 'Alamat Pengguna',
     'user_balance_histories' => 'Riwayat Saldo Pengguna',
+    'user_socialites' => 'Sosialita Pengguna',
     'users' => 'Pengguna',
     'verification_success' => 'Verifikasi Sukses',
     'verify' => 'Periksa',

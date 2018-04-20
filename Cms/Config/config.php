@@ -35,5 +35,6 @@ return [
         'game_token' => true,
 
         'role_default' => 'member',
+        'user_socialites' => true,
     ],
 ];

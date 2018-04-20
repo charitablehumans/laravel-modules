@@ -136,6 +136,7 @@ return [
     'user' => 'User',
     'user_addresses' => 'User Addresses',
     'user_balance_histories' => 'User Balance Histories',
+    'user_socialites' => 'User Socialites',
     'users' => 'Users',
     'verification_success' => 'Verification Success',
     'verify' => 'Verify',

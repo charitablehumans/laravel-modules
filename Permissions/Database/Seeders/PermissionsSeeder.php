@@ -69,6 +69,7 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'backend transactions sales all']);
         Permission::create(['name' => 'backend user addresses']);
         Permission::create(['name' => 'backend user balance histories']);
+        Permission::create(['name' => 'backend user socialites']);
         Permission::create(['name' => 'backend users']);
         Permission::create(['name' => 'backend users store all']);
     }

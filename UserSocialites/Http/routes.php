@@ -1,6 +1,9 @@
 <?php
 
-Route::group(['middleware' => 'web', 'prefix' => 'usersocialites', 'namespace' => 'Modules\UserSocialites\Http\Controllers'], function()
-{
-    Route::get('/', 'UserSocialitesController@index');
+Route::group(['middleware' => ['web']], function () {
+    Route::group(['middleware' => ['auth']], function () {
+        Route::group(['middleware' => ['permission:backend users']], function () {
+            Route::get('backend/user-socialites/{id}/delete', ['as' => 'backend.user-socialites.delete', 'uses' => '\Modules\UserSocialites\Http\Controllers\Backend\UserSocialitesController@delete']);
+        });
+    });
 });

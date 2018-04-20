@@ -182,6 +182,6 @@ class Users extends \App\User
 
     public function userSocialites()
     {
-        return $this->hasMany('\Modules\UserSocialites\Models\UserSocialites', 'user_id');
+        return $this->hasMany('\Modules\UserSocialites\Models\UserSocialites', 'user_id')->orderBy('provider');
     }
 }
