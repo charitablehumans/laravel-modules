@@ -72,7 +72,7 @@ class ShoppingController extends Controller
 
         (new CartDetails)->sync($cart->id);
 
-        $cart->sync();
+        $cart->sync()->save();
 
         return new \Modules\Carts\Transformers\Api\CartResource($cart);
     }
@@ -150,7 +150,7 @@ class ShoppingController extends Controller
         (new CartDetails)->insertUpdate($request->input(), $cart->id);
         (new CartDetails)->sync($cart->id);
 
-        $cart->sync();
+        $cart->sync()->save();
 
         return new \Modules\Carts\Transformers\Api\CartResource($cart);
     }
@@ -241,7 +241,7 @@ class ShoppingController extends Controller
         $cartDetail->fill($request->input())->save();
         (new CartDetails)->sync($cart->id);
 
-        $cart->sync();
+        $cart->sync()->save();
 
         return new \Modules\Carts\Transformers\Api\CartResource($cart);
     }
