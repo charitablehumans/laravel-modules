@@ -61,7 +61,7 @@
             <div class="box-body">
                 <select class="form-control input-sm" name="termmetas[template]">
                     @foreach ($term->getTemplateOptions() as $templateId => $templateName)
-                        <option {{ $templateId == $term->getTermmetaTemplate() ? 'selected' : '' }} value="{{ $templateId }}">{{ $templateName }}</option>
+                        <option {{ $templateId == $term->getTermmetaValue('template') ? 'selected' : '' }} value="{{ $templateId }}">{{ $templateName }}</option>
                     @endforeach
                 </select>
             </div>
@@ -100,18 +100,18 @@
                         </li>
                     </template>
 
-                    @foreach ($term->getTermmetaImagesId() as $imageId)
-                        @php $medium = \Modules\Media\Models\Media::find($imageId); @endphp
-
-                        <li>
-                            <input class="images_media_id" name="termmetas[images][]" type="hidden" value="{{ $imageId }}" />
-                            <div style="position: relative;">
-                                <a class="images_media_attached_file" data-fancybox="group" href="{{ Storage::url($medium->getPostmetaAttachedFile()) }}" target="_blank">
-                                    <img class="contain images_media_attached_file_thumbnail media-object" src="{{ Storage::url($medium->getPostmetaAttachedFileThumbnail()) }}" style="height: 64px; width: 64px;" />
-                                </a>
-                                <button class="close template_close" type="button"><span>&times;</span></button>
-                            </div>
-                        </li>
+                    @foreach ($term->getTermmetaValues('images') as $imageId)
+                        @if ($medium = \Modules\Media\Models\Media::find($imageId))
+                            <li>
+                                <input class="images_media_id" name="termmetas[images][]" type="hidden" value="{{ $imageId }}" />
+                                <div style="position: relative;">
+                                    <a class="images_media_attached_file" data-fancybox="group" href="{{ Storage::url($medium->getPostmetaValue('attached_file')) }}" target="_blank">
+                                        <img class="contain images_media_attached_file_thumbnail media-object" src="{{ Storage::url($medium->getPostmetaValue('attached_file_thumbnail')) }}" style="height: 64px; width: 64px;" />
+                                    </a>
+                                    <button class="close template_close" type="button"><span>&times;</span></button>
+                                </div>
+                            </li>
+                        @endif
                     @endforeach
                 </ul>
             </div>

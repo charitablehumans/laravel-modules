@@ -39,7 +39,7 @@
                 <ul class="nav navbar-nav">
                     @php
                     $term = \Modules\Menus\Models\Menus::search(['slug' => 'frontend-default-top-left'])->firstOrFail();
-                    $nestable = $term->getTermmetaNestable();
+                    $nestable = $term->getTermmetaValues('nestable');
                     @endphp
                     {!! $term->generateAsHtml($nestable, 'frontend-default-top') !!}
                 </ul>
@@ -47,7 +47,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     @php
                     $term = \Modules\Menus\Models\Menus::search(['slug' => 'frontend-default-top-right'])->firstOrFail();
-                    $nestable = $term->getTermmetaNestable();
+                    $nestable = $term->getTermmetaValues('nestable');
                     @endphp
                     {!! $term->generateAsHtml($nestable, 'frontend-default-top') !!}
 

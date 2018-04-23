@@ -103,14 +103,14 @@
                 <li class="header">@lang('cms::cms.main')</li>
                 @php
                 $term = \Modules\Menus\Models\Menus::search(['slug' => 'backend-main'])->firstOrFail();
-                $nestable = $term->getTermmetaNestable();
+                $nestable = $term->getTermmetaValues('nestable');
                 @endphp
                 {!! $term->generateAsHtml($nestable, 'backend-master') !!}
 
                 <li class="header">@lang('cms::cms.masters')</li>
                 @php
                 $term = \Modules\Menus\Models\Menus::search(['slug' => 'backend-master'])->firstOrFail();
-                $nestable = $term->getTermmetaNestable();
+                $nestable = $term->getTermmetaValues('nestable');
                 @endphp
                 {!! $term->generateAsHtml($nestable, 'backend-master') !!}
             </ul>

@@ -102,9 +102,9 @@
                                 <td>
                                     <a
                                     @if (in_array($post->mime_type, $post->mimeTypeImages)) data-fancybox="group" @endif
-                                        href="{{ Storage::url($post->getPostmetaAttachedFile()) }}" target="_blank"
+                                        href="{{ Storage::url($post->getPostmetaValue('attached_file')) }}" target="_blank"
                                         >
-                                        <img class="contain img-responsive media-object" src="{{ Storage::url($post->getPostmetaAttachedFileThumbnail()) }}" style="height: 32px; width: 32px;" />
+                                        <img class="contain img-responsive media-object" src="{{ Storage::url($post->getPostmetaValue('attached_file_thumbnail')) }}" style="height: 32px; width: 32px;" />
                                     </a>
                                 </td>
                                 <td>
@@ -124,7 +124,7 @@
                                 <td>{{ $post->mime_type }}</td>
                                 <td>
                                     @php
-                                    $categories = \Modules\MediumCategories\Models\MediumCategories::search(['id_in' => $post->getPostmetaCategoriesId(), 'sort' => 'name:asc'])->get();
+                                    $categories = \Modules\MediumCategories\Models\MediumCategories::search(['id_in' => $post->getPostmetaValues('categories'), 'sort' => 'name:asc'])->get();
                                     @endphp
 
                                     @if ($categories)
@@ -150,8 +150,8 @@
                                     @if (request()->query('layout') == 'media_iframe')
                                         <button
                                             class="btn btn-success btn-xs media_choose"
-                                            data-attached_file="{{ Storage::url($post->getPostmetaAttachedFile()) }}"
-                                            data-attached_file_thumbnail="{{ Storage::url($post->getPostmetaAttachedFileThumbnail()) }}"
+                                            data-attached_file="{{ Storage::url($post->getPostmetaValue('attached_file')) }}"
+                                            data-attached_file_thumbnail="{{ Storage::url($post->getPostmetaValue('attached_file_thumbnail')) }}"
                                             data-fancybox_to="{{ request()->query('fancybox_to') }}"
                                             data-media_id="{{ $post->id }}"
                                             data-success-message="@lang('cms::cms.added')"

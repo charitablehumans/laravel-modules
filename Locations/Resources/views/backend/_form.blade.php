@@ -97,7 +97,7 @@
             <div class="box-body">
                 <select class="form-control input-sm" name="postmetas[template]">
                     @foreach ($post->getTemplateOptions() as $templateId => $templateName)
-                        <option {{ $templateId == $post->getPostmetaTemplate() ? 'selected' : '' }} value="{{ $templateId }}">{{ $templateName }}</option>
+                        <option {{ $templateId == $post->getPostmetaValue('template') ? 'selected' : '' }} value="{{ $templateId }}">{{ $templateName }}</option>
                     @endforeach
                 </select>
             </div>
@@ -120,7 +120,7 @@
                         <div class="checkbox">
                             {{ $category_tree['tree_prefix'] }}
                             <label>
-                                <input {{ in_array($category_tree['id'], $post->getPostmetaCategoriesId()) ? 'checked' : '' }} name="postmetas[categories][]" type="checkbox" value="{{ $category_tree['id'] }}" /> {{ $category_tree['name'] }}
+                                <input {{ in_array($category_tree['id'], $post->getPostmetaValues('categories')) ? 'checked' : '' }} name="postmetas[categories][]" type="checkbox" value="{{ $category_tree['id'] }}" /> {{ $category_tree['name'] }}
                             </label>
                         </div>
                     @endforeach
@@ -142,7 +142,7 @@
                 <input name="postmetas[tags][]" type="hidden" value="" />
                 <select class="form-control input-sm select2" data-width="100%" multiple="multiple" name="postmetas[tags][]">
                     @foreach ($post->getTagIdOptions() as $tagId => $tagName)
-                        <option {{ in_array($tagId, $post->getPostmetaTagsId()) ? 'selected' : '' }} value="{{ $tagId }}">{{ $tagName }}</option>
+                        <option {{ in_array($tagId, $post->getPostmetaValues('tags')) ? 'selected' : '' }} value="{{ $tagId }}">{{ $tagName }}</option>
                     @endforeach
                 </select>
             </div>
@@ -180,13 +180,13 @@
                         </li>
                     </template>
 
-                    @foreach ($post->getPostmetaImagesId() as $imageId)
+                    @foreach ($post->getPostmetaValues('images') as $imageId)
                         @if ($medium = \Modules\Media\Models\Media::find($imageId))
                             <li>
                                 <input class="images_media_id" name="postmetas[images][]" type="hidden" value="{{ $imageId }}" />
                                 <div style="position: relative;">
-                                    <a class="images_media_attached_file" data-fancybox="group" href="{{ Storage::url($medium->getPostmetaAttachedFile()) }}" target="_blank">
-                                        <img class="contain images_media_attached_file_thumbnail media-object" src="{{ Storage::url($medium->getPostmetaAttachedFileThumbnail()) }}" style="height: 64px; width: 64px;" />
+                                    <a class="images_media_attached_file" data-fancybox="group" href="{{ Storage::url($medium->getPostmetaValue('attached_file')) }}" target="_blank">
+                                        <img class="contain images_media_attached_file_thumbnail media-object" src="{{ Storage::url($medium->getPostmetaValue('attached_file_thumbnail')) }}" style="height: 64px; width: 64px;" />
                                     </a>
                                     <button class="close template_close" type="button"><span>&times;</span></button>
                                 </div>

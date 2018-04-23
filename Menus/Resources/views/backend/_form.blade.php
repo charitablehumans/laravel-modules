@@ -46,7 +46,7 @@
             <div class="box-body">
                 <select class="form-control input-sm" name="termmetas[template]">
                     @foreach ($term->getTemplateOptions() as $templateId => $templateName)
-                        <option {{ $templateId == $term->getTermmetaTemplate() ? 'selected' : '' }} value="{{ $templateId }}">{{ $templateName }}</option>
+                        <option {{ $templateId == $term->getTermmetaValue('template') ? 'selected' : '' }} value="{{ $templateId }}">{{ $templateName }}</option>
                     @endforeach
                 </select>
             </div>

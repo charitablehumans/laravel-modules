@@ -13,10 +13,10 @@
     </template>
 
     <div class="dd" id="nestable">
-        <input name="termmetas[nestable]" type="hidden" value="{{ json_encode($term->getTermmetaNestable()) }}" />
+        <input name="termmetas[nestable]" type="hidden" value="{{ json_encode($term->getTermmetaValues('nestable')) }}" />
         <ol class="dd-list">
             @php
-            $nestable = $term->getTermmetaNestable();
+            $nestable = $term->getTermmetaValues('nestable');
             @endphp
 
             {!! $term->generateAsHtml($nestable) !!}

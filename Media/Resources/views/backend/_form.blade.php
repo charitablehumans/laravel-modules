@@ -39,19 +39,19 @@
                 </div>
                 @if ($post->id)
                     @php
-                    $attachment_metadata = $post->getPostmetaAttachmentMetadata();
+                    $attachment_metadata = $post->getPostmetaValues('attachment_metadata');
                     @endphp
 
                     <div class="row">
                         <div class="col-md-4">
-                            <input name="postmetas[attached_file]" type="hidden" value="{{ $post->getPostmetaAttachedFile() }}" />
-                            <input name="postmetas[attached_file_thumbnail]" type="hidden" value="{{ $post->getPostmetaAttachedFileThumbnail() }}" />
+                            <input name="postmetas[attached_file]" type="hidden" value="{{ $post->getPostmetaValue('attached_file') }}" />
+                            <input name="postmetas[attached_file_thumbnail]" type="hidden" value="{{ $post->getPostmetaValue('attached_file_thumbnail') }}" />
                             <input name="postmetas[attachment_metadata]" type="hidden" value="{{ json_encode($attachment_metadata) }}" />
                             <a
                                 @if (in_array($post->mime_type, $post->mimeTypeImages)) data-fancybox="group" @endif
-                                href="{{ Storage::url($post->getPostmetaAttachedFile()) }}" target="_blank"
+                                href="{{ Storage::url($post->getPostmetaValue('attached_file')) }}" target="_blank"
                             >
-                                <img class="contain media-object" src="{{ Storage::url($post->getPostmetaAttachedFileThumbnail()) }}" style="height: 150px; width: 150px;" />
+                                <img class="contain media-object" src="{{ Storage::url($post->getPostmetaValue('attached_file_thumbnail')) }}" style="height: 150px; width: 150px;" />
                             </a>
                         </div>
                         <div class="col-md-8">
@@ -60,7 +60,7 @@
                                     <tr>
                                         <td width="20%">@lang('cms::cms.file_url')</td>
                                         <td width="1%">:</td>
-                                        <td>{{ $post->getPostmetaAttachedFile() }}</td>
+                                        <td>{{ $post->getPostmetaValue('attached_file') }}</td>
                                     </tr>
                                     <tr>
                                         <td>@lang('cms::cms.file_type')</td>
@@ -118,7 +118,7 @@
                         <div class="checkbox">
                             {{ $category_tree['tree_prefix'] }}
                             <label>
-                                <input {{ in_array($category_tree['id'], $post->getPostmetaCategoriesId()) ? 'checked' : '' }} name="postmetas[categories][]" type="checkbox" value="{{ $category_tree['id'] }}" /> {{ $category_tree['name'] }}
+                                <input {{ in_array($category_tree['id'], $post->getPostmetaValues('categories')) ? 'checked' : '' }} name="postmetas[categories][]" type="checkbox" value="{{ $category_tree['id'] }}" /> {{ $category_tree['name'] }}
                             </label>
                         </div>
                     @endforeach
@@ -140,7 +140,7 @@
                 <input name="postmetas[tags][]" type="hidden" value="" />
                 <select class="form-control input-sm select2" data-width="100%" multiple="multiple" name="postmetas[tags][]">
                     @foreach ($post->getTagIdOptions() as $tagId => $tagName)
-                        <option {{ in_array($tagId, $post->getPostmetaTagsId()) ? 'selected' : '' }} value="{{ $tagId }}">{{ $tagName }}</option>
+                        <option {{ in_array($tagId, $post->getPostmetaValues('tags')) ? 'selected' : '' }} value="{{ $tagId }}">{{ $tagName }}</option>
                     @endforeach
                 </select>
             </div>
@@ -183,8 +183,8 @@
                             <li>
                                 <input class="images_media_id" name="postmetas[related_media][]" type="hidden" value="{{ $mediumId }}" />
                                 <div style="position: relative;">
-                                    <a class="images_media_attached_file" data-fancybox="group" href="{{ Storage::url($medium->getPostmetaAttachedFile()) }}" target="_blank">
-                                        <img class="contain images_media_attached_file_thumbnail media-object" src="{{ Storage::url($medium->getPostmetaAttachedFileThumbnail()) }}" style="height: 64px; width: 64px;" />
+                                    <a class="images_media_attached_file" data-fancybox="group" href="{{ Storage::url($medium->getPostmetaValue('attached_file')) }}" target="_blank">
+                                        <img class="contain images_media_attached_file_thumbnail media-object" src="{{ Storage::url($medium->getPostmetaValue('attached_file_thumbnail')) }}" style="height: 64px; width: 64px;" />
                                     </a>
                                     <button class="close template_close" type="button"><span>&times;</span></button>
                                 </div>
