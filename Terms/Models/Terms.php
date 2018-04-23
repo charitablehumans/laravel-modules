@@ -8,6 +8,7 @@ use redzjovi\php\ArrayHelper;
 class Terms extends Model
 {
     use \Dimsav\Translatable\Translatable;
+    use \Modules\Terms\Traits\TermmetasTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -32,12 +33,14 @@ class Terms extends Model
 
         self::saved(function ($model) {
             \Cache::forget('terms-'.$model->id);
+            \Cache::forget('terms-termmetas-'.$model->id);
         });
 
         self::deleted(function ($model) {
             $model->termmetas->each(function ($termmeta) { $termmeta->delete(); });
             $model->deleteTranslations();
             \Cache::forget('terms-'.$model->id);
+            \Cache::forget('terms-termmetas-'.$model->id);
         });
     }
 
@@ -60,28 +63,6 @@ class Terms extends Model
             'default' => trans('cms::cms.default'),
         ];
         return $options;
-    }
-
-    public function getTermmetaImagesId()
-    {
-        $imagesId = [];
-        $imagesId = $this->id && isset($this->termmetas->where('key', 'images')->first()->value) ? json_decode($this->termmetas->where('key', 'images')->first()->value, true) : $imagesId;
-        $imagesId = is_array(request()->old('termmetas.images')) ? request()->old('termmetas.images') : $imagesId;
-        return $imagesId;
-    }
-
-    public function getTermmetaNestable()
-    {
-        $this->nestable = [];
-        $this->nestable = $this->id && isset($this->termmetas->where('key', 'nestable')->first()->value) ? json_decode($this->termmetas->where('key', 'nestable')->first()->value, true) : $this->nestable;
-        $this->nestable = is_array(request()->old('termmetas.nestable')) ? request()->old('termmetas.nestable') : $this->nestable;
-        return $this->nestable;
-    }
-
-    public function getTermmetaTemplate()
-    {
-        $template = isset($this->termmetas->where('key', 'template')->first()->value) ? $this->termmetas->where('key', 'template')->first()->value : '';
-        return $template;
     }
 
     public function getTermsTree()

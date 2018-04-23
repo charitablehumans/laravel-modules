@@ -23,7 +23,7 @@ class Termmetas extends Model
 
         if ($metas) {
             foreach ($metas as $key => $value) {
-                $value = is_array($value) ? json_encode(array_filter($value)) : $value;
+                $value = is_array($value) ? json_encode(array_values(array_filter($value))) : $value;
 
                 if ($meta = self::where('term_id', $postId)->where('key', $key)->first()) {
                     $meta->fill(['value' => $value])->save(); // update

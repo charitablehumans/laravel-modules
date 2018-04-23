@@ -12,6 +12,7 @@ use Modules\Users\Models\Users;
 class Posts extends Model
 {
     use \Dimsav\Translatable\Translatable;
+    use \Modules\Posts\Traits\PostmetasTrait;
 
     protected $attributes = [
         'type' => 'post',
@@ -41,12 +42,14 @@ class Posts extends Model
 
         self::saved(function ($model) {
             \Cache::forget('posts-'.$model->id);
+            \Cache::forget('posts-postmetas-'.$model->id);
         });
 
         self::deleted(function ($model) {
             $model->postmetas->each(function ($postmeta) { $postmeta->delete(); });
             $model->translations->each(function ($translation) { $translation->delete(); });
             \Cache::forget('posts-'.$model->id);
+            \Cache::forget('posts-postmetas-'.$model->id);
             \Storage::deleteDirectory('media/original/'.$model->id);
             \Storage::deleteDirectory('media/thumbnail/'.$model->id);
         });
@@ -82,112 +85,6 @@ class Posts extends Model
     {
         $options = self::search(['sort' => 'title:asc'])->select([self::getTable().'.id', 'title'])->get()->pluck('title', 'id')->toArray();
         return $options;
-    }
-
-    public function getPostmetaAttachedFile()
-    {
-        $attachedFile = $this->id && isset($this->postmetas->where('key', 'attached_file')->first()->value) ? $this->postmetas->where('key', 'attached_file')->first()->value : '';
-        return $attachedFile;
-    }
-
-    public function getPostmetaAttachedFileThumbnail()
-    {
-        $attachedFile = $this->id && isset($this->postmetas->where('key', 'attached_file_thumbnail')->first()->value) ? $this->postmetas->where('key', 'attached_file_thumbnail')->first()->value : '';
-        return $attachedFile;
-    }
-
-    public function getPostmetaAttachmentMetadata()
-    {
-        $attachmentMetadata = $this->id && isset($this->postmetas->where('key', 'attachment_metadata')->first()->value) ? json_decode($this->postmetas->where('key', 'attachment_metadata')->first()->value, true) : [];
-        return $attachmentMetadata;
-    }
-
-    public function getPostmetaCategoriesId()
-    {
-        $categoriesId = [];
-        $categoriesId = $this->id && isset($this->postmetas->where('key', 'categories')->first()->value) ? json_decode($this->postmetas->where('key', 'categories')->first()->value, true) : $categoriesId;
-        $categoriesId = is_array(request()->old('postmetas.categories')) ? request()->old('postmetas.categories') : $categoriesId;
-        return $categoriesId;
-    }
-
-    public function getPostmetaImageId()
-    {
-        $imagesId = $this->getPostmetaImagesId();
-        $imageId = collect($imagesId)->count() > 0 ? collect($imagesId)->first() : false;
-        return $imageId;
-    }
-
-    public function getPostmetaImagesId()
-    {
-        $imagesId = [];
-        $imagesId = $this->id && isset($this->postmetas->where('key', 'images')->first()->value) ? json_decode($this->postmetas->where('key', 'images')->first()->value, true) : $imagesId;
-        $imagesId = is_array(request()->old('postmetas.images')) ? request()->old('postmetas.images') : $imagesId;
-        return $imagesId;
-    }
-
-    public function getPostmetaImageThumbnailUrl()
-    {
-        $imageUrl = asset('images/posts/default.png');
-
-        if ($imageId = $this->getPostmetaImageId()) {
-            $medium = \Cache::remember('posts-'.$imageId, 1440, function () use ($imageId) {
-                return Media::find($imageId);
-            });
-
-            if ($medium) {
-                $imageUrl = $medium->getPostmetaAttachedFileThumbnail();
-                $imageUrl = \Storage::url($imageUrl);
-            }
-        }
-
-        return $imageUrl;
-    }
-
-    public function getPostmetaImageUrl()
-    {
-        $imageUrl = asset('images/posts/default.png');
-
-        if ($imageId = $this->getPostmetaImageId()) {
-            $medium = \Cache::remember('posts-'.$imageId, 1440, function () use ($imageId) {
-                return Media::find($imageId);
-            });
-
-            if ($medium) {
-                $imageUrl = $medium->getPostmetaAttachedFile();
-                $imageUrl = \Storage::url($imageUrl);
-            }
-        }
-
-        return $imageUrl;
-    }
-
-    public function getPostmetaTagsId()
-    {
-        $tagsId = [];
-        $tagsId = $this->id && isset($this->postmetas->where('key', 'tags')->first()->value) ? json_decode($this->postmetas->where('key', 'tags')->first()->value, true) : $tagsId;
-        $tagsId = is_array(request()->old('postmetas.tags')) ? request()->old('postmetas.tags') : $tagsId;
-        return $tagsId;
-    }
-
-    public function getPostmetaTemplate()
-    {
-        $template = isset($this->postmetas->where('key', 'template')->first()->value) ? $this->postmetas->where('key', 'template')->first()->value : '';
-        return $template;
-    }
-
-    public function getPostmetaValue($key)
-    {
-        $values = $this->getPostmetaValues($key);
-        $value = collect($values)->count() > 0 ? collect($values)->first() : false;
-        return $value;
-    }
-
-    public function getPostmetaValues($key)
-    {
-        $values = [];
-        $values = $this->id && isset($this->postmetas->where('key', $key)->first()->value) ? json_decode($this->postmetas->where('key', $key)->first()->value, true) : $values;
-        $values = is_array(request()->old('postmetas.'.$key)) ? request()->old('postmetas.'.$key) : $values;
-        return $values;
     }
 
     public function getStatusOptions()
