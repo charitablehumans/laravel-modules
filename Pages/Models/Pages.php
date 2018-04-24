@@ -23,6 +23,7 @@ class Pages extends \Modules\Posts\Models\Posts
         $templateOptions['default'] = trans('cms::cms.default');
         \Config::get('cms.pages.postmetas.template_options.bank_accounts') ? $templateOptions['bank_accounts'] = trans('cms::cms.bank_accounts') : '';
         \Config::get('cms.pages.postmetas.template_options.cnr_cash') ? $templateOptions['cnr_cash'] = trans('cms::cms.cnr_cash') : '';
+        \Config::get('cms.pages.postmetas.template_options.home') ? $templateOptions['home'] = trans('cms::cms.home') : '';
         return $templateOptions;
     }
 }

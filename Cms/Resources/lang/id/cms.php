@@ -45,6 +45,7 @@ return [
     'forgot_password' => 'Lupa Kata Sandi',
     'geocode' => 'Geocode',
     'geocodes' => 'Geocode',
+    'home' => 'Rumah',
     'icon' => 'Ikon',
     'images' => 'Gambar',
     'invalid_ip_address' => 'Alamat Ip Tidak Valid',

@@ -18,6 +18,7 @@ return [
             'template_options' => [
                 'bank_accounts' => false,
                 'cnr_cash' => false,
+                'home' => false,
             ],
         ],
     ],

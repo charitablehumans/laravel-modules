@@ -45,6 +45,7 @@ return [
     'forgot_password' => 'Forgot Password',
     'geocode' => 'Geocode',
     'geocodes' => 'Geocodes',
+    'home' => 'Home',
     'icon' => 'Icon',
     'images' => 'Images',
     'invalid_ip_address' => 'Invalid Ip Address',
