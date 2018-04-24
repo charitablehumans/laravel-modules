@@ -20,8 +20,8 @@
             <label>@lang('validation.attributes.value')</label>
             @includeFirst(
                 [
-                    'options::backend/options/value/_'.$option->type,
                     'backend/options/value/_'.$option->type,
+                    'options::backend/options/value/_'.$option->type,
                     'options::backend/options/value/_textarea',
                 ],
                 $option
