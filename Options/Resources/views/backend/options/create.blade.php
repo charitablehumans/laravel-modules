@@ -1,4 +1,4 @@
-@extends('backend.layouts.main')
+@extends('cms::backend.layouts.main')
 
 @section('title', trans('cms::cms.create'))
 @section('content_header', trans('cms::cms.create'))

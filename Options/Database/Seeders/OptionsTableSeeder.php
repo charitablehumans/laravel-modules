@@ -19,6 +19,7 @@ class OptionsTableSeeder extends Seeder
 
         $options = [
             ['type' => 'text', 'name' => 'application_version', 'value' => '1', 'created_at' => date('Y-m-d H:i:s')],
+            ['type' => 'page_id', 'name' => 'frontend_home_popup', 'value' => '', 'created_at' => date('Y-m-d H:i:s')],
         ];
         Options::insert($options);
     }
