@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Options extends Model
 {
+    use \Modules\Options\Traits\HelperTrait;
     use \Modules\Options\Traits\OptionValueTrait;
 
     /**
@@ -21,6 +22,15 @@ class Options extends Model
     ];
 
     protected $table = 'options';
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        self::saved(function ($model) {
+            \Cache::forget('options-name-'.$model->name);
+        });
+    }
 
     public function getTypeOptions()
     {
