@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->string('verification_code', 6);
             $table->date('date_of_birth')->comment('profile');
             $table->longText('address')->comment('profile');
-            $table->bigInteger('store_id')->default(0)->comment('store.user.id');
+            $table->bigInteger('store_id')->default(0)->nullable()->comment('store.user.id');
             $table->bigInteger('balance')->default(0)->comment('store.balance');
             $table->bigInteger('game_token')->default(0)->comment('game');
             $table->timestamps();
