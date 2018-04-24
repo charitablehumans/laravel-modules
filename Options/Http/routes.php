@@ -1,5 +1,11 @@
 <?php
 
+Route::group(['middleware' => ['api']], function () {
+    Route::resource('api/options', '\Modules\Options\Http\Controllers\Api\OptionsController', ['as' => 'api'])
+        ->except(['create', 'store', 'show', 'edit', 'update', 'destroy']);
+    Route::get('api/options/show', ['as' => 'api.options.show', 'uses' => '\Modules\Options\Http\Controllers\Api\OptionsController@show']);
+});
+
 Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::group(['middleware' => ['permission:backend options']], function () {
