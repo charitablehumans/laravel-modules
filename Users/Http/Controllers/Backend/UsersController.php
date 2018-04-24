@@ -49,7 +49,7 @@ class UsersController extends Controller
 
         $user = new Users;
         $user->fill($request->input());
-        $user->userBalanceHistoryCreate(['type' => 'backend_users']);
+        // $user->userBalanceHistoryCreate(['type' => 'backend_users']);
         $user->save();
         auth()->user()->can('backend roles') ? $user->syncRoles($request->input('roles')) : '';
         auth()->user()->can('backend permissions') ? $user->syncPermissions($request->input('permissions')) : '';
