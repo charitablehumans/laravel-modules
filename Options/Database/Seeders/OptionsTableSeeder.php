@@ -4,8 +4,9 @@ namespace Modules\Options\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Modules\Options\Models\Options;
 
-class OptionsDatabaseSeeder extends Seeder
+class OptionsTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,8 +17,9 @@ class OptionsDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call([
-            OptionsTableSeeder::class,
-        ]);
+        $options = [
+            ['type' => 'text', 'name' => 'application_version', 'value' => '1', 'created_at' => date('Y-m-d H:i:s')],
+        ];
+        Options::insert($options);
     }
 }
