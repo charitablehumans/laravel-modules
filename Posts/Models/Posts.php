@@ -12,6 +12,7 @@ use Modules\Users\Models\Users;
 class Posts extends Model
 {
     use \Dimsav\Translatable\Translatable;
+    use \Modules\Posts\Traits\HelperTrait;
     use \Modules\Posts\Traits\PostmetasTrait;
 
     protected $attributes = [
