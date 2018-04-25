@@ -1,6 +1,7 @@
-@extends('cms::frontend/default/layouts/main')
+@extends('cms::frontend/default/layouts/full')
 
 @section('content')
-    This is the home page.
+    <input name="post_id" type="hidden" value="{{ $post->id }}" />
+    @include('cms::frontend/default/pages/home/carousel')
     @include('cms::frontend/default/pages/home/popup')
 @endsection
