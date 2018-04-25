@@ -21,13 +21,20 @@ class ComposerServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Using class based composers...
         View::composer(
             [
                 'frontend/default/pages/home/carousel',
                 'cms::frontend/default/pages/home/carousel',
             ],
             '\Modules\Cms\Http\ViewComposers\Frontend\Pages\Home\CarouselComposer'
+        );
+
+        View::composer(
+            [
+                'frontend/default/pages/home/services',
+                'cms::frontend/default/pages/home/services',
+            ],
+            '\Modules\Cms\Http\ViewComposers\Frontend\Pages\Home\ServicesComposer'
         );
     }
 
