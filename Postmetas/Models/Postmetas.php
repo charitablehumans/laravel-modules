@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Postmetas extends Model
 {
+    use \Modules\Postmetas\Traits\RelationshipsTrait;
+
     /**
      * The attributes that are mass assignable.
      *
