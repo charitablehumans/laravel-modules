@@ -4,7 +4,7 @@ namespace Modules\Users\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Modules\Users\Models\Users;
 
 class UsersController extends Controller
 {
@@ -45,9 +45,10 @@ class UsersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($email)
     {
-        //
+        $user = Users::where('email', $email)->firstOrFail();
+        dump($user);
     }
 
     /**
@@ -86,14 +87,14 @@ class UsersController extends Controller
 
     public function profile()
     {
-        $data['user'] = Auth::user();
+        $data['user'] = \Auth::user();
         return view('users::frontend/default/profile', $data);
     }
 
     public function profileUpdate(\Modules\Users\Http\Requests\Api\ProfileUpdateRequest $request)
     {
         $request->input('password') ? $request->merge(['password' => \Hash::make($request->input('password'))]) : $request->request->remove('password');
-        $user = Auth::user();
+        $user = \Auth::user();
         $user->fill($request->input())->save();
         flash(trans('cms::cms.data_has_been_updated'))->success()->important();
         return redirect()->back();

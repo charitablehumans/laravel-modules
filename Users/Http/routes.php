@@ -15,7 +15,8 @@ Route::group(['middleware' => ['web']], function () {
         });
     });
     Route::group(['middleware' => ['auth', 'userVerified']], function () {
-        Route::get('/users/profile', ['as' => 'frontend.users.profile', 'uses' => '\Modules\Users\Http\Controllers\Frontend\UsersController@profile']);
-        Route::put('/users/profile', ['as' => 'frontend.users.profileUpdate', 'uses' => '\Modules\Users\Http\Controllers\Frontend\UsersController@profileUpdate']);
+        Route::get('users/profile', ['as' => 'frontend.users.profile', 'uses' => '\Modules\Users\Http\Controllers\Frontend\UsersController@profile']);
+        Route::put('users/profile', ['as' => 'frontend.users.profileUpdate', 'uses' => '\Modules\Users\Http\Controllers\Frontend\UsersController@profileUpdate']);
+        Route::put('users/{email}', ['as' => 'frontend.users.show', 'uses' => '\Modules\Users\Http\Controllers\Frontend\UsersController@show']);
     });
 });
