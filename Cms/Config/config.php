@@ -19,6 +19,7 @@ return [
                 'bank_accounts' => false,
                 'cnr_cash' => false,
                 'home' => false,
+                'new_arrival' => false,
             ],
         ],
     ],

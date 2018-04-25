@@ -61,6 +61,7 @@ return [
     'medium_categories' => 'Kategori Media',
     'menus' => 'Menu',
     'new' => 'Baru',
+    'new_arrival' => 'Baru Datang',
     'newer' => 'Lebih Baru',
     'next' => 'Berikutnya',
     'no' => 'Tidak',

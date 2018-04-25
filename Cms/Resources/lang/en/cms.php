@@ -61,6 +61,7 @@ return [
     'medium_categories' => 'Medium Categories',
     'menus' => 'Menus',
     'new' => 'New',
+    'new_arrival' => 'New Arrival',
     'newer' => 'Newer',
     'next' => 'Next',
     'no' => 'No',
