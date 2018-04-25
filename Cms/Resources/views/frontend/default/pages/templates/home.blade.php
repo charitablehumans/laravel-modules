@@ -4,5 +4,6 @@
     <input name="post_id" type="hidden" value="{{ $post->id }}" />
     @include('cms::frontend/default/pages/home/carousel')
     @include('cms::frontend/default/pages/home/services')
+    @include('cms::frontend/default/pages/home/products/new_arrival')
     @include('cms::frontend/default/pages/home/popup')
 @endsection

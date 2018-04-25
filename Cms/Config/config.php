@@ -1,6 +1,13 @@
 <?php
 
 return [
+    'currency' => [
+        'symbol' => [
+            'left' => [
+                'default' => 'Rp',
+            ]
+        ],
+    ],
     'geocodes' => [
         'code' => true,
         'latitude' => true,

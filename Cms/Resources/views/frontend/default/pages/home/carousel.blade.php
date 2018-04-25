@@ -31,7 +31,8 @@
             <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span>
             <span class="sr-only">@lang('cms::cms.next')</span>
         </a>
-    </div>    
+    </div>
+    <hr />
 @else
     <input name="frontendPagesHomeCarousel" type="hidden" value="No menu where slug = frontend-home-carousels" />
 @endif

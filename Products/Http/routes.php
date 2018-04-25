@@ -8,4 +8,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('backend/products/{id}/trash', ['as' => 'backend.products.trash', 'uses' => '\Modules\Products\Http\Controllers\Backend\ProductsController@trash']);
         });
     });
+
+    Route::get('frontend/products/{name}', ['as' => 'frontend.products.show', 'uses' => '\Modules\Products\Http\Controllers\Frontend\ProductsController@show']);
 });
