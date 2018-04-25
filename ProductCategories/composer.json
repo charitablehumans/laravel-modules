@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/productcategories",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\ProductCategories\\Providers\\ProductCategoriesServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\ProductCategories\\": ""
+        }
+    }
+}
