@@ -9,6 +9,8 @@ use Modules\Users\Models\Users;
 
 class Media extends \Modules\Posts\Models\Posts
 {
+    use \Modules\Media\Traits\HelperTrait;
+
     protected $attributes = [
         'type' => 'attachment',
     ];

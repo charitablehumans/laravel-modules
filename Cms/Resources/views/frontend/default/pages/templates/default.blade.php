@@ -4,6 +4,7 @@
 
 @section('content')
     <input name="post_id" type="hidden" value="{{ $post->id }}" />
+
     <h2>{{ $post->title }}</h2>
     <p class="lead">
         {{ strtolower(trans('cms::cms.by')) }}
@@ -17,17 +18,13 @@
     <hr />
 
     @php
-    $imageId = collect($post->getPostmetaImagesId())->first();
-    $medium = \Modules\Media\Models\Media::find($imageId);
+    $mediumId = $post->getPostmetaValue('images');
+    $medium = \Modules\Media\Models\Media::getPostById($mediumId);
     @endphp
 
-    <!-- Preview Image -->
     <div align="center">
-        <a data-fancybox href="{{ $medium ? Storage::url($medium->getPostmetaAttachedFile()) : 'http://placehold.it/900x300' }}" target="_blank">
-            <img alt="{{ $medium ? $medium->name : '' }}" class="img-responsive" src="{{ $medium ? Storage::url($medium->getPostmetaAttachedFileThumbnail()) : 'http://placehold.it/900x300' }}" />
-        </a>
-        <a data-fancybox href="{{ $post->getPostmetaValue('attached_file', 'image_url') }}">
-            <img alt="{{ $medium ? $medium->name : '' }}" class="img-responsive" src="{{ $post->getPostmetaValue('attached_file', 'image_thumbnail_url') }}" />
+        <a data-fancybox href="{{ $post->getPostmetaValue('images', 'image_url') }}">
+            <img alt="{{ optional($medium)->name }}" class="img-responsive" src="{{ $post->getPostmetaValue('images', 'image_thumbnail_url') }}" />
         </a>
     </div>
     <hr />

@@ -43,6 +43,7 @@ class Posts extends Model
 
         self::saved(function ($model) {
             \Cache::forget('posts-'.$model->id);
+            \Cache::forget('posts-name-'.$model->name);
             \Cache::forget('posts-postmetas-'.$model->id);
         });
 
@@ -50,6 +51,7 @@ class Posts extends Model
             $model->postmetas->each(function ($postmeta) { $postmeta->delete(); });
             $model->translations->each(function ($translation) { $translation->delete(); });
             \Cache::forget('posts-'.$model->id);
+            \Cache::forget('posts-name-'.$model->name);
             \Cache::forget('posts-postmetas-'.$model->id);
             \Storage::deleteDirectory('media/original/'.$model->id);
             \Storage::deleteDirectory('media/thumbnail/'.$model->id);
