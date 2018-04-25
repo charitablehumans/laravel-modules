@@ -52,6 +52,7 @@ class RolesSeeder extends Seeder
             'backend posts',
             'backend posts delete',
             'backend posts trash',
+            'backend product categories',
             'backend products',
             'backend products all',
             'backend products delete',

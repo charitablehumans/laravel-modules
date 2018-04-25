@@ -1,20 +1,20 @@
 @extends('cms::backend/layouts/main')
 
-@section('title', trans('cms::cms.medium_categories'))
-@section('content_header', trans('cms::cms.medium_categories'))
+@section('title', trans('cms::cms.product_categories'))
+@section('content_header', trans('cms::cms.product_categories'))
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li class="active">@lang('cms::cms.medium_categories')</li>
+        <li class="active">@lang('cms::cms.product_categories')</li>
     </ol>
 @endsection
 
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <a class="btn btn-default btn-sm" href="{{ route('backend.medium-categories.create', request()->query()) }}">@lang('cms::cms.create')</a>
+            <a class="btn btn-default btn-sm" href="{{ route('backend.product-categories.create', request()->query()) }}">@lang('cms::cms.create')</a>
         </div>
         <div class="box-body table-responsive">
-            <form action="{{ route('backend.medium-categories.index') }}" method="get">
+            <form action="{{ route('backend.product-categories.index') }}" method="get">
                 <table class="table table-bordered table-condensed table-striped">
                     <thead>
                         <tr>
@@ -71,7 +71,7 @@
                             </th>
                             <th>
                                 <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
-                                <a class="btn btn-default btn-xs" href="{{ route('backend.medium-categories.index') }}"><i class="fa fa-repeat"></i></a>
+                                <a class="btn btn-default btn-xs" href="{{ route('backend.product-categories.index') }}"><i class="fa fa-repeat"></i></a>
                             </th>
                         </tr>
                     </thead>
@@ -82,11 +82,11 @@
                                 <td>
                                     @foreach (config('app.languages') as $languageCode => $languageName)
                                         @if ($term->hasTranslation($languageCode))
-                                            <a href="{{ route('backend.medium-categories.edit', [$term->id] + ['locale' => $languageCode]) }}">
+                                            <a href="{{ route('backend.product-categories.edit', [$term->id] + ['locale' => $languageCode]) }}">
                                                 <img src="{{ asset('images/flags/'.$languageCode.'.gif') }}" />
                                             </a>
                                         @else
-                                            <a href="{{ route('backend.medium-categories.edit', [$term->id] + ['locale' => $languageCode]) }}">
+                                            <a href="{{ route('backend.product-categories.edit', [$term->id] + ['locale' => $languageCode]) }}">
                                                 <i class="fa fa-plus-square"></i>
                                             </a>
                                         @endif
@@ -98,8 +98,8 @@
                                 <td>{{ $term->parent ? $term->parent->name : '' }}</td>
                                 <td align="right">{{ $term->count }}</td>
                                 <td align="center">
-                                    <a class="btn btn-default btn-xs" href="{{ route('backend.medium-categories.edit', [$term->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
-                                    <a class="btn btn-danger btn-xs" href="{{ route('backend.medium-categories.delete', $term->id) }}" onclick="return confirm('@lang('cms::cms.are_you_sure_to_delete_this_permanently')?')"><i class="fa fa-trash-o"></i></a>
+                                    <a class="btn btn-default btn-xs" href="{{ route('backend.product-categories.edit', [$term->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-danger btn-xs" href="{{ route('backend.product-categories.delete', $term->id) }}" onclick="return confirm('@lang('cms::cms.are_you_sure_to_delete_this_permanently')?')"><i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
                         @empty

@@ -1,19 +1,18 @@
 <?php
 
-namespace Modules\MediumCategories\Http\Controllers\Backend;
+namespace Modules\ProductCategories\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
-use Modules\MediumCategories\Models\MediumCategories;
+use Modules\ProductCategories\Models\ProductCategories;
 use Modules\Termmetas\Models\Termmetas;
-use Modules\Terms\Http\Controllers\Backend\TermsController;
 
-class MediumCategoriesController extends TermsController
+class ProductCategoriesController extends \Modules\Terms\Http\Controllers\Backend\TermsController
 {
     protected $model;
 
     public function __construct()
     {
-        $this->model = new MediumCategories;
+        $this->model = new ProductCategories;
     }
 
     /**
@@ -27,12 +26,12 @@ class MediumCategoriesController extends TermsController
         $request->query('sort') ?: $request->query->set('sort', 'name:asc');
         $request->query('limit') ?: $request->query->set('limit', 10);
 
-        $data['terms'] = $this->model::search($request->query())->paginate($request->query('limit'));
         $data['model'] = $this->model;
+        $data['terms'] = $this->model::search($request->query())->paginate($request->query('limit'));
 
         if ($request->query('action')) { $this->model->action($request->query()); return redirect()->back(); }
 
-        return view('mediumcategories::backend/index', $data);
+        return view('productcategories::backend/product_categories/index', $data);
     }
 
     /**
@@ -44,7 +43,7 @@ class MediumCategoriesController extends TermsController
     {
         $data['term'] = $this->model;
         $data['term_translation'] = $this->model;
-        return view('mediumcategories::backend/create', $data);
+        return view('productcategories::backend/product_categories/create', $data);
     }
 
     /**
@@ -57,6 +56,6 @@ class MediumCategoriesController extends TermsController
     {
         $data['term'] = $term = $this->model::findOrFail($id);
         $data['term_translation'] = $term->translateOrNew($request->query('locale'));
-        return view('mediumcategories::backend/edit', $data);
+        return view('productcategories::backend/product_categories/edit', $data);
     }
 }

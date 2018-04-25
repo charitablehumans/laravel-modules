@@ -55,6 +55,7 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'backend posts']);
         Permission::create(['name' => 'backend posts delete']);
         Permission::create(['name' => 'backend posts trash']);
+        Permission::create(['name' => 'backend product categories']);
         Permission::create(['name' => 'backend products']);
         Permission::create(['name' => 'backend products all']);
         Permission::create(['name' => 'backend products delete']);

@@ -94,6 +94,7 @@ return [
     'process' => 'Process',
     'processed' => 'Processed',
     'product' => 'Product',
+    'product_categories' => 'Product Categories',
     'product_name' => 'Product Name',
     'products' => 'Products',
     'profile' => 'Profile',
