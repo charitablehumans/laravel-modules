@@ -9,7 +9,7 @@ trait RelationshipsTrait
 {
     public function getMedia()
     {
-        $values = JsonHelper::isValidJson($this->value) ? json_decode($this->value, true) : $this->value;
+        $values = JsonHelper::isValidJson($this->value) ? json_decode($this->value, true) : [];
 
         $media = [];
         foreach ($values as $value) {

@@ -4,9 +4,15 @@ namespace Modules\Posts\Traits;
 
 use redzjovi\php\JsonHelper;
 use Modules\Media\Models\Media;
+use Modules\Postmetas\Models\Postmetas;
 
 trait PostmetasTrait
 {
+    public function getPostmetaByKey($key)
+    {
+        return $this->getPostmetas()->firstWhere('key', $key) ? $this->getPostmetas()->firstWhere('key', $key) : new Postmetas;
+    }
+
     public function getPostmetas()
     {
         return \Cache::remember('posts-postmetas-'.$this->id, 1440, function () {
@@ -14,73 +20,38 @@ trait PostmetasTrait
         });
     }
 
-    public function getPostmetaValue($key, $type = false)
+    public function getPostmetaValue($key, $default = false)
     {
         // 1. From database
-        $values = $this->getPostmetaValues($key, $type);
+        $values = $this->getPostmetaValues($key);
 
         // 2. Collect first value
-        $value = collect($values)->count() > 0 ? collect($values)->first() : false;
+        $value = collect($values)->first();
 
-        // 3. Transform based on type
-        if (empty($value) && in_array($type, ['image_thumbnail_url', 'image_url'])) {
-            $value = asset('images/posts/default.png');
+        // 3. Check default
+        if (empty($value) && $default) {
+            if (in_array($key, ['attached_file', 'attached_file_thumbnail'])) {
+                $value = 'images/posts/default.png';
+            }
         }
 
         return $value;
     }
 
-    public function getPostmetaValues($key, $type = false)
+    public function getPostmetaValues($key)
     {
         $values = [];
 
         // 1. From database
         if ($this->id) {
-            $postmetas = $this->getPostmetas();
-
-            if (isset($postmetas->where('key', $key)->first()->value)) {
-                $values = $postmetas->where('key', $key)->first()->value;
+            if ($this->getPostmetaByKey($key)->value) {
+                $values = $this->getPostmetaByKey($key)->value;
                 $values = JsonHelper::isValidJson($values) ? json_decode($values, true) : $values;
             }
         }
 
         // 2. From request old
         $values = is_array(request()->old('postmetas.'.$key)) ? request()->old('postmetas.'.$key) : $values;
-
-        // 3. Transform based on type
-        if (is_array($values) && $type) {
-            foreach ($values as $i => $value) {
-
-                if ($type == 'image_thumbnail_url') {
-                    $imageUrl = asset('images/posts/default.png');
-                    $mediumId = $value;
-
-                    $medium = \Cache::remember('posts-'.$mediumId, 1440, function () use ($mediumId) {
-                        return Media::find($mediumId);
-                    });
-
-                    if ($medium) {
-                        $imageUrl = $medium->getPostmetaValue('attached_file_thumbnail');
-                        $imageUrl = \Storage::url($imageUrl);
-                        $values[$i] = $imageUrl;
-                    }
-                } else if ($type == 'image_url') {
-                    $imageUrl = asset('images/posts/default.png');
-                    $mediumId = $value;
-
-                    $medium = \Cache::remember('posts-'.$mediumId, 1440, function () use ($mediumId) {
-                        return Media::find($mediumId);
-                    });
-
-                    if ($medium) {
-                        $imageUrl = $medium->getPostmetaValue('attached_file');
-                        $imageUrl = \Storage::url($imageUrl);
-                        $values[$i] = $imageUrl;
-                    }
-                }
-
-            }
-        }
 
         return $values;
     }
@@ -184,7 +155,7 @@ trait PostmetasTrait
     // DEPRECATED, and will be REMOVED soon
     public function getPostmetaTemplate()
     {
-        // $template = isset($this->postmetas->where('key', 'template')->first()->value) ? $this->postmetas->where('key', 'template')->first()->value : ''; 
+        // $template = isset($this->postmetas->where('key', 'template')->first()->value) ? $this->postmetas->where('key', 'template')->first()->value : '';
         // return $template;
         return $this->getPostmetaValue('template');
     }

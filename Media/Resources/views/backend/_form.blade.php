@@ -178,18 +178,16 @@
                         </li>
                     </template>
 
-                    @foreach ($post->getPostMetaValues('related_media') as $mediumId)
-                        @if ($medium = \Modules\Media\Models\Media::find($mediumId))
-                            <li>
-                                <input class="images_media_id" name="postmetas[related_media][]" type="hidden" value="{{ $mediumId }}" />
-                                <div style="position: relative;">
-                                    <a class="images_media_attached_file" data-fancybox="group" href="{{ Storage::url($medium->getPostmetaValue('attached_file')) }}" target="_blank">
-                                        <img class="contain images_media_attached_file_thumbnail media-object" src="{{ Storage::url($medium->getPostmetaValue('attached_file_thumbnail')) }}" style="height: 64px; width: 64px;" />
-                                    </a>
-                                    <button class="close template_close" type="button"><span>&times;</span></button>
-                                </div>
-                            </li>
-                        @endif
+                    @foreach ($post->getPostmetaByKey('related_media')->getMedia() as $medium)
+                        <li>
+                            <input class="images_media_id" name="postmetas[related_media][]" type="hidden" value="{{ $medium->id }}" />
+                            <div style="position: relative;">
+                                <a class="images_media_attached_file" data-fancybox="group" href="{{ \Storage::url($medium->getPostmetaValue('attached_file')) }}" target="_blank">
+                                    <img class="contain images_media_attached_file_thumbnail media-object" src="{{ \Storage::url($medium->getPostmetaValue('attached_file_thumbnail')) }}" style="height: 64px; width: 64px;" />
+                                </a>
+                                <button class="close template_close" type="button"><span>&times;</span></button>
+                            </div>
+                        </li>
                     @endforeach
                 </ul>
             </div>
