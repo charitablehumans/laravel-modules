@@ -15,7 +15,7 @@ class NewArrivalComposer
      */
     public function compose(View $view)
     {
-        $data['frontendPagesHomeProductsNewArrival'] = Products::search(['status' => 'publish'])->latest()->limit(6)->get();
+        $data['frontendPagesHomeProductsNewArrival'] = Products::with('postProduct')->search(['status' => 'publish'])->latest()->limit(6)->get();
 
         $view->with($data);
     }

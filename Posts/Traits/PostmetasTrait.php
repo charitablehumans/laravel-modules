@@ -3,7 +3,6 @@
 namespace Modules\Posts\Traits;
 
 use redzjovi\php\JsonHelper;
-use Modules\Media\Models\Media;
 use Modules\Postmetas\Models\Postmetas;
 
 trait PostmetasTrait

@@ -2,13 +2,12 @@
     <div class="row">
         @foreach ($frontendPagesHomeProductsNewArrival as $i => $product)
             @php
-            $mediumId = (integer) $product->getPostmetaValue('images');
-            $medium = \Modules\Media\Models\Media::getPostById($mediumId);
+            $medium = $product->getPostmetaByKey('images')->getMedium();
             @endphp
 
             <div class="col-md-4 col-sm-6">
                 <div class="thumbnail">
-                    <img alt="{{ optional($medium)->name }}" src="{{ \Storage::url($post->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file_thumbnail', true)) }}" style="height: 200px" />
+                    <img alt="{{ $medium->title }}" src="{{ $medium->getPostmetaValue('attached_file_thumbnail', true) }}" style="height: 200px" />
                     <div align="center" class="caption">
                         <h3>
                             <a href="{{ route('frontend.products.show', $product->name) }}">{{ $product->title }}</a>
@@ -21,7 +20,6 @@
                     </div>
                 </div>
             </div>
-
         @endforeach
     </div>
     <hr />
