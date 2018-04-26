@@ -84,8 +84,8 @@
                                         <td>
                                             <div class="media">
                                                 <div class="media-left">
-                                                    <a data-fancybox="group" href="{{ $transactionDetail->product->getPostmetaValue('images', 'image_url') }}" target="_blank">
-                                                        <img class="contain media-object" src="{{ $transactionDetail->product->getPostmetaValue('images', 'image_thumbnail_url') }}" style="height: 60px; width: 60px;" />
+                                                    <a data-fancybox="group" href="{{ \Storage::url($transactionDetail->product->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file', true)) }}" target="_blank">
+                                                        <img class="contain media-object" src="{{ \Storage::url($transactionDetail->product->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file_thumbnail', true)) }}" style="height: 60px; width: 60px;" />
                                                     </a>
                                                 </div>
                                                 <div class="media-body">

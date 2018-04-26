@@ -23,8 +23,8 @@ class CartDetailResource extends Resource
             'quantity' => (int) $this->quantity,
             'price' => $this->product ? $this->product->getPostProductSellPrice() : 0,
             'weight' => $this->product ? $this->product->getPostProductWeight() : 0,
-            'image_thumbnail_url' => $this->product->getPostmetaValue('images', 'image_thumbnail_url'),
-            'image_url' => $this->product->getPostmetaValue('images', 'image_url'),
+            'image_thumbnail_url' => \Storage::url($this->product->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file_thumbnail', true)),
+            'image_url' => \Storage::url($this->product->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file', true)),
 
             // products
             'product' => [

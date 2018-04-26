@@ -237,8 +237,12 @@ class Menus extends Terms
                 });
                 $this->setContent($post->content);
                 $this->setExcerpt($post->excerpt);
-                $this->setImageThumbnailUrl($post->getPostmetaValue('images', 'image_thumbnail_url'));
-                $this->setImageUrl($post->getPostmetaValue('images', 'image_url'));
+                $this->setImageThumbnailUrl(
+                    \Storage::url($post->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file_thumbnail', true))
+                );
+                $this->setImageUrl(
+                    \Storage::url($post->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file', true))
+                );
                 $this->setMetas($post->getPostmetas());
                 $this->setOthers('');
                 $this->setPost($post);
@@ -252,8 +256,12 @@ class Menus extends Terms
                 });
                 $this->setContent($post->content);
                 $this->setExcerpt($post->excerpt);
-                $this->setImageThumbnailUrl($post->getPostmetaValue('images', 'image_thumbnail_url'));
-                $this->setImageUrl($post->getPostmetaValue('images', 'image_url'));
+                $this->setImageThumbnailUrl(
+                    \Storage::url($post->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file_thumbnail', true))
+                );
+                $this->setImageUrl(
+                    \Storage::url($post->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file', true))
+                );
                 $this->setMetas($post->getPostmetas());
                 $this->setOthers('');
                 $this->setPost($post);
@@ -267,8 +275,12 @@ class Menus extends Terms
                 });
                 $this->setContent($post->content);
                 $this->setExcerpt($post->excerpt);
-                $this->setImageThumbnailUrl($post->getPostmetaValue('images', 'image_thumbnail_url'));
-                $this->setImageUrl($post->getPostmetaValue('images', 'image_url'));
+                $this->setImageThumbnailUrl(
+                    \Storage::url($post->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file_thumbnail', true))
+                );
+                $this->setImageUrl(
+                    \Storage::url($post->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file', true))
+                );
                 $this->setMetas($post->getPostmetas());
                 $this->setOthers('');
                 $this->setPost($post);
@@ -282,8 +294,12 @@ class Menus extends Terms
                 });
                 $this->setContent($post->content);
                 $this->setExcerpt($post->excerpt);
-                $this->setImageThumbnailUrl($post->getPostmetaValue('images', 'image_thumbnail_url'));
-                $this->setImageUrl($post->getPostmetaValue('images', 'image_url'));
+                $this->setImageThumbnailUrl(
+                    \Storage::url($post->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file_thumbnail', true))
+                );
+                $this->setImageUrl(
+                    \Storage::url($post->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file', true))
+                );
                 $this->setMetas($post->getPostmetas());
                 $this->setOthers('');
                 $this->setPost($post);
@@ -297,8 +313,12 @@ class Menus extends Terms
                 });
                 $this->setContent($post->content);
                 $this->setExcerpt($post->excerpt);
-                $this->setImageThumbnailUrl($post->getPostmetaValue('images', 'image_thumbnail_url'));
-                $this->setImageUrl($post->getPostmetaValue('images', 'image_url'));
+                $this->setImageThumbnailUrl(
+                    \Storage::url($post->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file_thumbnail', true))
+                );
+                $this->setImageUrl(
+                    \Storage::url($post->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file', true))
+                );
                 $this->setMetas($post->getPostmetas());
                 $this->setOthers(['product' => $post->postProduct]);
                 $this->setPost($post);

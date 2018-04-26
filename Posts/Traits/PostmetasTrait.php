@@ -120,7 +120,7 @@ trait PostmetasTrait
         // }
         //
         // return $imageUrl;
-        return $this->getPostmetaValue('images', 'image_thumbnail_url');
+        return \Storage::url($this->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file_thumbnail', true));
     }
 
     // DEPRECATED, and will be REMOVED soon
@@ -140,7 +140,7 @@ trait PostmetasTrait
         // }
         //
         // return $imageUrl;
-        return $this->getPostmetaValue('images', 'image_url');
+        return \Storage::url($this->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file', true));
     }
 
     // DEPRECATED, and will be REMOVED soon
