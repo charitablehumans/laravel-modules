@@ -8,6 +8,7 @@ use Modules\CustomLinks\Models\CustomLinks;
 use Modules\DokuMyshortcart\Models\DokuMyshortcartPaymentMethods;
 use Modules\Pages\Models\Pages;
 use Modules\Posts\Models\Posts;
+use Modules\ProductCategories\Models\ProductCategories;
 use Modules\Products\Models\Products;
 use Modules\Tags\Models\Tags;
 use Modules\Terms\Models\Terms;
@@ -21,7 +22,7 @@ class Menus extends Terms
 
     // custom attribute menu
     public $post, $icon, $title, $type, $url, $permission;
-    public $content, $excerpt, $image_thumbnail_url, $image_url, $metas, $others, $template;
+    public $content, $excerpt, $image_thumbnail_url, $image_url, $images_thumbnail_url, $images_url, $metas, $others, $template;
 
     protected static function boot()
     {
@@ -46,6 +47,8 @@ class Menus extends Terms
                 'id' => $this->id,
                 'image_thumbnail_url' => $this->getImageThumbnailUrl(),
                 'image_url' => $this->getImageUrl(),
+                'images_thumbnail_url' => $this->getImagesThumbnailUrl(),
+                'images_url' => $this->getImagesUrl(),
                 'metas' => collect($this->getMetas())->pluck('value', 'key'),
                 'others' => $this->getOthers(),
                 'template' => $this->getTemplate(),
@@ -192,6 +195,16 @@ class Menus extends Terms
         return $this->attributes['image_thumbnail_url'];
     }
 
+    public function getImagesUrl()
+    {
+        return $this->attributes['images_url'];
+    }
+
+    public function getImagesThumbnailUrl()
+    {
+        return $this->attributes['images_thumbnail_url'];
+    }
+
     public function getMetas()
     {
         return $this->attributes['metas'];
@@ -224,6 +237,8 @@ class Menus extends Terms
                 $this->setExcerpt('');
                 $this->setImageThumbnailUrl($term->getTermmetaImageThumbnailUrl());
                 $this->setImageUrl($term->getTermmetaImageUrl());
+                $this->setImagesThumbnailUrl($term->getTermmetaValues('images')->getMediaUrlFullByKey('attached_file_thumbnail', true));
+                $this->setImagesUrl($term->getTermmetaValues('images')->getMediaUrlFullByKey('attached_file', true));
                 $this->setMetas($term->getTermmetas());
                 $this->setOthers('');
                 $this->setPost($term);
@@ -243,6 +258,8 @@ class Menus extends Terms
                 $this->setImageUrl(
                     \Storage::url($post->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file', true))
                 );
+                $this->setImagesThumbnailUrl($post->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file_thumbnail', true));
+                $this->setImagesUrl($post->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file', true));
                 $this->setMetas($post->getPostmetas());
                 $this->setOthers('');
                 $this->setPost($post);
@@ -262,6 +279,8 @@ class Menus extends Terms
                 $this->setImageUrl(
                     \Storage::url($post->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file', true))
                 );
+                $this->setImagesThumbnailUrl($term->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file_thumbnail', true));
+                $this->setImagesUrl($term->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file', true));
                 $this->setMetas($post->getPostmetas());
                 $this->setOthers('');
                 $this->setPost($post);
@@ -281,6 +300,8 @@ class Menus extends Terms
                 $this->setImageUrl(
                     \Storage::url($post->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file', true))
                 );
+                $this->setImagesThumbnailUrl($post->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file_thumbnail', true));
+                $this->setImagesUrl($post->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file', true));
                 $this->setMetas($post->getPostmetas());
                 $this->setOthers('');
                 $this->setPost($post);
@@ -300,6 +321,8 @@ class Menus extends Terms
                 $this->setImageUrl(
                     \Storage::url($post->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file', true))
                 );
+                $this->setImagesThumbnailUrl($post->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file_thumbnail', true));
+                $this->setImagesUrl($post->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file', true));
                 $this->setMetas($post->getPostmetas());
                 $this->setOthers('');
                 $this->setPost($post);
@@ -319,6 +342,8 @@ class Menus extends Terms
                 $this->setImageUrl(
                     \Storage::url($post->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file', true))
                 );
+                $this->setImagesThumbnailUrl($post->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file_thumbnail', true));
+                $this->setImagesUrl($post->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file', true));
                 $this->setMetas($post->getPostmetas());
                 $this->setOthers(['product' => $post->postProduct]);
                 $this->setPost($post);
@@ -326,15 +351,34 @@ class Menus extends Terms
                 $this->setTitle($post->title);
                 $this->setUrl(url('posts/'.$post->name));
                 break;
+            case 'product_category' :
+                $term = \Cache::remember('terms-'.$this->id, 1440, function () {
+                    return ProductCategories::findOrFail($this->id);
+                });
+                $this->setContent($post->description);
+                $this->setExcerpt('');
+                $this->setMetas($term->getTermmetas());
+                $this->setImageThumbnailUrl($term->getTermmetaImageThumbnailUrl());
+                $this->setImageUrl($term->getTermmetaImageUrl());
+                $this->setImagesThumbnailUrl($term->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file_thumbnail', true));
+                $this->setImagesUrl($term->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file', true));
+                $this->setOthers('');
+                $this->setPost($term);
+                $this->setTemplate($term->getTermmetaValue('template'));
+                $this->setTitle($term->name);
+                $this->setUrl(url('product-categories/'.$term->name));
+                break;
             case 'tag' :
                 $term = \Cache::remember('terms-'.$this->id, 1440, function () {
                     return Tags::findOrFail($this->id);
                 });
                 $this->setContent($post->description);
                 $this->setExcerpt('');
+                $this->setMetas($term->getTermmetas());
                 $this->setImageThumbnailUrl($term->getTermmetaImageThumbnailUrl());
                 $this->setImageUrl($term->getTermmetaImageUrl());
-                $this->setMetas($term->getTermmetas());
+                $this->setImagesThumbnailUrl($term->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file_thumbnail', true));
+                $this->setImagesUrl($term->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file', true));
                 $this->setOthers('');
                 $this->setPost($term);
                 $this->setTemplate($term->getTermmetaValue('template'));
@@ -346,6 +390,8 @@ class Menus extends Terms
                 $this->setExcerpt('');
                 $this->setImageThumbnailUrl('');
                 $this->setImageUrl('');
+                $this->setImagesThumbnailUrl('');
+                $this->setImagesUrl('');
                 $this->setMetas('');
                 $this->setOthers('');
                 $this->setPost('');
@@ -418,6 +464,16 @@ class Menus extends Terms
     public function setImageUrl($value)
     {
         $this->attributes['image_url'] = $value;
+    }
+
+    public function setImagesThumbnailUrl($value)
+    {
+        $this->attributes['images_thumbnail_url'] = $value;
+    }
+
+    public function setImagesUrl($value)
+    {
+        $this->attributes['images_url'] = $value;
     }
 
     public function setMetas($value)

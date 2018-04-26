@@ -19,6 +19,18 @@ trait RelationshipsTrait
         return $media;
     }
 
+    public function getMediaUrlFullByKey($key, $default = false)
+    {
+        $values = JsonHelper::isValidJson($this->value) ? json_decode($this->value, true) : [];
+
+        $mediaUrl = [];
+        foreach ($values as $value) {
+            $mediaUrl[] = \Storage::url(Media::getPostById($value)->getPostmetaValue($key, true));
+        }
+
+        return $mediaUrl;
+    }
+
     public function getMedium()
     {
         $values = JsonHelper::isValidJson($this->value) ? json_decode($this->value, true) : $this->value;

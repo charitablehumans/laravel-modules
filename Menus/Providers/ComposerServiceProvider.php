@@ -31,6 +31,14 @@ class ComposerServiceProvider extends ServiceProvider
 
         View::composer(
             [
+                'frontend/default/pages/home/product_categories/featured',
+                'cms::frontend/default/pages/home/product_categories/featured',
+            ],
+            '\Modules\Cms\Http\ViewComposers\Frontend\Pages\Home\ProductCategories\FeaturedComposer'
+        );
+
+        View::composer(
+            [
                 'frontend/default/pages/home/services',
                 'cms::frontend/default/pages/home/services',
             ],
