@@ -14,7 +14,7 @@
         </div>
         <div class="form-group">
             <label>@lang('validation.attributes.province_id') (*)</label>
-            <select class="form-control provinces select2" data-allow-clear="true" data-placeholder="" name="province_id" required>
+            <select class="form-control provinces select2" data-allow-clear="true" data-placeholder="" data-width="100%" name="province_id" required>
                 <option></option>
                 @foreach ($userAddress->getProvinceIdOptions() as $provinceId => $provinceName)
                     <option {{ $provinceId == request()->old('province_id', $userAddress->province_id) ? 'selected' : '' }} value="{{ $provinceId }}">{{ $provinceName }}</option>
@@ -24,7 +24,7 @@
         </div>
         <div class="form-group">
             <label>@lang('validation.attributes.regency_id') (*)</label>
-            <select class="form-control regencies select2" data-allow-clear="true" data-placeholder="" name="regency_id" required>
+            <select class="form-control regencies select2" data-allow-clear="true" data-placeholder="" data-width="100%" name="regency_id" required>
                 <option></option>
                 @foreach ($userAddress->getRegencyIdOptions() as $regencyId => $regencyName)
                     <option {{ $regencyId == request()->old('regency_id', $userAddress->regency_id) ? 'selected' : '' }} value="{{ $regencyId }}">{{ $regencyName }}</option>
@@ -54,6 +54,6 @@
         </div>
     </div>
     <div class="box-footer">
-        <input class="btn btn-default btn-sm" type="submit" value="@lang('cms::cms.save')" />
+        <input class="btn btn-sm btn-success" type="submit" value="@lang('cms::cms.save')" />
     </div>
 </div>

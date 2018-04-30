@@ -22,7 +22,7 @@ $('.media_choose').each(function () {
                 .getElementById(this.getAttribute('data-fancybox_to'))
                 .innerHTML += content;
 
-            toastr.options = { closeButton: true, positionClass: 'toast-bottom-center', progressBar: true, timeOut: '2000' }
+            toastr.options = { closeButton: true, positionClass: 'toast-top-right', progressBar: true, timeOut: '2000' }
             toastr.success(this.getAttribute('data-success-message'));
 
         }

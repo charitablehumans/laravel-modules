@@ -128,7 +128,7 @@
                                         <th>@lang('validation.attributes.address')</th>
                                         <th>@lang('validation.attributes.primary')</th>
                                         <th>
-                                            <a class="btn btn-default btn-xs" href="{{ route('backend.user-addresses.create', ['user_id' => $user->id]) }}"><i class="fa fa-plus-square-o"></i></a>
+                                            <a class="btn btn-primary btn-xs" href="{{ route('backend.user-addresses.create', ['user_id' => $user->id]) }}"><i class="fa fa-plus"></i></a>
                                         </th>
                                     </tr>
                                 </thead>
@@ -150,7 +150,7 @@
                                                 @endif
                                             </td>
                                             <td align="center">
-                                                <a class="btn btn-default btn-xs" href="{{ route('backend.user-addresses.edit', [$userAddress->id] + ['user_id' => $user->id]) }}"><i class="fa fa-pencil"></i></a>
+                                                <a class="btn btn-primary btn-xs" href="{{ route('backend.user-addresses.edit', [$userAddress->id] + ['user_id' => $user->id]) }}"><i class="fa fa-pencil"></i></a>
                                                 <a class="btn btn-danger btn-xs" href="{{ route('backend.user-addresses.delete', $userAddress->id) }}" onclick="return confirm('@lang('cms::cms.are_you_sure_to_delete_this_permanently')?')"><i class="fa fa-trash-o"></i></a>
                                             </td>
                                         </tr>

@@ -11,7 +11,7 @@
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <a class="btn btn-default btn-sm" href="{{ route('backend.media.create', request()->query()) }}">@lang('cms::cms.create')</a>
+            <a class="btn btn-primary btn-sm" href="{{ route('backend.media.create', request()->query()) }}">@lang('cms::cms.create')</a>
         </div>
         <div class="box-body table-responsive">
             <form action="{{ route('backend.media.index') }}" method="get">
@@ -87,7 +87,7 @@
                             @endcan
                             <th>@lang('validation.attributes.updated_at') <input class="datepicker form-control input-sm" data-date-format="yyyy-mm-dd" name="updated_at_date" type="text" value="{{ request()->query('updated_at_date') }}" /></th>
                             <th>
-                                <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-success btn-xs" type="submit"><i class="fa fa-search"></i></button>
                                 <a
                                     class="btn btn-default btn-xs"
                                     href="{{ route('backend.media.index', array_except(request()->query(), ['page', 'limit', 'sort', 'title', 'mime_type', 'category_id', 'updated_at_date'])) }}"
@@ -142,7 +142,7 @@
                                 @endcan
                                 <td>{{ $post->updated_at }}</td>
                                 <td align="center">
-                                    <a class="btn btn-default btn-xs" href="{{ route('backend.media.edit', ['id' => $post->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-primary btn-xs" href="{{ route('backend.media.edit', ['id' => $post->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
                                     <a class="btn btn-danger btn-xs" href="{{ route('backend.media.trash', $post->id) }}" onclick="return confirm('@lang('cms::cms.are_you_sure_to_delete_this')?')"><i class="fa fa-trash-o"></i></a>
                                     @can('backend media delete')
                                         <a class="btn btn-danger btn-xs" href="{{ route('backend.media.delete', $post->id) }}" onclick="return confirm('@lang('cms::cms.are_you_sure_to_delete_this_permanently')?')"><i class="fa fa-trash-o"></i></a>
@@ -177,7 +177,7 @@
                                         <option value="delete">@lang('cms::cms.delete')</option>
                                     @endcan
                                 </select>
-                                <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
+                                <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
                             </td>
                         </tr>
                         <tr>
