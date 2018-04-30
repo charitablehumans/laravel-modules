@@ -279,8 +279,8 @@ class Menus extends Terms
                 $this->setImageUrl(
                     \Storage::url($post->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file', true))
                 );
-                $this->setImagesThumbnailUrl($term->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file_thumbnail', true));
-                $this->setImagesUrl($term->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file', true));
+                $this->setImagesThumbnailUrl($post->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file_thumbnail', true));
+                $this->setImagesUrl($post->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file', true));
                 $this->setMetas($post->getPostmetas());
                 $this->setOthers('');
                 $this->setPost($post);
@@ -355,7 +355,7 @@ class Menus extends Terms
                 $term = \Cache::remember('terms-'.$this->id, 1440, function () {
                     return ProductCategories::findOrFail($this->id);
                 });
-                $this->setContent($post->description);
+                $this->setContent($term->description);
                 $this->setExcerpt('');
                 $this->setMetas($term->getTermmetas());
                 $this->setImageThumbnailUrl($term->getTermmetaImageThumbnailUrl());
@@ -372,7 +372,7 @@ class Menus extends Terms
                 $term = \Cache::remember('terms-'.$this->id, 1440, function () {
                     return Tags::findOrFail($this->id);
                 });
-                $this->setContent($post->description);
+                $this->setContent($term->description);
                 $this->setExcerpt('');
                 $this->setMetas($term->getTermmetas());
                 $this->setImageThumbnailUrl($term->getTermmetaImageThumbnailUrl());
