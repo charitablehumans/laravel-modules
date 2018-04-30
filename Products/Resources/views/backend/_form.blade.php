@@ -37,9 +37,6 @@
                     <textarea class="form-control tinymce" name="content" rows="6">{{ request()->old('content', $post_translation->content) }}</textarea>
                     <i class="text-danger">{{ $errors->first('content') }}</i>
                 </div>
-                @include('products::backend/_product')
-            </div>
-            <div class="box-footer">
                 <div class="form-group">
                     <label>@lang('validation.attributes.status')</label>
                     <select class="form-control input-sm" name="status">
@@ -48,8 +45,37 @@
                         @endforeach
                     </select>
                 </div>
+                <hr />
+
+                @include('products::backend/_product')
+                <hr />
+
+                @if (config('cms.products.product_testimonials.rating_average'))
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    @lang('validation.attributes.rating')
+                                    <a
+                                        data-fancybox
+                                        data-type="iframe"
+                                        href="{{ route('backend.product-testimonials.index', ['layout' => 'media_iframe', 'parent_id' => $post->id]) }}"
+                                    >»</a>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <input class="form-control input-sm text-right" readonly type="number" value="{{ optional($post->postTestimonial)->rating_average }}">
+                                        <i class="text-danger"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            </div>
+            <div class="box-footer">
                 <div class="form-group">
-                    <input class="btn btn-default btn-sm" type="submit" value="@lang('cms::cms.save')" />
+                    <input class="btn btn-sm btn-success" type="submit" value="@lang('cms::cms.save')" />
                 </div>
             </div>
         </div>

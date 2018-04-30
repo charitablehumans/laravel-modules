@@ -16,11 +16,14 @@ class CreatePostsTable extends Migration
         \Schema::create((new Posts)->getTable(), function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('author_id');
-            $table->string('type')->comment('{ attachment, custom_link, doku_myshortcart_payment_method, faq, location, page, post, product }');
+            $table->string('type')->comment('{ attachment, custom_link, doku_myshortcart_payment_method, faq, location, page, post, product, testimonial }');
             $table->string('mime_type', 100);
+            $table->bigInteger('parent_id')->default(0)->nullable();
+
             $table->enum('status', ['draft', 'publish', 'trash'])->default('publish');
             $table->enum('comment_status', ['closed', 'open'])->default('open');
             $table->bigInteger('comment_count')->default('0');
+
             $table->timestamps();
         });
     }

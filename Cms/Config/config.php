@@ -30,6 +30,11 @@ return [
             ],
         ],
     ],
+    'products' => [
+        'product_testimonials' => [
+            'rating_average' => false,
+        ],
+    ],
     'transactions' => [
         'status_options' => [
             'received' => true,

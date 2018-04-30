@@ -18,7 +18,7 @@ class CreatePostTranslationsTable extends Migration
             $table->bigInteger('post_id');
             $table->string('locale', 200);
             $table->text('title');
-            $table->string('name', 200);
+            $table->string('name', 200)->nullable();
             $table->text('excerpt')->nullable();
             $table->longText('content')->nullable();
             $table->timestamps();

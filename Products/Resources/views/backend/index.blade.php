@@ -11,14 +11,14 @@
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <a class="btn btn-default btn-sm" href="{{ route('backend.products.create', request()->query()) }}">@lang('cms::cms.create')</a>
+            <a class="btn btn-primary btn-sm" href="{{ route('backend.products.create', request()->query()) }}">@lang('cms::cms.create')</a>
         </div>
         <div class="box-body table-responsive">
             <form action="{{ route('backend.products.index') }}" method="get">
                 <table class="table table-bordered table-condensed table-striped">
                     <thead>
                         <tr>
-                            <th class="text-right" colspan="9">
+                            <th class="text-right" colspan="10">
                                 <div class="form-inline">
                                     <div class="form-group">
                                         @lang('cms::cms.per_page')
@@ -38,6 +38,10 @@
                                             <option {{ request()->query('sort') == 'post_product_sell_price:desc' ? 'selected' : '' }} value="post_product_sell_price:desc">@lang('validation.attributes.sell_price') (↑)</option>
                                             <option {{ request()->query('sort') == 'status:asc' ? 'selected' : '' }} value="status:asc">@lang('validation.attributes.status') (↓)</option>
                                             <option {{ request()->query('sort') == 'status:desc' ? 'selected' : '' }} value="status:desc">@lang('validation.attributes.status') (↑)</option>
+                                            @if (config('cms.products.product_testimonials.rating_average'))
+                                                <option {{ request()->query('sort') == 'post_testimonial_rating_average:asc' ? 'selected' : '' }} value="post_testimonial_rating_average:asc">@lang('validation.attributes.rating') (↓)</option>
+                                                <option {{ request()->query('sort') == 'post_testimonial_rating_average:desc' ? 'selected' : '' }} value="post_testimonial_rating_average:desc">@lang('validation.attributes.rating') (↑)</option>
+                                            @endif
                                             <option {{ request()->query('sort') == 'updated_at:asc' ? 'selected' : '' }} value="updated_at:asc">@lang('validation.attributes.updated_at') (↓)</option>
                                             <option {{ request()->query('sort') == 'updated_at:desc' ? 'selected' : '' }} value="updated_at:desc">@lang('validation.attributes.updated_at') (↑)</option>
                                         </select>
@@ -85,12 +89,23 @@
                                     @endforeach
                                 </select>
                             </th>
+                            @if (config('cms.products.product_testimonials.rating_average'))
+                                <th>
+                                    @lang('validation.attributes.rating')
+                                    <select class="form-control input-sm" name="post_testimonial_rating_average_operator">
+                                        <option value="">=</option>
+                                        <option {{ request()->query('post_testimonial_rating_average_operator') == '>' ? 'selected' : '' }} value=">">></option>
+                                        <option {{ request()->query('post_testimonial_rating_average_operator') == '<' ? 'selected' : '' }} value="<"><</option>
+                                    </select>
+                                    <input class="form-control input-sm text-right" name="post_testimonial_rating_average" type="number" value="{{ request()->query('post_testimonial_rating_average') }}" />
+                                </th>
+                            @endif
                             <th>
                                 @lang('validation.attributes.updated_at')
                                 <input class="datepicker form-control input-sm" data-date-format="yyyy-mm-dd" name="updated_at_date" type="text" value="{{ request()->query('updated_at_date') }}" />
                             </th>
                             <th>
-                                <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-success btn-xs" type="submit"><i class="fa fa-search"></i></button>
                                 <a class="btn btn-default btn-xs" href="{{ route('backend.products.index') }}"><i class="fa fa-repeat"></i></a>
                             </th>
                         </tr>
@@ -131,9 +146,12 @@
                                     @endif
                                 </td>
                                 <td>@lang('cms::cms.'.$post->status)</td>
+                                @if (config('cms.products.product_testimonials.rating_average'))
+                                    <td align="right">{{ optional($post->postTestimonial)->rating_average }}</td>
+                                @endif
                                 <td>{{ $post->updated_at }}</td>
                                 <td align="center">
-                                    <a class="btn btn-default btn-xs" href="{{ route('backend.products.edit', [$post->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-primary btn-xs" href="{{ route('backend.products.edit', [$post->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
                                     <a class="btn btn-danger btn-xs" href="{{ route('backend.products.trash', $post->id) }}" onclick="return confirm('@lang('cms::cms.are_you_sure_to_delete_this')?')"><i class="fa fa-trash-o"></i></a>
                                     @can('backend products delete')
                                         <a class="btn btn-danger btn-xs" href="{{ route('backend.products.delete', $post->id) }}" onclick="return confirm('@lang('cms::cms.are_you_sure_to_delete_this_permanently')?')"><i class="fa fa-trash-o"></i></a>
@@ -142,13 +160,13 @@
                             </tr>
                         @empty
                             <tr>
-                                <td align="center" colspan="9">@lang('cms::cms.no_data')</td>
+                                <td align="center" colspan="10">@lang('cms::cms.no_data')</td>
                             </tr>
                         @endforelse
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="9">
+                            <td colspan="10">
                                 <select class="input-sm" name="action">
                                     <option value="">@lang('cms::cms.action')</option>
                                     @foreach ($model->getStatusOptions() as $statusId => $statusName)
@@ -158,11 +176,11 @@
                                         <option value="delete">@lang('cms::cms.delete')</option>
                                     @endcan
                                 </select>
-                                <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
+                                <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" colspan="9">{{ $posts->appends(request()->query())->links('cms::vendor/pagination/default-2') }}</td>
+                            <td align="center" colspan="10">{{ $posts->appends(request()->query())->links('cms::vendor/pagination/default-2') }}</td>
                         </tr>
                     </tfoot>
                 </table>

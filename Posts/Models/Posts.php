@@ -4,14 +4,13 @@ namespace Modules\Posts\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Categories\Models\Categories;
-use Modules\Media\Models\Media;
 use Modules\Postmetas\Models\Postmetas;
 use Modules\Users\Models\Users;
 
 class Posts extends Model
 {
     use \Dimsav\Translatable\Translatable;
+    use \Modules\Posts\Traits\AttributesTrait;
     use \Modules\Posts\Traits\HelperTrait;
     use \Modules\Posts\Traits\PostmetasTrait;
 
@@ -26,7 +25,15 @@ class Posts extends Model
      * @var array
      */
     protected $fillable = [
-        'author_id', 'type', 'mime_type', 'status', 'comment_status', 'comment_count',
+        // 'id',
+        'author_id',
+        'type',
+        'mime_type',
+        'parent_id',
+
+        'status',
+        'comment_status',
+        'comment_count',
     ];
 
     protected $table = 'posts';
@@ -44,6 +51,7 @@ class Posts extends Model
         self::saved(function ($model) {
             \Cache::forget('posts-'.$model->id);
             \Cache::forget('posts-name-'.$model->name);
+            \Cache::forget('posts-post_testimonials.post_id-'.$model->id);
             \Cache::forget('posts-postmetas-'.$model->id);
         });
 
@@ -52,6 +60,7 @@ class Posts extends Model
             $model->translations->each(function ($translation) { $translation->delete(); });
             \Cache::forget('posts-'.$model->id);
             \Cache::forget('posts-name-'.$model->name);
+            \Cache::forget('posts-post_testimonials.post_id-'.$model->id);
             \Cache::forget('posts-postmetas-'.$model->id);
             \Storage::deleteDirectory('media/original/'.$model->id);
             \Storage::deleteDirectory('media/thumbnail/'.$model->id);
@@ -66,55 +75,6 @@ class Posts extends Model
         return $this->hasOne('\Modules\Users\Models\Users', 'id', 'author_id');
     }
 
-    public function getAuthorIdOptions()
-    {
-        $options = self::search(['sort' => 'author_name:asc'])->get()->pluck('author_name', 'author_id')->toArray();
-        return $options;
-    }
-
-    public function getCategoriesTree()
-    {
-        $tree = (new Categories)->getTermsTree();
-        return $tree;
-    }
-
-    public function getCategoryIdOptions()
-    {
-        $options = (new Categories)->getParentOptions();
-        return $options;
-    }
-
-    public function getPostIdOptions()
-    {
-        $options = self::search(['sort' => 'title:asc'])->select([self::getTable().'.id', 'title'])->get()->pluck('title', 'id')->toArray();
-        return $options;
-    }
-
-    public function getStatusOptions()
-    {
-        $options = [
-            'draft' => trans('cms::cms.draft'),
-            'publish' => trans('cms::cms.publish'),
-            'trash' => trans('cms::cms.trash'),
-        ];
-
-        return $options;
-    }
-
-    public function getStatusOptionsAttribute()
-    {
-        $statusOptions = $this->getStatusOptions();
-        $options = self::pluck('status', 'status')->toArray();
-        $options = array_intersect_key($statusOptions, $options);
-        return $options;
-    }
-
-    public function getTagIdOptions()
-    {
-        $options = (new \Modules\Tags\Models\Tags)->getTagIdOptions();
-        return $options;
-    }
-
     public function getTemplateOptions()
     {
         $options = [
@@ -123,9 +83,19 @@ class Posts extends Model
         return $options;
     }
 
+    public function parent()
+    {
+        return $this->belongsTo('\Modules\Posts\Models\Posts', 'parent_id');
+    }
+
     public function postmetas()
     {
         return $this->hasMany('\Modules\Postmetas\Models\Postmetas', 'post_id', 'id');
+    }
+
+    public function postTestimonial()
+    {
+        return $this->hasOne('\Modules\PostTestimonials\Models\PostTestimonials', 'post_id');
     }
 
     public function scopeAction($query, $params)
@@ -147,7 +117,7 @@ class Posts extends Model
     public function scopeSearch($query, $params)
     {
         isset($params['id']) ? $query->where('id', $params['id']) : '';
-        isset($params['id_in']) ? $query->whereIn('id', $params['id_in']) : '';
+        isset($params['id_in']) ? $query->whereIn(self::getTable().'.id', $params['id_in']) : '';
         isset($params['author_id']) ? $query->where('author_id', $params['author_id']) : '';
         isset($params['type']) ? $query->where('type', $params['type']) : '';
         isset($params['mime_type']) ? $query->where('mime_type', $params['mime_type']) : '';
@@ -160,6 +130,8 @@ class Posts extends Model
                 }
             });
         }
+        isset($params['parent_id']) ? $query->where('parent_id', $params['parent_id']) : '';
+        isset($params['parent_id_in']) ? $query->whereIn('parent_id', $params['parent_id_in']) : '';
         isset($params['status']) ? $query->where('status', $params['status']) : '';
         isset($params['created_at']) ? $query->where(self::getTable().'.created_at', 'like', '%'.$params['created_at'].'%') : '';
         isset($params['created_at_date']) ? $query->whereDate(self::getTable().'.created_at', '=', $params['created_at_date']) : '';
@@ -169,6 +141,26 @@ class Posts extends Model
         isset($params['category_id']) ? $query->join((new Postmetas)->getTable().' AS postmetas_category_id', 'postmetas_category_id.post_id', '=', self::getTable().'.id')->where('postmetas_category_id.key', 'categories')->where('postmetas_category_id.value', 'LIKE', '%"'.$params['category_id'].'"%') : ('');
         isset($params['template']) ? $query->join((new Postmetas)->getTable().' AS postmeta_template', 'postmeta_template.post_id', '=', self::getTable().'.id')->where('postmeta_template.key', 'template')->where('postmeta_template.value', $params['template']) : ('');
 
+        // post_testimonials
+        if (isset($params['post_testimonial_rating'])) {
+            $query = $query->whereHas('postTestimonial', function ($postTestimonial) use ($params) {
+                if (isset($params['post_testimonial_rating_operator'])) {
+                    $postTestimonial->where('rating', $params['post_testimonial_rating_operator'], $params['post_testimonial_rating']);
+                } else {
+                    $postTestimonial->where('rating', $params['post_testimonial_rating']);
+                }
+            });
+        }
+        if (isset($params['post_testimonial_rating_average'])) {
+            $query = $query->whereHas('postTestimonial', function ($postTestimonial) use ($params) {
+                if (isset($params['post_testimonial_rating_average_operator'])) {
+                    $postTestimonial->where('rating_average', $params['post_testimonial_rating_average_operator'], $params['post_testimonial_rating_average']);
+                } else {
+                    $postTestimonial->where('rating_average', $params['post_testimonial_rating_average']);
+                }
+            });
+        }
+
         // post_translations
         isset($params['locale']) ? $query->whereTranslation('locale', $params['locale']) : '';
         isset($params['title']) ? $query->whereTranslation('title', $params['title']) : '';
@@ -177,6 +169,7 @@ class Posts extends Model
         isset($params['name_like']) ? $query->whereTranslationLike('name', '%'.$params['name_like'].'%') : '';
         isset($params['excerpt']) ? $query->whereTranslationLike('excerpt', '%'.$params['excerpt'].'%') : '';
         isset($params['content']) ? $query->whereTranslationLike('content', '%'.$params['content'].'%') : '';
+        isset($params['content_like']) ? $query->whereTranslationLike('content', '%'.$params['content_like'].'%') : '';
 
         if (isset($params['sort']) && $sort = explode(':', $params['sort'])) {
             if (in_array($sort[0], ['created_at', 'updated_at'])) {
@@ -197,6 +190,15 @@ class Posts extends Model
                 ->select([
                     self::getTable().'.*',
                     'author.name AS author_name',
+                ]);
+            } else if (in_array($sort[0], ['post_testimonial_rating_average'])) {
+                $query->leftJoin((new \Modules\PostTestimonials\Models\PostTestimonials)->getTable().' AS post_testimonial', function ($join) {
+                    $join->on('post_testimonial.post_id', '=', self::getTable().'.id');
+                })
+                ->orderBy($sort[0], $sort[1])
+                ->select([
+                    self::getTable().'.*',
+                    'post_testimonial.rating_average AS post_testimonial_rating_average',
                 ]);
             } else if (str_contains($sort[0], 'postmetas.')) {
                 $key = explode('.', $sort[0]);

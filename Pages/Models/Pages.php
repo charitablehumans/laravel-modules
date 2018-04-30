@@ -6,8 +6,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Pages extends \Modules\Posts\Models\Posts
 {
-    use \Modules\Pages\Traits\HelperTrait;
-
     protected $attributes = [
         'type' => 'page',
     ];

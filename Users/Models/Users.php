@@ -2,11 +2,10 @@
 
 namespace Modules\Users\Models;
 
-use Spatie\Permission\Traits\HasRoles;
-
 class Users extends \App\User
 {
-    use HasRoles;
+    use \Modules\Users\Traits\AttributesTrait;
+    use \Spatie\Permission\Traits\HasRoles;
 
     /**
      * The attributes that are mass assignable.
