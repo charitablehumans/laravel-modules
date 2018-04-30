@@ -79,8 +79,9 @@ class Rajaongkir extends Model
     {
         try {
             $client = new Client();
+            $formParams['weight'] = $formParams['weight'] > 0 ? $formParams['weight'] : 1;
+            $options['form_params'] = $formParams;
             $options['headers'] = ['Key' => env('RAJAONGKIR_KEY')];
-            $formParams ? $options['form_params'] = $formParams : '';
             $response = $client->post($this->getCostUrl(), $options);
 
             $contents = json_decode($response->getBody()->getContents(), true);
@@ -112,13 +113,14 @@ class Rajaongkir extends Model
     public function getCosts($formParams = [], $couriers = [])
     {
         $costs = [];
+        $formParams['weight'] = $formParams['weight'] > 0 ? $formParams['weight'] : 1;
 
         foreach ($couriers as $courier) {
             try {
                 $client = new Client();
-                $options['headers'] = ['Key' => env('RAJAONGKIR_KEY')];
                 $formParams['courier'] = $courier;
-                $formParams ? $options['form_params'] = $formParams : '';
+                $options['form_params'] = $formParams;
+                $options['headers'] = ['Key' => env('RAJAONGKIR_KEY')];
                 $response = $client->post($this->getCostUrl(), $options);
 
                 $contents = json_decode($response->getBody()->getContents(), true);
