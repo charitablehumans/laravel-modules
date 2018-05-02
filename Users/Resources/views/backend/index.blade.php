@@ -74,7 +74,7 @@
                                         @lang('cms::cms.store')
                                         <select class="form-control select2" data-allow-clear="true" data-placeholder="" name="store_id">
                                             <option value=""></option>
-                                            @foreach ($model->getStoreIdOptions() as $storeId => $storeName)
+                                            @foreach ($model->getStoreIdNameOptions() as $storeId => $storeName)
                                                 <option {{ (string) $storeId == request()->query('store_id') ? 'selected' : '' }} value="{{ $storeId }}">{{ $storeName }}</option>
                                             @endforeach
                                         </select>

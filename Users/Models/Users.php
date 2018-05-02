@@ -5,6 +5,7 @@ namespace Modules\Users\Models;
 class Users extends \App\User
 {
     use \Modules\Users\Traits\AttributesTrait;
+    use \Modules\Users\Traits\UsermetasTrait;
     use \Spatie\Permission\Traits\HasRoles;
 
     /**
@@ -42,9 +43,16 @@ class Users extends \App\User
     {
         parent::boot();
 
+        self::saved(function ($model) {
+            \Cache::forget('users-'.$model->id);
+            \Cache::forget('users-usermetas-'.$model->id);
+        });
+
         self::deleted(function ($model) {
             $model->userAddresses->each(function ($userAddress) { $userAddress->delete(); });
             $model->userSocialites->each(function ($userSocialite) { $userSocialite->delete(); });
+            \Cache::forget('users-'.$model->id);
+            \Cache::forget('users-usermetas-'.$model->id);
         });
     }
 
@@ -59,27 +67,6 @@ class Users extends \App\User
         $completed = empty($this->address) ? 0 : $completed;
 
         return $completed;
-    }
-
-    public function getStoreIdOptions()
-    {
-        $options = self::search(['role_name' => 'store', 'sort' => 'name:asc'])->get()->pluck('name', 'id');
-        return $options;
-    }
-
-    public function getVerifiedOptions()
-    {
-        $options = [
-            '0' => trans('cms::cms.no'),
-            '1' => trans('cms::cms.yes'),
-        ];
-        return $options;
-    }
-
-    public function getVerifiedName()
-    {
-        $options = $this->getVerifiedOptions();
-        return $options[$this->verified];
     }
 
     public function scopeAction($query, $params)
@@ -177,6 +164,11 @@ class Users extends \App\User
     public function userGames()
     {
         return $this->hasMany('\App\Http\Models\Cnr\UsersGames', 'user_id', 'id');
+    }
+
+    public function usermetas()
+    {
+        return $this->hasMany('\Modules\Usermetas\Models\Usermetas', 'user_id');
     }
 
     public function userSocialites()

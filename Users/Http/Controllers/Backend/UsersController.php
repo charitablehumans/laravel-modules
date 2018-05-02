@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Permissions\Models\Permission;
 use Modules\Roles\Models\Role;
+use Modules\Usermetas\Models\Usermetas;
 use Modules\Users\Models\Users;
 
 class UsersController extends Controller
@@ -51,6 +52,7 @@ class UsersController extends Controller
         $user->fill($request->input());
         // $user->userBalanceHistoryCreate(['type' => 'backend_users']);
         $user->save();
+        (new Usermetas)->sync($request->input('usermetas'), $user->id);
         auth()->user()->can('backend roles') ? $user->syncRoles($request->input('roles')) : '';
         auth()->user()->can('backend permissions') ? $user->syncPermissions($request->input('permissions')) : '';
         flash(trans('cms::cms.data_has_been_created'))->success()->important();
@@ -85,6 +87,7 @@ class UsersController extends Controller
         $user->fill($request->input());
         $user->userBalanceHistoryCreate(['type' => 'backend_users']);
         $user->save();
+        (new Usermetas)->sync($request->input('usermetas'), $user->id);
         auth()->user()->can('backend roles') ? $user->syncRoles($request->input('roles')) : '';
         auth()->user()->can('backend permissions') ? $user->syncPermissions($request->input('permissions')) : '';
         flash(trans('cms::cms.data_has_been_updated'))->success()->important();
