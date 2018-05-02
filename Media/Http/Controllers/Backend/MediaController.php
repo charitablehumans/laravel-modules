@@ -18,7 +18,7 @@ class MediaController extends \Modules\Posts\Http\Controllers\Backend\PostsContr
     public function index(Request $request)
     {
         $request->query('locale') ?: $request->query->set('locale', config('app.locale'));
-        $request->query('sort') ?: $request->query->set('sort', 'created_at:desc');
+        $request->query('sort') ?: $request->query->set('sort', 'updated_at:desc');
         $request->query('limit') ?: $request->query->set('limit', 10);
 
         $data['model'] = $this->model;
