@@ -42,6 +42,11 @@ trait AttributesTrait
         return $options;
     }
 
+    public function getIdContentOptions()
+    {
+        return self::select([self::getTable().'.id', 'content'])->search(['sort' => 'content:asc'])->get()->pluck('content', 'id')->toArray();
+    }
+
     public function getIdTitleOptions()
     {
         return self::select([self::getTable().'.id', 'title'])->search(['sort' => 'title:asc'])->get()->pluck('title', 'id')->toArray();

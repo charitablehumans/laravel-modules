@@ -6,6 +6,7 @@
     @include('cms::frontend/default/pages/home/services')
     @include('cms::frontend/default/pages/home/products/new_arrival')
     @include('cms::frontend/default/pages/home/product_categories/featured')
-    @include('cms::frontend/default/pages/home/product_testimonials/carousel')
+    @include('cms::frontend/default/pages/home/product_testimonials/featured/carousel')
+    @include('cms::frontend/default/pages/home/product_testimonials/latest/carousel')
     @include('cms::frontend/default/pages/home/popup')
 @endsection

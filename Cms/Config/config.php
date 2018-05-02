@@ -18,6 +18,7 @@ return [
         'accordion' => [
             'doku_myshortcart_payment_methods' => false,
             'products' => true,
+            'product_testimonials' => false,
         ],
     ],
     'pages' => [

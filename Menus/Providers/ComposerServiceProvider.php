@@ -37,6 +37,14 @@ class ComposerServiceProvider extends ServiceProvider
             '\Modules\Cms\Http\ViewComposers\Frontend\Pages\Home\ProductCategories\FeaturedComposer'
         );
 
+        \View::composer(
+            [
+                'frontend/default/pages/home/product_testimonials/featured/carousel',
+                'cms::frontend/default/pages/home/product_testimonials/featured/carousel',
+            ],
+            '\Modules\Cms\Http\ViewComposers\Frontend\Pages\Home\ProductTestimonials\Featured\CarouselComposer'
+        );
+
         View::composer(
             [
                 'frontend/default/pages/home/services',

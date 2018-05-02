@@ -1,22 +1,22 @@
-@if ($frontendPagesHomeProductsTestimonialsCarousel)
+@if (count($frontendPagesHomeProductsTestimonialsLatestCarousel))
     <div class="carousel slide" data-ride="carousel" id="frontend_pages_home_product_testimonials_carousel">
         <!-- Indicators -->
         <ol class="carousel-indicators">
-            @foreach ($frontendPagesHomeProductsTestimonialsCarousel as $i => $slide)
+            @foreach ($frontendPagesHomeProductsTestimonialsLatestCarousel as $i => $slide)
                 <li class="{{ $i == 0 ? 'active' : '' }}" data-slide-to="{{ $i }}" data-target="#frontend_pages_home_product_testimonials_carousel"></li>
             @endforeach
         </ol>
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox">
-            @foreach ($frontendPagesHomeProductsTestimonialsCarousel as $i => $slide)
+            @foreach ($frontendPagesHomeProductsTestimonialsLatestCarousel as $i => $slide)
                 <div align="center" class="item {{ $i == 0 ? 'active' : '' }}">
-                    <img alt="{{ $slide->getPostmetaByKey('images')->getMedium()->title }}" src="{{ \Storage::url($slide->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file_thumbnail', true)) }}" style="max-height: 300px" />
+                    <img alt="{{ $slide->author->getUsermetaByKey('images')->getMedium()->title }}" src="{{ \Storage::url($slide->author->getUsermetaByKey('images')->getMedium()->getPostmetaValue('attached_file_thumbnail', true)) }}" style="max-height: 300px" />
                     <div class="carousel-caption">
                         <h3>
                             <a href="{{ route('frontend.product-testimonials.show', $slide->id) }}">{!! $slide->content !!}</a>
                         </h3>
-                        <p>{{ $slide['excerpt'] }}</p>
+                        <p>{{ $slide->postTestimonial->rating }}</p>
                     </div>
                 </div>
             @endforeach
@@ -34,5 +34,5 @@
     </div>
     <hr />
 @else
-    <input name="frontendPagesHomeProductsTestimonialsCarousel" type="hidden" value="No product testimonials" />
+    <input name="frontendPagesHomeProductsTestimonialsLatestCarousel" type="hidden" value="No product testimonials" />
 @endif

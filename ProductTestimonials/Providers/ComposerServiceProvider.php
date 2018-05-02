@@ -22,10 +22,10 @@ class ComposerServiceProvider extends ServiceProvider
     {
         \View::composer(
             [
-                'frontend/default/pages/home/product_testimonials/carousel',
-                'cms::frontend/default/pages/home/product_testimonials/carousel',
+                'frontend/default/pages/home/product_testimonials/latest/carousel',
+                'cms::frontend/default/pages/home/product_testimonials/latest/carousel',
             ],
-            '\Modules\Cms\Http\ViewComposers\Frontend\Pages\Home\ProductTestimonials\CarouselComposer'
+            '\Modules\Cms\Http\ViewComposers\Frontend\Pages\Home\ProductTestimonials\Latest\CarouselComposer'
         );
     }
 
