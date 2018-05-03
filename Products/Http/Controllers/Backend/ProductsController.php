@@ -4,7 +4,7 @@ namespace Modules\Products\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Modules\Postmetas\Models\Postmetas;
-use Modules\Products\Models\PostProducts;
+use Modules\PostProducts\Models\PostProducts;
 
 class ProductsController extends \Modules\Posts\Http\Controllers\Backend\PostsController
 {

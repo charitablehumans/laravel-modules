@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Modules\PostProducts\Models\PostProducts;
 
 class CreatePostProductsTable extends Migration
 {
@@ -12,12 +13,16 @@ class CreatePostProductsTable extends Migration
      */
     public function up()
     {
-        \Schema::create('post_products', function (Blueprint $table) {
+        \Schema::create((new PostProducts)->getTable(), function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('post_id');
             $table->string('status')->comment('{ always_available, limited_stock }');
             $table->bigInteger('stock');
             $table->bigInteger('sell_price');
+            $table->tinyInteger('special_sell')->default(0)->nullable();
+            $table->bigInteger('special_sell_price')->default(0)->nullable();
+            $table->bigInteger('special_sell_price_discount')->default(0)->nullable();
+            $table->bigInteger('special_sell_price_discount_percentage')->default(0)->nullable();
             $table->bigInteger('weight')->comment('grams');
             $table->timestamps();
         });
@@ -30,6 +35,6 @@ class CreatePostProductsTable extends Migration
      */
     public function down()
     {
-        \Schema::dropIfExists('post_products');
+        \Schema::dropIfExists((new PostProducts)->getTable());
     }
 }

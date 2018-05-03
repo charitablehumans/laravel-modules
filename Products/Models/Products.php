@@ -3,10 +3,11 @@
 namespace Modules\Products\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Modules\Products\Models\PostProducts;
 
 class Products extends \Modules\Posts\Models\Posts
 {
+    use \Modules\Products\Traits\AttributesTrait;
+
     protected $attributes = [
         'type' => 'product',
     ];
@@ -15,12 +16,13 @@ class Products extends \Modules\Posts\Models\Posts
     {
         parent::boot();
 
+        self::saved(function ($model) {
+            \Cache::forget('posts-post_products-post_id-'.$model->id);
+        });
+
         self::deleting(function ($model) {
+            \Cache::forget('posts-post_products-post_id-'.$model->id);
             $model->postProduct()->delete();
-            $model->postmetas->each(function ($postmeta) { $postmeta->delete(); });
-            $model->translations->each(function ($translation) { $translation->delete(); });
-            \Storage::deleteDirectory('media/original/'.$model->id);
-            \Storage::deleteDirectory('media/thumbnail/'.$model->id);
         });
 
         static::addGlobalScope('type', function (Builder $builder) { $builder->where('type', 'product'); });
@@ -40,39 +42,9 @@ class Products extends \Modules\Posts\Models\Posts
         return $authorId;
     }
 
-    public function getPostProductDiscount()
-    {
-        return 0;
-    }
-
-    public function getPostProductSellPrice()
-    {
-        return $this->id ? $this->postProduct->getSellPrice() : (new PostProducts)->getSellPrice();
-    }
-
-    public function getPostProductStatus()
-    {
-        return $this->id ? $this->postProduct->getStatus() : (new PostProducts)->getStatus();
-    }
-
-    public function getPostProductStatusOptions()
-    {
-        return (new PostProducts)->getStatusOptions();
-    }
-
-    public function getPostProductStock()
-    {
-        return $this->id ? $this->postProduct->getStock() : (new PostProducts)->getStock();
-    }
-
-    public function getPostProductWeight()
-    {
-        return $this->id ? $this->postProduct->getWeight() : (new PostProducts)->getWeight();
-    }
-
     public function postProduct()
     {
-        return $this->hasOne('\Modules\Products\Models\PostProducts', 'post_id', 'id');
+        return $this->hasOne('\Modules\PostProducts\Models\PostProducts', 'post_id', 'id');
     }
 
     public function scopeSearch($query, $params)

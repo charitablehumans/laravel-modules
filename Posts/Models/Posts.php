@@ -51,8 +51,8 @@ class Posts extends Model
         self::saved(function ($model) {
             \Cache::forget('posts-'.$model->id);
             \Cache::forget('posts-name-'.$model->name);
-            \Cache::forget('posts-post_testimonials.post_id-'.$model->id);
             \Cache::forget('posts-postmetas-'.$model->id);
+            \Cache::forget('posts-post_testimonials.post_id-'.$model->id);
         });
 
         self::deleted(function ($model) {
@@ -60,8 +60,8 @@ class Posts extends Model
             $model->translations->each(function ($translation) { $translation->delete(); });
             \Cache::forget('posts-'.$model->id);
             \Cache::forget('posts-name-'.$model->name);
-            \Cache::forget('posts-post_testimonials.post_id-'.$model->id);
             \Cache::forget('posts-postmetas-'.$model->id);
+            \Cache::forget('posts-post_testimonials.post_id-'.$model->id);
             \Storage::deleteDirectory('media/original/'.$model->id);
             \Storage::deleteDirectory('media/thumbnail/'.$model->id);
         });

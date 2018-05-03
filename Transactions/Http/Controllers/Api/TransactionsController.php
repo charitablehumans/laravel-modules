@@ -78,7 +78,6 @@ class TransactionsController extends Controller
                                     'quantity' => $transactionDetail['quantity'],
                                     'product_id' => $product->id,
                                     'product_sell_price' => $product->getPostProductSellPrice(),
-                                    'product_discount' => $product->getPostProductDiscount(),
                                     'product_weight' => $product->getPostProductWeight(),
                                 ])
                             ]);
