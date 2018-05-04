@@ -21,8 +21,8 @@ class CreatePostProductsTable extends Migration
             $table->bigInteger('sell_price');
             $table->tinyInteger('special_sell')->default(0)->nullable();
             $table->bigInteger('special_sell_price')->default(0)->nullable();
-            $table->bigInteger('special_sell_price_discount')->default(0)->nullable();
-            $table->bigInteger('special_sell_price_discount_percentage')->default(0)->nullable();
+            $table->bigInteger('special_sell_price_discount')->default(0)->nullable()->comment('sell_price - special_sell_price');
+            $table->bigInteger('special_sell_price_discount_percentage')->default(0)->nullable('special_sell_price / sell_price * 100');
             $table->bigInteger('weight')->comment('grams');
             $table->timestamps();
         });

@@ -8,6 +8,7 @@ class Options extends Model
 {
     use \Modules\Options\Traits\HelperTrait;
     use \Modules\Options\Traits\OptionValueTrait;
+    use \Modules\Options\Traits\RelationshipsTrait;
 
     /**
      * The attributes that are mass assignable.

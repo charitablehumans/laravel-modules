@@ -7,7 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Products\Models\Products;
 
-class Frontend/ProductsController extends Controller
+class ProductsController extends Controller
 {
     public function show($name)
     {

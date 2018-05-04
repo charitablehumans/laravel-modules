@@ -9,5 +9,5 @@ Route::group(['middleware' => ['web']], function () {
         });
     });
 
-    Route::get('frontend/products/{name}', ['as' => 'frontend.products.show', 'uses' => '\Modules\Products\Http\Controllers\Frontend\ProductsController@show']);
+    Route::get('products/{name}', ['as' => 'frontend.products.show', 'uses' => '\Modules\Products\Http\Controllers\Frontend\ProductsController@show']);
 });

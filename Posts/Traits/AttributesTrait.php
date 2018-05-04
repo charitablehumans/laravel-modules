@@ -9,6 +9,13 @@ use Modules\Users\Models\Users;
 
 trait AttributesTrait
 {
+    public function getAuthor()
+    {
+        return \Cache::remember('users-'.$this->author_id, 1440, function () {
+            return $this->author ? $this->author : new Users;
+        });
+    }
+
     public function getAuthorId()
     {
         $authorId = 0;
