@@ -8,6 +8,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('backend/posts/{id}/trash', ['as' => 'backend.posts.trash', 'uses' => '\Modules\Posts\Http\Controllers\Backend\PostsController@trash']);
         });
     });
-    Route::resource('posts', '\Modules\Posts\Frontend\PostsController', ['as' => 'frontend']);
+    Route::resource('posts', '\Modules\Posts\Http\Controllers\Frontend\PostsController', ['as' => 'frontend']);
     // Route::get('posts/{name}', ['as' => 'frontend.pages.show', 'uses' => 'Frontend\PostsController@show']);
 });
