@@ -22,6 +22,7 @@ class Users extends \App\User
         'verified',
         'verification_code',
         'date_of_birth',
+        'gender',
         'address',
         'store_id',
         'balance',

@@ -6,6 +6,14 @@ use Modules\Users\Models\Users;
 
 trait AttributesTrait
 {
+    public function getGenderOptions()
+    {
+        return [
+            'female' => trans('cms::cms.female'),
+            'male' => trans('cms::cms.male'),
+        ];
+    }
+
     public function getIdNameOptions()
     {
         return Users::select(['id', 'name'])->orderBy('name')->get()->pluck('name', 'id')->toArray();
