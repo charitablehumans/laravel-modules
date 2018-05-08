@@ -33,11 +33,14 @@ class QueryVoucherController extends Controller
 
         // 2. If validation false
         if ($validator->fails()) {
-            return response()->json([
-                'response_status' => 'error',
-                'code' => 422,
-                'msg' => $validator->errors()->first(),
-            ]);
+            return response()->json(
+                [
+                    'response_status' => 'error',
+                    'code' => 422,
+                    'msg' => $validator->errors()->first(),
+                ],
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
         }
 
         // 3. Select user
@@ -64,7 +67,7 @@ class QueryVoucherController extends Controller
 
         // 6. Response json ok
         return response()->json([
-            'status' => 'OK',
+            'status' => 'ok',
             'voucher' => new \Modules\Ravintola\Http\Resources\Api\v1\VoucherResource($ravintolaUserVoucher),
         ]);
     }

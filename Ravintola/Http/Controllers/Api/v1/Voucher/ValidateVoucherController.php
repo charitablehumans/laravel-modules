@@ -5,6 +5,7 @@ namespace Modules\Ravintola\Http\Controllers\Api\v1\Voucher;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
+use Modules\Options\Models\Options;
 use Modules\Ravintola\Models\RavintolaUserVouchers;
 
 class ValidateVoucherController extends Controller
@@ -37,11 +38,14 @@ class ValidateVoucherController extends Controller
 
         // 2. If validation false
         if ($validator->fails()) {
-            return response()->json([
-                'response_status' => 'error',
-                'code' => 422,
-                'msg' => $validator->errors()->first(),
-            ]);
+            return response()->json(
+                [
+                    'response_status' => 'error',
+                    'code' => 422,
+                    'msg' => $validator->errors()->first(),
+                ],
+                Response::HTTP_UNPROCESSABLE_ENTITY
+            );
         }
 
         // 3. Select user and set discount
@@ -60,6 +64,7 @@ class ValidateVoucherController extends Controller
         $ravintolaUserVoucher->used_outlet = $request->input('outlet_code');
         $ravintolaUserVoucher->status = 'used';
         $ravintolaUserVoucher->transaction_deductible = $discount;
+        $ravintolaUserVoucher->transaction_remaining_amount = $request->input('transaction_amount') - $discount;
         $ravintolaUserVoucher->save();
 
         // 5. Insert user_balance_histories, update users.balance
@@ -67,9 +72,13 @@ class ValidateVoucherController extends Controller
         $user->userBalanceHistoryCreate(['type' => 'ravintola_voucher', 'reference_id' => $ravintolaUserVoucher->id]);
         $user->save();
 
-        // 6. Response json ok
+        // 6. Update users.game_token
+        $user->game_token += (int) $ravintolaUserVoucher->transaction_remaining_amount / (int) Options::getOptionByName('amount_ratio_game_token')->value;
+        $user->save();
+
+        // 7. Response json ok
         return response()->json([
-            'status' => 'OK',
+            'status' => 'ok',
             'voucher' => new \Modules\Ravintola\Http\Resources\Api\v1\VoucherResource($ravintolaUserVoucher),
             'transaction_deductible' => $discount,
         ]);
