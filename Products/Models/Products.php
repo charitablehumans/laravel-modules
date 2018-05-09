@@ -16,6 +16,7 @@ class Products extends \Modules\Posts\Models\Posts
     protected static function boot()
     {
         parent::boot();
+        $table = (new self)->getTable();
 
         self::saved(function ($model) {
             \Cache::forget('posts-post_products-post_id-'.$model->id);
@@ -27,7 +28,7 @@ class Products extends \Modules\Posts\Models\Posts
         });
 
         static::addGlobalScope('type', function (Builder $builder) { $builder->where('type', 'product'); });
-        static::addGlobalScope('status_deleted', function (Builder $builder) { \Auth::check() && \Auth::user()->can('backend products trash') ?: $builder->where('status', '<>', 'trash'); });
+        static::addGlobalScope('status_deleted', function (Builder $builder) use ($table) { \Auth::check() && \Auth::user()->can('backend products trash') ?: $builder->where($table.'.status', '<>', 'trash'); });
     }
 
     public function getAuthorId()

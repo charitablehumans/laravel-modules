@@ -20,7 +20,7 @@
     </style>
     @stack('styles')
 </head>
-<body>
+<body class="pjax-container">
     <!-- Navigation -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
