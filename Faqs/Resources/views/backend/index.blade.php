@@ -104,11 +104,7 @@
                                 <td>{{ $post->title }}</td>
                                 <td>{{ $post->author->name }}</td>
                                 <td>
-                                    @php
-                                    $categories = \Modules\Categories\Models\Categories::search(['id_in' => $post->getPostmetaValues('categories'), 'sort' => 'name:asc'])->get();
-                                    @endphp
-
-                                    @if ($categories)
+                                    @if ($categories = $post->getPostmetaByKey('categories')->getCategories())
                                         <ol>
                                             @foreach ($categories as $category)
                                                 <li>

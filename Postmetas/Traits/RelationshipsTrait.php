@@ -3,10 +3,22 @@
 namespace Modules\Postmetas\Traits;
 
 use Modules\Media\Models\Media;
+use Modules\Terms\Models\Terms;
 use redzjovi\php\JsonHelper;
 
 trait RelationshipsTrait
 {
+    public function getCategories()
+    {
+        $values = JsonHelper::isValidJson($this->value) ? json_decode($this->value, true) : [];
+        $terms = [];
+        foreach ($values as $value) {
+            $terms[] = $value ? Terms::getTermById($value) : new Terms;
+        }
+
+        return $terms;
+    }
+
     public function getMedia()
     {
         $values = JsonHelper::isValidJson($this->value) ? json_decode($this->value, true) : [];
