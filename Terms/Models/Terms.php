@@ -8,6 +8,7 @@ use redzjovi\php\ArrayHelper;
 class Terms extends Model
 {
     use \Dimsav\Translatable\Translatable;
+    use \Modules\Terms\Traits\HelperTrait;
     use \Modules\Terms\Traits\TermmetasTrait;
 
     /**
@@ -33,6 +34,7 @@ class Terms extends Model
 
         self::saved(function ($model) {
             \Cache::forget('terms-'.$model->id);
+            \Cache::forget('terms-slug-'.$model->slug);
             \Cache::forget('terms-termmetas-'.$model->id);
         });
 
@@ -40,6 +42,7 @@ class Terms extends Model
             $model->termmetas->each(function ($termmeta) { $termmeta->delete(); });
             $model->deleteTranslations();
             \Cache::forget('terms-'.$model->id);
+            \Cache::forget('terms-slug-'.$model->slug);
             \Cache::forget('terms-termmetas-'.$model->id);
         });
     }
@@ -70,7 +73,7 @@ class Terms extends Model
         $tree = self::all()->sortBy(function ($row, $key) { return $row['name']; })->toArray();
         $tree = ArrayHelper::copyKeyName($tree, 'parent_id', 'parent');
         $tree = ArrayHelper::buildTree($tree);
-        $tree = ArrayHelper::printTree($tree, '&nbsp;&nbsp;');
+        $tree = ArrayHelper::printTree($tree, '&nbsp;&nbsp;&nbsp;');
 
         return $tree;
     }

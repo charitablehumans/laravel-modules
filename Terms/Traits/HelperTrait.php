@@ -11,10 +11,10 @@ trait HelperTrait
         });
     }
 
-    public static function getTermByName($name)
+    public static function getTermBySlug($slug)
     {
-        return \Cache::remember('terms-name-'.$name, 1440, function () use ($name) {
-            return self::search(['name' => $name])->firstOrFail();
+        return \Cache::remember('terms-slug-'.$slug, 1440, function () use ($slug) {
+            return self::search(['slug' => $slug])->firstOrFail();
         });
     }
 }
