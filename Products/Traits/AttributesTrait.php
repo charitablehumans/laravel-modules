@@ -3,9 +3,20 @@
 namespace Modules\Products\Traits;
 
 use Modules\PostProducts\Models\PostProducts;
+use Modules\ProductCategories\Models\ProductCategories;
 
 trait AttributesTrait
 {
+    public function getCategoriesTree()
+    {
+        return (new ProductCategories)->getTermsTree();
+    }
+
+    public function getCategoryIdOptions()
+    {
+        return (new ProductCategories)->getParentOptions();
+    }
+
     public function getPostProduct()
     {
         return \Cache::remember('posts-post_products-post_id-'.$this->id, 1440, function () {

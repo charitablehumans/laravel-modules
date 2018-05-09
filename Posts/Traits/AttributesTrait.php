@@ -35,18 +35,14 @@ trait AttributesTrait
         return (new Users)->getIdNameOptions();
     }
 
-    // DEPRECATED, and will be REMOVED soon
     public function getCategoriesTree()
     {
-        $tree = (new Categories)->getTermsTree();
-        return $tree;
+        return (new Categories)->getTermsTree();
     }
 
-    // DEPRECATED, and will be REMOVED soon
     public function getCategoryIdOptions()
     {
-        $options = (new Categories)->getParentOptions();
-        return $options;
+        return (new Categories)->getParentOptions();
     }
 
     public function getIdContentOptions()
