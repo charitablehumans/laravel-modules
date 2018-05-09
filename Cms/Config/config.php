@@ -35,6 +35,14 @@ return [
         'product_testimonials' => [
             'rating_average' => false,
         ],
+
+        'frontend' => [
+            'limit_options' => [
+                '12' => '12',
+                '24' => '24',
+                '36' => '36',
+            ],
+        ],
     ],
     'transactions' => [
         'status_options' => [

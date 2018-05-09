@@ -3,6 +3,7 @@
 namespace Modules\Products\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Modules\PostProducts\Models\PostProducts;
 
 class Products extends \Modules\Posts\Models\Posts
 {

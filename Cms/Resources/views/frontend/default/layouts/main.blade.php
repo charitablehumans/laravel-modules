@@ -86,7 +86,7 @@
 
     <!-- Page Content -->
     <div class="container">
-
+        @yield('breadcrumb')
         <div class="row">
 
             <!-- Blog Entries Column -->
