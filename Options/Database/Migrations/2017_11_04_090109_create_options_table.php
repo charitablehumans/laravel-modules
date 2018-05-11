@@ -17,7 +17,7 @@ class CreateOptionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('type')->default('text');
             $table->string('name');
-            $table->longText('value');
+            $table->longText('value')->nullable();
             $table->timestamps();
         });
     }

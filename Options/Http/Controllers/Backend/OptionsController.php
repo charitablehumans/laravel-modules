@@ -44,7 +44,7 @@ class OptionsController extends \App\Http\Controllers\Controller
     public function store(\Modules\Options\Http\Requests\Backend\Options\StoreRequest $request)
     {
         Options::create($request->input());
-        flash(trans('cms.data_has_been_created'))->success()->important();
+        flash(trans('cms::cms.data_has_been_created'))->success()->important();
         return redirect()->back();
     }
 
@@ -82,7 +82,7 @@ class OptionsController extends \App\Http\Controllers\Controller
     {
         $option = Options::findOrFail($id);
         $option->fill($request->input())->save();
-        flash(trans('cms.data_has_been_updated'))->success()->important();
+        flash(trans('cms::cms.data_has_been_updated'))->success()->important();
         return redirect()->back();
     }
 
@@ -90,7 +90,7 @@ class OptionsController extends \App\Http\Controllers\Controller
     {
         $option = Options::findOrFail($id);
         $option->delete();
-        flash(trans('cms.data_has_been_deleted'))->success()->important();
+        flash(trans('cms::cms.data_has_been_deleted'))->success()->important();
         return redirect()->back();
     }
 }
