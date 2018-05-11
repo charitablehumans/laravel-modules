@@ -16,4 +16,15 @@ class ProductCategories extends Terms
         $table = (new Terms)->getTable();
         static::addGlobalScope('taxonomy', function (Builder $builder) use ($table) { $builder->where($table.'.taxonomy', 'product_category'); });
     }
+
+    public function getTemplateOptions()
+    {
+        $templateOptions['default'] = trans('cms::cms.default');
+        if ($additionalTemplateOptions = \Config::get('cms.product_categories.postmetas.template_options')) {
+            foreach ($additionalTemplateOptions as $template => $enable) {
+                $templateOptions[$template] = trans('cms::cms.'.$template);
+            }
+        }
+        return $templateOptions;
+    }
 }

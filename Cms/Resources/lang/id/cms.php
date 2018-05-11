@@ -139,6 +139,8 @@ return [
     'send_password_reset_link' => 'Kirim Tautan Ulang Sandi',
     'sender' => 'Pengirim',
     'sent' => 'Terkirim',
+    'shop_men' => 'Toko Pria',
+    'shop_women' => 'Toko Wanita',
     'sign_in' => 'Masuk',
     'sign_up' => 'Daftar',
     'sort' => 'Urut',

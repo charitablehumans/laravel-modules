@@ -139,6 +139,8 @@ return [
     'send_password_reset_link' => 'Send Password Reset Link',
     'sender' => 'Sender',
     'sent' => 'Sent',
+    'shop_men' => 'Shop Men',
+    'shop_women' => 'Shop Women',
     'sign_in' => 'Sign In',
     'sign_up' => 'Sign Up',
     'sort' => 'Sort',
