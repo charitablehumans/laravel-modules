@@ -17,24 +17,18 @@ class PopupComposer
     public function compose(View $view)
     {
         $data['frontendHomePopup'] = new Pages;
-        if ($option = Options::getOptionByName('frontend_home_popup')) {
-            if ($page = Pages::getPostById($option->value)) {
-                $data['frontendHomePopup'] = $page;
-            }
+        if ($page = Options::getOptionByName('frontend_home_popup')->getPageByOptionValue()) {
+            $data['frontendHomePopup'] = $page;
         }
 
         $data['frontendHomePopupButtonText'] = new Pages;
-        if ($option = Options::getOptionByName('frontend_home_popup_button_text')) {
-            if ($page = Pages::getPostById($option->value)) {
-                $data['frontendHomePopupButtonText'] = $page->title;
-            }
+        if ($page = Options::getOptionByName('frontend_home_popup_button_text')->getPageByOptionValue()) {
+            $data['frontendHomePopupButtonText'] = $page->title;
         }
 
         $data['frontendHomePopupButtonUrl'] = new Pages;
-        if ($option = Options::getOptionByName('frontend_home_popup_button_url')) {
-            if ($page = Pages::getPostById($option->value)) {
-                $data['frontendHomePopupButtonUrl'] = route('frontend.pages.show', $page->name);
-            }
+        if ($page = Options::getOptionByName('frontend_home_popup_button_url')->getPageByOptionValue()) {
+            $data['frontendHomePopupButtonUrl'] = route('frontend.pages.show', $page->name);
         }
 
         $view->with($data);
