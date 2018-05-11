@@ -66,6 +66,9 @@
             @if (config('cms.menus.accordion.products'))
                 @include('menus::backend/_accordion/_products', ['term' => $term])
             @endif
+            @if (config('cms.menus.accordion.product_categories'))
+                @include('menus::backend/_accordion/_product_categories', ['term' => $term])
+            @endif
             @if (config('cms.menus.accordion.product_testimonials'))
                 @include('menus::backend/_accordion/_product_testimonials', ['term' => $term])
             @endif

@@ -16,10 +16,4 @@ class Tags extends Terms
         $table = (new Terms)->getTable();
         static::addGlobalScope('taxonomy', function (Builder $builder) use ($table) { $builder->where($table.'.taxonomy', 'tag'); });
     }
-
-    public function getTagIdOptions()
-    {
-        $options = self::search(['sort' => 'name:asc'])->get()->pluck('name', 'id')->toArray();
-        return $options;
-    }
 }

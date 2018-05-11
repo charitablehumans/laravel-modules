@@ -8,6 +8,7 @@ use redzjovi\php\ArrayHelper;
 class Terms extends Model
 {
     use \Dimsav\Translatable\Translatable;
+    use \Modules\Terms\Traits\AttributesTrait;
     use \Modules\Terms\Traits\HelperTrait;
     use \Modules\Terms\Traits\TermmetasTrait;
 

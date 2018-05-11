@@ -1,5 +1,5 @@
 <div class="panel panel-default">
-    <div class="panel-heading" id="headingProducts" role="tab">
+    <div class="panel-heading" id="headingProductTestimonials" role="tab">
         <h4 class="panel-title">
             <a aria-controls="collapseProductTestimonials" aria-expanded="true" data-parent="#accordion" data-toggle="collapse" href="#collapseProductTestimonials" role="button">@lang('cms::cms.product_testimonials')</a>
         </h4>

@@ -8,11 +8,11 @@
         <div class="panel-body">
             <div class="form-group">
                 <div class="categories-container">
-                    @foreach ($term->getCategoriesTree() as $category_tree)
+                    @foreach ($term->getCategoriesTree() as $tree)
                         <div class="checkbox">
-                            {{ $category_tree['tree_prefix'] }}
+                            {{ $tree['tree_prefix'] }}
                             <label>
-                                <input class="categories" data-name="{{ $category_tree['name'] }}" name="category[]" type="checkbox" value="{{ $category_tree['id'] }}" /> {{ $category_tree['name'] }}
+                                <input data-name="{{ $tree['name'] }}" name="category[]" type="checkbox" value="{{ $tree['id'] }}" /> {{ $tree['name'] }}
                             </label>
                         </div>
                     @endforeach

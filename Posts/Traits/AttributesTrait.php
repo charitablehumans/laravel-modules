@@ -115,7 +115,7 @@ trait AttributesTrait
     // DEPRECATED, and will be REMOVED soon
     public function getTagIdOptions()
     {
-        $options = (new \Modules\Tags\Models\Tags)->getTagIdOptions();
+        $options = (new \Modules\Tags\Models\Tags)->getIdNameOptions();
         return $options;
     }
 }

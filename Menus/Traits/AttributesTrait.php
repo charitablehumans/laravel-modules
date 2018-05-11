@@ -279,6 +279,11 @@ trait AttributesTrait
         return $options;
     }
 
+    public function getProductCategoriesTree()
+    {
+        return (new ProductCategories)->getTermsTree();
+    }
+
     public function getProductIdOptions()
     {
         $options = (new Products)->getPostIdOptions();
@@ -290,10 +295,9 @@ trait AttributesTrait
         return (new ProductTestimonials)->getIdContentOptions();
     }
 
-    public function getTagIdOptions()
+    public function getTagIdNameOptions()
     {
-        $options = (new Tags)->getTagIdOptions();
-        return $options;
+        return (new Tags)->getIdNameOptions();
     }
 
     public function getTemplate()
