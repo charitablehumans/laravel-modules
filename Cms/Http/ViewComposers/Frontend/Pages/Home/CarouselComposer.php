@@ -18,7 +18,7 @@ class CarouselComposer
         $data['frontendPagesHomeCarousel'] = false;
 
         if ($menu = Menus::search(['slug' => 'frontend-home-carousels'])->first()) {
-            if ($nestable = $menu->getTermmetaNestable()) {
+            if ($nestable = $menu->getTermmetaValues('nestable')) {
                 $data['frontendPagesHomeCarousel'] = (new Menus)->generateAsArray($nestable);
             }
         }

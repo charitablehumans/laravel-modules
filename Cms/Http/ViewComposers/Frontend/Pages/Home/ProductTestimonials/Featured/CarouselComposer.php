@@ -18,7 +18,7 @@ class CarouselComposer
         $data['frontendPagesHomeProductsTestimonialsCarousel'] = false;
 
         if ($menu = Menus::search(['slug' => 'frontend-home-product-testimonials-featured'])->first()) {
-            if ($nestable = $menu->getTermmetaNestable()) {
+            if ($nestable = $menu->getTermmetaValues('nestable')) {
                 $data['frontendPagesHomeProductsTestimonialsCarousel'] = (new Menus)->generateAsArray($nestable);
             }
         }

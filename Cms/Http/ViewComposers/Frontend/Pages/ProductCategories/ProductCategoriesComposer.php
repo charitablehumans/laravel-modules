@@ -19,7 +19,7 @@ class ProductCategoriesComposer
         $data['pages']['product_categories']['product_categories'] = [];
 
         if ($menu = Menus::search(['slug' => 'frontend-product-categories-product-categories-left'])->first()) {
-            if ($nestable = $menu->getTermmetaNestable()) {
+            if ($nestable = $menu->getTermmetaValues('nestable')) {
                 $nestable = (new Menus)->generateAsArray($nestable);
                 $data['pages']['product_categories']['product_categories']['html'] = $this->generateHtml($nestable);
             }

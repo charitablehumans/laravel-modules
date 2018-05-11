@@ -18,7 +18,7 @@ class ServicesComposer
         $data['frontendPagesHomeServices'] = false;
 
         if ($menu = Menus::search(['slug' => 'frontend-home-services'])->first()) {
-            if ($nestable = $menu->getTermmetaNestable()) {
+            if ($nestable = $menu->getTermmetaValues('nestable')) {
                 $frontendPagesHomeServices = (new Menus)->generateAsArray($nestable);
                 $data['frontendPagesHomeServices'] = array_slice($frontendPagesHomeServices, 0, 4);
             }
