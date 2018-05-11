@@ -219,7 +219,7 @@ trait AttributesTrait
                 $this->setPost($term);
                 $this->setTemplate($term->getTermmetaValue('template'));
                 $this->setTitle($term->name);
-                $this->setUrl(url('product-categories/'.$term->name));
+                $this->setUrl(route('frontend.product-categories.index', $term->slug));
                 break;
             case 'product_testimonial' :
                 $post = ProductTestimonials::getPostById($this->id);

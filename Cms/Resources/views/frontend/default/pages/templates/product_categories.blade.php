@@ -8,8 +8,7 @@
 
 @section('content')
     <div class="row">
-        {{-- <div class="col-md-3">@include('cms::frontend/default/pages/product_categories/left_product_categories')</div> --}}
-        <div class="col-md-3"></div>
+        <div class="col-md-3">@include('cms::frontend/default/pages/product_categories/product_categories')</div>
         <div class="col-md-9">@include('cms::frontend/default/pages/product_categories/products')</div>
     </div>
 @endsection

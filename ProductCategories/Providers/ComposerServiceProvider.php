@@ -31,10 +31,10 @@ class ComposerServiceProvider extends ServiceProvider
 
         View::composer(
             [
-                'frontend/default/pages/product_categories/left_product_categories',
-                'cms::frontend/default/pages/product_categories/left_product_categories',
+                'frontend/default/pages/product_categories/product_categories',
+                'cms::frontend/default/pages/product_categories/product_categories',
             ],
-            '\Modules\Cms\Http\ViewComposers\Frontend\Pages\ProductCategories\LeftProductCategoriesComposer'
+            '\Modules\Cms\Http\ViewComposers\Frontend\Pages\ProductCategories\ProductCategoriesComposer'
         );
     }
 
