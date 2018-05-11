@@ -58,7 +58,7 @@
             <div class="box-header with-border">
                 <h3 class="box-title">@lang('validation.attributes.template')</h3>
                 <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                    <button class="btn btn-box-tool" data-original-title="Collapse" data-toggle="tooltip" data-widget="collapse" title="" type="button">
                         <i class="fa fa-minus"></i>
                     </button>
                 </div>
@@ -77,7 +77,7 @@
             <div class="box-header with-border">
                 <h3 class="box-title">@lang('cms::cms.images')</h3>
                 <div class="box-tools pull-right">
-                    <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="" data-original-title="Collapse">
+                    <button class="btn btn-box-tool" data-original-title="Collapse" data-toggle="tooltip" data-widget="collapse" title="" type="button">
                         <i class="fa fa-minus"></i>
                     </button>
                 </div>
