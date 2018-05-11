@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Modules\Postmetas\Models\Postmetas;
 use Modules\Users\Models\Users;
+use Modules\Terms\Models\Terms;
 
 class Posts extends Model
 {
@@ -133,13 +134,16 @@ class Posts extends Model
         }
         isset($params['parent_id']) ? $query->where('parent_id', $params['parent_id']) : '';
         isset($params['parent_id_in']) ? $query->whereIn('parent_id', $params['parent_id_in']) : '';
-        isset($params['status']) ? $query->where('status', $params['status']) : '';
+        isset($params['status']) ? $query->where(self::getTable().'.status', $params['status']) : '';
         isset($params['created_at']) ? $query->where(self::getTable().'.created_at', 'like', '%'.$params['created_at'].'%') : '';
         isset($params['created_at_date']) ? $query->whereDate(self::getTable().'.created_at', '=', $params['created_at_date']) : '';
         isset($params['updated_at_date']) ? $query->whereDate(self::getTable().'.updated_at', '=', $params['updated_at_date']) : '';
 
         // postmetas
         isset($params['category_id']) ? $query->join((new Postmetas)->getTable().' AS postmetas_category_id', 'postmetas_category_id.post_id', '=', self::getTable().'.id')->where('postmetas_category_id.key', 'categories')->where('postmetas_category_id.value', 'LIKE', '%"'.$params['category_id'].'"%') : ('');
+        if (isset($params['category_slug'])) {
+            $query->join((new Postmetas)->getTable().' AS postmetas_category_name', 'postmetas_category_name.post_id', '=', self::getTable().'.id')->where('postmetas_category_name.key', 'categories')->where('postmetas_category_name.value', 'LIKE', '%"'.Terms::getTermBySlug($params['category_slug'])->id.'"%');
+        }
         isset($params['template']) ? $query->join((new Postmetas)->getTable().' AS postmeta_template', 'postmeta_template.post_id', '=', self::getTable().'.id')->where('postmeta_template.key', 'template')->where('postmeta_template.value', $params['template']) : ('');
 
         // post_testimonials

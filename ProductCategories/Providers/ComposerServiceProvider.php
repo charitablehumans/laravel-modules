@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Products\Providers;
+namespace Modules\ProductCategories\Providers;
 
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
@@ -23,18 +23,18 @@ class ComposerServiceProvider extends ServiceProvider
     {
         View::composer(
             [
-                'frontend/default/pages/home/products/new_arrival',
-                'cms::frontend/default/pages/home/products/new_arrival',
+                'frontend/default/pages/product_categories/breadcrumb',
+                'cms::frontend/default/pages/product_categories/breadcrumb',
             ],
-            '\Modules\Cms\Http\ViewComposers\Frontend\Pages\Home\Products\NewArrivalComposer'
+            '\Modules\Cms\Http\ViewComposers\Frontend\Pages\ProductCategories\BreadcrumbComposer'
         );
 
         View::composer(
             [
-                'frontend/default/pages/product_categories/products',
-                'cms::frontend/default/pages/product_categories/products',
+                'frontend/default/pages/product_categories/left_product_categories',
+                'cms::frontend/default/pages/product_categories/left_product_categories',
             ],
-            '\Modules\Cms\Http\ViewComposers\Frontend\Pages\ProductCategories\ProductsComposer'
+            '\Modules\Cms\Http\ViewComposers\Frontend\Pages\ProductCategories\LeftProductCategoriesComposer'
         );
     }
 

@@ -7,4 +7,6 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('backend/product-categories/{id}/delete', ['as' => 'backend.product-categories.delete', 'uses' => '\Modules\ProductCategories\Http\Controllers\Backend\ProductCategoriesController@delete']);
         });
     });
+
+    Route::get('product-categories/{productCategories?}', ['as' => 'frontend.product-categories.index', 'uses' => '\Modules\ProductCategories\Http\Controllers\Frontend\ProductCategoriesController@index'])->where('productCategories', '(.*)');
 });
