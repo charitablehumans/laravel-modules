@@ -92,10 +92,14 @@ trait AttributesTrait
                 $term = Categories::getTermById($this->id);
                 $this->setContent($term->description);
                 $this->setExcerpt('');
-                $this->setImageThumbnailUrl($term->getTermmetaImageThumbnailUrl());
-                $this->setImageUrl($term->getTermmetaImageUrl());
-                $this->setImagesThumbnailUrl($term->getTermmetaValues('images')->getMediaUrlFullByKey('attached_file_thumbnail', true));
-                $this->setImagesUrl($term->getTermmetaValues('images')->getMediaUrlFullByKey('attached_file', true));
+                $this->setImageThumbnailUrl(
+                    \Storage::url($term->getTermmetaByKey('images')->getMedium()->getPostmetaValue('attached_file_thumbnail', true))
+                );
+                $this->setImageUrl(
+                    \Storage::url($term->getTermmetaByKey('images')->getMedium()->getPostmetaValue('attached_file', true))
+                );
+                $this->setImagesThumbnailUrl($term->getTermmetaByKey('images')->getMediaUrlFullByKey('attached_file_thumbnail', true));
+                $this->setImagesUrl($term->getTermmetaByKey('images')->getMediaUrlFullByKey('attached_file', true));
                 $this->setMetas($term->getTermmetas());
                 $this->setOthers('');
                 $this->setPost($term);
@@ -203,10 +207,14 @@ trait AttributesTrait
                 $this->setContent($term->description);
                 $this->setExcerpt('');
                 $this->setMetas($term->getTermmetas());
-                $this->setImageThumbnailUrl($term->getTermmetaImageThumbnailUrl());
-                $this->setImageUrl($term->getTermmetaImageUrl());
-                $this->setImagesThumbnailUrl($term->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file_thumbnail', true));
-                $this->setImagesUrl($term->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file', true));
+                $this->setImageThumbnailUrl(
+                    \Storage::url($term->getTermmetaByKey('images')->getMedium()->getPostmetaValue('attached_file_thumbnail', true))
+                );
+                $this->setImageUrl(
+                    \Storage::url($term->getTermmetaByKey('images')->getMedium()->getPostmetaValue('attached_file', true))
+                );
+                $this->setImagesThumbnailUrl($term->getTermmetaByKey('images')->getMediaUrlFullByKey('attached_file_thumbnail', true));
+                $this->setImagesUrl($term->getTermmetaByKey('images')->getMediaUrlFullByKey('attached_file', true));
                 $this->setOthers('');
                 $this->setPost($term);
                 $this->setTemplate($term->getTermmetaValue('template'));
@@ -239,10 +247,14 @@ trait AttributesTrait
                 $this->setContent($term->description);
                 $this->setExcerpt('');
                 $this->setMetas($term->getTermmetas());
-                $this->setImageThumbnailUrl($term->getTermmetaImageThumbnailUrl());
-                $this->setImageUrl($term->getTermmetaImageUrl());
-                $this->setImagesThumbnailUrl($term->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file_thumbnail', true));
-                $this->setImagesUrl($term->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file', true));
+                $this->setImageThumbnailUrl(
+                    \Storage::url($term->getTermmetaByKey('images')->getMedium()->getPostmetaValue('attached_file_thumbnail', true))
+                );
+                $this->setImageUrl(
+                    \Storage::url($term->getTermmetaByKey('images')->getMedium()->getPostmetaValue('attached_file', true))
+                );
+                $this->setImagesThumbnailUrl($term->getTermmetaByKey('images')->getMediaUrlFullByKey('attached_file_thumbnail', true));
+                $this->setImagesUrl($term->getTermmetaByKey('images')->getMediaUrlFullByKey('attached_file', true));
                 $this->setOthers('');
                 $this->setPost($term);
                 $this->setTemplate($term->getTermmetaValue('template'));
