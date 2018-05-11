@@ -8,6 +8,7 @@ class Pages extends \Modules\Posts\Models\Posts
 {
     protected $attributes = [
         'type' => 'page',
+        'status' => 'publish',
     ];
 
     protected static function boot()

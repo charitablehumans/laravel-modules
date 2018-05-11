@@ -11,6 +11,7 @@ class Products extends \Modules\Posts\Models\Posts
 
     protected $attributes = [
         'type' => 'product',
+        'status' => 'publish',
     ];
 
     protected static function boot()
