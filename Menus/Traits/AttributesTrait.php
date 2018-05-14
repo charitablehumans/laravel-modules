@@ -196,7 +196,7 @@ trait AttributesTrait
                 $this->setImagesThumbnailUrl($post->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file_thumbnail', true));
                 $this->setImagesUrl($post->getPostmetaByKey('images')->getMediaUrlFullByKey('attached_file', true));
                 $this->setMetas($post->getPostmetas());
-                $this->setOthers(['product' => $post->postProduct]);
+                $this->setOthers(['product' => $post->getPostProduct()]);
                 $this->setPost($post);
                 $this->setTemplate($post->getPostmetaValue('template'));
                 $this->setTitle($post->title);
