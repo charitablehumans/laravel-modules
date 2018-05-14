@@ -104,6 +104,14 @@ class Terms extends Model
         isset($params['name']) ? $query->whereTranslation('name', $params['name']) : '';
         isset($params['name_like']) ? $query->whereTranslationLike('name', '%'.$params['name_like'].'%') : '';
         isset($params['slug']) ? $query->whereTranslation('slug', $params['slug']) : '';
+        if (isset($params['slugs']) && is_array($params['slugs'])) {
+            $slugs = $params['slugs'];
+            $query = $query->where(function($query) use ($slugs) {
+                foreach ($slugs as $slug) {
+                    $query->whereTranslation('slug', $slug);
+                }
+            });
+        }
         if (isset($params['slug_in']) && is_array($params['slug_in'])) {
             $slugIn = $params['slug_in'];
             $query = $query->where(function($query) use ($slugIn) {
