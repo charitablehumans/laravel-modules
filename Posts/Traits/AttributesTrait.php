@@ -64,8 +64,9 @@ trait AttributesTrait
 
     public function getParentId()
     {
-        $this->parent_id = \Request::query('parent_id', $this->parent_id);
-        return \Request::old('parent_id', $this->parent_id);
+        $parentId = 0;
+        $parentId = \Request::query('parent_id', $parentId);
+        return \Request::old('parent_id', $parentId);
     }
 
     public function getParentIdTitleOptions()
@@ -90,8 +91,9 @@ trait AttributesTrait
 
     public function getStatus()
     {
-        $this->status = $this->id ? $this->status : 'publish';
-        return \Request::old('status', $this->status);
+        $status = 'publish';
+        $status = $this->id ? $status : 'publish';
+        return \Request::old('status', $status);
     }
 
     public function getStatusOptions()
@@ -115,7 +117,13 @@ trait AttributesTrait
     // DEPRECATED, and will be REMOVED soon
     public function getTagIdOptions()
     {
-        $options = (new \Modules\Tags\Models\Tags)->getIdNameOptions();
-        return $options;
+        return (new \Modules\Tags\Models\Tags)->getIdNameOptions();
+    }
+
+    public function getTitle()
+    {
+        $title = '';
+        $title = $this->id ? $this->title : $title;
+        return \Request::old('title', $title);
     }
 }
