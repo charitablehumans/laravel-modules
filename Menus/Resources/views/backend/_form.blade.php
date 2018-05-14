@@ -23,6 +23,10 @@
                     <i class="text-danger">{{ $errors->first('name') }}</i>
                 </div>
                 <div class="form-group">
+                    <label>@lang('validation.attributes.slug')</label>
+                    <input class="form-control input-sm" readonly type="text" value="{{ request()->old('slug', $term_translation->slug) }}" />
+                </div>
+                <div class="form-group">
                     <label>@lang('validation.attributes.description')</label>
                     <textarea class="form-control input-sm" name="description" rows="3">{{ request()->old('description', $term_translation->description) }}</textarea>
                     <i class="text-danger">{{ $errors->first('description') }}</i>
