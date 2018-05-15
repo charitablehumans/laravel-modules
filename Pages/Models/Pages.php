@@ -22,10 +22,13 @@ class Pages extends \Modules\Posts\Models\Posts
     public function getTemplateOptions()
     {
         $templateOptions['default'] = trans('cms::cms.default');
-        \Config::get('cms.pages.postmetas.template_options.bank_accounts') ? $templateOptions['bank_accounts'] = trans('cms::cms.bank_accounts') : '';
-        \Config::get('cms.pages.postmetas.template_options.cnr_cash') ? $templateOptions['cnr_cash'] = trans('cms::cms.cnr_cash') : '';
-        \Config::get('cms.pages.postmetas.template_options.home') ? $templateOptions['home'] = trans('cms::cms.home') : '';
-        \Config::get('cms.pages.postmetas.template_options.new_arrival') ? $templateOptions['new_arrival'] = trans('cms::cms.new_arrival') : '';
+
+        if ($additionalTemplateOptions = \Config::get('cms.pages.postmetas.template_options')) {
+            foreach ($additionalTemplateOptions as $template => $enable) {
+                $enable ? $templateOptions[$template] = trans('cms::cms.'.$template) : '';
+            }
+        }
+
         return $templateOptions;
     }
 }

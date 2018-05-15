@@ -17,14 +17,9 @@
     </p>
     <hr />
 
-    @php
-    $mediumId = $post->getPostmetaValue('images');
-    $medium = \Modules\Media\Models\Media::getPostById($mediumId);
-    @endphp
-
     <div align="center">
         <a data-fancybox href="{{ \Storage::url($post->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file', true)) }}">
-            <img alt="{{ optional($medium)->name }}" class="img-responsive" src="{{ \Storage::url($post->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file_thumbnail', true)) }}" />
+            <img alt="{{ $post->getPostmetaByKey('images')->getMedium()->name }}" class="img-responsive" src="{{ \Storage::url($post->getPostmetaByKey('images')->getMedium()->getPostmetaValue('attached_file_thumbnail', true)) }}" />
         </a>
     </div>
     <hr />
