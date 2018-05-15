@@ -144,6 +144,15 @@ class Posts extends Model
         if (isset($params['category_slug'])) {
             $query->join((new Postmetas)->getTable().' AS postmetas_category_name', 'postmetas_category_name.post_id', '=', self::getTable().'.id')->where('postmetas_category_name.key', 'categories')->where('postmetas_category_name.value', 'LIKE', '%"'.Terms::getTermBySlug($params['category_slug'])->id.'"%');
         }
+        if (isset($params['tag_id_in']) && is_array($params['tag_id_in'])) {
+            $query->join((new Postmetas)->getTable().' AS postmetas_tag_id_in', 'postmetas_tag_id_in.post_id', '=', self::getTable().'.id')->where('postmetas_tag_id_in.key', 'tags');
+            $tagIdIn = $params['tag_id_in'];
+            $query = $query->where(function($query) use ($tagIdIn) {
+                foreach ($tagIdIn as $tagId) {
+                    $query->orWhere('postmetas_tag_id_in.value', 'LIKE', '%"'.$tagId.'"%');
+                }
+            });
+        }
         isset($params['template']) ? $query->join((new Postmetas)->getTable().' AS postmeta_template', 'postmeta_template.post_id', '=', self::getTable().'.id')->where('postmeta_template.key', 'template')->where('postmeta_template.value', $params['template']) : ('');
 
         // post_testimonials
