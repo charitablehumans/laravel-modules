@@ -26,6 +26,8 @@ class CmsServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
+        \Config::get('cms.cache') ? '' : \Artisan::call('cache:clear');
     }
 
     /**

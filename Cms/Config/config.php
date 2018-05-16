@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'cache' => true,
     'currency' => [
         'symbol' => [
             'left' => [
