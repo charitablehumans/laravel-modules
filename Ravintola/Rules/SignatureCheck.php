@@ -34,6 +34,7 @@ class SignatureCheck implements Rule
         $signature .= isset($this->attributes['verification_number']) ? $this->attributes['verification_number'] : '';
         $signature .= isset($this->attributes['phone_number']) ? $this->attributes['phone_number'] : '';
         $signature .= isset($this->attributes['transaction_amount']) ? $this->attributes['transaction_amount'] : '';
+        $signature .= isset($this->attributes['transaction_deductible']) ? $this->attributes['transaction_deductible'] : '';
 
         if (hash('sha256', $signature) != $value) {
             return false;
