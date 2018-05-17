@@ -27,9 +27,10 @@ class RavintolaUserVouchers extends Model
         'used_time',
         'used_outlet',
         'status',
-
         'transaction_deductible',
+
         'transaction_remaining_amount',
+        'data',
     ];
 
     protected $table = 'ravintola_user_vouchers';

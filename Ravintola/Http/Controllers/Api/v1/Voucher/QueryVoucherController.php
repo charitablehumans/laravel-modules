@@ -62,6 +62,7 @@ class QueryVoucherController extends Controller
             'uuid' => \Ramsey\Uuid\Uuid::uuid1(),
             'expiry' => \Carbon\Carbon::now()->addDay()->toDateString(),
             'value' => $user->balance,
+            'data' => json_encode($request->input()),
         ]);
         $ravintolaUserVoucher->save();
 

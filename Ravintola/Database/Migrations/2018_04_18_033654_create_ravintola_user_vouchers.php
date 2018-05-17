@@ -33,6 +33,7 @@ class CreateRavintolaUserVouchers extends Migration
             $table->bigInteger('transaction_deductible')->comment('Real transaction amount in rupiah that is deductible by this voucher (this is the actual amount spent on voucher amount on the server)');
 
             $table->bigInteger('transaction_remaining_amount');
+            $table->longText('data')->nullable();
 
             $table->timestamps();
         });
