@@ -18,7 +18,7 @@
                 <table class="table table-bordered table-condensed table-striped">
                     <thead>
                         <tr>
-                            <th class="text-right" colspan="9">
+                            <th class="text-right" colspan="10">
                                 <div class="form-inline">
                                     <div class="form-group">
                                         @lang('cms::cms.per_page')
@@ -34,6 +34,8 @@
                                             <option {{ request()->query('sort') == 'name:desc' ? 'selected' : '' }} value="name:desc">@lang('validation.attributes.name') (Z-A)</option>
                                             <option {{ request()->query('sort') == 'email:asc' ? 'selected' : '' }} value="email:asc">@lang('validation.attributes.email') (A-Z)</option>
                                             <option {{ request()->query('sort') == 'email:desc' ? 'selected' : '' }} value="email:desc">@lang('validation.attributes.email') (Z-A)</option>
+                                            <option {{ request()->query('sort') == 'phone_number:asc' ? 'selected' : '' }} value="phone_number:asc">@lang('validation.attributes.phone_number') (↓)</option>
+                                            <option {{ request()->query('sort') == 'phone_number:desc' ? 'selected' : '' }} value="phone_number:desc">@lang('validation.attributes.phone_number') (↑)</option>
                                             <option {{ request()->query('sort') == 'verified:asc' ? 'selected' : '' }} value="verified:asc">@lang('validation.attributes.verified') (↓)</option>
                                             <option {{ request()->query('sort') == 'verified:desc' ? 'selected' : '' }} value="verified:desc">@lang('validation.attributes.verified') (↑)</option>
                                             @if (config('cms.users.store_id'))
@@ -59,6 +61,7 @@
                             <th><input class="table_row_checkbox_all" type="checkbox" /></th>
                             <th>@lang('validation.attributes.name') <input class="form-control" name="name" type="text" value="{{ request()->query('name') }}" /></th>
                             <th>@lang('validation.attributes.email') <input class="form-control" name="email" type="text" value="{{ request()->query('email') }}" /></th>
+                            <th>@lang('validation.attributes.phone_number') <input class="form-control" name="phone_number_like" type="text" value="{{ request()->query('phone_number_like') }}" /></th>
                             <th>
                                 @lang('validation.attributes.verified')
                                 <select class="form-control" name="verified">
@@ -126,6 +129,7 @@
                                 <td align="center"><input class="table_row_checkbox" name="action_id[]" type="checkbox" value="{{ $user->id }}" /></td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
+                                <td>{{ $user->phone_number }}</td>
                                 <td>{{ $user->getVerifiedName() }}</td>
                                 @if (config('cms.users.store_id'))
                                     @can ('backend users store all')
@@ -153,13 +157,13 @@
                             </tr>
                         @empty
                             <tr>
-                                <td align="center" colspan="9">@lang('cms::cms.no_data')</td>
+                                <td align="center" colspan="10">@lang('cms::cms.no_data')</td>
                             </tr>
                         @endforelse
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td colspan="9">
+                            <td colspan="10">
                                 <select class="input-sm" name="action">
                                     <option value="">@lang('cms::cms.action')</option>
                                     <option value="delete">@lang('cms::cms.delete')</option>
@@ -168,7 +172,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" colspan="9">{{ $users->appends(request()->query())->links('cms::vendor.pagination.default-2') }}</td>
+                            <td align="center" colspan="10">{{ $users->appends(request()->query())->links('cms::vendor.pagination.default-2') }}</td>
                         </tr>
                     </tfoot>
                 </table>

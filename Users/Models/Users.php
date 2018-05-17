@@ -87,6 +87,7 @@ class Users extends \App\User
         isset($params['id_in']) ? $query->whereIn('id', $params['id_in']) : '';
         isset($params['name']) ? $query->where('name', 'like', '%'.$params['name'].'%') : '';
         isset($params['email']) ? $query->where('email', 'like', '%'.$params['email'].'%') : '';
+        isset($params['phone_number_like']) ? $query->where('phone_number', 'like', '%'.$params['phone_number_like'].'%') : '';
         isset($params['verified']) ? $query->where('verified', $params['verified']) : '';
         isset($params['store_id']) ? $query->where('store_id', $params['store_id']) : '';
         if (isset($params['balance'])) {
