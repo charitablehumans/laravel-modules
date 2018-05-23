@@ -110,7 +110,7 @@ return [
     'post' => 'Post',
     'posted_on' => 'Posted on',
     'posts' => 'Posts',
-    'prev' => 'Previous',
+    'prev' => 'Prev',
     'process' => 'Process',
     'processed' => 'Processed',
     'product' => 'Product',

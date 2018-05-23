@@ -141,8 +141,26 @@ class Posts extends Model
 
         // postmetas
         isset($params['category_id']) ? $query->join((new Postmetas)->getTable().' AS postmetas_category_id', 'postmetas_category_id.post_id', '=', self::getTable().'.id')->where('postmetas_category_id.key', 'categories')->where('postmetas_category_id.value', 'LIKE', '%"'.$params['category_id'].'"%') : ('');
+        if (isset($params['category_ids'])) {
+            $query->join((new Postmetas)->getTable().' AS postmetas_category_ids', 'postmetas_category_ids.post_id', '=', self::getTable().'.id')->where('postmetas_category_ids.key', 'categories');
+            $categoryIds = $params['category_ids'];
+            $query = $query->where(function($query) use ($categoryIds) {
+                foreach ($categoryIds as $categoryId) {
+                    $query->where('postmetas_category_ids.value', 'LIKE', '%"'.$categoryId.'"%');
+                }
+            });
+        }
         if (isset($params['category_slug'])) {
-            $query->join((new Postmetas)->getTable().' AS postmetas_category_name', 'postmetas_category_name.post_id', '=', self::getTable().'.id')->where('postmetas_category_name.key', 'categories')->where('postmetas_category_name.value', 'LIKE', '%"'.Terms::getTermBySlug($params['category_slug'])->id.'"%');
+            $query->join((new Postmetas)->getTable().' AS postmetas_category_slug', 'postmetas_category_slug.post_id', '=', self::getTable().'.id')->where('postmetas_category_slug.key', 'categories')->where('postmetas_category_slug.value', 'LIKE', '%"'.Terms::getBySlug($params['category_slug'])->id.'"%');
+        }
+        if (isset($params['category_slugs'])) {
+            $query->join((new Postmetas)->getTable().' AS postmetas_category_slugs', 'postmetas_category_slugs.post_id', '=', self::getTable().'.id')->where('postmetas_category_slugs.key', 'categories');
+            $categorySlugs = $params['category_slugs'];
+            $query = $query->where(function($query) use ($categorySlugs) {
+                foreach ($categorySlugs as $categorySlug) {
+                    $query->where('postmetas_category_slugs.value', 'LIKE', '%"'.Terms::getBySlug($categorySlug)->id.'"%');
+                }
+            });
         }
         if (isset($params['tag_id_in']) && is_array($params['tag_id_in'])) {
             $query->join((new Postmetas)->getTable().' AS postmetas_tag_id_in', 'postmetas_tag_id_in.post_id', '=', self::getTable().'.id')->where('postmetas_tag_id_in.key', 'tags');
