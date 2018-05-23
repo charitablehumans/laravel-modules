@@ -4,16 +4,16 @@ namespace Modules\Terms\Traits;
 
 trait HelperTrait
 {
-    public static function getTermById($id)
+    public static function getById($id)
     {
-        return \Cache::remember('terms-'.$id, 1440, function () use ($id) {
+        return \Cache::remember((new self)->getTable().'-'.$id, 1440, function () use ($id) {
             return self::findOrFail($id);
         });
     }
 
-    public static function getTermBySlug($slug)
+    public static function getBySlug($slug)
     {
-        return \Cache::remember('terms-slug-'.$slug, 1440, function () use ($slug) {
+        return \Cache::remember((new self)->getTable().'-slug-'.$slug, 1440, function () use ($slug) {
             return self::search(['slug' => $slug])->firstOrFail();
         });
     }

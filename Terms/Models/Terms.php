@@ -9,6 +9,7 @@ class Terms extends Model
 {
     use \Dimsav\Translatable\Translatable;
     use \Modules\Terms\Traits\AttributesTrait;
+    use \Modules\Terms\Traits\DeprecatedTrait;
     use \Modules\Terms\Traits\HelperTrait;
     use \Modules\Terms\Traits\TermmetasTrait;
 
@@ -21,8 +22,6 @@ class Terms extends Model
 
     protected $table = 'terms';
 
-    protected $parent = 'parent_id';
-
     protected $with = ['translations'];
 
     public $translatedAttributes = ['locale', 'name', 'slug', 'description'];
@@ -34,17 +33,17 @@ class Terms extends Model
         parent::boot();
 
         self::saved(function ($model) {
-            \Cache::forget('terms-'.$model->id);
-            \Cache::forget('terms-slug-'.$model->slug);
-            \Cache::forget('terms-termmetas-'.$model->id);
+            \Cache::forget($model->getTable().'-'.$model->id);
+            \Cache::forget($model->getTable().'-slug-'.$model->slug);
+            \Cache::forget($model->getTable().'-termmetas-'.$model->id);
         });
 
         self::deleted(function ($model) {
-            $model->termmetas->each(function ($termmeta) { $termmeta->delete(); });
+            \Cache::forget($model->getTable().'-'.$model->id);
+            \Cache::forget($model->getTable().'-slug-'.$model->slug);
+            \Cache::forget($model->getTable().'-termmetas-'.$model->id);
             $model->deleteTranslations();
-            \Cache::forget('terms-'.$model->id);
-            \Cache::forget('terms-slug-'.$model->slug);
-            \Cache::forget('terms-termmetas-'.$model->id);
+            $model->termmetas->each(function ($termmeta) { $termmeta->delete(); });
         });
     }
 
@@ -58,14 +57,6 @@ class Terms extends Model
         $tree = ArrayHelper::printTree($tree);
         $options = collect($tree)->pluck('tree_name', 'id')->toArray();
 
-        return $options;
-    }
-
-    public function getTemplateOptions()
-    {
-        $options = [
-            'default' => trans('cms::cms.default'),
-        ];
         return $options;
     }
 
