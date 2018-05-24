@@ -79,6 +79,16 @@ class Products extends \Modules\Posts\Models\Posts
                 }
             });
         }
+        if (isset($params['post_product_sell_price_max'])) {
+            $query = $query->whereHas('postProduct', function ($postProduct) use ($params) {
+                $postProduct->where('sell_price', '<=', $params['post_product_sell_price_max']);
+            });
+        }
+        if (isset($params['post_product_sell_price_min'])) {
+            $query = $query->whereHas('postProduct', function ($postProduct) use ($params) {
+                $postProduct->where('sell_price', '>=', $params['post_product_sell_price_min']);
+            });
+        }
 
         if (isset($params['sort']) && $sort = explode(':', $params['sort'])) {
             if (in_array($sort[0], ['post_product_stock', 'post_product_sell_price'])) {

@@ -111,6 +111,7 @@ return [
     'posted_on' => 'Diposting pada',
     'posts' => 'Posting',
     'prev' => 'Sebelumnya',
+    'price_range' => 'Kisaran Harga',
     'process' => 'Proses',
     'processed' => 'Diproses',
     'product' => 'Produk',

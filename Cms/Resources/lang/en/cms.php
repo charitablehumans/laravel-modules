@@ -111,6 +111,7 @@ return [
     'posted_on' => 'Posted on',
     'posts' => 'Posts',
     'prev' => 'Prev',
+    'price_range' => 'Price Range',
     'process' => 'Process',
     'processed' => 'Processed',
     'product' => 'Product',
