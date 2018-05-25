@@ -1,5 +1,9 @@
 $.pjax.defaults.timeout = 5000;
 
+$(document).on('pjax:success', function() {
+    new LazyLoad();
+});
+
 $(document).on('submit', 'form[data-pjax]', function(event) {
     event.preventDefault();
     $.pjax.submit(event, '.pjax-container', {
