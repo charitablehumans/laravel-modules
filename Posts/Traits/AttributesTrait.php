@@ -45,6 +45,20 @@ trait AttributesTrait
         return (new Categories)->getParentOptions();
     }
 
+    public function getContent2()
+    {
+        $content = null;
+        $content = $this->id ? $this->content_2 : $content;
+        return \Request::old('content_2', $content);
+    }
+
+    public function getContent3()
+    {
+        $content = null;
+        $content = $this->id ? $this->content_3 : $content;
+        return \Request::old('content_3', $content);
+    }
+
     public function getIdContentOptions()
     {
         return self::select([self::getTable().'.id', 'content'])->search(['sort' => 'content:asc'])->get()->pluck('content', 'id')->toArray();

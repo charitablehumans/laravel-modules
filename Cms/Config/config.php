@@ -34,6 +34,12 @@ return [
         ],
     ],
     'products' => [
+        'postmetas' => [
+            'template' => ['default' => 'default'],
+            'template_options' => [
+                'foreverjewelry' => false,
+            ],
+        ],
         'product_testimonials' => [
             'rating_average' => false,
         ],

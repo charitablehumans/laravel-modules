@@ -151,11 +151,10 @@ trait PostmetasTrait
         return $this->getPostmetaValues('tags');
     }
 
-    // DEPRECATED, and will be REMOVED soon
     public function getPostmetaTemplate()
     {
-        // $template = isset($this->postmetas->where('key', 'template')->first()->value) ? $this->postmetas->where('key', 'template')->first()->value : '';
-        // return $template;
-        return $this->getPostmetaValue('template');
+        $postmetaTemplate = null;
+        $postmetaTemplate = $this->id ? $this->getPostmetaValue('template') : $postmetaTemplate;
+        return \Request::old('postmeta.template', $postmetaTemplate);
     }
 }

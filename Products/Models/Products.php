@@ -45,6 +45,19 @@ class Products extends \Modules\Posts\Models\Posts
         return $authorId;
     }
 
+    public function getTemplateOptions()
+    {
+        $templateOptions['default'] = trans('cms::cms.default');
+
+        if ($additionalTemplateOptions = \Config::get('cms.products.postmetas.template_options')) {
+            foreach ($additionalTemplateOptions as $template => $enable) {
+                $enable ? $templateOptions[$template] = trans('cms::cms.'.$template) : '';
+            }
+        }
+
+        return $templateOptions;
+    }
+
     public function postProduct()
     {
         return $this->hasOne('\Modules\PostProducts\Models\PostProducts', 'post_id', 'id');

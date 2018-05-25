@@ -13,7 +13,17 @@ class PostTranslations extends Model
      *
      * @var array
      */
-    protected $fillable = ['post_id', 'title', 'name', 'excerpt', 'content'];
+    protected $fillable = [
+        'post_id',
+        'title',
+        'name',
+        'excerpt',
+        'content',
+        'content_2',
+        'content_3',
+        'content_4',
+        'content_5'
+    ];
 
     protected $table = 'post_translations';
 

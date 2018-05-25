@@ -37,6 +37,9 @@
                     <textarea class="form-control tinymce" name="content" rows="6">{{ request()->old('content', $post_translation->content) }}</textarea>
                     <i class="text-danger">{{ $errors->first('content') }}</i>
                 </div>
+                <div id="postmetas_template_div">
+                    @includeIf('products::backend/products/postmetas/templates/'.($post->getPostmetaTemplate() ?? config('cms.products.postmetas.template.default')))
+                </div>
                 <div class="form-group">
                     <label>@lang('validation.attributes.status')</label>
                     <select class="form-control input-sm" name="status">
@@ -91,9 +94,9 @@
                 </div>
             </div>
             <div class="box-body">
-                <select class="form-control input-sm" name="postmetas[template]">
+                <select class="form-control input-sm" data-url-ajax="{{ route('backend.products.postmetas.templates') }}" name="postmetas[template]">
                     @foreach ($post->getTemplateOptions() as $templateId => $templateName)
-                        <option {{ $templateId == $post->getPostmetaValue('template') ? 'selected' : '' }} value="{{ $templateId }}">{{ $templateName }}</option>
+                        <option {{ $templateId == ($post->getPostmetaTemplate() ?? config('cms.products.postmetas.template.default')) ? 'selected' : '' }} value="{{ $templateId }}">{{ $templateName }}</option>
                     @endforeach
                 </select>
             </div>
