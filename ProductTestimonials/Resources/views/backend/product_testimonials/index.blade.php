@@ -53,7 +53,7 @@
                             <th>
                                 @lang('validation.attributes.author')
                                 <select class="form-control select2" data-allow-clear="true" data-placeholder="" name="author_id">
-                                    <option value=""></option>
+                                    <option></option>
                                     @foreach ($model->getAuthorIdOptions() as $authorId => $authorName)
                                         <option {{ $authorId == request()->query('author_id') ? 'selected' : '' }} value="{{ $authorId }}">{{ $authorName }}</option>
                                     @endforeach

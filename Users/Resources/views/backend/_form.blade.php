@@ -61,7 +61,7 @@
                         <div class="form-group">
                             <label>@lang('cms::cms.store')</label>
                             <select class="form-control select2" data-allow-clear="true" data-placeholder="" name="store_id">
-                                <option value="0"></option>
+                                <option></option>
                                 @foreach ($user->getStoreIdNameOptions() as $storeId => $storeName)
                                     <option {{ $storeId == request()->old('store_id', $user->store_id) ? 'selected' : '' }} value="{{ $storeId }}">{{ $storeName }}</option>
                                 @endforeach

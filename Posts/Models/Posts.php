@@ -41,7 +41,7 @@ class Posts extends Model
 
     protected $with = ['translations'];
 
-    public $translatedAttributes = ['title', 'name', 'excerpt', 'content'];
+    public $translatedAttributes = ['title', 'name', 'excerpt', 'content', 'content_2', 'content_3', 'content_4', 'content_5'];
     public $translationForeignKey = 'post_id';
     public $translationModel = '\Modules\PostTranslations\Models\PostTranslations';
 
