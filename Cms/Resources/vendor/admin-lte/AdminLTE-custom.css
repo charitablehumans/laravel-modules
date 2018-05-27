@@ -1,0 +1,20 @@
+@media (max-width: 767px) {
+    .skin-purple .main-header .navbar .dropdown-menu li a { color: #777; }
+    .skin-purple .main-header .navbar .dropdown-menu li a:hover { color: #fff; }
+}
+
+th {
+    text-align: center;
+}
+
+.contain { object-fit: contain; }
+
+.categories-container {
+    border: 1px solid #ddd;
+    min-height: 50px;
+    max-height: 200px;
+    overflow: auto;
+    padding: 0 10px;
+}
+
+.template_close { line-height: 10px; position: absolute; right: 0; top: 0; }
