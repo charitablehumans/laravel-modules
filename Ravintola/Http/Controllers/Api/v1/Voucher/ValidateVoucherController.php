@@ -29,7 +29,7 @@ class ValidateVoucherController extends Controller
                 'required', 'between:0,20', 'exists:users,phone_number',
                 new \Modules\Ravintola\Rules\VoucherNewVerificationNumberPhoneNumberCheck($request->input()),
             ],
-            'transaction_amount' => ['required', 'integer', 'min:1'],
+            'transaction_amount' => ['required', 'integer'],
             'transaction_deductible' => ['required', 'integer'],
             'signature' => [
                 'required', 'between:0,64',
