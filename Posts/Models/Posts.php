@@ -141,6 +141,15 @@ class Posts extends Model
 
         // postmetas
         isset($params['category_id']) ? $query->join((new Postmetas)->getTable().' AS postmetas_category_id', 'postmetas_category_id.post_id', '=', self::getTable().'.id')->where('postmetas_category_id.key', 'categories')->where('postmetas_category_id.value', 'LIKE', '%"'.$params['category_id'].'"%') : ('');
+        if (isset($params['category_id_in'])) {
+            $query->join((new Postmetas)->getTable().' AS postmetas_category_id_in', 'postmetas_category_id_in.post_id', '=', self::getTable().'.id')->where('postmetas_category_id_in.key', 'categories');
+            $categoryIdIn = $params['category_id_in'];
+            $query = $query->where(function($query) use ($categoryIdIn) {
+                foreach ($categoryIdIn as $categoryId) {
+                    $query->orWhere('postmetas_category_id_in.value', 'LIKE', '%"'.$categoryId.'"%');
+                }
+            });
+        }
         if (isset($params['category_ids'])) {
             $query->join((new Postmetas)->getTable().' AS postmetas_category_ids', 'postmetas_category_ids.post_id', '=', self::getTable().'.id')->where('postmetas_category_ids.key', 'categories');
             $categoryIds = $params['category_ids'];

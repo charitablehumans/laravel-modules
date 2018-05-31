@@ -17,7 +17,7 @@ class CreatePostmetasTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('post_id');
             $table->string('key');
-            $table->longText('value');
+            $table->longText('value')->nullable();
             $table->timestamps();
         });
     }

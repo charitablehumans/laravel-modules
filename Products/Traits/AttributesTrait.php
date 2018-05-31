@@ -70,4 +70,15 @@ trait AttributesTrait
         $postProductWeight = $this->id && $this->getPostProduct() ? $this->getPostProduct()->weight : $postProductWeight;
         return \Request::old('post_products.weight', $postProductWeight);
     }
+
+    public function getRelatedProducts()
+    {
+        $relatedProducts = [];
+
+        if (empty($relatedProducts)) {
+            $relatedProducts = self::select((new self)->getTable().'.id')->search(['category_id_in' => $this->getPostmetaValues('categories')])->get()->pluck('id', 'id');
+        }
+
+        return $relatedProducts;
+    }
 }
