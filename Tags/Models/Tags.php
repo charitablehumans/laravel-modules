@@ -2,10 +2,7 @@
 
 namespace Modules\Tags\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Modules\Terms\Models\Terms;
-
-class Tags extends Terms
+class Tags extends \Modules\Terms\Models\Terms
 {
     protected $attributes = ['taxonomy' => 'tag'];
 
@@ -13,7 +10,6 @@ class Tags extends Terms
     {
         parent::boot();
 
-        $table = (new Terms)->getTable();
-        static::addGlobalScope('taxonomy', function (Builder $builder) use ($table) { $builder->where($table.'.taxonomy', 'tag'); });
+        static::addGlobalScope(new \Modules\Terms\Scopes\TaxonomyScope);
     }
 }

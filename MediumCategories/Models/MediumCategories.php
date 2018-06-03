@@ -2,10 +2,7 @@
 
 namespace Modules\MediumCategories\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Modules\Terms\Models\Terms;
-
-class MediumCategories extends Terms
+class MediumCategories extends \Modules\Terms\Models\Terms
 {
     protected $attributes = ['taxonomy' => 'medium_category'];
 
@@ -13,7 +10,6 @@ class MediumCategories extends Terms
     {
         parent::boot();
 
-        $table = (new Terms)->getTable();
-        static::addGlobalScope('taxonomy', function (Builder $builder) use ($table) { $builder->where($table.'.taxonomy', 'medium_category'); });
+        static::addGlobalScope(new \Modules\Terms\Scopes\TaxonomyScope);
     }
 }

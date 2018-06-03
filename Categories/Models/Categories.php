@@ -2,10 +2,7 @@
 
 namespace Modules\Categories\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Modules\Terms\Models\Terms;
-
-class Categories extends Terms
+class Categories extends \Modules\Terms\Models\Terms
 {
     protected $attributes = ['taxonomy' => 'category'];
 
@@ -13,7 +10,6 @@ class Categories extends Terms
     {
         parent::boot();
 
-        $table = (new Terms)->getTable();
-        static::addGlobalScope('taxonomy', function (Builder $builder) use ($table) { $builder->where($table.'.taxonomy', 'category'); });
+        static::addGlobalScope(new \Modules\Terms\Scopes\TaxonomyScope);
     }
 }

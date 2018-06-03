@@ -2,16 +2,11 @@
 
 namespace Modules\Menus\Models;
 
-use Illuminate\Database\Eloquent\Builder;
-use Modules\Terms\Models\Terms;
-
-class Menus extends Terms
+class Menus extends \Modules\Terms\Models\Terms
 {
     use \Modules\Menus\Traits\AttributesTrait;
 
-    protected $attributes = [
-        'taxonomy' => 'menu',
-    ];
+    protected $attributes = ['taxonomy' => 'menu'];
 
     // custom attribute menu
     public $post, $icon, $title, $type, $url, $permission;
@@ -21,8 +16,7 @@ class Menus extends Terms
     {
         parent::boot();
 
-        $table = (new Terms)->getTable();
-        static::addGlobalScope('taxonomy', function (Builder $builder) use ($table) { $builder->where($table.'.taxonomy', 'menu'); });
+        static::addGlobalScope(new \Modules\Terms\Scopes\TaxonomyScope);
     }
 
     public function generateAsArray($nestable)

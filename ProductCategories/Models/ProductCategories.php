@@ -2,8 +2,8 @@
 
 namespace Modules\ProductCategories\Models;
 
-use Illuminate\Database\Eloquent\Builder;
 use Modules\Terms\Models\Terms;
+use Modules\Terms\Scopes\TaxonomyScope;
 
 class ProductCategories extends Terms
 {
@@ -13,8 +13,7 @@ class ProductCategories extends Terms
     {
         parent::boot();
 
-        $table = (new Terms)->getTable();
-        static::addGlobalScope('taxonomy', function (Builder $builder) use ($table) { $builder->where($table.'.taxonomy', 'product_category'); });
+        static::addGlobalScope(new TaxonomyScope);
     }
 
     public function getTemplateOptions()
