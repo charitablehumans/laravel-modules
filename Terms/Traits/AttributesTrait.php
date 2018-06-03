@@ -14,6 +14,7 @@ trait AttributesTrait
         $options = [
             'default' => trans('cms::cms.default'),
         ];
+        
         return $options;
     }
 }

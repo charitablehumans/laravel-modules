@@ -4,7 +4,6 @@ namespace Modules\Categories\Http\Controllers\Backend;
 
 use Illuminate\Http\Request;
 use Modules\Categories\Models\Categories;
-use Modules\Termmetas\Models\Termmetas;
 
 class CategoriesController extends \Modules\Terms\Http\Controllers\Backend\TermsController
 {

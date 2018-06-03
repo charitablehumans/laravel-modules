@@ -136,7 +136,7 @@ trait AttributesTrait
 
     public function getTitle()
     {
-        $title = '';
+        $title = null;
         $title = $this->id ? $this->title : $title;
         return \Request::old('title', $title);
     }
