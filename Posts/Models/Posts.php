@@ -3,12 +3,11 @@
 namespace Modules\Posts\Models;
 
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
 use Modules\Postmetas\Models\Postmetas;
 use Modules\Users\Models\Users;
 use Modules\Terms\Models\Terms;
 
-class Posts extends Model
+class Posts extends \Illuminate\Database\Eloquent\Model
 {
     use \Dimsav\Translatable\Translatable;
     use \Modules\Posts\Traits\AttributesTrait;
@@ -17,7 +16,7 @@ class Posts extends Model
 
     protected $attributes = [
         'type' => 'post',
-        'status' => 'publish',
+        'status' => 'publish'
     ];
 
     /**
@@ -58,17 +57,17 @@ class Posts extends Model
         });
 
         self::deleted(function ($model) {
-            $model->postmetas->each(function ($postmeta) { $postmeta->delete(); });
-            $model->translations->each(function ($translation) { $translation->delete(); });
             \Cache::forget('posts-'.$model->id);
             \Cache::forget('posts-name-'.$model->name);
             \Cache::forget('posts-postmetas-'.$model->id);
             \Cache::forget('posts-post_testimonials.post_id-'.$model->id);
             \Storage::deleteDirectory('media/original/'.$model->id);
             \Storage::deleteDirectory('media/thumbnail/'.$model->id);
+            $model->postmetas->each(function ($postmeta) { $postmeta->delete(); });
+            $model->translations->each(function ($translation) { $translation->delete(); });
         });
 
-        static::addGlobalScope('type', function (Builder $builder) { $builder->where('type', 'post'); });
+        static::addGlobalScope(new \Modules\Posts\Scopes\TypeScope);
         static::addGlobalScope('status_deleted', function (Builder $builder) use ($table) { \Auth::check() && \Auth::user()->can('backend posts trash') ?: $builder->where($table.'.status', '<>', 'trash'); });
     }
 

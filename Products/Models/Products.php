@@ -11,7 +11,7 @@ class Products extends \Modules\Posts\Models\Posts
 
     protected $attributes = [
         'type' => 'product',
-        'status' => 'publish',
+        'status' => 'publish'
     ];
 
     protected static function boot()
@@ -28,7 +28,6 @@ class Products extends \Modules\Posts\Models\Posts
             $model->postProduct()->delete();
         });
 
-        static::addGlobalScope('type', function (Builder $builder) { $builder->where('type', 'product'); });
         static::addGlobalScope('status_deleted', function (Builder $builder) use ($table) { \Auth::check() && \Auth::user()->can('backend products trash') ?: $builder->where($table.'.status', '<>', 'trash'); });
     }
 

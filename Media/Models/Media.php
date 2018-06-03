@@ -9,9 +9,7 @@ use Modules\Users\Models\Users;
 
 class Media extends \Modules\Posts\Models\Posts
 {
-    protected $attributes = [
-        'type' => 'attachment',
-    ];
+    protected $attributes = ['type' => 'attachment'];
 
     protected $guarded = ['attached_file', 'attached_file_thumbnail'];
 
@@ -21,7 +19,6 @@ class Media extends \Modules\Posts\Models\Posts
     {
         parent::boot();
 
-        static::addGlobalScope('type', function (Builder $builder) { $builder->where('type', 'attachment'); });
         static::addGlobalScope('status_deleted', function (Builder $builder) { \Auth::check() && \Auth::user()->can('backend media trash') ?: $builder->where('status', '<>', 'trash'); });
     }
 

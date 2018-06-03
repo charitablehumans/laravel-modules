@@ -8,9 +8,13 @@ class Locations extends \Modules\Posts\Models\Posts
 {
     protected $attributes = [
         'type' => 'location',
+        'status' => 'publish'
     ];
 
-    protected $with = ['postLocation', 'translations'];
+    protected $with = [
+        'postLocation',
+        'translations'
+    ];
 
     protected static function boot()
     {
@@ -18,13 +22,8 @@ class Locations extends \Modules\Posts\Models\Posts
 
         self::deleting(function ($model) {
             $model->postLocation()->delete();
-            $model->postmetas->each(function ($postmeta) { $postmeta->delete(); });
-            $model->translations->each(function ($translation) { $translation->delete(); });
-            \Storage::deleteDirectory('media/original/'.$model->id);
-            \Storage::deleteDirectory('media/thumbnail/'.$model->id);
         });
 
-        static::addGlobalScope('type', function (Builder $builder) { $builder->where('type', 'location'); });
         static::addGlobalScope('status_deleted', function (Builder $builder) { \Auth::check() && \Auth::user()->can('backend locations trash') ?: $builder->where('status', '<>', 'trash'); });
     }
 

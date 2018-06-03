@@ -8,14 +8,13 @@ class Pages extends \Modules\Posts\Models\Posts
 {
     protected $attributes = [
         'type' => 'page',
-        'status' => 'publish',
+        'status' => 'publish'
     ];
 
     protected static function boot()
     {
         parent::boot();
 
-        static::addGlobalScope('type', function (Builder $builder) { $builder->where('type', 'page'); });
         static::addGlobalScope('status_deleted', function (Builder $builder) { \Auth::check() && \Auth::user()->can('backend pages trash') ?: $builder->where('status', '<>', 'trash'); });
     }
 
