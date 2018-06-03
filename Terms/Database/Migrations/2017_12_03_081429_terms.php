@@ -1,8 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class Terms extends Migration
 {
@@ -13,7 +12,7 @@ class Terms extends Migration
      */
     public function up()
     {
-        Schema::create('terms', function (Blueprint $table) {
+        \Schema::create('terms', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('taxonomy', 100);
             $table->bigInteger('parent_id')->nullable()->default('0');
@@ -29,6 +28,6 @@ class Terms extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('terms');
+        \Schema::dropIfExists('terms');
     }
 }
