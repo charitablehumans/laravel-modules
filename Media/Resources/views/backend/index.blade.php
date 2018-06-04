@@ -167,7 +167,7 @@
                     <tfoot>
                         <tr>
                             <td colspan="9">
-                                <select class="input-sm" name="action">
+                                <select class="input-xs" name="action">
                                     <option value="">@lang('cms::cms.action')</option>
                                     @can('backend media trash')
                                         <option value="publish">@lang('cms::cms.publish')</option>

@@ -163,7 +163,7 @@
                     <tfoot>
                         <tr>
                             <td colspan="10">
-                                <select class="input-sm" name="action">
+                                <select class="input-xs" name="action">
                                     <option value="">@lang('cms::cms.action')</option>
                                     @foreach ($model->getStatusOptions() as $statusId => $statusName)
                                         <option value="{{ $statusId }}">{{ $statusName }}</option>

@@ -120,7 +120,7 @@
                     <tfoot>
                         <tr>
                             <td colspan="8">
-                                <select class="input-sm" name="action">
+                                <select class="input-xs" name="action">
                                     <option value="">@lang('cms::cms.action')</option>
                                 </select>
                                 <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>

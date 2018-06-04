@@ -69,7 +69,7 @@
                     <tfoot>
                         <tr>
                             <td colspan="4">
-                                <select class="input-sm" name="action">
+                                <select class="input-xs" name="action">
                                     <option value="">@lang('cms::cms.action')</option>
                                     <option value="delete">@lang('cms::cms.delete')</option>
                                 </select>
