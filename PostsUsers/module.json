@@ -1,0 +1,16 @@
+{
+    "name": "PostsUsers",
+    "alias": "postsusers",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\PostsUsers\\Providers\\PostsUsersServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}

@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/postsusers",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\PostsUsers\\Providers\\PostsUsersServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\PostsUsers\\": ""
+        }
+    }
+}
