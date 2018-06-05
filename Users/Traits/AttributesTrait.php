@@ -6,6 +6,11 @@ use Modules\Users\Models\Users;
 
 trait AttributesTrait
 {
+    public function getNameDashEmailAttribute()
+    {
+        return $this->name.' - '.$this->email;
+    }
+
     public function getGenderOptions()
     {
         return [
