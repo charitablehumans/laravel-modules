@@ -1,0 +1,16 @@
+{
+    "name": "ProductsWishlist",
+    "alias": "productswishlist",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\ProductsWishlist\\Providers\\ProductsWishlistServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}

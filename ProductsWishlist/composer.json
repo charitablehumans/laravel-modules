@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/productswishlist",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\ProductsWishlist\\Providers\\ProductsWishlistServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\ProductsWishlist\\": ""
+        }
+    }
+}
