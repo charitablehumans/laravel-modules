@@ -115,6 +115,7 @@ return [
     'post' => 'Post',
     'posted_on' => 'Posted on',
     'posts' => 'Posts',
+    'posts_users' => 'Posts Users',
     'prev' => 'Prev',
     'price_range' => 'Price Range',
     'process' => 'Process',
