@@ -128,6 +128,7 @@ return [
     'product_sku' => 'SKU Produk',
     'product_testimonials' => 'Testimonial Produk',
     'products' => 'Produk',
+    'products_wishlist' => 'Daftar Keinginan Produk',
     'profile' => 'Profil',
     'province' => 'Provinsi',
     'publish' => 'Terbit',

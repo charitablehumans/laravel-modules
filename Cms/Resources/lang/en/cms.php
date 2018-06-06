@@ -128,6 +128,7 @@ return [
     'product_sku' => 'Product SKU',
     'product_testimonials' => 'Product Testimonials',
     'products' => 'Products',
+    'products_wishlist' => 'Products Wishlist',
     'profile' => 'Profile',
     'province' => 'Province',
     'publish' => 'Publish',

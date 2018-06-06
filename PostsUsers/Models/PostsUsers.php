@@ -58,11 +58,11 @@ class PostsUsers extends Model
 
     public function scopeSearch($query, $params)
     {
-        isset($params['id']) ? $query->where('id', $params['id']) : '';
-        isset($params['id_in']) ? $query->whereIn('id', $params['id_in']) : '';
-        isset($params['type']) ? $query->where('type', $params['type']) : '';
-        isset($params['post_id']) ? $query->where('post_id', $params['post_id']) : '';
-        isset($params['user_id']) ? $query->where('user_id', $params['user_id']) : '';
+        isset($params['id']) ? $query->where(self::getTable().'.id', $params['id']) : '';
+        isset($params['id_in']) ? $query->whereIn(self::getTable().'.id', $params['id_in']) : '';
+        isset($params['type']) ? $query->where(self::getTable().'.type', $params['type']) : '';
+        isset($params['post_id']) ? $query->where(self::getTable().'.post_id', $params['post_id']) : '';
+        isset($params['user_id']) ? $query->where(self::getTable().'.user_id', $params['user_id']) : '';
         isset($params['created_at']) ? $query->where(self::getTable().'.created_at', 'like', '%'.$params['created_at'].'%') : '';
         isset($params['created_at_date']) ? $query->whereDate(self::getTable().'.created_at', '=', $params['created_at_date']) : '';
         isset($params['updated_at']) ? $query->where(self::getTable().'.updated_at', 'like', '%'.$params['updated_at'].'%') : '';

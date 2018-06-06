@@ -62,6 +62,7 @@ class RolesSeeder extends Seeder
             'backend products all',
             'backend products delete',
             'backend products trash',
+            'backend products wishlist',
             'backend rajaongkir',
             'backend roles',
             'backend tags',
