@@ -7,7 +7,7 @@ use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Modules\CartDetails\Models\CartDetails;
 use Modules\Carts\Models\Carts;
-use Modules\Products\Models\Products;
+use Modules\Carts\Transformers\Api\CartResource;
 
 class ShoppingController extends Controller
 {
@@ -74,17 +74,7 @@ class ShoppingController extends Controller
 
         $cart->sync()->save();
 
-        return new \Modules\Carts\Transformers\Api\CartResource($cart);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return new CartResource($cart);
     }
 
     /**
@@ -152,29 +142,7 @@ class ShoppingController extends Controller
 
         $cart->sync()->save();
 
-        return new \Modules\Carts\Transformers\Api\CartResource($cart);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return new CartResource($cart);
     }
 
     /**
@@ -243,7 +211,7 @@ class ShoppingController extends Controller
 
         $cart->sync()->save();
 
-        return new \Modules\Carts\Transformers\Api\CartResource($cart);
+        return new CartResource($cart);
     }
 
     /**
@@ -310,6 +278,6 @@ class ShoppingController extends Controller
 
         $cart = Carts::findOrFail($cartId)->sync();
 
-        return new \Modules\Carts\Transformers\Api\CartResource($cart);
+        return new CartResource($cart);
     }
 }
