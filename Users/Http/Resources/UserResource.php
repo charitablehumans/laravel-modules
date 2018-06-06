@@ -1,13 +1,9 @@
 <?php
 
-namespace Modules\Users\Http\Resources\Api;
+namespace Modules\Users\Http\Resources;
 
 use Illuminate\Http\Resources\Json\Resource;
 
-/**
- * [UserResource description]
- * DEPRECATED, and will be REMOVED soon
- */
 class UserResource extends Resource
 {
     /**
@@ -22,9 +18,7 @@ class UserResource extends Resource
         $data['name'] = $this->name;
         $data['email'] = $this->email;
         $data['phone_number'] = $this->phone_number;
-        $data['access_token'] = $this->access_token;
         $data['verified'] = (int) $this->verified;
-        $data['verification_code'] = $this->verification_code;
         $data['date_of_birth'] = $this->date_of_birth;
         $data['address'] = $this->address;
         \Config::get('cms.users.store_id') ? $data['store_id'] = (int) $this->store_id : '';
