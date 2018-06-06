@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Modules\CartDetails\Models\CartDetails;
+use Modules\Carts\Http\Resources\CartResource;
 use Modules\Carts\Models\Carts;
-use Modules\Carts\Transformers\Api\CartResource;
 
 class ShoppingController extends Controller
 {

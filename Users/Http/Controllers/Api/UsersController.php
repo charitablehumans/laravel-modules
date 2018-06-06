@@ -5,6 +5,7 @@ namespace Modules\Users\Http\Controllers\Api;
 use Illuminate\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Modules\Users\Http\Resources\UserResource;
 use Modules\Users\Models\Users;
 
 class UsersController extends Controller
@@ -128,7 +129,7 @@ class UsersController extends Controller
     public function profile()
     {
         $user = \Auth::user();
-        return new \Modules\Users\Http\Resources\Api\UserResource($user);
+        return new UserResource($user);
     }
 
     /**
@@ -183,6 +184,6 @@ class UsersController extends Controller
         $request->input('password') ? $request->merge(['password' => \Hash::make($request->input('password'))]) : $request->request->remove('password');
         $user = \Auth::user();
         $user->fill($request->input())->save();
-        return new \Modules\Users\Http\Resources\Api\UserResource($user);
+        return new UserResource($user);
     }
 }
