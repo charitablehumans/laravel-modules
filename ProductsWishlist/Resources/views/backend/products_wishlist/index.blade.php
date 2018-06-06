@@ -44,7 +44,7 @@
                         <tr>
                             <th><input class="table_row_checkbox_all" type="checkbox" /></th>
                             <th>
-                                @lang('validation.attributes.post_id')<br />
+                                @lang('cms::cms.product')<br />
                                 <select class="form-control select2" data-allow-clear="true" data-placeholder="" name="post_id">
                                     <option value=""></option>
                                     @foreach ($model->getPostIdTitleOptions() as $postId => $postTitle)
@@ -53,7 +53,7 @@
                                 </select>
                             </th>
                             <th>
-                                @lang('validation.attributes.user_id')<br />
+                                @lang('cms::cms.user')<br />
                                 <select class="form-control select2" data-allow-clear="true" data-placeholder="" name="user_id">
                                     <option value=""></option>
                                     @foreach ($model->getUserIdEmailFilterOptions() as $userId => $userEmail)
