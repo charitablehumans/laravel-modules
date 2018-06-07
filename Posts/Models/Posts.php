@@ -67,7 +67,7 @@ class Posts extends \Illuminate\Database\Eloquent\Model
             $model->translations->each(function ($translation) { $translation->delete(); });
         });
 
-        static::addGlobalScope(new \Modules\Posts\Scopes\TypeScope);
+        static::addGlobalScope(new \Modules\Cms\Scopes\TypeScope);
         static::addGlobalScope('status_deleted', function (Builder $builder) use ($table) { \Auth::check() && \Auth::user()->can('backend posts trash') ?: $builder->where($table.'.status', '<>', 'trash'); });
     }
 
