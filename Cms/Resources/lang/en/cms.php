@@ -3,6 +3,7 @@
 return [
     'action' => 'Action',
     'add_to_menu' => 'Add to menu',
+    'add_to_wishlist' => 'Add to wishlist',
     'added' => 'Added',
     'already_have_an_account' => 'Already have an account',
     'always_available' => 'Always Available',

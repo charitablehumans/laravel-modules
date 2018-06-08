@@ -3,6 +3,7 @@
 return [
     'action' => 'Aksi',
     'add_to_menu' => 'Tambahkan ke menu',
+    'add_to_wishlist' => 'Tambahkan ke daftar keinginan',
     'added' => 'Ditambahkan',
     'already_have_an_account' => 'Sudah memiliki akun',
     'always_available' => 'Selalu Tersedia',

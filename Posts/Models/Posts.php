@@ -119,6 +119,7 @@ class Posts extends \Illuminate\Database\Eloquent\Model
     {
         isset($params['id']) ? $query->where('id', $params['id']) : '';
         isset($params['id_in']) ? $query->whereIn(self::getTable().'.id', $params['id_in']) : '';
+        isset($params['id_not']) ? $query->where('id', '<>', $params['id_not']) : '';
         isset($params['author_id']) ? $query->where('author_id', $params['author_id']) : '';
         isset($params['type']) ? $query->where('type', $params['type']) : '';
         isset($params['mime_type']) ? $query->where('mime_type', $params['mime_type']) : '';
