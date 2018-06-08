@@ -8,6 +8,11 @@ use Modules\Users\Models\Users;
 
 class AuthenticationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logoutStore');
+    }
+
     public function login()
     {
         return view('authentication::frontend/login');
@@ -21,7 +26,8 @@ class AuthenticationController extends Controller
         ]);
 
         if (\Auth::attempt($request->only('email', 'password'), $request->has('remember'))) {
-            return redirect()->intended(route('frontend'));
+
+            return redirect()->back();
         } else {
             return redirect()->back()->withErrors(['email' => [trans('auth.failed')]]);
         }
@@ -39,7 +45,7 @@ class AuthenticationController extends Controller
 
         $request->session()->invalidate();
 
-        return redirect('/');
+        return redirect()->back();
     }
 
     public function passwordForgot()
