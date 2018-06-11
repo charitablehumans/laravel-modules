@@ -142,6 +142,7 @@ return [
     'related_media' => 'Media terkait',
     'remaining_time_of_your_payment' => 'Sisa waktu pembayaran Anda',
     'remember_me' => 'Ingatkan Saya',
+    'remove_wishlist' => 'Hapus daftar keinginan',
     'reset' => 'Atur Ulang',
     'reset_password' => 'Atur Ulang Kata Sandi',
     'returned' => 'Dikembalikan',

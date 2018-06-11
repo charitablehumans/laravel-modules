@@ -62,6 +62,11 @@ class Products extends \Modules\Posts\Models\Posts
         return $this->hasOne('\Modules\PostProducts\Models\PostProducts', 'post_id', 'id');
     }
 
+    public function productWishlist()
+    {
+        return $this->hasOne('\Modules\ProductsWishlist\Models\ProductsWishlist', 'post_id');
+    }
+
     public function scopeSearch($query, $params)
     {
         $query = parent::scopeSearch($query, $params);

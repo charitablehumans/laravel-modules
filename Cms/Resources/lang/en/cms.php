@@ -142,6 +142,7 @@ return [
     'related_media' => 'Related Media',
     'remaining_time_of_your_payment' => 'Remaining time of your payment',
     'remember_me' => 'Remember Me',
+    'remove_wishlist' => 'Remove wishlist',
     'reset' => 'Reset',
     'reset_password' => 'Reset Password',
     'returned' => 'Returned',
