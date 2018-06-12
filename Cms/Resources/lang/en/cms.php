@@ -160,6 +160,7 @@ return [
     'sign_up' => 'Sign Up',
     'size_guide' => 'Size Guide',
     'sort' => 'Sort',
+    'sort_by' => 'Sort by',
     'store' => 'Store',
     'store_name' => 'Store Name',
     'submit' => 'Submit',

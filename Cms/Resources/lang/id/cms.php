@@ -160,6 +160,7 @@ return [
     'sign_up' => 'Daftar',
     'size_guide' => 'Panduan Ukuran',
     'sort' => 'Urut',
+    'sort_by' => 'Diurutkan berdasarkan',
     'store' => 'Toko',
     'store_name' => 'Nama Toko',
     'submit' => 'Submit',
