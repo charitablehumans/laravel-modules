@@ -2,6 +2,7 @@
 
 return [
     'action' => 'Action',
+    'add_to_bag' => 'Add to bag',
     'add_to_menu' => 'Add to menu',
     'add_to_wishlist' => 'Add to wishlist',
     'added' => 'Added',
@@ -19,9 +20,11 @@ return [
     'categories' => 'Categories',
     'category' => 'Category',
     'cheapest' => 'Cheapest',
+    'checkout' => 'Checkout',
     'choose' => 'Choose',
     'close' => 'Close',
     'cnr_cash' => 'CNR Cash',
+    'continue_shopping' => 'Continue Shopping',
     'copyright' => 'Copyright',
     'create' => 'Create',
     'create_an_account' => 'Create an Account',
@@ -170,6 +173,7 @@ return [
     'tags' => 'Tags',
     'term' => 'Term',
     'terms' => 'Terms',
+    'this_item_has_been_successfully_added_to_bag' => 'This item has been successfully added to bag',
     'total_shipping_cost' => 'Total Shipping Cost',
     'transaction' => 'Transaction',
     'transaction_details' => 'Transaction Details',

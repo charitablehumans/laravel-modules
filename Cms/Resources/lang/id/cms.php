@@ -2,6 +2,7 @@
 
 return [
     'action' => 'Aksi',
+    'add_to_bag' => 'Tambahkan ke tas',
     'add_to_menu' => 'Tambahkan ke menu',
     'add_to_wishlist' => 'Tambahkan ke daftar keinginan',
     'added' => 'Ditambahkan',
@@ -19,9 +20,11 @@ return [
     'categories' => 'Kategori',
     'category' => 'Kategori',
     'cheapest' => 'Termurah',
+    'checkout' => 'Periksa',
     'choose' => 'Pilih',
     'close' => 'Tutup',
     'cnr_cash' => 'Uang Tunai CNR',
+    'continue_shopping' => 'Lanjutkan Belanja',
     'copyright' => 'Hak Cipta',
     'create' => 'Buat',
     'create_an_account' => 'Buat Akun',
@@ -170,6 +173,7 @@ return [
     'tags' => 'Tag',
     'term' => 'Term',
     'terms' => 'Term',
+    'this_item_has_been_successfully_added_to_bag' => 'Barang ini telah berhasil ditambahkan ke tas',
     'total_shipping_cost' => 'Total Biaya Pengiriman',
     'transaction' => 'Transaksi',
     'transaction_details' => 'Detil Transaksi',
