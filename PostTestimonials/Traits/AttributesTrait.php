@@ -20,4 +20,9 @@ trait AttributesTrait
             '5' => '5',
         ];
     }
+
+    public function getRatingOptionsMax()
+    {
+        return max($this->getRatingOptions());
+    }
 }
