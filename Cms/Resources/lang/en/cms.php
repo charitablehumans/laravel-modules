@@ -195,6 +195,7 @@ return [
     'verify' => 'Verify',
     'welcome' => 'Welcome',
     'yes' => 'Yes',
+    'you_have_param1_item_in_your_cart' => 'You have %s item in your cart',
     'you_may_also_like' => 'You may also like',
     'your_account_has_been_successfully_created' => 'Your account has been successfully created',
     'your_email_address' => 'Your Email Address',

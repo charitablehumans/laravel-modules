@@ -277,6 +277,7 @@ class ShoppingController extends Controller
         (new CartDetails)->sync($cartId);
 
         $cart = Carts::findOrFail($cartId)->sync();
+        $cart->save();
 
         return new CartResource($cart);
     }

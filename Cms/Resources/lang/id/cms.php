@@ -195,6 +195,7 @@ return [
     'verify' => 'Periksa',
     'welcome' => 'Selamat Datang',
     'yes' => 'Ya',
+    'you_have_param1_item_in_your_cart' => 'Anda memiliki %s barang di keranjang Anda',
     'you_may_also_like' => 'Anda mungkin juga suka',
     'your_account_has_been_successfully_created' => 'Akun Anda telah berhasil dibuat',
     'your_email_address' => 'Alamat Email Anda',
