@@ -11,7 +11,7 @@
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <a class="btn btn-default btn-sm" href="{{ route('backend.menus.create', request()->query()) }}">@lang('cms::cms.create')</a>
+            <a class="btn btn-primary btn-xs" href="{{ route('backend.menus.create', request()->query()) }}">@lang('cms::cms.create')</a>
         </div>
         <div class="box-body table-responsive">
             <form action="{{ route('backend.menus.index') }}" method="get">
@@ -45,7 +45,7 @@
                             <th>@lang('validation.attributes.name') <input class="form-control input-sm" name="name" type="text" value="{{ request()->query('name') }}" /></th>
                             <th>@lang('validation.attributes.description') <input class="form-control input-sm" name="description" type="text" value="{{ request()->query('description') }}" /></th>
                             <th>
-                                <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-success btn-xs" type="submit"><i class="fa fa-search"></i></button>
                                 <a class="btn btn-default btn-xs" href="{{ route('backend.menus.index') }}"><i class="fa fa-repeat"></i></a>
                             </th>
                         </tr>
@@ -70,7 +70,7 @@
                                 <td>{{ $term->name }}</td>
                                 <td>{{ $term->description }}</td>
                                 <td align="center">
-                                    <a class="btn btn-default btn-xs" href="{{ route('backend.menus.edit', [$term->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-primary btn-xs" href="{{ route('backend.menus.edit', [$term->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
                                     <a class="btn btn-danger btn-xs" href="{{ route('backend.menus.delete', $term->id) }}" onclick="return confirm('@lang('cms::cms.are_you_sure_to_delete_this_permanently')?')"><i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
@@ -87,7 +87,7 @@
                                     <option value="">@lang('cms::cms.action')</option>
                                     <option value="delete">@lang('cms::cms.delete')</option>
                                 </select>
-                                <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
+                                <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
                             </td>
                         </tr>
                         <tr>

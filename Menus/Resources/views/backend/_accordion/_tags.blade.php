@@ -15,7 +15,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <button class="btn btn-default pull-right" id="tag_add" type="button">@lang('cms::cms.add_to_menu')</button>
+                <button class="btn btn-default btn-xs pull-right" id="tag_add" type="button">@lang('cms::cms.add_to_menu')</button>
             </div>
         </div>
     </div>

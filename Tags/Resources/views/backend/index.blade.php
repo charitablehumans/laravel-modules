@@ -11,7 +11,7 @@
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <a class="btn btn-default btn-sm" href="{{ route('backend.tags.create', request()->query()) }}">@lang('cms::cms.create')</a>
+            <a class="btn btn-primary btn-xs" href="{{ route('backend.tags.create', request()->query()) }}">@lang('cms::cms.create')</a>
         </div>
         <div class="box-body table-responsive">
             <form action="{{ route('backend.tags.index') }}" method="get">
@@ -59,7 +59,7 @@
                                 <input class="form-control input-sm text-right" name="count" type="number" value="{{ request()->query('count') }}" />
                             </th>
                             <th>
-                                <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-success btn-xs" type="submit"><i class="fa fa-search"></i></button>
                                 <a class="btn btn-default btn-xs" href="{{ route('backend.tags.index') }}"><i class="fa fa-repeat"></i></a>
                             </th>
                         </tr>
@@ -86,7 +86,7 @@
                                 <td>{{ $term->description }}</td>
                                 <td align="right">{{ $term->count }}</td>
                                 <td align="center">
-                                    <a class="btn btn-default btn-xs" href="{{ route('backend.tags.edit', [$term->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
+                                    <a class="btn btn-primary btn-xs" href="{{ route('backend.tags.edit', [$term->id] + request()->query()) }}"><i class="fa fa-pencil"></i></a>
                                     <a class="btn btn-danger btn-xs" href="{{ route('backend.tags.delete', $term->id) }}" onclick="return confirm('@lang('cms::cms.are_you_sure_to_delete_this_permanently')?')"><i class="fa fa-trash-o"></i></a>
                                 </td>
                             </tr>
@@ -103,7 +103,7 @@
                                     <option value="">@lang('cms::cms.action')</option>
                                     <option value="delete">@lang('cms::cms.delete')</option>
                                 </select>
-                                <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
+                                <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
                             </td>
                         </tr>
                         <tr>

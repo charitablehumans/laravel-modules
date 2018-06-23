@@ -60,6 +60,6 @@
         @endif
     </div>
     <div class="box-footer">
-        <input class="btn btn-default btn-sm" type="submit" value="@lang('cms::cms.save')" />
+        <input class="btn btn-success btn-xs" type="submit" value="@lang('cms::cms.save')" />
     </div>
 </div>

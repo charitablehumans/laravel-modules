@@ -11,7 +11,7 @@
 @section('content')
     <div class="box">
         <div class="box-header with-border">
-            <a class="btn btn-default btn-sm" href="{{ route('backend.pages.create', request()->query()) }}">@lang('cms::cms.create')</a>
+            <a class="btn btn-primary btn-xs" href="{{ route('backend.pages.create', request()->query()) }}">@lang('cms::cms.create')</a>
         </div>
         <div class="box-body table-responsive">
             <form action="{{ route('backend.pages.index') }}" method="get">
@@ -79,7 +79,7 @@
                                 <input class="datepicker form-control input-sm" data-date-format="yyyy-mm-dd" name="updated_at_date" type="text" value="{{ request()->query('updated_at_date') }}" />
                             </th>
                             <th>
-                                <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-success btn-xs" type="submit"><i class="fa fa-search"></i></button>
                                 <a class="btn btn-default btn-xs" href="{{ route('backend.pages.index') }}"><i class="fa fa-repeat"></i></a>
                             </th>
                         </tr>
@@ -142,7 +142,7 @@
                                         <option value="delete">@lang('cms::cms.delete')</option>
                                     @endcan
                                 </select>
-                                <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
+                                <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
                             </td>
                         </tr>
                         <tr>
