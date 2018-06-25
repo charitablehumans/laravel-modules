@@ -10,6 +10,7 @@ return [
     'always_available' => 'Always Available',
     'amount_that_should_be_paid' => 'Amount that shoud be paid',
     'an_email_with_a_link_to_create_password_has_been_sent_to_bla' => 'An Email with a link to create password has been sent to bla..bla',
+    'are_you_a_new_user' => 'Are you a new user',
     'are_you_sure_to_delete_this' => 'Are you sure to delete this',
     'are_you_sure_to_delete_this_permanently' => 'Are you sure to delete this permanently',
     'are_you_sure_to_reject_this' => 'Are you sure to reject this',

@@ -329,7 +329,14 @@ trait AttributesTrait
 
     public function getUrl()
     {
-        return UrlHelper::isRelative($this->attributes['url']) ? url($this->attributes['url']) : $this->attributes['url'];
+        $url = null;
+
+        if ($this->attributes['url'])
+        {
+            $url = UrlHelper::isRelative($this->attributes['url']) ? url($this->attributes['url']) : $this->attributes['url'];
+        }
+
+        return $url;
     }
 
     public function setContent($value)

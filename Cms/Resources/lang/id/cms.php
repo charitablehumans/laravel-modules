@@ -10,6 +10,7 @@ return [
     'always_available' => 'Selalu Tersedia',
     'amount_that_should_be_paid' => 'Jumlah yang harus dibayar',
     'an_email_with_a_link_to_create_password_has_been_sent_to_bla' => 'Email dengan tautan untuk membuat kata sandi telah dikirim ke bla..bla',
+    'are_you_a_new_user' => 'Apakah Anda pengguna baru',
     'are_you_sure_to_delete_this' => 'Apakah kamu yakin untuk menghapus ini',
     'are_you_sure_to_delete_this_permanently' => 'Apakah kamu yakin untuk menghapus ini secara permanen',
     'are_you_sure_to_reject_this' => 'Apakah Anda yakin untuk menolak ini',
