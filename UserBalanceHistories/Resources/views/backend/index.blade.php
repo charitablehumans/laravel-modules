@@ -100,7 +100,7 @@
                             <th>@lang('validation.attributes.notes') <input class="form-control" name="notes_like" type="text" value="{{ request()->query('notes_like') }}" /></th>
                             <th>
                                 @lang('validation.attributes.created_at')
-                                <input class="datepicker form-control input-sm" data-date-format="yyyy-mm-dd" name="created_at_date" type="text" value="{{ request()->query('created_at_date') }}" />
+                                <input autocomplete="off" class="datepicker form-control input-sm" data-date-format="yyyy-mm-dd" name="created_at_date" type="text" value="{{ request()->query('created_at_date') }}" />
                             </th>
                             <th>
                                 <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>

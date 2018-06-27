@@ -46,7 +46,7 @@
                             <div class="form-group">
                                 <label class="col-md-4 control-label" for="date_of_birth">@lang('validation.attributes.date_of_birth') (*)</label>
                                 <div class="col-md-6">
-                                    <input class="form-control datepicker" data-date-format="yyyy-mm-dd" id="date_of_birth" name="date_of_birth" required type="text" value="{{ request()->old('date_of_birth', $user->date_of_birth) }}" />
+                                    <input autocomplete="off" class="form-control datepicker" data-date-format="yyyy-mm-dd" id="date_of_birth" name="date_of_birth" required type="text" value="{{ request()->old('date_of_birth', $user->date_of_birth) }}" />
                                     <i class="text-danger">{{ $errors->first('date_of_birth') }}</i>
                                 </div>
                             </div>

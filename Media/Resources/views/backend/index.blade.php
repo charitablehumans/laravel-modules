@@ -85,7 +85,9 @@
                                     </select>
                                 </th>
                             @endcan
-                            <th>@lang('validation.attributes.updated_at') <input class="datepicker form-control input-sm" data-date-format="yyyy-mm-dd" name="updated_at_date" type="text" value="{{ request()->query('updated_at_date') }}" /></th>
+                            <th>
+                                @lang('validation.attributes.updated_at')
+                                <input autocomplete="off" class="datepicker form-control input-sm" data-date-format="yyyy-mm-dd" name="updated_at_date" type="text" value="{{ request()->query('updated_at_date') }}" /></th>
                             <th>
                                 <button class="btn btn-success btn-xs" type="submit"><i class="fa fa-search"></i></button>
                                 <a
