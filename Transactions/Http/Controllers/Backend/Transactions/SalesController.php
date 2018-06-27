@@ -23,7 +23,7 @@ class SalesController extends Controller
     {
         $request->query->set('sales_ownership', true);
         $request->query('sort') ?: $request->query->set('sort', 'created_at:desc');
-        $request->query('limit') ?: $request->query->set('limit', 10);
+        $request->query('limit') ?: $request->query->set('limit', config('cms.database.eloquent.model.per_page'));
 
         $data['model'] = $this->model;
         $data['transactions'] = $this->model::select($this->model->getTable().'.*')->search($request->query())->paginate($request->query('limit'));

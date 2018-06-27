@@ -24,7 +24,7 @@ class DokuMyshortcartPaymentMethodsController extends \Modules\Posts\Http\Contro
     {
         $request->query('locale') ?: $request->query->set('locale', config('app.locale'));
         $request->query('sort') ?: $request->query->set('sort', 'title:asc');
-        $request->query('limit') ?: $request->query->set('limit', 10);
+        $request->query('limit') ?: $request->query->set('limit', config('cms.database.eloquent.model.per_page'));
 
         $data['model'] = $this->model;
         $data['posts'] = $this->model::select($this->model->getTable().'.*')->search($request->query())->paginate($request->query('limit'));

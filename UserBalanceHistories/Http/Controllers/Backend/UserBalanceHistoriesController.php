@@ -19,7 +19,7 @@ class UserBalanceHistoriesController extends Controller
         $request->query('user_id') ?: $request->query('user_id');
         $request->query('locale') ?: $request->query->set('locale', config('app.locale'));
         $request->query('sort') ?: $request->query->set('sort', 'created_at:desc');
-        $request->query('limit') ?: $request->query->set('limit', 10);
+        $request->query('limit') ?: $request->query->set('limit', config('cms.database.eloquent.model.per_page'));
 
         $data['model'] = new UserBalanceHistories;
         $data['user'] = Users::findOrFail($request->query('user_id'));

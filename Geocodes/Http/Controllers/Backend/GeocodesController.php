@@ -16,7 +16,7 @@ class GeocodesController extends Controller
     public function index(Request $request)
     {
         $request->query('sort') ?: $request->query->set('sort', 'updated_at:desc');
-        $request->query('limit') ?: $request->query->set('limit', 10);
+        $request->query('limit') ?: $request->query->set('limit', config('cms.database.eloquent.model.per_page'));
 
         $data['model'] = new Geocodes;
         $data['geocodes'] = Geocodes::search($request->query())->paginate($request->query('limit'));

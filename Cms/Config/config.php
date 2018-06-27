@@ -9,6 +9,13 @@ return [
             ]
         ],
     ],
+    'database' => [
+        'eloquent' => [
+            'model' => [
+                'per_page' => env('CMS_DATABASE_ELOQUENT_MODEL_PER_PAGE', 10),
+            ],
+        ],
+    ],
     'geocodes' => [
         'code' => true,
         'latitude' => true,

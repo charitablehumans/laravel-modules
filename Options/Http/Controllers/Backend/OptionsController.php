@@ -15,7 +15,7 @@ class OptionsController extends \App\Http\Controllers\Controller
     public function index(Request $request)
     {
         $request->query('sort') ?: $request->query->set('sort', 'name:asc');
-        $request->query('limit') ?: $request->query->set('limit', 10);
+        $request->query('limit') ?: $request->query->set('limit', config('cms.database.eloquent.model.per_page'));
 
         $data['options'] = Options::search($request->query())->paginate($request->query('limit'));
 

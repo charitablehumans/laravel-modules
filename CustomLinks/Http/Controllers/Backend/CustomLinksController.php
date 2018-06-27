@@ -23,7 +23,7 @@ class CustomLinksController extends \Modules\Posts\Http\Controllers\Backend\Post
     {
         $request->query('locale') ?: $request->query->set('locale', config('app.locale'));
         $request->query('sort') ?: $request->query->set('sort', 'updated_at:desc');
-        $request->query('limit') ?: $request->query->set('limit', 10);
+        $request->query('limit') ?: $request->query->set('limit', config('cms.database.eloquent.model.per_page'));
 
         $data['model'] = $this->model;
         $data['posts'] = $this->model::with(['author', 'postmetas'])->select($this->model->getTable().'.*')->search($request->query())->paginate($request->query('limit'));

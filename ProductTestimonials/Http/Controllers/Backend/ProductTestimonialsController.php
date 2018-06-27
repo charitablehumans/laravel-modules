@@ -26,7 +26,7 @@ class ProductTestimonialsController extends \App\Http\Controllers\Controller
     {
         $request->query('locale') ?: $request->query->set('locale', config('app.locale'));
         $request->query('sort') ?: $request->query->set('sort', 'updated_at:desc');
-        $request->query('limit') ?: $request->query->set('limit', 10);
+        $request->query('limit') ?: $request->query->set('limit', config('cms.database.eloquent.model.per_page'));
         $request->query->set('testimonial_ownership', true);
 
         $data['model'] = $model = $this->model;

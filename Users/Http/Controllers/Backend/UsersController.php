@@ -14,7 +14,7 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         $request->query('sort') ?: $request->query->set('sort', 'email:asc');
-        $request->query('limit') ?: $request->query->set('limit', 10);
+        $request->query('limit') ?: $request->query->set('limit', config('cms.database.eloquent.model.per_page'));
 
         $data['model'] = new Users;
         $data['role'] = new Role;

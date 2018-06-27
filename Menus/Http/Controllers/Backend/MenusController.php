@@ -26,7 +26,7 @@ class MenusController extends \Modules\Terms\Http\Controllers\Backend\TermsContr
     {
         $request->query('locale') ?: $request->query->set('locale', config('app.locale'));
         $request->query('sort') ?: $request->query->set('sort', 'name:asc');
-        $request->query('limit') ?: $request->query->set('limit', 10);
+        $request->query('limit') ?: $request->query->set('limit', config('cms.database.eloquent.model.per_page'));
 
         $data['model'] = $this->model;
         $data['terms'] = $this->model::search($request->query())->paginate($request->query('limit'));
