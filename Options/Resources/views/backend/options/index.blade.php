@@ -1,4 +1,4 @@
-@extends('cms::backend.layouts.main')
+@extends(request()->query('layout') ? 'cms::backend/layouts/'.request()->query('layout') : 'cms::backend/layouts/main')
 
 @section('title', trans('cms::cms.options'))
 @section('content_header', trans('cms::cms.options'))
