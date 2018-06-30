@@ -59,6 +59,9 @@ return [
             ],
         ],
     ],
+    'theme' => [
+        'frontend' => 'default',
+    ],
     'transactions' => [
         'status_options' => [
             'received' => true,

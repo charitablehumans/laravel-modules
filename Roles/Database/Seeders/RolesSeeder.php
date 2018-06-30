@@ -66,6 +66,7 @@ class RolesSeeder extends Seeder
             'backend rajaongkir',
             'backend roles',
             'backend tags',
+            'backend theme',
             'backend transactions',
             'backend transactions purchases',
             'backend transactions purchases all',
