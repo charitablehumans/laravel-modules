@@ -4,6 +4,8 @@ namespace Modules\Geocodes\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Geocodes\Models\Geocodes;
+use Modules\Geocodes\Observers\GeocodeObserver;
 
 class GeocodesServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,8 @@ class GeocodesServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
+        Geocodes::observe(GeocodeObserver::class);
     }
 
     /**
