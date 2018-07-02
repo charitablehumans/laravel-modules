@@ -233,6 +233,7 @@
                             @forelse ($user->userAddresses as $i => $userAddress)
                                 <tr>
                                     <td>
+                                        <b>{{ $userAddress->address_as }}</b><br />
                                         {{ $userAddress->name }}<br />
                                         {{ $userAddress->phone_number }}
                                     </td>

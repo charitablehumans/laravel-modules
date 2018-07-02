@@ -3,6 +3,11 @@
     <div class="box-body">
         <input name="user_id" type="hidden" value="{{ $user->id }}" />
         <div class="form-group">
+            <label>@lang('validation.attributes.address_as') (*)</label>
+            <input class="form-control" name="address_as" required type="text" value="{{ request()->old('address_as', $userAddress->address_as) }}" />
+            <i class="text-danger">{{ $errors->first('address_as') }}</i>
+        </div>
+        <div class="form-group">
             <label>@lang('validation.attributes.name') (*)</label>
             <input class="form-control" name="name" required type="text" value="{{ request()->old('name', $userAddress->name) }}" />
             <i class="text-danger">{{ $errors->first('name') }}</i>
