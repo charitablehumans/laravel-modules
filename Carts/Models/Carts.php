@@ -3,9 +3,12 @@
 namespace Modules\Carts\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\CartDetails\Models\CartDetails;
 
 class Carts extends Model
 {
+    use \Modules\Carts\Traits\HelperTrait;
+
     protected $attributes = [
         'type' => 'shopping',
     ];
@@ -19,6 +22,13 @@ class Carts extends Model
     public function cartDetails()
     {
         return $this->hasMany('\Modules\CartDetails\Models\CartDetails', 'cart_id', 'id');
+    }
+
+    public function getCartDetails()
+    {
+        return \Cache::remember((new CartDetails)->getTable().'-cart_id-'.$this->id, 1440, function () {
+            return $this->cartDetails ? $this->cartDetails : new CartDetails;
+        });
     }
 
     public function getTotalPrice()

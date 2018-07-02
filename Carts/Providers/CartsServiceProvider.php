@@ -4,6 +4,8 @@ namespace Modules\Carts\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Carts\Models\Carts;
+use Modules\Carts\Observers\CartObserver;
 
 class CartsServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,8 @@ class CartsServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
+        Carts::observe(CartObserver::class);
     }
 
     /**
