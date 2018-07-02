@@ -16,6 +16,7 @@ class UserAddressResource extends Resource
     {
         return [
             'id' => $this->id,
+            'address_as' => $this->address_as,
             'user_id' => $this->user_id,
             'name' => $this->name,
             'phone_number' => $this->phone_number,

@@ -1,11 +1,18 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Modules\UserAddresses\Models\UserAddresses;
 
 class CreateUserAddressesTable extends Migration
 {
+    public $model;
+
+    public function __construct()
+    {
+        $this->model = new UserAddresses;
+    }
+
     /**
      * Run the migrations.
      *
@@ -13,8 +20,9 @@ class CreateUserAddressesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_addresses', function (Blueprint $table) {
+        Schema::create($this->model->getTable(), function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('address_as');
             $table->bigInteger('user_id');
             $table->string('name');
             $table->string('phone_number', 20);
@@ -35,6 +43,6 @@ class CreateUserAddressesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_addresses');
+        Schema::dropIfExists($this->model->getTable());
     }
 }

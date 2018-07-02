@@ -7,8 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class UserAddresses extends Model
 {
     protected $fillable = [
-        'user_id', 'name', 'phone_number', 'province_id', 'regency_id',
-        'district_id', 'postal_code', 'address', 'primary',
+        'address_as',
+        'user_id',
+        'name',
+        'phone_number',
+
+        'province_id',
+        'regency_id',
+        'district_id',
+        'postal_code',
+        'address',
+
+        'primary',
     ];
 
     protected $table = 'user_addresses';

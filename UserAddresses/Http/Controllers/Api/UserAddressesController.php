@@ -73,15 +73,6 @@ class UserAddressesController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-        return view('useraddresses::create');
-    }
-
-    /**
      * @SWG\Post(
      *      path="/api/user-addresses",
      *      summary="",
@@ -132,6 +123,7 @@ class UserAddressesController extends Controller
     public function store(\Modules\UserAddresses\Http\Requests\Api\StoreRequest $request)
     {
         $userAddress = new UserAddresses;
+        $userAddress->address_as = 'address';
         $userAddress->user_id = \Auth::user()->id;
         $userAddress->fill($request->input())->save();
 
@@ -189,15 +181,6 @@ class UserAddressesController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     * @return Response
-     */
-    public function edit()
-    {
-        return view('useraddresses::edit');
-    }
-
-    /**
      * @SWG\Put(
      *      path="/api/user-addresses/{id}",
      *      summary="",
@@ -250,6 +233,7 @@ class UserAddressesController extends Controller
     public function update(\Modules\UserAddresses\Http\Requests\Api\UpdateRequest $request, $id)
     {
         $userAddress = UserAddresses::where('id', $id)->where('user_id', \Auth::user()->id)->firstOrFail();
+        $userAddress->address_as = 'address';
         $userAddress->fill($request->input())->save();
         return new \Modules\UserAddresses\Http\Resources\Api\UserAddressResource($userAddress);
     }
