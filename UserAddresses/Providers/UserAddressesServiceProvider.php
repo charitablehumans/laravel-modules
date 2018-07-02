@@ -4,6 +4,8 @@ namespace Modules\UserAddresses\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\UserAddresses\Models\UserAddresses;
+use Modules\UserAddresses\Observers\UserAddressObserver;
 
 class UserAddressesServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,8 @@ class UserAddressesServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
+        UserAddresses::observe(UserAddressObserver::class);
     }
 
     /**

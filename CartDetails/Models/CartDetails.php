@@ -7,6 +7,8 @@ use Modules\Products\Models\Products;
 
 class CartDetails extends Model
 {
+    use \Modules\CartDetails\Traits\AttributesTrait;
+
     protected $attributes = [
         'seller_id' => 0,
         'weight' => 0,

@@ -2,6 +2,7 @@
 
 namespace Modules\Users\Traits;
 
+use Modules\UserAddresses\Models\UserAddresses;
 use Modules\Users\Models\Users;
 
 trait AttributesTrait
@@ -27,6 +28,13 @@ trait AttributesTrait
     public function getStoreIdNameOptions()
     {
         return Users::search(['role_name' => 'store', 'sort' => 'name:asc'])->get()->pluck('name', 'id');
+    }
+
+    public function getUserAddresses()
+    {
+        return \Cache::remember((new UserAddresses)->getTable().'-user_id-'.$this->id, 1440, function () {
+            return $this->userAddresses ? $this->userAddresses : new UserAddresses;
+        });
     }
 
     public function getVerifiedName()
