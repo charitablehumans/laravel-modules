@@ -6,6 +6,13 @@ use Modules\Geocodes\Models\Geocodes;
 
 class CreateGeocodesTable extends Migration
 {
+    public $model;
+
+    public function __construct()
+    {
+        $this->model = new Geocodes;
+    }
+
     /**
      * Run the migrations.
      *
@@ -13,7 +20,7 @@ class CreateGeocodesTable extends Migration
      */
     public function up()
     {
-        \Schema::create((new Geocodes)->getTable(), function (Blueprint $table) {
+        \Schema::create($this->model->getTable(), function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('type')->comment('{ country, district, province, regency }');
             $table->string('code')->nullable();
@@ -34,6 +41,6 @@ class CreateGeocodesTable extends Migration
      */
     public function down()
     {
-        \Schema::dropIfExists((new Geocodes)->getTable());
+        \Schema::dropIfExists($this->model->getTable());
     }
 }
