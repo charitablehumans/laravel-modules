@@ -3,6 +3,7 @@
 return [
     'about' => 'Tentang',
     'action' => 'Aksi',
+    'add_an_address' => 'Tambahkan sebuah alamat',
     'add_to_bag' => 'Tambahkan ke tas',
     'add_to_menu' => 'Tambahkan ke menu',
     'add_to_wishlist' => 'Tambahkan ke daftar keinginan',
@@ -15,6 +16,7 @@ return [
     'are_you_sure_to_delete_this' => 'Apakah kamu yakin untuk menghapus ini',
     'are_you_sure_to_delete_this_permanently' => 'Apakah kamu yakin untuk menghapus ini secara permanen',
     'are_you_sure_to_reject_this' => 'Apakah Anda yakin untuk menolak ini',
+    'back' => 'Kembali',
     'bag' => 'Tas',
     'balance' => 'Saldo',
     'bank_accounts' => 'Akun Bank',
@@ -177,6 +179,7 @@ return [
     'sender' => 'Pengirim',
     'sent' => 'Terkirim',
     'service' => 'Pelayanan',
+    'shipping_address' => 'Alamat Pengiriman',
     'shop_men' => 'Toko Pria',
     'shop_women' => 'Toko Wanita',
     'showcase' => 'Memamerkan',

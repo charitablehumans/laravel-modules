@@ -3,6 +3,7 @@
 return [
     'about' => 'About',
     'action' => 'Action',
+    'add_an_address' => 'Add An Address',
     'add_to_bag' => 'Add to bag',
     'add_to_menu' => 'Add to menu',
     'add_to_wishlist' => 'Add to wishlist',
@@ -15,6 +16,7 @@ return [
     'are_you_sure_to_delete_this' => 'Are you sure to delete this',
     'are_you_sure_to_delete_this_permanently' => 'Are you sure to delete this permanently',
     'are_you_sure_to_reject_this' => 'Are you sure to reject this',
+    'back' => 'Back',
     'bag' => 'Bag',
     'balance' => 'Balance',
     'bank_accounts' => 'Bank Accounts',
@@ -177,6 +179,7 @@ return [
     'sender' => 'Sender',
     'sent' => 'Sent',
     'service' => 'Service',
+    'shipping_address' => 'Shipping Address',
     'shop_men' => 'Shop Men',
     'shop_women' => 'Shop Women',
     'showcase' => 'Showcase',
