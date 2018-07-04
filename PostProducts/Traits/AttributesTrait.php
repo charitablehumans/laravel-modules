@@ -11,7 +11,13 @@ trait AttributesTrait
 
     public function getSpecialSellPriceDiscountPercentage()
     {
-        return ($this->sell_price - $this->special_sell_price) / $this->sell_price * 100;
+        $this->special_sell_price_discount_percentage = 0;
+
+        if ($this->sell_price > 0) {
+            $this->special_sell_price_discount_percentage = ($this->sell_price - $this->special_sell_price) / $this->sell_price * 100;
+        }
+
+        return $this->special_sell_price_discount_percentage;
     }
 
     public function getStatus()
