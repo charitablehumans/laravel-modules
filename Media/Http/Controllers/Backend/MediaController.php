@@ -22,7 +22,10 @@ class MediaController extends \Modules\Posts\Http\Controllers\Backend\PostsContr
         $request->query('limit') ?: $request->query->set('limit', config('cms.database.eloquent.model.per_page'));
 
         $data['model'] = $this->model;
-        $data['posts'] = $this->model::with(['author', 'postmetas'])->search($request->query())->paginate($request->query('limit'));
+        $data['posts'] = $this->model::with(['author', 'postmetas'])
+            ->select($this->model->getTable().'.*')
+            ->search($request->query())
+            ->paginate($request->query('limit'));
 
         if ($request->query('action')) { $this->model->action($request->query()); return redirect()->back(); }
 
