@@ -26,6 +26,7 @@ class CartDetails extends Model
      * [
      *      'post_id' => 1,
      *      'quantity' => 1,
+     *      'multiple' => 0,
      * ]
      * @param [type] $cartId
      */
@@ -33,7 +34,12 @@ class CartDetails extends Model
     {
         $product = Products::findOrFail($data['post_id']);
 
-        $cartDetail = self::firstOrNew(['cart_id' => $cartId, 'post_id' => $product->id]);
+        if (isset($data['multiple']) && $data['multiple'] == 1) {
+            $cartDetail = new self(['cart_id' => $cartId, 'post_id' => $product->id]);
+        } else {
+            $cartDetail = self::firstOrNew(['cart_id' => $cartId, 'post_id' => $product->id]);
+        }
+
         $cartDetail->seller_id += $product->author_id;
         $cartDetail->quantity += $data['quantity'];
         $cartDetail->price = $product->getPostProductSellPrice();
