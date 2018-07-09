@@ -15,12 +15,11 @@ Route::group(['middleware' => ['api']], function() {
 
 Route::group(['middleware' => ['web']], function() {
     Route::group(['middleware' => ['auth']], function() {
-        Route::resource('backend/doku-myshortcart', '\Modules\DokuMyshortcart\Http\Controllers\Backend\DokuMyshortcartController', ['as' => 'backend'])
-            ->except(['index', 'show', 'edit', 'update', 'destroy']);
+        Route::get('backend/doku-myshortcart/create', ['as' => 'backend.doku-myshortcart.create', 'uses' => '\Modules\DokuMyshortcart\Http\Controllers\Backend\DokuMyshortcartController@create']);
+        Route::post('backend/doku-myshortcart/create', ['as' => 'backend.doku-myshortcart.store', 'uses' => '\Modules\DokuMyshortcart\Http\Controllers\Backend\DokuMyshortcartController@store']);
         Route::get('backend/doku-myshortcart-payment-methods/{id}/delete', ['as' => 'backend.doku-myshortcart-payment-methods.delete', 'uses' => '\Modules\DokuMyshortcart\Http\Controllers\Backend\DokuMyshortcartPaymentMethodsController@delete']);
         Route::get('backend/doku-myshortcart-payment-methods/{id}/trash', ['as' => 'backend.doku-myshortcart-payment-methods.trash', 'uses' => '\Modules\DokuMyshortcart\Http\Controllers\Backend\DokuMyshortcartPaymentMethodsController@trash']);
-        Route::resource('backend/doku-myshortcart-payment-methods', '\Modules\DokuMyshortcart\Http\Controllers\Backend\DokuMyshortcartPaymentMethodsController', ['as' => 'backend'])
-            ->except(['show', 'destroy']);
+        Route::resource('backend/doku-myshortcart-payment-methods', '\Modules\DokuMyshortcart\Http\Controllers\Backend\DokuMyshortcartPaymentMethodsController', ['as' => 'backend'])->only(['index', 'create', 'store', 'edit', 'update', 'delete', 'trash']);
         Route::get('doku-myshortcart/redirect', ['as' => 'frontend.doku-myshortcart.redirect', 'uses' => '\Modules\DokuMyshortcart\Http\Controllers\Frontend\DokuMyshortcartController@redirect']);
     });
 });
