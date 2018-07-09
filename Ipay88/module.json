@@ -1,0 +1,16 @@
+{
+    "name": "Ipay88",
+    "alias": "ipay88",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Ipay88\\Providers\\Ipay88ServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
