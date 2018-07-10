@@ -1,0 +1,2425 @@
+{
+	"variables": [],
+	"info": {
+		"name": "chicknroll",
+		"_postman_id": "32700945-6cbe-4165-a6a7-d5685b5e0727",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "authentication/register",
+			"request": {
+				"url": "{{APP_URL}}/api/authentication/register",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Jovi",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "member@mailinator.com",
+							"type": "text"
+						},
+						{
+							"key": "phone_number",
+							"value": "087877118199",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "123456789",
+							"type": "text"
+						},
+						{
+							"key": "date_of_birth",
+							"value": "1945-08-17",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "Jakarta",
+							"type": "text"
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "authentication/socialite/register",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"if (responseCode.code === 200) {",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable('access_token', jsonData.access_token);",
+							"} else {",
+							"    postman.setEnvironmentVariable('access_token', '');",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{APP_URL}}/api/authentication/socialite/register",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "provider",
+							"value": "google",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "id",
+							"value": "423692338046189",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "fajarfdxstudio@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "name",
+							"value": "Fajar Fdxstudio",
+							"type": "text"
+						},
+						{
+							"key": "user",
+							"value": "{ \"id\": \"423692338046189\" }",
+							"type": "text",
+							"description": "json"
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "authentication/verify",
+			"request": {
+				"url": "{{APP_URL}}/api/authentication/verify",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "member@mailinator.com",
+							"type": "text"
+						},
+						{
+							"key": "verification_code",
+							"value": "542665",
+							"type": "text"
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "authentication/password/forgot",
+			"request": {
+				"url": "{{APP_URL}}/api/authentication/password/forgot",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "member@mailinator.com",
+							"type": "text"
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "authentication/password/reset",
+			"request": {
+				"url": "{{APP_URL}}/api/authentication/password/reset",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "member@mailinator.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "member",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "member",
+							"type": "text"
+						},
+						{
+							"key": "verification_code",
+							"value": "352607",
+							"type": "text"
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "authentication/login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"if (responseCode.code === 200) {",
+							"    var jsonData = JSON.parse(responseBody);",
+							"    postman.setEnvironmentVariable('access_token', jsonData.access_token);",
+							"} else {",
+							"    postman.setEnvironmentVariable('access_token', '');",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{APP_URL}}/api/authentication/login",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "member@mailinator.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "member",
+							"type": "text"
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "users/verification-code/refresh",
+			"request": {
+				"url": "{{APP_URL}}/api/users/verification-code/refresh",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "users/profile",
+			"request": {
+				"url": "{{APP_URL}}/api/users/profile",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "users/profile",
+			"request": {
+				"url": "{{APP_URL}}/api/users/profile",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Jovi O",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "member@mailinator.com",
+							"type": "text"
+						},
+						{
+							"key": "phone_number",
+							"value": "087811112222",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "member",
+							"type": "text",
+							"description": "optional",
+							"disabled": true
+						},
+						{
+							"key": "date_of_birth",
+							"value": "1945-08-17",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "Jakarta",
+							"type": "text"
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "users/profile/completed",
+			"request": {
+				"url": "{{APP_URL}}/api/users/profile/completed",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "users/balance",
+			"request": {
+				"url": "{{APP_URL}}/api/users/balance",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "users/game-token",
+			"request": {
+				"url": "{{APP_URL}}/api/users/game-token",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "users-games/play",
+			"request": {
+				"url": "{{APP_URL}}/api/users-games/play",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "100",
+							"type": "text"
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "users-games/play",
+			"request": {
+				"url": "{{APP_URL}}/api/users-games/play",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "balance",
+							"value": "1000",
+							"type": "text"
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "users-games/score-board",
+			"request": {
+				"url": "{{APP_URL}}/api/users-games/score-board",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "users-games/score-board/month/1",
+			"request": {
+				"url": "{{APP_URL}}/api/users-games/score-board/month/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "users-games/score-board/week/1",
+			"request": {
+				"url": "{{APP_URL}}/api/users-games/score-board/week/1",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "menus/show?slug=mobile-application-account-information",
+			"request": {
+				"url": {
+					"raw": "{{APP_URL}}/api/menus/show?slug=mobile-application-account-information",
+					"host": [
+						"{{APP_URL}}"
+					],
+					"path": [
+						"api",
+						"menus",
+						"show"
+					],
+					"query": [
+						{
+							"key": "slug",
+							"value": "mobile-application-account-information",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "menus/show?slug=mobile-application-payment-methods",
+			"request": {
+				"url": {
+					"raw": "{{APP_URL}}/api/menus/show?slug=mobile-application-payment-methods",
+					"host": [
+						"{{APP_URL}}"
+					],
+					"path": [
+						"api",
+						"menus",
+						"show"
+					],
+					"query": [
+						{
+							"key": "slug",
+							"value": "mobile-application-payment-methods",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "menus/show?slug=mobile-application-shopping",
+			"request": {
+				"url": {
+					"raw": "{{APP_URL}}/api/menus/show?slug=mobile-application-shopping",
+					"host": [
+						"{{APP_URL}}"
+					],
+					"path": [
+						"api",
+						"menus",
+						"show"
+					],
+					"query": [
+						{
+							"key": "slug",
+							"value": "mobile-application-shopping",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "menus/show?slug=mobile-application-eat",
+			"request": {
+				"url": {
+					"raw": "{{APP_URL}}/api/menus/show?slug=mobile-application-eat",
+					"host": [
+						"{{APP_URL}}"
+					],
+					"path": [
+						"api",
+						"menus",
+						"show"
+					],
+					"query": [
+						{
+							"key": "slug",
+							"value": "mobile-application-eat",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "menus/show?slug=mobile-application-contact-us",
+			"request": {
+				"url": {
+					"raw": "{{APP_URL}}/api/menus/show?slug=mobile-application-contact-us",
+					"host": [
+						"{{APP_URL}}"
+					],
+					"path": [
+						"api",
+						"menus",
+						"show"
+					],
+					"query": [
+						{
+							"key": "slug",
+							"value": "mobile-application-contact-us",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "menus/show?slug=social-media",
+			"request": {
+				"url": {
+					"raw": "{{APP_URL}}/api/menus/show?slug=social-media",
+					"host": [
+						"{{APP_URL}}"
+					],
+					"path": [
+						"api",
+						"menus",
+						"show"
+					],
+					"query": [
+						{
+							"key": "slug",
+							"value": "social-media",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "news",
+			"request": {
+				"url": "{{APP_URL}}/api/news",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "locations",
+			"request": {
+				"url": {
+					"raw": "{{APP_URL}}/api/locations?latitude=-6.1755&longitude=106.8105&per_page=100",
+					"host": [
+						"{{APP_URL}}"
+					],
+					"path": [
+						"api",
+						"locations"
+					],
+					"query": [
+						{
+							"key": "latitude",
+							"value": "-6.1755",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "longitude",
+							"value": "106.8105",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "per_page",
+							"value": "100",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "faqs",
+			"request": {
+				"url": "{{APP_URL}}/api/faqs",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "cart/shopping",
+			"request": {
+				"url": "{{APP_URL}}/api/cart/shopping",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "50",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "cart/shopping",
+			"request": {
+				"url": "{{APP_URL}}/api/cart/shopping",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "post_id",
+							"value": "161",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "multiple",
+							"value": "1",
+							"description": "optional, if 1, then always add as new",
+							"type": "text"
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "cart/shopping",
+			"request": {
+				"url": "{{APP_URL}}/api/cart/shopping",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "1",
+							"description": "cart_detail_id",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "10",
+							"type": "text"
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "cart/shopping",
+			"request": {
+				"url": "{{APP_URL}}/api/cart/shopping",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "1",
+							"description": "cart_detail_id",
+							"type": "text"
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "user-addresses",
+			"request": {
+				"url": "{{APP_URL}}/api/user-addresses",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "50",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "user-addresses",
+			"request": {
+				"url": "{{APP_URL}}/api/user-addresses",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Member Address 1",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "phone_number",
+							"value": "087877118199",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "province_id",
+							"value": "6",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "regency_id",
+							"value": "186",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "district_id",
+							"value": "3",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "postal_code",
+							"value": "14450",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "Jl. Jelambar Aladin",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "primary",
+							"value": "1",
+							"description": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "user-addresses/{id}",
+			"request": {
+				"url": "{{APP_URL}}/api/user-addresses/17",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "50",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "user-addresses/{id}",
+			"request": {
+				"url": "{{APP_URL}}/api/user-addresses/17",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Member Address 2",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "phone_number",
+							"value": "087877118199",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "province_id",
+							"value": "6",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "regency_id",
+							"value": "186",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "district_id",
+							"value": "3",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "postal_code",
+							"value": "14450",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "address",
+							"value": "Jl. Jelambar Aladin",
+							"type": "text",
+							"description": ""
+						},
+						{
+							"key": "primary",
+							"value": "1",
+							"type": "text",
+							"description": "",
+							"disabled": true
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "user-addresses/{id}",
+			"request": {
+				"url": "{{APP_URL}}/api/user-addresses/17",
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "user-addresses/{id}/primary",
+			"request": {
+				"url": "{{APP_URL}}/api/user-addresses/1/primary",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "user-addresses/chicknroll/default",
+			"request": {
+				"url": "{{APP_URL}}/api/user-addresses/chicknroll/default",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "50",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "geocodes/provinces",
+			"request": {
+				"url": "{{APP_URL}}/api/geocodes/provinces",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "50",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "geocodes/regencies?parent_id=1",
+			"request": {
+				"url": {
+					"raw": "{{APP_URL}}/api/geocodes/regencies?parent_id=1",
+					"host": [
+						"{{APP_URL}}"
+					],
+					"path": [
+						"api",
+						"geocodes",
+						"regencies"
+					],
+					"query": [
+						{
+							"key": "parent_id",
+							"value": "1",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "50",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "rajaongkir/couriers",
+			"request": {
+				"url": "{{APP_URL}}/api/rajaongkir/couriers",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "id",
+							"value": "50",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "rajaongkir/cost",
+			"request": {
+				"url": "{{APP_URL}}/api/rajaongkir/cost",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "origin",
+							"value": "153",
+							"description": "rajaongkir_id",
+							"type": "text"
+						},
+						{
+							"key": "destination",
+							"value": "17",
+							"description": "rajaongkir_id",
+							"type": "text"
+						},
+						{
+							"key": "weight",
+							"value": "1000",
+							"description": "grams",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "rajaongkir/cost/courier",
+			"request": {
+				"url": "{{APP_URL}}/api/rajaongkir/cost/courier",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "origin",
+							"value": "153",
+							"description": "rajaongkir_id",
+							"type": "text"
+						},
+						{
+							"key": "destination",
+							"value": "17",
+							"description": "rajaongkir_id",
+							"type": "text"
+						},
+						{
+							"key": "weight",
+							"value": "1000",
+							"description": "grams",
+							"type": "text"
+						},
+						{
+							"key": "courier",
+							"value": "jne",
+							"description": "api/rajaongkir/couriers",
+							"type": "text"
+						}
+					]
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "transactions",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// sender_id, user-addresses/chicknroll/default user_id"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{APP_URL}}/api/transactions",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"sender_id\": 4,\n\t\"balance\": 1000,\n\t\"notes\": \"Semoga cepat sampai\",\n\t\"transaction_details\": [\n\t\t{\n\t\t\t\"quantity\": 10,\n\t\t\t\"product_id\": 77\n\t\t},\n\t\t{\n\t\t\t\"quantity\": 10,\n\t\t\t\"product_id\": 77\n\t\t}\n\t],\n\t\"transaction_shipment\": {\n\t\t\"code\": \"jne\",\n\t\t\"name\": \"Nugraha Ekakurir (JNE)\",\n\t\t\"service\": \"OKE\",\n\t\t\"description\": \"Ongkos Kirim Ekonomis\",\n        \"cost\": 24000\n\t},\n\t\"transaction_shipping_address\": {\n\t\t\"user_address_id\": 1\n\t}\n}"
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "transactions/purchases",
+			"request": {
+				"url": "{{APP_URL}}/api/transactions/purchases",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "transactions/purchases/{id}",
+			"request": {
+				"url": "{{APP_URL}}/api/transactions/purchases/11",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "transactions/purchases/{id}/reject",
+			"request": {
+				"url": "{{APP_URL}}/api/transactions/purchases/11/reject",
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "transactions/sales/status",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// sender_id, user-addresses/chicknroll/default user_id"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{APP_URL}}/api/transactions/sales/status",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": ""
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"sender_id\": 4,\n\t\"notes\": \"Semoga cepat sampai\",\n\t\"transaction_details\": [\n\t\t{\n\t\t\t\"quantity\": 10,\n\t\t\t\"product_id\": 68\n\t\t},\n\t\t{\n\t\t\t\"quantity\": 10,\n\t\t\t\"product_id\": 68\n\t\t}\n\t],\n\t\"transaction_shipment\": {\n\t\t\"code\": \"jne\",\n\t\t\"name\": \"Nugraha Ekakurir (JNE)\",\n\t\t\"service\": \"OKE\",\n\t\t\"description\": \"Ongkos Kirim Ekonomis\",\n        \"cost\": 24000\n\t},\n\t\"transaction_shipping_address\": {\n\t\t\"user_address_id\": 1\n\t}\n}"
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "api/doku-myshortcart",
+			"request": {
+				"url": "{{APP_URL}}/api/doku-myshortcart",
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "PAYMENTMETHODID",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "api/doku-myshortcart/transactions/purchases",
+			"request": {
+				"url": "{{APP_URL}}/api/doku-myshortcart/transactions/purchases",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "1",
+							"description": "",
+							"type": "text"
+						},
+						{
+							"key": "PAYMENTMETHODID",
+							"value": "2",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "api/options",
+			"request": {
+				"url": "{{APP_URL}}/api/options",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "api/options/show",
+			"request": {
+				"url": {
+					"raw": "{{APP_URL}}/api/options/show?name=application_version",
+					"host": [
+						"{{APP_URL}}"
+					],
+					"path": [
+						"api",
+						"options",
+						"show"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "application_version",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {},
+				"description": "api/options/show?id=1,\napi/options/show?name=application_version"
+			},
+			"response": []
+		},
+		{
+			"name": "api/ravintola/v1/voucher/query_voucher",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// http://www.xorbin.com/tools/sha256-hash-calculator",
+							"// chicknroll123"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{APP_URL}}/api/ravintola/v1/voucher/query_voucher",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"pos_id\": \"1\",\n\t\"outlet_code\": \"2\",\n\t\"verification_number\": 123456,\n\t\"phone_number\": \"087877118199\",\n\t\"signature\": \"71c93d79093a99c258aa6a6fc245e4165ad167553b70083c44e37811c3ea0166\"\n}"
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "api/ravintola/v1/voucher/validate_voucher",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// http://www.xorbin.com/tools/sha256-hash-calculator"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "{{APP_URL}}/api/ravintola/v1/voucher/validate_voucher",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": "",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \n\t\"pos_id\": \"1\",\n\t\"outlet_code\": \"2\",\n\t\"verification_number\": 123456,\n\t\"phone_number\": \"087877118199\",\n\t\"transaction_amount\": 1000000,\n\t\"transaction_deductible\": 10000,\n\t\"signature\": \"a5bbc9a81b57ddef2e51eed6d748afaecc7378eeb4ae1d0b1736e08cc6eba4bc\"\n}"
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "ravintola balances/check",
+			"request": {
+				"url": "{{APP_URL}}/api/balances/check",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "phone_number",
+							"value": "081280001881",
+							"type": "text"
+						},
+						{
+							"key": "verification_code",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		},
+		{
+			"name": "ravintola transactions",
+			"request": {
+				"url": "{{APP_URL}}/api/transactions",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "reference_number",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "total",
+							"value": "100000",
+							"type": "text"
+						},
+						{
+							"key": "phone_number",
+							"value": "081280001881",
+							"type": "text"
+						},
+						{
+							"key": "verification_code",
+							"value": "123456",
+							"type": "text"
+						}
+					]
+				},
+				"description": null
+			},
+			"response": []
+		}
+	]
+}
