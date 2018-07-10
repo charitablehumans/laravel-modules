@@ -1,0 +1,16 @@
+{
+    "name": "Chicknroll",
+    "alias": "chicknroll",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\Chicknroll\\Providers\\ChicknrollServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
