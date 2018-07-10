@@ -20,18 +20,18 @@ class CourierStoreRequest extends FormRequest
 
         return [
             'origin' => [
-                'required', 'integer', 'digits_between:1,20',
+                'required', 'integer',
                 Rule::exists((new Geocodes)->getTable(), 'rajaongkir_id')->where(function ($query) {
                     $query->where('type', 'regency');
                 }),
             ],
             'destination' => [
-                'required', 'integer', 'digits_between:1,20',
+                'required', 'integer',
                 Rule::exists((new Geocodes)->getTable(), 'rajaongkir_id')->where(function ($query) {
                     $query->where('type', 'regency');
                 }),
             ],
-            'weight' => ['required', 'integer', 'digits_between:1,20'],
+            'weight' => ['required', 'integer'],
             'courier' => [
                 'required',
                 Rule::in($couriers),

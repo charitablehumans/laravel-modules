@@ -26,7 +26,7 @@ class DestroyRequest extends FormRequest
     {
         return [
             'id' => [
-                'required', 'integer', 'digits_between:0,20',
+                'required', 'integer',
                 Rule::exists('cart_details'),
             ],
         ];

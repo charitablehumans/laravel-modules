@@ -24,7 +24,7 @@ class UpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required', 'integer', 'digits_between:1,10'],
+            'id' => ['required', 'integer'],
             'name' => ['required', 'between:0,191', 'unique:roles,name,'.$this->input('id')],
             'guard_name' => ['required', 'between:0,191'],
         ];

@@ -17,7 +17,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'sender_id' => [
-                'required', 'integer', 'digits_between:1,20',
+                'required', 'integer',
                 Rule::exists((new Users)->getTable(), 'id'),
             ],
             'balance' => [

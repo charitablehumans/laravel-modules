@@ -54,11 +54,11 @@ class TransactionsController extends Controller
                         // 3.1.1. Validate
                         $validator = \Validator::make($transactionDetail, [
                             'quantity' => [
-                                'required', 'integer', 'digits_between:0,20',
+                                'required', 'integer',
                                 new \Modules\Products\Rules\StockCheck($transactionDetail),
                             ],
                             'product_id' => [
-                                'required', 'integer', 'digits_between:0,20',
+                                'required', 'integer',
                                 Rule::exists('posts', 'id')->where(function ($query) {
                                     $query->where('type', 'product');
                                 }),

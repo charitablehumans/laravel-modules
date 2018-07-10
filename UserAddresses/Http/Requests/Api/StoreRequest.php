@@ -21,18 +21,18 @@ class StoreRequest extends FormRequest
             'name' => ['required', 'between:0,191'],
             'phone_number' => ['required', 'between:0,20'],
             'province_id' => [
-                'required', 'integer', 'digits_between:1,20',
+                'required', 'integer',
                 Rule::exists((new Geocodes)->getTable(), 'id')->where(function ($query) {
                     $query->where('type', 'province');
                 }),
             ],
             'regency_id' => [
-                'required', 'integer', 'digits_between:1,20',
+                'required', 'integer',
                 Rule::exists((new Geocodes)->getTable(), 'id')->where(function ($query) use ($input) {
                     $query->where('type', 'regency')->where('parent_id', $input['province_id']);
                 }),
             ],
-            'district_id' => ['required', 'integer', 'digits_between:1,20'],
+            'district_id' => ['required', 'integer'],
             'postal_code' => ['required', 'between:0,10'],
             'address' => ['required'],
         ];

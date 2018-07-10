@@ -24,7 +24,7 @@ class UpdateRequest extends FormRequest
      */
     public function rules()
     {
-        $rules['id'] = ['required', 'integer', 'digits_between:1,10'];
+        $rules['id'] = ['required', 'integer'];
         $rules['name'] = ['required', 'between:0,191'];
         $rules['email'] = [
             'required', 'between:0,191', 'email',

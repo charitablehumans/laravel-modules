@@ -15,9 +15,9 @@ class StoreRequest extends FormRequest
     public function rules()
     {
         return [
-            'quantity' => ['required', 'integer', 'digits_between:0,20'],
+            'quantity' => ['required', 'integer'],
             'product_id' => [
-                'required', 'integer', 'digits_between:0,20',
+                'required', 'integer',
                 Rule::exists('posts', 'id')->where(function ($query) {
                     $query->where('type', 'product');
                 }),

@@ -20,13 +20,13 @@ class StoreRequest extends FormRequest
 
         return [
             'post_id' => [
-                'required', 'integer', 'digits_between:1,20',
+                'required', 'integer',
                 Rule::exists($post->getTable(), 'id')->where(function ($query) use ($post) {
                     $query->where('type', $post->type);
                 })
             ],
             'user_id' => [
-                'required', 'integer', 'digits_between:1,20',
+                'required', 'integer',
                 Rule::exists((new Users)->getTable(), 'id')
             ]
         ];

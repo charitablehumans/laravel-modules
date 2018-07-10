@@ -17,7 +17,7 @@ class StoreRequest extends FormRequest
             'code' => ['required', 'between:0,191'],
             'name' => ['required', 'between:0,191'],
             'service' => ['required', 'between:0,191'],
-            'cost' => ['required', 'integer', 'digits_between:1,20'],
+            'cost' => ['required', 'integer'],
         ];
     }
 
