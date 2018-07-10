@@ -9,7 +9,7 @@ use Modules\UserAddresses\Models\UserAddresses;
 class StoreRequest extends FormRequest
 {
     /**
-     * Get the validation rules that apply to the request. 
+     * Get the validation rules that apply to the request.
      *
      * @return array
      */
@@ -17,7 +17,7 @@ class StoreRequest extends FormRequest
     {
         return [
             'user_address_id' => [
-                'required', 'integer', 'between:0,20',
+                'required', 'integer',
                 Rule::exists((new UserAddresses)->getTable(), 'id'),
             ],
         ];
