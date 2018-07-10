@@ -6,6 +6,13 @@ use Modules\PostsUsers\Models\PostsUsers;
 
 class CreatePostsUsersTable extends Migration
 {
+    protected $model;
+
+    public function __construct()
+    {
+        $this->model = new PostsUsers;
+    }
+
     /**
      * Run the migrations.
      *
@@ -13,14 +20,16 @@ class CreatePostsUsersTable extends Migration
      */
     public function up()
     {
-        \Schema::create((new PostsUsers)->getTable(), function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('type')->nullable()->comment('{ wishlist_product }');
-            $table->bigInteger('post_id')->comment('posts.id');
-            $table->bigInteger('user_id')->comment('users.id');
+        if (! \Schema::hasTable($this->model->getTable())) {
+            \Schema::create($this->model->getTable(), function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('type')->nullable()->comment('{ wishlist_product }');
+                $table->bigInteger('post_id')->comment('posts.id');
+                $table->bigInteger('user_id')->comment('users.id');
 
-            $table->timestamps();
-        });
+                $table->timestamps();
+            });
+        }
     }
 
     /**
@@ -30,6 +39,8 @@ class CreatePostsUsersTable extends Migration
      */
     public function down()
     {
-        \Schema::dropIfExists((new PostsUsers)->getTable());
+        if (\Schema::hasTable($this->model->getTable())) {
+            \Schema::dropIfExists($this->model->getTable());
+        }
     }
 }

@@ -6,6 +6,13 @@ use Modules\Options\Models\Options;
 
 class CreateOptionsTable extends Migration
 {
+    protected $model;
+
+    public function __construct()
+    {
+        $this->model = new Options;
+    }
+
     /**
      * Run the migrations.
      *
@@ -13,13 +20,15 @@ class CreateOptionsTable extends Migration
      */
     public function up()
     {
-        \Schema::create((new Options)->getTable(), function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('type')->default('text');
-            $table->string('name');
-            $table->longText('value')->nullable();
-            $table->timestamps();
-        });
+        if (! \Schema::hasTable($this->model->getTable())) {
+            \Schema::create($this->model->getTable(), function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->string('type')->default('text');
+                $table->string('name');
+                $table->longText('value')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**
@@ -29,6 +38,8 @@ class CreateOptionsTable extends Migration
      */
     public function down()
     {
-        \Schema::dropIfExists((new Options)->getTable());
+        if (\Schema::hasTable($this->model->getTable())) {
+            \Schema::dropIfExists((new Options)->getTable());
+        }
     }
 }

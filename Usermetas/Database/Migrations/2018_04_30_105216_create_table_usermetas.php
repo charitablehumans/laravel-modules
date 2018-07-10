@@ -1,10 +1,18 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Modules\Usermetas\Models\Usermetas;
 
 class CreateTableUsermetas extends Migration
 {
+    protected $model;
+
+    public function __construct()
+    {
+        $this->model = new Usermetas;
+    }
+
     /**
      * Run the migrations.
      *
@@ -12,14 +20,16 @@ class CreateTableUsermetas extends Migration
      */
     public function up()
     {
-        \Schema::create('usermetas', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('user_id')->comment('users.id');
-            $table->string('key');
-            $table->longText('value');
+        if (! \Schema::hasTable($this->model->getTable())) {
+            \Schema::create('usermetas', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->bigInteger('user_id')->comment('users.id');
+                $table->string('key');
+                $table->longText('value');
 
-            $table->timestamps();
-        });
+                $table->timestamps();
+            });
+        }
     }
 
     /**
@@ -29,6 +39,8 @@ class CreateTableUsermetas extends Migration
      */
     public function down()
     {
-        \Schema::dropIfExists('usermetas');
+        if (\Schema::hasTable($this->model->getTable())) {
+            \Schema::dropIfExists('usermetas');
+        }
     }
 }
