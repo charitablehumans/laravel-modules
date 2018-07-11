@@ -1,7 +1,7 @@
 @extends('cms::backend/layouts/media_iframe')
 
 @section('content')
-    <form action="{{ $ipay88Transaction->getEpaymentEntryUrl() }}" class="{{ request()->input('auto_submit') == '1' ? 'hidden' : '' }}" method="post">
+    <form action="{{ $ipay88Transaction->getEpaymentEntryUrl() }}" class="{{ request()->input('auto_submit', '1') == '1' ? 'hidden' : '' }}" method="post">
         <div class="box">
             <div class="box-header hidden with-border"></div>
             <div class="box-body">
@@ -73,7 +73,7 @@
             </div>
             <div class="box-footer">
                 <div class="form-group">
-                    <input name="auto_submit" type="hidden" value="{{ request()->input('auto_submit', 1) }}" />
+                    <input name="auto_submit" type="hidden" value="{{ request()->input('auto_submit', '1') }}" />
                     <input class="btn btn-success" type="submit" value="@lang('cms::cms.save')" />
                 </div>
             </div>
