@@ -1,7 +1,7 @@
 @extends('cms::backend/layouts/media_iframe')
 
 @section('content')
-    <form action="https://apps.myshortcart.com/payment/request-payment/" class="hidden" method="post" name="order">
+    <form action="https://apps.myshortcart.com/payment/request-payment/" class="hidden" method="post">
         <div class="box">
             <div class="box-header hidden with-border"></div>
             <div class="box-body">
@@ -92,7 +92,7 @@
             </div>
             <div class="box-footer">
                 <div class="form-group">
-                    <input class="btn btn-default btn-sm" type="submit" value="@lang('cms::cms.save')" />
+                    <input class="btn btn-success" type="submit" value="@lang('cms::cms.save')" />
                 </div>
             </div>
         </div>

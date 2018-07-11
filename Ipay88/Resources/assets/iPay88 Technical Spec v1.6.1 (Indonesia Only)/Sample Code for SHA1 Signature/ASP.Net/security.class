@@ -1,0 +1,16 @@
+Imports Microsoft.VisualBasic
+Imports System.Security.Cryptography
+
+'Sample code for VB.Net 2.0
+Public Class Security
+    Public Function Signature(ByVal Key As String) As String
+        Dim objSHA1 As New SHA1CryptoServiceProvider()
+
+        objSHA1.ComputeHash(System.Text.Encoding.UTF8.GetBytes(Key.ToCharArray))
+
+        Dim buffer() As Byte = objSHA1.Hash
+        Dim HashValue As String = System.Convert.ToBase64String(buffer)
+
+        Return HashValue
+    End Function
+End Class

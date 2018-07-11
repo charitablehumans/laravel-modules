@@ -16,6 +16,7 @@ return [
     'are_you_sure_to_delete_this' => 'Apakah kamu yakin untuk menghapus ini',
     'are_you_sure_to_delete_this_permanently' => 'Apakah kamu yakin untuk menghapus ini secara permanen',
     'are_you_sure_to_reject_this' => 'Apakah Anda yakin untuk menolak ini',
+    'auto_submit' => 'Submit Otomatis',
     'back' => 'Kembali',
     'bag' => 'Tas',
     'balance' => 'Saldo',

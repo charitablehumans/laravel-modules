@@ -16,6 +16,7 @@ return [
     'are_you_sure_to_delete_this' => 'Are you sure to delete this',
     'are_you_sure_to_delete_this_permanently' => 'Are you sure to delete this permanently',
     'are_you_sure_to_reject_this' => 'Are you sure to reject this',
+    'auto_submit' => 'Auto Submit',
     'back' => 'Back',
     'bag' => 'Bag',
     'balance' => 'Balance',

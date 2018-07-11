@@ -37,6 +37,10 @@ class Transactions extends Model
 
     protected $table = 'transactions';
 
+    public static $paymentStatusFalse = '0';
+    public static $paymentStatusTrue = '1';
+    public static $statusNew = 'new';
+
     public function getGrandTotal()
     {
         $grandTotal = 0;

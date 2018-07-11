@@ -4,21 +4,21 @@
 @section('content_header', trans('cms::cms.create'))
 @section('breadcrumb')
     <ol class="breadcrumb">
-        <li>Doku Myshortcart</li>
+        <li>iPay88</li>
         <li class="active">@lang('cms::cms.create')</li>
     </ol>
 @endsection
 
 @section('content')
-    <form action="{{ route('backend.doku-myshortcart.store') }}" method="post">
+    <form action="{{ route('ipay88.backend.ipay88.store') }}" method="post">
         {{ csrf_field() }}
         <div class="box">
             <div class="box-header hidden with-border"></div>
             <div class="box-body">
                 <div class="form-group">
-                    <label>@lang('cms::cms.transaction_id')</label>
-                    <select class="form-control select2" data-allow-clear="true" data-placeholder="" name="id" required>
-                        <option></option>
+                    <label>@lang('validation.attributes.transaction_id')</label>
+                    <select class="form-control select2" data-allow-clear="true" data-placeholder="Select" name="id" required>
+                        <option value=""></option>
                         @foreach ($transactions as $transaction)
                             <option value="{{ $transaction->id }}">{{ $transaction->id }}</option>
                         @endforeach
@@ -26,12 +26,19 @@
                     <i class="text-danger">{{ $errors->first('id') }}</i>
                 </div>
                 <div class="form-group">
-                    <label>PAYMENTMETHODID</label>
-                    <select class="form-control select2" data-allow-clear="true" data-placeholder="" name="PAYMENTMETHODID">
-                        <option></option>
-                        @foreach ($doku_myshortcart_transaction->getPaymentMethodIdOptions() as $paymentMethodId => $paymentMethodName)
+                    <label>PaymentId</label>
+                    <select class="form-control select2" data-allow-clear="true" data-placeholder="" name="PaymentId">
+                        <option value=""></option>
+                        @foreach ($ipay88Transactions->getPaymentMethodIdNameOptions() as $paymentMethodId => $paymentMethodName)
                             <option value="{{ $paymentMethodId }}">{{ $paymentMethodName }}</option>
                         @endforeach
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>@lang('cms::cms.auto_submit')</label>
+                    <select class="form-control select2" name="auto_submit">
+                        <option value="0">@lang('cms::cms.no')</option>
+                        <option value="1">@lang('cms::cms.yes')</option>
                     </select>
                 </div>
             </div>
