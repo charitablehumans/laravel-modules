@@ -75,6 +75,7 @@
                                 @can ('backend users store all')
                                     <th>
                                         @lang('cms::cms.store')
+                                        <br />
                                         <select class="form-control select2" data-allow-clear="true" data-placeholder="" name="store_id">
                                             <option value=""></option>
                                             @foreach ($model->getStoreIdNameOptions() as $storeId => $storeName)
