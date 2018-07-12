@@ -9,7 +9,7 @@ class Ipay88TransactionLogs extends Model
     protected $fillable = [
         'ip_address',
         'type',
-        'MerchantCode'
+        'MerchantCode',
         'PaymentId',
 
         'RefNo',
