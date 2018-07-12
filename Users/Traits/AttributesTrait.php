@@ -25,6 +25,13 @@ trait AttributesTrait
         return Users::select(['id', 'name'])->orderBy('name')->get()->pluck('name', 'id')->toArray();
     }
 
+    public function getStore()
+    {
+        return \Cache::remember('users-'.$this->store_id, 1440, function () {
+            return $this->store ? $this->store : new Users;
+        });
+    }
+
     public function getStoreIdNameOptions()
     {
         return Users::search(['role_name' => 'store', 'sort' => 'name:asc'])->get()->pluck('name', 'id');

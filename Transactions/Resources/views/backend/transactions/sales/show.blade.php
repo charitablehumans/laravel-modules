@@ -42,7 +42,7 @@
                         </div>
                         <div class="form-inline">
                             <label>@lang('cms::cms.transaction_shipment')</label><br />
-                            {{ $transaction->transactionShipment->name.', '.$transaction->transactionShipment->service }}
+                            {{ $transaction->transactionShipment->name.', '.$transaction->transactionShipment->service.' ('.$transaction->transactionShipment->description.')' }}
                             @if (in_array($transaction->status, ['processed', 'sent']))
                                 <input class="form-control input-sm" name="receipt_number" placeholder="@lang('validation.attributes.receipt_number')" required type="text" value="{{ $transaction->receipt_number }}" />
                                 <input class="btn btn-success btn-sm" name="send" type="submit" value="@lang('cms::cms.save')" />

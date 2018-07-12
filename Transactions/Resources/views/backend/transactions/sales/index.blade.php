@@ -28,10 +28,14 @@
                                         </select>
                                         @lang('cms::cms.sort')
                                         <select class="input-sm" name="sort">
-                                            @can('backend transactions sales all')
+                                            @if (auth()->user()->can('backend transactions sales all') && config('cms.transactions.sender_id'))
                                                 <option {{ request()->query('sort') == 'sender_name:asc' ? 'selected' : '' }} value="sender_name:asc">@lang('cms::cms.sender') (A-Z)</option>
                                                 <option {{ request()->query('sort') == 'sender_name:desc' ? 'selected' : '' }} value="sender_name:desc">@lang('cms::cms.sender') (Z-A)</option>
-                                            @endcan
+                                            @endif
+                                            @if (config('cms.transactions.sender.store_id'))
+                                                <option {{ request()->query('sort') == 'sender_store_name:asc' ? 'selected' : '' }} value="sender_store_name:asc">@lang('cms::cms.sender_store_name') (A-Z)</option>
+                                                <option {{ request()->query('sort') == 'sender_store_name:desc' ? 'selected' : '' }} value="sender_store_name:desc">@lang('cms::cms.sender_store_name') (Z-A)</option>
+                                            @endif
                                             <option {{ request()->query('sort') == 'number:asc' ? 'selected' : '' }} value="number:asc">@lang('validation.attributes.number') (A-Z)</option>
                                             <option {{ request()->query('sort') == 'number:desc' ? 'selected' : '' }} value="number:desc">@lang('validation.attributes.number') (Z-A)</option>
                                             <option {{ request()->query('sort') == 'receipt_number:asc' ? 'selected' : '' }} value="receipt_number:asc">@lang('validation.attributes.receipt_number') (A-Z)</option>
@@ -47,7 +51,7 @@
                         </tr>
                         <tr>
                             <th class="hidden"><input class="table_row_checkbox_all" type="checkbox" /></th>
-                            @can('backend transactions sales all')
+                            @if (auth()->user()->can('backend transactions sales all') && config('cms.transactions.sender_id'))
                                 <th>
                                     @lang('cms::cms.sender')<br />
                                     <select class="form-control select2" data-allow-clear="true" data-placeholder="" name="sender_id">
@@ -57,7 +61,18 @@
                                         @endforeach
                                     </select>
                                 </th>
-                            @endcan
+                            @endif
+                            @if (config('cms.transactions.sender.store_id'))
+                                <th>
+                                    @lang('cms::cms.sender_store_name')<br />
+                                    <select class="form-control select2" data-allow-clear="true" data-placeholder="" name="sender_store_id">
+                                        <option value=""></option>
+                                        @foreach ($model->getStoreIdNameOptions() as $storeId => $storeName)
+                                            <option {{ $storeId == request()->query('sender_store_id') ? 'selected' : '' }} value="{{ $storeId }}">{{ $storeName }}</option>
+                                        @endforeach
+                                    </select>
+                                </th>
+                            @endif
                             <th>@lang('validation.attributes.number') <input class="form-control" name="number_like" type="text" value="{{ request()->query('number_like') }}" /></th>
                             <th>
                                 @lang('validation.attributes.status')
@@ -83,7 +98,7 @@
                                 <input autocomplete="off" class="datepicker form-control" data-date-format="yyyy-mm-dd" name="created_at_date" type="text" value="{{ request()->query('created_at_date') }}" />
                             </th>
                             <th>
-                                <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-success btn-xs" type="submit"><i class="fa fa-search"></i></button>
                                 <a class="btn btn-default btn-xs" href="{{ route('backend.transactions.sales.index') }}"><i class="fa fa-repeat"></i></a>
                             </th>
                         </tr>
@@ -92,9 +107,12 @@
                         @forelse ($transactions as $i => $transaction)
                             <tr>
                                 <td align="center" style="display: none"><input class="table_row_checkbox" name="action_id[]" type="checkbox" value="{{ $transaction->id }}" /></td>
-                                @can('backend transactions sales all')
-                                    <td>{{ $transaction->sender->name }}</td>
+                                @if (auth()->user()->can('backend transactions sales all') && config('cms.transactions.sender_id'))
+                                    <td>{{ $transaction->getSender()->name }}</td>
                                 @endcan
+                                @if (config('cms.transactions.sender.store_id'))
+                                    <td>{{ $transaction->getSender()->getStore()->name }}</td>
+                                @endif
                                 <td>
                                     <a href="{{ route('backend.transactions.sales.show', $transaction->id) }}" target="_blank">
                                         {{ $transaction->number }}
@@ -123,7 +141,7 @@
                                 <select class="input-xs" name="action">
                                     <option value="">@lang('cms::cms.action')</option>
                                 </select>
-                                <button class="btn btn-default btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
+                                <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
                             </td>
                         </tr>
                         <tr>

@@ -56,6 +56,13 @@ class Transactions extends Model
         return $paymentFee;
     }
 
+    public function getSender()
+    {
+        return \Cache::remember('users-'.$this->sender_id, 1440, function () {
+            return $this->sender ? $this->sender : new Users;
+        });
+    }
+
     public function getSenderIdOptions()
     {
         return self::search(['sort' => 'sender_name:asc'])->get()->pluck('sender_name', 'sender_id')->toArray();
@@ -71,6 +78,11 @@ class Transactions extends Model
         \Config::get('cms.transactions.status_options.finished') ? $statusOptions['finished'] = trans('cms::cms.finished') : '';
         \Config::get('cms.transactions.status_options.returned') ? $statusOptions['returned'] = trans('cms::cms.returned') : '';
         return $statusOptions;
+    }
+
+    public function getStoreIdNameOptions()
+    {
+        return (new Users)->getStoreIdNameOptions();
     }
 
     public function getTotalDiscount()
@@ -144,6 +156,11 @@ class Transactions extends Model
         isset($params['id_in']) ? $query->whereIn('id', $params['id_in']) : '';
         isset($params['type']) ? $query->where('type', $params['type']) : '';
         isset($params['sender_id']) ? $query->where('sender_id', $params['sender_id']) : '';
+        if (isset($params['sender_store_id'])) {
+            $query->whereHas('sender', function ($sender) use ($params) {
+                $sender->where('store_id', $params['sender_store_id']);
+            });
+        }
         isset($params['number_like']) ? $query->where('number', 'like', '%'.$params['number_like'].'%') : '';
         if (isset($params['grand_total'])) {
             if (isset($params['grand_total_operator'])) {
@@ -189,6 +206,18 @@ class Transactions extends Model
                 ->select([
                     self::getTable().'.*',
                     'sender.name AS sender_name',
+                ]);
+            } else if (in_array($sort[0], ['sender_store_name'])) {
+                $query->join((new Users)->getTable().' AS sender', function ($join) {
+                    $join->on('sender.id', '=', self::getTable().'.sender_id');
+                })
+                ->join((new Users)->getTable().' AS sender_store', function ($join) {
+                    $join->on('sender_store.id', '=', 'sender.store_id');
+                })
+                ->orderBy($sort[0], $sort[1])
+                ->select([
+                    self::getTable().'.*',
+                    'sender_store.name AS sender_store_name',
                 ]);
             } else {
                 count($sort) == 2 ? $query->orderBy($sort[0], $sort[1]) : '';

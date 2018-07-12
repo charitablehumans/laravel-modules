@@ -188,6 +188,7 @@ return [
     'selected_collection' => 'Selected Collection',
     'send_password_reset_link' => 'Send Password Reset Link',
     'sender' => 'Sender',
+    'sender_store_name' => 'Sender Store Name',
     'sent' => 'Sent',
     'service' => 'Service',
     'shipping_address' => 'Shipping Address',

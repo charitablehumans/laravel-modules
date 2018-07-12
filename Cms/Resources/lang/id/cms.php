@@ -188,6 +188,7 @@ return [
     'selected_collection' => 'Koleksi yang dipilih',
     'send_password_reset_link' => 'Kirim Tautan Ulang Sandi',
     'sender' => 'Pengirim',
+    'sender_store_name' => 'Nama Toko Pengirim',
     'sent' => 'Terkirim',
     'service' => 'Pelayanan',
     'shipping_address' => 'Alamat Pengiriman',
