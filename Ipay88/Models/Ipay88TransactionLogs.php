@@ -6,6 +6,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Ipay88TransactionLogs extends Model
 {
+    protected $fillable = [
+        'ip_address',
+        'type',
+        'MerchantCode'
+        'PaymentId',
+
+        'RefNo',
+        'Amount',
+        'Currency',
+        'Remark',
+        'TransId',
+
+        'AuthCode',
+        'Status',
+        'ErrDesc',
+        'Signature',
+        'data',
+    ];
+
     protected $guarded = [
         'id',
         'created_at',

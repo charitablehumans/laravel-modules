@@ -8,6 +8,27 @@ use Modules\Transactions\Models\Transactions;
 
 class Ipay88Transactions extends Model
 {
+    protected $fillable = [
+        'transaction_id',
+        'MerchantCode',
+        'PaymentId',
+        'RefNo',
+
+        'Amount',
+        'Currency',
+        'ProdDesc',
+        'UserName',
+        'UserEmail',
+
+        'UserContact',
+        'Remark',
+        'Lang',
+        'Signature',
+        'ResponseURL',
+
+        'BackendURL',
+    ];
+
     protected $guarded = [
         'id',
         'created_at',
