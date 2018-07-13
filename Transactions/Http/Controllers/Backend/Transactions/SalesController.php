@@ -80,7 +80,7 @@ class SalesController extends Controller
         $transaction = $this->model::search(['id' => $id, 'sales_ownership' => true])->firstOrFail();
         $transaction->fill($request->input());
         $transaction->save();
-        $request->has('receipt_number') && $request->has('send') ? (new $this->model)->send($id) : '';
+        $request->has('receipt_number') && $request->has('send') ? $this->model->send($id) : '';
         flash(trans('cms::cms.data_has_been_updated'))->success()->important();
         return redirect()->back();
     }
@@ -95,14 +95,14 @@ class SalesController extends Controller
 
     public function process($id)
     {
-        (new $this->model)->process($id);
+        $this->model->process($id);
         flash(trans('cms::cms.data_has_been_processed'))->success()->important();
         return redirect()->back();
     }
 
     public function reject($id)
     {
-        (new $this->model)->reject($id);
+        $this->model->reject($id);
         flash(trans('cms::cms.data_has_been_returned'))->success()->important();
         return redirect()->back();
     }
