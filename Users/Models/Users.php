@@ -141,6 +141,11 @@ class Users extends \App\User
         return $this;
     }
 
+    public function userAddress()
+    {
+        return $this->hasOne('\Modules\UserAddresses\Models\UserAddresses', 'user_id')->orderBy('primary', 'desc')->latest();
+    }
+
     public function userAddresses()
     {
         return $this->hasMany('\Modules\UserAddresses\Models\UserAddresses', 'user_id')->orderBy('primary', 'desc')->latest();

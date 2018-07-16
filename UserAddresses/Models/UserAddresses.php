@@ -4,6 +4,7 @@ namespace Modules\UserAddresses\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Modules\Geocodes\Models\Geocodes\{
+    Districts,
     Provinces,
     Regencies
 };
@@ -26,6 +27,18 @@ class UserAddresses extends Model
     ];
 
     protected $table = 'user_addresses';
+
+    public function district()
+    {
+        return $this->belongsTo('\Modules\Geocodes\Models\Geocodes\Districts', 'district_id');
+    }
+
+    public function getDistrict()
+    {
+        return \Cache::remember((new Districts)->getTable().'-'.$this->district_id, 1440, function () {
+            return $this->district ? $this->district : new Districts;
+        });
+    }
 
     public function getProvince()
     {

@@ -125,6 +125,19 @@ class Transactions extends Model
         return $totalShippingCost;
     }
 
+    public function getTotalQuantity()
+    {
+        $totalQuantity = 0;
+
+        if ($this->transactionDetails) {
+            foreach ($this->transactionDetails as $transactionDetail) {
+                $totalQuantity += $transactionDetail->quantity;
+            }
+        }
+
+        return $totalQuantity;
+    }
+
     public function getTotalWeight()
     {
         $totalWeight = 0;
@@ -143,6 +156,18 @@ class Transactions extends Model
         $transaction = self::search(['id' => $id, 'status' => 'new'])->firstOrFail();
         $transaction->status = 'processed';
         $transaction->save();
+
+        // check shipment using Rpx
+        if ($transaction->transactionShipment->code == 'rpx' && config('rpx.name')) {
+
+            // send transaction data and get return awb from sendShipmentData
+            $this->modelRpxSoap = new \Modules\Rpx\Models\RpxSoap;
+            $awb = $this->modelRpxSoap->sendShipmentData($transaction);
+
+            // update receipt_number column via Rpx model
+            $this->modelTransactionsRpx = new \Modules\Rpx\Models\TransactionsRpx;
+            $this->modelTransactionsRpx->processSendShipmentData($id, $awb);
+        }
     }
 
     public function receiver()

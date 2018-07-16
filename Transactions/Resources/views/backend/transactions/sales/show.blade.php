@@ -23,7 +23,7 @@
                         @if (in_array($transaction->status, ['new']))
                             <a class="btn btn-primary btn-sm" href="{{ route('backend.transactions.sales.process', $transaction->id) }}">@lang('cms::cms.process')</a>
                             <a class="btn btn-danger btn-sm" href="{{ route('backend.transactions.sales.reject', $transaction->id) }}" onclick="return confirm('@lang('cms::cms.are_you_sure_to_reject_this')?')">@lang('cms::cms.reject')</a>
-                        @endcan
+                        @endif
                     </div>
                 </div>
                 <div class="box">
@@ -46,6 +46,9 @@
                             @if (in_array($transaction->status, ['processed', 'sent']))
                                 <input class="form-control input-sm" name="receipt_number" placeholder="@lang('validation.attributes.receipt_number')" required type="text" value="{{ $transaction->receipt_number }}" />
                                 <input class="btn btn-success btn-sm" name="send" type="submit" value="@lang('cms::cms.save')" />
+                            @endif
+                            @if (in_array($transaction->status, ['sent']))
+                                <a data-fancybox data-type="iframe" href="{{ route('frontend.rpx.sales.tracking.show', $transaction->receipt_number) }}" class="btn btn-primary btn-sm">Tracking AWB</a>
                             @endif
                         </div>
                     </div>
