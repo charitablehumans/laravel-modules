@@ -1,6 +1,6 @@
 <?php
 
-Route::group(['middleware' => 'web', 'prefix' => 'rpx', 'namespace' => 'Modules\Rpx\Http\Controllers'], function()
+Route::group(['middleware' => 'web'], function()
 {
-    Route::get('/', 'RpxController@index');
+    Route::get('frontend/rpx/sales/tracking/{awb}', ['as' => 'frontend.rpx.sales.tracking.show', 'uses' => '\Modules\Rpx\Http\Controllers\Frontend\Rpx\TrackingController@show']);
 });

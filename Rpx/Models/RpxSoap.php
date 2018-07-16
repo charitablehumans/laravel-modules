@@ -292,69 +292,84 @@ class RpxSoap extends Model
         return $data;
 	}
 
-	public function sendShipmentData()
+	public function sendShipmentData($transaction)
 	{
+        $transactionSenderStoreUserAddress = $transaction->sender->store->userAddress;
+
         $response = $this->soapWrapper->call('Data.sendShipmentData', [
-            'user'					=> $this->user, 
+            'user'					=> $this->user,
             'password'				=> $this->password,
-            'awb'					=> '',
-            'package_id'			=> '',
-            'order_type'			=> '',
-            'order_number'			=> '',
-            'service_type_id'		=> '',
+            'awb'                   => '',
+            'package_id'            => '',
+            'order_type'            => 'OS',
+            'order_number'          => $transaction->id,
+            'service_type_id'       => $transaction->transactionShipment->service,
             'shipper_account'		=> $this->account_number,
-            'shipper_name'			=> '',
-            'shipper_company'		=> '',
-            'shipper_address1'		=> '',
-            'shipper_address2'		=> '',
-            'shipper_kelurahan'		=> '',
-            'shipper_kecamatan'		=> '',
-            'shipper_city'			=> '',
-            'shipper_state'			=> '',
-            'shipper_zip'			=> '',
-            'shipper_phone'			=> '',
-            'identity_no'			=> '',
-            'shipper_mobile_no'		=> '',
-            'shipper_email'			=> '',
-            'consignee_account'		=> '',
-            'consignee_name'		=> '',
-            'consignee_company'		=> '',
-            'consignee_address1'	=> '',
-            'consignee_address2'	=> '',
-            'consignee_kelurahan'	=> '',
-            'consignee_kecamatan'	=> '',
-            'consignee_city'		=> '',
-            'consignee_state'		=> '',
-            'consignee_zip'			=> '',
-            'consignee_phone'		=> '',
-            'consignee_mobile_no'	=> '',
-            'consignee_email'		=> '',
-            'desc_of_goods'			=> '',
-            'tot_package'			=> '',
-            'actual_weight'			=> '',
-            'tot_weight'			=> '',
-            'tot_declare_value'		=> '',
-            'tot_dimensi' 			=> '',
-            'flag_mp_spec_handling' => '',
-            'insurance' 			=> '',
-            'surcharge' 			=> '',
-            'high_value' 			=> '',
-            'value_docs' 			=> '',
-            'electronic' 			=> '',
-            'flag_dangerous_goods' 	=> '',
-            'flag_birdnest' 		=> '',
-            'declare_value' 		=> '',
-            'format'				=> '',
-            'dest_store_id'			=> '',
-            'dest_dc_id'			=> '',
-            'widhtx'				=> '',
-            'lengthx'				=> '',
-            'heightx'				=> ''
+            'shipper_name'          => $transactionSenderStoreUserAddress->name,
+            'shipper_company'       => $transactionSenderStoreUserAddress->address_as,
+            'shipper_address1'      => $transactionSenderStoreUserAddress->address,
+            'shipper_address2'      => '',
+            'shipper_kelurahan'     => '',
+            'shipper_kecamatan'     => $transactionSenderStoreUserAddress->getDistrict()->name,
+            'shipper_city'          => $transactionSenderStoreUserAddress->getRegency()->name,
+            'shipper_state'         => $transactionSenderStoreUserAddress->getProvince()->name,
+            'shipper_zip'           => $transactionSenderStoreUserAddress->postal_code,
+            'shipper_phone'         => $transactionSenderStoreUserAddress->phone_number,
+            'identity_no'           => '',
+            'shipper_mobile_no'     => '',
+            'shipper_email'         => $transaction->sender->store->email,
+            'consignee_account'     => '',
+            'consignee_name'        => $transaction->receiver->name,
+            'consignee_company'     => '',
+            'consignee_address1'    => $transaction->receiver->userAddress->address,
+            'consignee_address2'    => '',
+            'consignee_kelurahan'   => '',
+            'consignee_kecamatan'   => optional($transaction->transactionShippingAddress->district)->name,
+            'consignee_city'        => $transaction->transactionShippingAddress->regency->name,
+            'consignee_state'       => $transaction->transactionShippingAddress->province->name,
+            'consignee_zip'         => $transaction->transactionShippingAddress->postal_code,
+            'consignee_phone'       => $transaction->transactionShippingAddress->phone_number,
+            'consignee_mobile_no'   => '',
+            'consignee_email'       => $transaction->receiver->email,
+            'desc_of_goods'         => $transaction->notes,
+            'tot_package'           => $transaction->getTotalQuantity(),
+            'actual_weight'         => '',
+            'tot_weight'            => $transaction->getTotalWeight() / 1000,
+            'tot_declare_value'     => $transaction->grand_total,
+            'tot_dimensi'           => '',
+            'flag_mp_spec_handling' => 'Y',
+            'insurance'             => 'Y',
+            'surcharge'             => 'N',
+            'high_value'            => 'Y',
+            'value_docs'            => 'Y',
+            'electronic'            => 'N',
+            'flag_dangerous_goods'  => 'Y',
+            'flag_birdnest'         => 'N',
+            'declare_value'         => $transaction->grand_total,
+            'format'				=> $this->format,
+            'dest_store_id'         => '',
+            'dest_dc_id'            => '',
+            'widhtx'                => '',
+            'lengthx'               => '',
+            'heightx'               => ''
         ]);
 
         $data = json_decode($response, true);
 
-        return $data;
+        // check the data
+        $check_sendShipmentData = in_array('Success', $data['RPX']['DATA']['0']);
+
+        if($check_sendShipmentData == true) {
+
+            $awb = $data['RPX']['DATA']['0']['AWB_RETURN'];
+
+        } else {
+
+            $awb = null;
+
+        }
+        
+        return $awb;
 	}
 
 
