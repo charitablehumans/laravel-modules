@@ -2,14 +2,19 @@
 
 namespace Modules\Users\Traits;
 
+use Modules\Options\Models\Options;
 use Modules\UserAddresses\Models\UserAddresses;
 use Modules\Users\Models\Users;
 
 trait AttributesTrait
 {
-    public function getNameDashEmailAttribute()
+    public function getGameTokenMultiple()
     {
-        return $this->name.' - '.$this->email;
+        if ($gameTokenMultiple = Options::firstByName('Modules/Users/Models/Users/GameTokenMultiple')->value) {
+            return (int) $gameTokenMultiple;
+        }
+
+        return 1;
     }
 
     public function getGenderOptions()
@@ -23,6 +28,11 @@ trait AttributesTrait
     public function getIdNameOptions()
     {
         return Users::select(['id', 'name'])->orderBy('name')->get()->pluck('name', 'id')->toArray();
+    }
+
+    public function getNameDashEmailAttribute()
+    {
+        return $this->name.' - '.$this->email;
     }
 
     public function getStore()

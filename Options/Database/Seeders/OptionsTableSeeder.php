@@ -25,6 +25,7 @@ class OptionsTableSeeder extends Seeder
             ['type' => 'page_id', 'name' => 'frontend_home_popup_button_text', 'value' => ''],
             ['type' => 'page_id', 'name' => 'frontend_home_popup_button_url', 'value' => ''],
             ['type' => 'number', 'name' => 'Modules/Users/Console/GameTokenAddEverySunday', 'value' => '1'],
+            ['type' => 'number', 'name' => 'Modules/Users/Models/Users/GameTokenMultiple', 'value' => '1'],
         ];
 
         foreach ($options as $option) {

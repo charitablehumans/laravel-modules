@@ -4,10 +4,10 @@ namespace Modules\Options\Traits;
 
 trait HelperTrait
 {
-    public static function getByName($name)
+    public static function firstByName($name)
     {
         return \Cache::remember((new self)->getTable().'-name-'.$name, 1440, function () use ($name) {
-            return self::where('name', $name)->first();
+            return self::where('name', $name)->first() ? self::where('name', $name)->first() : new self;
         });
     }
 
