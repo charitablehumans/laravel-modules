@@ -24,15 +24,6 @@ class Options extends Model
 
     protected $table = 'options';
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        self::saved(function ($model) {
-            \Cache::forget('options-name-'.$model->name);
-        });
-    }
-
     public function getTypeOptions()
     {
         return self::orderBy('type')->get()->pluck('type', 'type')->toArray();

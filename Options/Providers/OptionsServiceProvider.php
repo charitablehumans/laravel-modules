@@ -4,6 +4,8 @@ namespace Modules\Options\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Modules\Options\Models\Options;
+use Modules\Options\Observers\OptionObserver;
 
 class OptionsServiceProvider extends ServiceProvider
 {
@@ -26,6 +28,8 @@ class OptionsServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+
+        Options::observe(OptionObserver::class);
     }
 
     /**
