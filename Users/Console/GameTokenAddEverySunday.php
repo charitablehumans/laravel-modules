@@ -42,7 +42,7 @@ class GameTokenAddEverySunday extends Command
      */
     public function handle()
     {
-        $option = Options::getByName('\Modules\Users\Console\GameTokenAddEverySunday');
+        $option = Options::getByName('Modules/Users/Console/GameTokenAddEverySunday');
 
         if ($option && $option->value > 0) {
             if ($users = Users::all()) {
