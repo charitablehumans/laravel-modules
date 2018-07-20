@@ -18,12 +18,17 @@ class OptionsTableSeeder extends Seeder
         Model::unguard();
 
         $options = [
-            ['type' => 'text', 'name' => 'application_version', 'value' => '1', 'created_at' => date('Y-m-d H:i:s')],
-            ['type' => 'page_id', 'name' => 'frontend_home_page', 'value' => '', 'created_at' => date('Y-m-d H:i:s')],
-            ['type' => 'page_id', 'name' => 'frontend_home_popup', 'value' => '', 'created_at' => date('Y-m-d H:i:s')],
-            ['type' => 'page_id', 'name' => 'frontend_home_popup_button_text', 'value' => '', 'created_at' => date('Y-m-d H:i:s')],
-            ['type' => 'page_id', 'name' => 'frontend_home_popup_button_url', 'value' => '', 'created_at' => date('Y-m-d H:i:s')],
+            ['type' => 'text', 'name' => 'application_version', 'value' => '1'],
+            ['type' => 'number', 'name' => 'cms.users.balance_default', 'value' => '0'],
+            ['type' => 'page_id', 'name' => 'frontend_home_page', 'value' => ''],
+            ['type' => 'page_id', 'name' => 'frontend_home_popup', 'value' => ''],
+            ['type' => 'page_id', 'name' => 'frontend_home_popup_button_text', 'value' => ''],
+            ['type' => 'page_id', 'name' => 'frontend_home_popup_button_url', 'value' => ''],
+            ['type' => 'number', 'name' => '\Modules\Users\Console\GameTokenAddEverySunday', 'value' => '1'],
         ];
-        Options::insert($options);
+
+        foreach ($options as $option) {
+            Options::create($option);
+        }
     }
 }
