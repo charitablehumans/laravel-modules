@@ -79,7 +79,6 @@ return [
         'balance' => true,
         'balance_default' => 0,
         'game_token' => true,
-        'game_token_default' => 0,
 
         'role_default' => 'member',
         'usermetas' => [

@@ -8,9 +8,18 @@ use Modules\Users\Models\Users;
 
 trait AttributesTrait
 {
+    public function getGameTokenDefault()
+    {
+        if ($gameTokenDefault = optional(Options::firstByName('Modules/Users/Models/Users/GameTokenDefault'))->value) {
+            return (int) $gameTokenDefault;
+        }
+
+        return 10;
+    }
+
     public function getGameTokenMultiple()
     {
-        if ($gameTokenMultiple = Options::firstByName('Modules/Users/Models/Users/GameTokenMultiple')->value) {
+        if ($gameTokenMultiple = optional(Options::firstByName('Modules/Users/Models/Users/GameTokenMultiple')->value)) {
             return (int) $gameTokenMultiple;
         }
 
