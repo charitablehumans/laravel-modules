@@ -15,6 +15,7 @@ class ThemeController extends Controller
     public function index()
     {
         return view()->first([
+            'backend/theme/index/'.config('cms.theme.frontend'),
             'theme::backend/theme/index/'.config('cms.theme.frontend'),
             'theme::backend/theme/index/default',
         ]);
