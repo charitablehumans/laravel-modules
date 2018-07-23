@@ -18,6 +18,8 @@ class OptionsTableSeeder extends Seeder
         Model::unguard();
 
         $options = [
+            ['type' => 'APP_ENV', 'name' => 'APP_ENV', 'value' => 'local'],
+            ['type' => 'url', 'name' => 'APP_URL', 'value' => 'https://laravel.com'],
             ['type' => 'text', 'name' => 'application_version', 'value' => '1'],
             ['type' => 'number', 'name' => 'cms.users.balance_default', 'value' => '0'],
             ['type' => 'page_id', 'name' => 'frontend_home_page', 'value' => ''],

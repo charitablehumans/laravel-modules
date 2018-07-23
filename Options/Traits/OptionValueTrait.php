@@ -4,6 +4,14 @@ namespace Modules\Options\Traits;
 
 trait OptionValueTrait
 {
+    public function getAppEnvOptions()
+    {
+        return [
+            'maintenance' => 'maintenance',
+            'local' => 'local',
+        ];
+    }
+
     public function getPages()
     {
         return \Modules\Pages\Models\Pages::search(['status' => 'publish', 'sort' => 'title:asc'])->get();
