@@ -8,13 +8,22 @@ use Modules\Users\Models\Users;
 
 trait AttributesTrait
 {
+    public function getBalanceDefault()
+    {
+        if ($balanceDefault = optional(Options::firstByName('Modules/Users/Models/Users/BalanceDefault'))->value) {
+            return (int) $balanceDefault;
+        }
+
+        return 0;
+    }
+
     public function getGameTokenDefault()
     {
         if ($gameTokenDefault = optional(Options::firstByName('Modules/Users/Models/Users/GameTokenDefault'))->value) {
             return (int) $gameTokenDefault;
         }
 
-        return 10;
+        return 0;
     }
 
     public function getGameTokenMultiple()

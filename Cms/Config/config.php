@@ -77,7 +77,6 @@ return [
     'users' => [
         'store_id' => true,
         'balance' => true,
-        'balance_default' => 0,
         'game_token' => true,
 
         'role_default' => 'member',

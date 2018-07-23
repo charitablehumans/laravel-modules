@@ -28,6 +28,7 @@ class OptionsTableSeeder extends Seeder
             ['type' => 'page_id', 'name' => 'frontend_home_popup_button_url', 'value' => ''],
             ['type' => 'number', 'name' => 'Modules/Users/Console/GameTokenAddEveryMonday', 'value' => '0'],
             ['type' => 'number', 'name' => 'Modules/Users/Console/GameTokenAddEverySunday', 'value' => '0'],
+            ['type' => 'number', 'name' => 'Modules/Users/Models/Users/BalanceDefault', 'value' => '0'],
             ['type' => 'number', 'name' => 'Modules/Users/Models/Users/GameTokenDefault', 'value' => '10'],
             ['type' => 'number', 'name' => 'Modules/Users/Models/Users/GameTokenMultiple', 'value' => '1'],
         ];

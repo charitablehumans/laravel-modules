@@ -97,7 +97,7 @@ class AuthenticationController extends Controller
         $user->password = \Hash::make($user->password);
         $user->verified = 0;
         $user->verification_code = rand(111111, 999999);
-        $user->balance = Options::firstByName('cms.users.balance_default') ? Options::firstByName('cms.users.balance_default')->value : \Config::get('cms.users.balance_default');
+        $user->balance = $user->getBalanceDefault();
         $user->game_token = $user->getGameTokenDefault();
         $user->save();
 
