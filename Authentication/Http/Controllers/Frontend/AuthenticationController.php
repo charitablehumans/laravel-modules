@@ -11,7 +11,11 @@ class AuthenticationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('guest')->except('logoutStore');
+        $this->middleware('guest')->except([
+            'logoutStore',
+            'verify',
+            'verifyStore',
+        ]);
     }
 
     public function login()
