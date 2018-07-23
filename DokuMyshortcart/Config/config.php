@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'name' => 'Doku',
+    'name' => 'Doku MyShortcart',
 
     'cancel_route' => env('DOKU_MYSHORTCART_ROUTE', 'frontend'),
     'ip_address' => env('DOKU_MYSHORTCART_IP_ADDRESS', '103.10.128.14'),
