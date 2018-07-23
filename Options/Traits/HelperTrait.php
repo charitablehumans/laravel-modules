@@ -14,6 +14,6 @@ trait HelperTrait
     // DEPRECATED, and will be REMOVED soon
     public static function getOptionByName($name)
     {
-        return self::getByName($name);
+        return self::firstByName($name);
     }
 }
