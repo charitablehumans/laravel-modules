@@ -22,8 +22,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::put('authentication/password/reset', ['as' => 'frontend.authentication.passwordResetUpdate', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@passwordResetUpdate']);
     Route::get('authentication/register', ['as' => 'frontend.authentication.register', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@register']);
     Route::post('authentication/register', ['as' => 'frontend.authentication.registerStore', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@registerStore']);
-    Route::group(['middleware' => ['auth']], function () {
-        Route::get('authentication/verify', ['as' => 'frontend.authentication.verify', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@verify']);
-        Route::post('authentication/verify', ['as' => 'frontend.authentication.verifyStore', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@verifyStore']);
-    });
+    Route::get('authentication/verify', ['as' => 'frontend.authentication.verify', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@verify']);
+    Route::post('authentication/verify', ['as' => 'frontend.authentication.verifyStore', 'uses' => '\Modules\Authentication\Http\Controllers\Frontend\AuthenticationController@verifyStore']);
 });

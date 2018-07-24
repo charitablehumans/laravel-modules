@@ -7,7 +7,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">@lang('cms::cms.login')</div>
                     <div class="panel-body">
-                        <form action="{{ route('frontend.authentication.loginStore') }}" class="form-horizontal" method="post">
+                        <form action="{{ route('frontend.authentication.loginStore', request()->query()) }}" class="form-horizontal" method="post">
                             {{ csrf_field() }}
 
                             <div class="form-group">

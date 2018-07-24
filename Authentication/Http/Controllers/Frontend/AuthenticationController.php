@@ -31,6 +31,9 @@ class AuthenticationController extends Controller
         ]);
 
         if (\Auth::attempt($request->only('email', 'password'), $request->has('remember'))) {
+            if ($request->query('url')) {
+                return redirect($request->query('url'));
+            }
 
             return redirect()->back();
         } else {
