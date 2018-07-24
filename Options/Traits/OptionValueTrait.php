@@ -9,6 +9,7 @@ trait OptionValueTrait
         return [
             'maintenance' => 'maintenance',
             'local' => 'local',
+            'production' => 'production',
         ];
     }
 
