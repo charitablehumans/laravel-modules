@@ -27,6 +27,7 @@ class CmsServiceProvider extends ServiceProvider
         $this->registerFactories();
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
+        app()->environment('production') ? url()->forceScheme('https') : '';
         \Config::get('cms.cache') ? '' : \Artisan::call('cache:clear');
     }
 
