@@ -28,7 +28,7 @@ trait AttributesTrait
 
     public function getGameTokenMultiple()
     {
-        if ($gameTokenMultiple = optional(Options::firstByName('Modules/Users/Models/Users/GameTokenMultiple')->value)) {
+        if ($gameTokenMultiple = optional(Options::firstByName('Modules/Users/Models/Users/GameTokenMultiple'))->value) {
             return (int) $gameTokenMultiple;
         }
 

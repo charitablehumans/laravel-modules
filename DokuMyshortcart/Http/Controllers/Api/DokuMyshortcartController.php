@@ -90,6 +90,8 @@ class DokuMyshortcartController extends Controller
                 $transaction->payment_type = $request->input('PTYPE');
                 $transaction->save();
 
+                // 2.3 Send email success to member, bcc: store, admin, superadmin
+
                 return 'Continue';
             }
         }
