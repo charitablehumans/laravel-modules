@@ -7,10 +7,18 @@ use Illuminate\Routing\Controller;
 use Modules\Permissions\Models\Permission;
 use Modules\Roles\Models\Role;
 use Modules\Usermetas\Models\Usermetas;
+use Modules\Users\Excel\UserExcel;
 use Modules\Users\Models\Users;
 
 class UsersController extends Controller
 {
+    protected $model;
+
+    public function __construct()
+    {
+        $this->model = new Users;
+    }
+
     public function index(Request $request)
     {
         $request->query('sort') ?: $request->query->set('sort', 'email:asc');
@@ -20,7 +28,9 @@ class UsersController extends Controller
         $data['role'] = new Role;
         $data['users'] = Users::with('roles')->search($request->query())->paginate($request->query('limit'));
 
-        if ($request->query('action')) { (new Users)->action($request->query()); return redirect()->back(); }
+        if ($indexAction = $this->indexAction($request)) {
+            return $indexAction;
+        }
 
         return view('users::backend/index', $data);
     }
@@ -103,6 +113,26 @@ class UsersController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function indexAction(Request $request)
+    {
+        $users = null;
+
+        if ($actionId = $request->query('action_id')) {
+            $users = Users::search($request->query())->whereIn('id', $actionId)->paginate($request->query('limit'));
+        }
+
+        if ($request->query('action') == 'delete' && $users) {
+            $users->each(function ($user) { $user->delete(); });
+            flash(trans('cms::cms.deleted').' ('.$users->count().')')->success()->important();
+            return redirect()->back();
+        } else if ($request->query('action') == 'export_to_excel' && $users) {
+            return \Excel::download(
+                new UserExcel($users),
+                $this->model->getTable().'-'.date('YmdHis').'.xlsx'
+            );
+        }
     }
 
     public function delete($id)

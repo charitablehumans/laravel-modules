@@ -70,17 +70,6 @@ class Users extends \App\User
         return $completed;
     }
 
-    public function scopeAction($query, $params)
-    {
-        if ($params['action'] == 'delete' && isset($params['action_id'])) {
-            if ($users = self::whereIn('id', $params['action_id'])->get()) {
-                $users->each(function ($user) { $user->delete(); });
-            }
-            flash(trans('cms::cms.data_has_been_deleted').' ('.$users->count().')')->success()->important();
-        }
-        return $query;
-    }
-
     public function scopeSearch($query, $params)
     {
         isset($params['id']) ? $query->where('id', $params['id']) : '';

@@ -18,15 +18,16 @@
                 <table class="table table-bordered table-condensed table-striped">
                     <thead>
                         <tr>
-                            <th class="text-right" colspan="10">
-                                <div class="form-inline">
+                            <th colspan="10">
+                                <div class="pull-left">{{ number_format($users->total()) }} @lang('cms::cms.total')</div>
+                                <div class="form-inline pull-right">
                                     <div class="form-group">
                                         @lang('cms::cms.per_page')
                                         <select class="input-sm" name="limit">
                                             <option {{ request()->query('limit') == '10' ? 'selected' : '' }} value="10">10</option>
-                                            <option {{ request()->query('limit') == '25' ? 'selected' : '' }} value="25">25</option>
-                                            <option {{ request()->query('limit') == '50' ? 'selected' : '' }} value="50">50</option>
                                             <option {{ request()->query('limit') == '100' ? 'selected' : '' }} value="100">100</option>
+                                            <option {{ request()->query('limit') == '1000' ? 'selected' : '' }} value="1000">1000</option>
+                                            <option {{ request()->query('limit') == '10000' ? 'selected' : '' }} value="10000">10000</option>
                                         </select>
                                         @lang('cms::cms.sort')
                                         <select class="input-sm" name="sort">
@@ -168,6 +169,7 @@
                                 <select class="input-xs" name="action">
                                     <option value="">@lang('cms::cms.action')</option>
                                     <option value="delete">@lang('cms::cms.delete')</option>
+                                    <option value="export_to_excel">@lang('cms::cms.export_to_excel')</option>
                                 </select>
                                 <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
                             </td>
