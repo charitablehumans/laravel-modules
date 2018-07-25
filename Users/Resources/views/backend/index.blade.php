@@ -166,11 +166,17 @@
                     <tfoot>
                         <tr>
                             <td colspan="10">
-                                <select class="input-xs" name="action">
-                                    <option value="">@lang('cms::cms.action')</option>
-                                    <option value="delete">@lang('cms::cms.delete')</option>
-                                    <option value="export_to_excel">@lang('cms::cms.export_to_excel')</option>
-                                </select>
+                                <div class="pull-left">
+                                    <select class="input-xs" name="action">
+                                        <option value="">@lang('cms::cms.action')</option>
+                                        <option value="delete">@lang('cms::cms.delete')</option>
+                                    </select>
+                                </div>
+                                <div class="pull-right">
+                                    <a class="btn btn-success btn-xs" href="{{ request()->fullUrlWithQuery(['action' => 'export_to_excel']) }}" title="@lang('cms::cms.export_to_excel')">
+                                        <i class="fa fa-file-excel-o"></i> {{ count($users) }}
+                                    </a>
+                                </div>
                                 <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
                             </td>
                         </tr>

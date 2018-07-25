@@ -117,17 +117,14 @@ class UsersController extends Controller
 
     public function indexAction(Request $request)
     {
-        $users = null;
-
-        if ($actionId = $request->query('action_id')) {
+        if ($request->query('action') == 'delete' && $actionId = $request->query('action_id')) {
             $users = Users::search($request->query())->whereIn('id', $actionId)->paginate($request->query('limit'));
-        }
-
-        if ($request->query('action') == 'delete' && $users) {
             $users->each(function ($user) { $user->delete(); });
             flash(trans('cms::cms.deleted').' ('.$users->count().')')->success()->important();
             return redirect()->back();
-        } else if ($request->query('action') == 'export_to_excel' && $users) {
+        } else if ($request->query('action') == 'export_to_excel') {
+            $users = Users::search($request->query())->paginate($request->query('limit'));
+
             return \Excel::download(
                 new UserExcel($users),
                 $this->model->getTable().'-'.date('YmdHis').'.xlsx'
