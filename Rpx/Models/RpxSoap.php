@@ -19,7 +19,7 @@ class RpxSoap extends Model
 	
     public function __construct()
     {
-        $this->soapWrapper = new soapWrapper;
+        $this->soapWrapper = new SoapWrapper;
 
         $this->soapWrapper->add('Data', function ($service) {
             $service
