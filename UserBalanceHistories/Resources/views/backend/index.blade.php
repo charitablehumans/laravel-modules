@@ -128,7 +128,7 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td align="center" colspan="8">{{ $userBalanceHistories->appends(request()->query())->links('cms::vendor.pagination.default-2') }}</td>
+                            <td align="center" colspan="8">{{ $userBalanceHistories->appends(request()->query())->links('cms::vendor/pagination/default-2') }}</td>
                         </tr>
                     </tfoot>
                 </table>
