@@ -1,0 +1,16 @@
+{
+    "name": "UserGameTokenHistories",
+    "alias": "usergametokenhistories",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\UserGameTokenHistories\\Providers\\UserGameTokenHistoriesServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}
