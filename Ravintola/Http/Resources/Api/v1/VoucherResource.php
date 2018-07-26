@@ -18,7 +18,7 @@ class VoucherResource extends Resource
             'id' => (string) $this->uuid,
             'code' => (string) $this->verification_number,
             'expiry' => (string) $this->expiry,
-            'value' => (integer) $this->value,
+            'value' => (integer) config('ravintola.value.enabled') ? $this->value : 0,
             'used_time' => (string) $this->used_time,
 
             'used_time' => (string) $this->used_time,
