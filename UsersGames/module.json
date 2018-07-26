@@ -1,0 +1,16 @@
+{
+    "name": "UsersGames",
+    "alias": "usersgames",
+    "description": "",
+    "keywords": [],
+    "active": 1,
+    "order": 0,
+    "providers": [
+        "Modules\\UsersGames\\Providers\\UsersGamesServiceProvider"
+    ],
+    "aliases": {},
+    "files": [
+        "start.php"
+    ],
+    "requires": []
+}

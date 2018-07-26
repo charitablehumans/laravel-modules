@@ -1,0 +1,25 @@
+{
+    "name": "nwidart/usersgames",
+    "description": "",
+    "authors": [
+        {
+            "name": "Nicolas Widart",
+            "email": "n.widart@gmail.com"
+        }
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\UsersGames\\Providers\\UsersGamesServiceProvider"
+            ],
+            "aliases": {
+                
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\UsersGames\\": ""
+        }
+    }
+}
