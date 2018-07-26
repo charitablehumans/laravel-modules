@@ -80,5 +80,6 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'backend user socialites']);
         Permission::create(['name' => 'backend users']);
         Permission::create(['name' => 'backend users store all']);
+        Permission::create(['name' => 'users-games.backend.*']);
     }
 }

@@ -98,7 +98,16 @@
                     @if (config('cms.users.game_token'))
                         <div class="col-md-3">
                             <div class="panel panel-default">
-                                <div class="panel-heading">@lang('validation.attributes.game_token') (*)</div>
+                                <div class="panel-heading">
+                                    @lang('validation.attributes.game_token') (*)
+                                    @if ($user->id)
+                                        <a
+                                            data-fancybox
+                                            data-type="iframe"
+                                            href="{{ route('users-games.backend.users-games.user-id.show', [$user->id, 'layout' => 'media_iframe']) }}"
+                                        >»</a>
+                                    @endif
+                                </div>
                                 <div class="panel-body">
                                     <div class="form-group">
                                         <input class="form-control input-sm text-right" name="game_token" required type="number" value="{{ request()->old('game_token', $user->game_token) }}" />
