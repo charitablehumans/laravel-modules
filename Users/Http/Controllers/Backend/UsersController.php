@@ -61,6 +61,7 @@ class UsersController extends Controller
         $user = new Users;
         $user->fill($request->input());
         // $user->userBalanceHistoryCreate(['type' => 'backend_users']);
+        // $user->userGameTokenHistoryCreate(['type' => 'backend_users']);
         $user->save();
         (new Usermetas)->sync($request->input('usermetas'), $user->id);
         auth()->user()->can('backend roles') ? $user->syncRoles($request->input('roles')) : '';
@@ -96,6 +97,7 @@ class UsersController extends Controller
         $request->input('password') ? $request->merge(['password' => \Hash::make($request->input('password'))]) : $request->request->remove('password');
         $user->fill($request->input());
         $user->userBalanceHistoryCreate(['type' => 'backend_users']);
+        $user->userGameTokenHistoryCreate(['type' => 'backend_users']);
         $user->save();
         (new Usermetas)->sync($request->input('usermetas'), $user->id);
         auth()->user()->can('backend roles') ? $user->syncRoles($request->input('roles')) : '';

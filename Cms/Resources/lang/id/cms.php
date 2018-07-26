@@ -248,6 +248,7 @@ return [
     'user_addresses' => 'Alamat Pengguna',
     'user_balance_histories' => 'Riwayat Saldo Pengguna',
     'user_game_histories' => 'Riwayat Permainan Pengguna',
+    'user_game_token_histories' => 'Riwayat Token Permainan Pengguna',
     'user_socialites' => 'Sosialita Pengguna',
     'users' => 'Pengguna',
     'validate' => 'Mensahkan',

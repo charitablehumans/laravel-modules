@@ -2,6 +2,9 @@
 
 namespace Modules\Users\Models;
 
+use Modules\UserBalanceHistories\Models\UserBalanceHistories;
+use Modules\UserGameTokenHistories\Models\UserGameTokenHistories;
+
 class Users extends \App\User
 {
     use \Modules\Users\Traits\AttributesTrait;
@@ -142,16 +145,33 @@ class Users extends \App\User
 
     public function userBalanceHistories()
     {
-        return $this->hasMany('\Modules\UserBalanceHistories\Models\UserBalanceHistories', 'user_id')->orderBy('created_at', 'desc')->latest();
+        return $this->hasMany(UserBalanceHistories::class, 'user_id')->orderBy('created_at', 'desc')->latest();
     }
 
     public function userBalanceHistoryCreate($data = [])
     {
-        if ($this->getOriginal('balance') != $this->balance) {
+        if ($this->balance != $this->getOriginal('balance')) {
             $data['balance_start'] = $this->getOriginal('balance');
             $data['balance'] = $this->balance - $this->getOriginal('balance');
             $data['balance_end'] = $this->balance;
-            $this->userBalanceHistories()->save(new \Modules\UserBalanceHistories\Models\UserBalanceHistories($data));
+            $this->userBalanceHistories()->save(new UserBalanceHistories($data));
+        }
+
+        return $this;
+    }
+
+    public function userGameTokenHistories()
+    {
+        return $this->hasMany(UserGameTokenHistories::class, 'user_id')->orderBy('created_at', 'desc')->latest();
+    }
+
+    public function userGameTokenHistoryCreate($data = [])
+    {
+        if ($this->game_token != $this->getOriginal('game_token')) {
+            $data['game_token_start'] = $this->getOriginal('game_token');
+            $data['game_token'] = $this->game_token - $this->getOriginal('game_token');
+            $data['game_token_end'] = $this->game_token;
+            $this->userGameTokenHistories()->save(new UserGameTokenHistories($data));
         }
 
         return $this;

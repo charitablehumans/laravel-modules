@@ -2,15 +2,15 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Modules\UserBalanceHistories\Models\UserBalanceHistories;
+use Modules\UserGameTokenHistories\Models\UserGameTokenHistories;
 
-class CreateUserBalanceHistoriesTable extends Migration
+class CreateUserGameTokenHistoriesTable extends Migration
 {
     protected $model;
 
     public function __construct()
     {
-        $this->model = new UserBalanceHistories;
+        $this->model = new UserGameTokenHistories;
     }
 
     /**
@@ -25,10 +25,10 @@ class CreateUserBalanceHistoriesTable extends Migration
             $table->bigInteger('user_id')->comment('users.id');
             $table->string('type')->comment('{ transaction }');
             $table->bigInteger('reference_id');
-            $table->bigInteger('balance_start')->default(0)->nullable();
+            $table->bigInteger('game_token_start')->default(0)->nullable();
 
-            $table->bigInteger('balance')->default(0)->nullable();
-            $table->bigInteger('balance_end')->default(0)->nullable();
+            $table->bigInteger('game_token')->default(0)->nullable();
+            $table->bigInteger('game_token_end')->default(0)->nullable();
             $table->text('notes')->nullable();
 
             $table->timestamps();

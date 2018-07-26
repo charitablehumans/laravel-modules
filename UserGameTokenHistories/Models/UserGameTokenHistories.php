@@ -1,23 +1,21 @@
 <?php
 
-namespace Modules\UserBalanceHistories\Models;
+namespace Modules\UserGameTokenHistories\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserBalanceHistories extends Model
+class UserGameTokenHistories extends Model
 {
     protected $fillable = [
         'user_id',
         'type',
         'reference_id',
-        'balance_start',
+        'game_token_start',
 
-        'balance',
-        'balance_end',
+        'game_token',
+        'game_token_end',
         'notes',
     ];
-
-    protected $table = 'user_balance_histories';
 
     public function getTypeOptions()
     {
@@ -27,31 +25,28 @@ class UserBalanceHistories extends Model
     public function scopeSearch($query, $params)
     {
         isset($params['id']) ? $query->where('id', $params['id']) : '';
-        isset($params['id_in']) ? $query->whereIn('id', $params['id_in']) : '';
         isset($params['user_id']) ? $query->where('user_id', $params['user_id']) : '';
         isset($params['type']) ? $query->where('type', $params['type']) : '';
-        isset($params['type_like']) ? $query->where('type', 'like', '%'.$params['type_like'].'%') : '';
         isset($params['reference_id']) ? $query->where('reference_id', $params['reference_id']) : '';
-        isset($params['reference_id_like']) ? $query->where('reference_id', 'like', '%'.$params['reference_id_like'].'%') : '';
-        if (isset($params['balance_start'])) {
-            if (isset($params['balance_start_operator'])) {
-                $query->where('balance_start', $params['balance_start_operator'], $params['balance_start']);
+        if (isset($params['game_token_start'])) {
+            if (isset($params['game_token_start_operator'])) {
+                $query->where('game_token_start', $params['game_token_start_operator'], $params['game_token_start']);
             } else {
-                $query->where('balance_start', $params['balance_start']);
+                $query->where('game_token_start', $params['game_token_start']);
             }
         }
-        if (isset($params['balance'])) {
-            if (isset($params['balance_operator'])) {
-                $query->where('balance', $params['balance_operator'], $params['balance']);
+        if (isset($params['game_token'])) {
+            if (isset($params['game_token_operator'])) {
+                $query->where('game_token', $params['game_token_operator'], $params['game_token']);
             } else {
-                $query->where('balance', $params['balance']);
+                $query->where('game_token', $params['game_token']);
             }
         }
-        if (isset($params['balance_end'])) {
-            if (isset($params['balance_end_operator'])) {
-                $query->where('balance_end', $params['balance_end_operator'], $params['balance_end']);
+        if (isset($params['game_token_end'])) {
+            if (isset($params['game_token_end_operator'])) {
+                $query->where('game_token_end', $params['game_token_end_operator'], $params['game_token_end']);
             } else {
-                $query->where('balance_end', $params['balance_end']);
+                $query->where('game_token_end', $params['game_token_end']);
             }
         }
         isset($params['created_at_date']) ? $query->whereDate(self::getTable().'.created_at', '=', $params['created_at_date']) : '';

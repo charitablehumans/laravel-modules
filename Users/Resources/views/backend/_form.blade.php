@@ -106,6 +106,11 @@
                                             data-type="iframe"
                                             href="{{ route('users-games.backend.users-games.user-id.show', [$user->id, 'layout' => 'media_iframe']) }}"
                                         >»</a>
+                                        <a
+                                            data-fancybox
+                                            data-type="iframe"
+                                            href="{{ route('user-game-token-histories.backend.user-game-token-histories.user-id.show', [$user->id, 'layout' => 'media_iframe']) }}"
+                                        >»</a>
                                     @endif
                                 </div>
                                 <div class="panel-body">

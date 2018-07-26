@@ -76,6 +76,7 @@ class ValidateVoucherController extends Controller
 
         // 6. Update users.game_token
         $user->game_token += (int) $ravintolaUserVoucher->transaction_remaining_amount / (int) Options::firstByName('amount_ratio_game_token')->value * $user->getGameTokenMultiple();
+        $user->userGameTokenHistoryCreate(['type' => 'ravintola_user_voucher', 'reference_id' => $ravintolaUserVoucher->id]);
         $user->save();
 
         // 7. Response json ok

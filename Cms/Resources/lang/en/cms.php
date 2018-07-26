@@ -248,6 +248,7 @@ return [
     'user_addresses' => 'User Addresses',
     'user_balance_histories' => 'User Balance Histories',
     'user_game_histories' => 'User Game Histories',
+    'user_game_token_histories' => 'User Game Token Histories',
     'user_socialites' => 'User Socialites',
     'users' => 'Users',
     'validate' => 'Validate',
