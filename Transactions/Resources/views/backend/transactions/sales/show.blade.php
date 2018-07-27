@@ -47,15 +47,19 @@
                                 <input class="form-control input-sm" name="receipt_number" placeholder="@lang('validation.attributes.receipt_number')" required type="text" value="{{ $transaction->receipt_number }}" />
                                 <input class="btn btn-success btn-sm" name="send" type="submit" value="@lang('cms::cms.save')" />
                             @endif
-                            @if (in_array($transaction->status, ['sent']))
-                                <a data-fancybox data-type="iframe" href="{{ route('frontend.rpx.sales.tracking.show', $transaction->receipt_number) }}" class="btn btn-primary btn-sm">Tracking AWB</a>
+                            @if (in_array($transaction->status, ['sent']) && $transaction->receipt_number)
+                                @if ($transaction->transactionShipment->code == $transaction->transactionShipment::$codeRpx)
+                                    <a data-fancybox data-type="iframe" href="{{ route('frontend.rpx.sales.tracking.show', $transaction->receipt_number) }}" class="btn btn-primary btn-sm">Tracking AWB</a>
+                                @else
+                                    <a data-fancybox data-type="iframe" href="{{ route('rajaongkir.backend.rajaongkir.tracking', [$transaction->transactionShipment->code, $transaction->receipt_number, 'layout' => 'media_iframe']) }}" class="btn btn-primary btn-sm">@lang('cms::cms.track')</a>
+                                @endif
                             @endif
                         </div>
                     </div>
                 </div>
                 <div class="box">
                     <div class="box-body">
-                        <a href="mailto:webmaster@example.com">{{ $transaction->receiver->email }}</a>,
+                        <a href="mailto:{{ $transaction->receiver->email }}">{{ $transaction->receiver->email }}</a>,
                         {{ $transaction->receiver->name }},
                         {{ $transaction->receiver->phone_number }}
                     </div>

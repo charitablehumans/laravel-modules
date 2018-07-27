@@ -3,11 +3,14 @@
 namespace Modules\TransactionShipment\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\Transactions\Models\Transactions;
 
 class TransactionShipment extends Model
 {
+    public static $codeJne = 'jne';
+    public static $codeRpx = 'rpx';
+
     protected $fillable = [
-        // 'id',
         'transaction_id',
         'code',
         'name',
@@ -22,6 +25,6 @@ class TransactionShipment extends Model
 
     public function transaction()
     {
-        return $this->belongsTo('Modules\Transactions\Models\Transactions', 'transaction_id');
+        return $this->belongsTo(Transactions::class, 'transaction_id');
     }
 }

@@ -239,6 +239,7 @@ return [
     'total' => 'Total',
     'total_point' => 'Total Poin',
     'total_shipping_cost' => 'Total Biaya Pengiriman',
+    'track' => 'Lacak',
     'track_order' => 'Lacak Pesanan',
     'transaction' => 'Transaksi',
     'transaction_details' => 'Detil Transaksi',
