@@ -16,15 +16,17 @@ class Rajaongkir extends Model
     const BASIC_CITY_URL = 'https://api.rajaongkir.com/basic/city';
     const BASIC_COST_URL = 'https://api.rajaongkir.com/basic/cost';
 
-    const PRO_PROVINCE_URL = 'https://api.rajaongkir.com/pro/province';
-    const PRO_CITY_URL = 'https://api.rajaongkir.com/pro/city';
+    const PRO_PROVINCE_URL = 'https://pro.rajaongkir.com/api/province';
+    const PRO_CITY_URL = 'https://pro.rajaongkir.com/api/city';
+    const PRO_SUBSDISTRICT_URL = 'https://pro.rajaongkir.com/api/subdistrict';
     const PRO_COST_URL = 'https://pro.rajaongkir.com/api/cost';
+    const PRO_WAYBILL_URL = 'https://pro.rajaongkir.com/api/waybill';
 
     protected $fillable = [];
 
     public function getCityUrl()
     {
-        $account = strtolower(env('RAJAONGKIR_ACCOUNT'));
+        $account = strtolower(config('rajaongkir.account'));
 
         switch ($account) {
             case 'starter':
@@ -49,16 +51,17 @@ class Rajaongkir extends Model
     {
         try {
             $client = new Client();
-            $options['headers'] = ['Key' => env('RAJAONGKIR_KEY')];
+            $options['headers'] = ['Key' => config('rajaongkir.key')];
             $query ? $options['query'] = $query : '';
             $response = $client->get($this->getCityUrl(), $options);
 
             $contents = json_decode($response->getBody()->getContents(), true);
             $results = $contents['rajaongkir']['results'];
         } catch (ClientException $e) {
-            // $response = $e->getResponse();
-            // $contents = json_decode($response->getBody()->getContents(), true);
-            $results = false;
+            $response = $e->getResponse();
+            $contents = $response->getBody()->getContents();
+            logger()->error($response->getStatusCode().'. '.$contents);
+            abort($response->getStatusCode(), $contents);
         }
 
         return $results;
@@ -81,15 +84,16 @@ class Rajaongkir extends Model
             $client = new Client();
             $formParams['weight'] = $formParams['weight'] > 0 ? $formParams['weight'] : 1;
             $options['form_params'] = $formParams;
-            $options['headers'] = ['Key' => env('RAJAONGKIR_KEY')];
+            $options['headers'] = ['Key' => config('rajaongkir.key')];
             $response = $client->post($this->getCostUrl(), $options);
 
             $contents = json_decode($response->getBody()->getContents(), true);
             $results = $contents['rajaongkir']['results'][0];
         } catch (ClientException $e) {
-            // $response = $e->getResponse();
-            // $contents = json_decode($response->getBody()->getContents(), true);
-            $results = false;
+            $response = $e->getResponse();
+            $contents = $response->getBody()->getContents();
+            logger()->error($response->getStatusCode().'. '.$contents);
+            abort($response->getStatusCode(), $contents);
         }
 
         return $results;
@@ -120,7 +124,7 @@ class Rajaongkir extends Model
                 $client = new Client();
                 $formParams['courier'] = $courier;
                 $options['form_params'] = $formParams;
-                $options['headers'] = ['Key' => env('RAJAONGKIR_KEY')];
+                $options['headers'] = ['Key' => config('rajaongkir.key')];
                 $response = $client->post($this->getCostUrl(), $options);
 
                 $contents = json_decode($response->getBody()->getContents(), true);
@@ -138,9 +142,10 @@ class Rajaongkir extends Model
                     ];
                 }
             } catch (ClientException $e) {
-                // $response = $e->getResponse();
-                // $contents = json_decode($response->getBody()->getContents(), true);
-                $costs = false;
+                $response = $e->getResponse();
+                $contents = $response->getBody()->getContents();
+                logger()->error($response->getStatusCode().'. '.$contents);
+                abort($response->getStatusCode(), $contents);
             }
         }
 
@@ -149,7 +154,7 @@ class Rajaongkir extends Model
 
     public function getCostUrl()
     {
-        $account = strtolower(env('RAJAONGKIR_ACCOUNT'));
+        $account = strtolower(config('rajaongkir.account'));
 
         switch ($account) {
             case 'starter':
@@ -165,7 +170,7 @@ class Rajaongkir extends Model
 
     public function getCouriers()
     {
-        $account = strtolower(env('RAJAONGKIR_ACCOUNT'));
+        $account = strtolower(config('rajaongkir.account'));
         $couriers = [
             'jne' => 'JNE',
             'tiki' => 'TIKI',
@@ -225,7 +230,7 @@ class Rajaongkir extends Model
 
     public function getProvinceUrl()
     {
-        $account = strtolower(env('RAJAONGKIR_ACCOUNT'));
+        $account = strtolower(config('rajaongkir.account'));
 
         switch ($account) {
             case 'starter':
@@ -251,18 +256,98 @@ class Rajaongkir extends Model
     {
         try {
             $client = new Client();
-            $options['headers'] = ['Key' => env('RAJAONGKIR_KEY')];
+            $options['headers'] = ['Key' => config('rajaongkir.key')];
             $query ? $options['query'] = $query : '';
             $response = $client->get($this->getProvinceUrl(), $options);
 
             $contents = json_decode($response->getBody()->getContents(), true);
             $results = $contents['rajaongkir']['results'];
         } catch (ClientException $e) {
-            // $response = $e->getResponse();
-            // $contents = json_decode($response->getBody()->getContents(), true);
-            $results = false;
+            $response = $e->getResponse();
+            $contents = $response->getBody()->getContents();
+            logger()->error($response->getStatusCode().'. '.$contents);
+            abort($response->getStatusCode(), $contents);
         }
 
         return $results;
+    }
+
+    /**
+     * [getSubdistricts description]
+     * @param array $query
+     * [
+     *      'id' => 1,
+     * ]
+     */
+    public function getSubdistricts($query = [])
+    {
+        try {
+            $client = new Client();
+            $options['headers'] = ['Key' => config('rajaongkir.key')];
+            $query ? $options['query'] = $query : '';
+            $response = $client->get($this->getSubdistrictUrl(), $options);
+
+            $contents = json_decode($response->getBody()->getContents(), true);
+            $results = $contents['rajaongkir']['results'];
+        } catch (ClientException $e) {
+            $response = $e->getResponse();
+            $contents = $response->getBody()->getContents();
+            logger()->error($response->getStatusCode().'. '.$contents);
+            abort($response->getStatusCode(), $contents);
+        }
+
+        return $results;
+    }
+
+    public function getSubdistrictUrl()
+    {
+        $account = strtolower(config('rajaongkir.account'));
+
+        switch ($account) {
+            case 'pro':
+                return self::PRO_SUBSDISTRICT_URL;
+            default :
+                return self::PRO_SUBSDISTRICT_URL;
+        }
+    }
+
+    public function getWaybillUrl()
+    {
+        $account = strtolower(config('rajaongkir.account'));
+
+        switch ($account) {
+            case 'pro':
+                return self::PRO_WAYBILL_URL;
+            default :
+                return self::PRO_WAYBILL_URL;
+        }
+    }
+
+    /**
+     * [getWaybill description]
+     * @param array $body
+     * [
+     *      'courier' => jne,
+     *      'waybill' => 'SOCAG00183235715',
+     * ]
+     */
+    public function getWaybill($formParams = [])
+    {
+        try {
+            $client = new Client();
+            $options['headers'] = ['Key' => config('rajaongkir.key')];
+            $formParams ? $options['form_params'] = $formParams : '';
+            $response = $client->post($this->getWaybillUrl(), $options);
+
+            $contents = json_decode($response->getBody()->getContents(), true);
+            $result = $contents['rajaongkir']['result'];
+        } catch (ClientException $e) {
+            $response = $e->getResponse();
+            $contents = $response->getBody()->getContents();
+            logger()->error($response->getStatusCode().'. '.$contents);
+            abort($response->getStatusCode(), $contents);
+        }
+
+        return $result;
     }
 }

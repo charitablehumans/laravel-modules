@@ -13,7 +13,8 @@ Route::group(['middleware' => ['api']], function () {
 Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => ['auth']], function () {
         Route::group(['middleware' => ['permission:backend rajaongkir']], function () {
-            Route::resource('backend/rajaongkir', '\Modules\Rajaongkir\Http\Controllers\Backend\RajaongkirController', ['as' => 'backend']);
+            Route::resource('backend/rajaongkir', '\Modules\Rajaongkir\Http\Controllers\Backend\RajaongkirController', ['as' => 'backend'])->only(['index']);
+            Route::get('backend/rajaongkir/tracking/{courier}/{waybill}', ['as' => 'backend.rajaongkir.tracking', 'uses' => '\Modules\Rajaongkir\Http\Controllers\Backend\RajaongkirController@tracking']);
         });
     });
 });

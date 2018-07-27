@@ -2,37 +2,43 @@
 
 namespace Modules\Rajaongkir\Http\Controllers\Backend;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Modules\Rajaongkir\Models\Rajaongkir;
 
 class RajaongkirController extends Controller
 {
+    protected $model;
+
+    public function __construct()
+    {
+        $this->model = new Rajaongkir;
+    }
+
     /**
      * Display a listing of the resource.
      * @return Response
      */
     public function index()
     {
-        $rajaongkir = new Rajaongkir;
-
-        $provinces = $rajaongkir->getProvinces();
+        $provinces = $this->model->getProvinces();
         dump($provinces);
 
-        $province = $rajaongkir->getProvinces(['id' => 1]);
+        $province = $this->model->getProvinces(['id' => 1]);
         dump($province);
 
-        $cities = $rajaongkir->getCities();
+        $cities = $this->model->getCities();
         dump($cities);
 
-        $cities = $rajaongkir->getCities(['province' => 21]);
+        $cities = $this->model->getCities(['province' => 21]);
         dump($cities);
 
-        $city = $rajaongkir->getCities(['id' => 1]);
+        $city = $this->model->getCities(['id' => 1]);
         dump($city);
 
-        return view('rajaongkir::index');
+        $subdistricts = $this->model->getSubdistricts(['city' => 155]);
+        dump($subdistricts);
     }
 
     /**
@@ -41,7 +47,6 @@ class RajaongkirController extends Controller
      */
     public function create()
     {
-        return view('rajaongkir::create');
     }
 
     /**
@@ -59,7 +64,6 @@ class RajaongkirController extends Controller
      */
     public function show()
     {
-        return view('rajaongkir::show');
     }
 
     /**
@@ -68,7 +72,6 @@ class RajaongkirController extends Controller
      */
     public function edit()
     {
-        return view('rajaongkir::edit');
     }
 
     /**
@@ -86,5 +89,11 @@ class RajaongkirController extends Controller
      */
     public function destroy()
     {
+    }
+
+    public function tracking($courier, $waybill, Request $request)
+    {
+        $data['waybill'] = $this->model->getWaybill($request->route()->parameters());
+        return view('rajaongkir::backend/rajaongkir/tracking', $data);
     }
 }
