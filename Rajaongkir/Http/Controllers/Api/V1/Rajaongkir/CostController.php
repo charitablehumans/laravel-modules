@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\Rajaongkir\Http\Controllers\Api;
+namespace Modules\Rajaongkir\Http\Controllers\Api\V1\Rajaongkir;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Rajaongkir\Models\Rajaongkir;
 
-class CouriersController extends Controller
+class CostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,7 @@ class CouriersController extends Controller
      */
     public function index()
     {
-        $rajaongkir = new Rajaongkir;
-        $couriers = $rajaongkir->getCouriers();
-        return response()->json($couriers);
+        //
     }
 
     /**
@@ -34,8 +32,11 @@ class CouriersController extends Controller
      * @param  Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(\Modules\Rajaongkir\Http\Requests\Api\V1\Rajaongkir\Cost\StoreRequest $request)
     {
+        $rajaongkir = new Rajaongkir;
+        $costs = $rajaongkir->getCosts($request->input(), $rajaongkir->getCouriersId());
+        return response()->json($costs);
     }
 
     /**

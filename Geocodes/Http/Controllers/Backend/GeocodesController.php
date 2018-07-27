@@ -19,7 +19,7 @@ class GeocodesController extends Controller
         $request->query('limit') ?: $request->query->set('limit', config('cms.database.eloquent.model.per_page'));
 
         $data['model'] = new Geocodes;
-        $data['geocodes'] = Geocodes::search($request->query())->paginate($request->query('limit'));
+        $data['geocodes'] = Geocodes::with('parent')->search($request->query())->paginate($request->query('limit'));
 
         if ($request->query('action')) { (new Geocodes)->action($request->query()); return redirect()->back(); }
 

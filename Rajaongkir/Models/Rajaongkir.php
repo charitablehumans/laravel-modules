@@ -80,9 +80,12 @@ class Rajaongkir extends Model
      */
     public function getCostCourier($formParams = [])
     {
+        $formParams['originType'] = isset($formParams['originType']) ? $formParams['originType'] : 'city';
+        $formParams['weight'] = $formParams['weight'] > 0 ? $formParams['weight'] : 1;
+        $formParams['destinationType '] = isset($formParams['destinationType']) ? $formParams['destinationType'] : 'subdistrict';
+
         try {
             $client = new Client();
-            $formParams['weight'] = $formParams['weight'] > 0 ? $formParams['weight'] : 1;
             $options['form_params'] = $formParams;
             $options['headers'] = ['Key' => config('rajaongkir.key')];
             $response = $client->post($this->getCostUrl(), $options);
@@ -117,6 +120,8 @@ class Rajaongkir extends Model
     public function getCosts($formParams = [], $couriers = [])
     {
         $costs = [];
+        $formParams['originType'] = isset($formParams['originType']) ? $formParams['originType'] : 'city';
+        $formParams['destinationType '] = isset($formParams['destinationType']) ? $formParams['destinationType'] : 'city';
         $formParams['weight'] = $formParams['weight'] > 0 ? $formParams['weight'] : 1;
 
         foreach ($couriers as $courier) {
@@ -162,7 +167,8 @@ class Rajaongkir extends Model
             case 'basic':
                 return self::BASIC_COST_URL;
             case 'pro':
-                return self::PRO_COST_URL;
+                return self::STARTER_COST_URL;
+                // return self::PRO_COST_URL; // destinationType is not readable
             default :
                 return self::STARTER_COST_URL;
         }
@@ -190,30 +196,31 @@ class Rajaongkir extends Model
                 ];
                 break;
             case 'pro':
-                $couriers = [
-                    'cahaya' => 'Cahaya',
-                    'dse' => 'DSE',
-                    'esl' => 'ESL',
-                    'first' => 'First',
-                    'indah' => 'Indah Cargo',
-                    'jet' => 'JET',
-                    'jne' => 'JNE',
-                    'jnt' => 'J&T',
-                    'ncs' => 'NCS',
-                    'nss' => 'NSS',
-                    'pahala' => 'Pahala',
-                    'pandu' => 'Pandu',
-                    'pcp' => 'PCP',
-                    'pos' => 'POS',
-                    'rpx' => 'RPX',
-                    'sap' => 'SAP',
-                    'sicepat' => 'SiCepat',
-                    'slis' => '', // not found
-                    'star' => 'STAR',
-                    'tiki' => 'TIKI',
-                    'wahana' => 'Wahana',
-                ];
-                break;
+                // destinationType is not readable
+                // $couriers = [
+                //     'cahaya' => 'Cahaya',
+                //     'dse' => 'DSE',
+                //     'esl' => 'ESL',
+                //     'first' => 'First',
+                //     'indah' => 'Indah Cargo',
+                //     'jet' => 'JET',
+                //     'jne' => 'JNE',
+                //     'jnt' => 'J&T',
+                //     'ncs' => 'NCS',
+                //     'nss' => 'NSS',
+                //     'pahala' => 'Pahala',
+                //     'pandu' => 'Pandu',
+                //     'pcp' => 'PCP',
+                //     'pos' => 'POS',
+                //     'rpx' => 'RPX',
+                //     'sap' => 'SAP',
+                //     'sicepat' => 'SiCepat',
+                //     'slis' => '', // not found
+                //     'star' => 'STAR',
+                //     'tiki' => 'TIKI',
+                //     'wahana' => 'Wahana',
+                // ];
+                // break;
             default :
                 $couriers;
         }

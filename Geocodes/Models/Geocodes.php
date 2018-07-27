@@ -15,6 +15,7 @@ class Geocodes extends Model
         'code',
         'name',
         'postal_code',
+
         'latitude',
         'longitude',
         'parent_id',
@@ -25,7 +26,7 @@ class Geocodes extends Model
 
     public function parent()
     {
-        return $this->belongsTo('\Modules\Geocodes\Models\Geocodes', 'parent_id');
+        return $this->belongsTo(self::class, 'parent_id');
     }
 
     public function getParentIdOptions()
@@ -98,32 +99,50 @@ class Geocodes extends Model
         $count = 0;
         $rajaongkir = new Rajaongkir;
 
-        foreach ($provinces = $rajaongkir->getProvinces() as $province) {
-            $model = Provinces::firstOrNew([
-                'rajaongkir_id' => $province['province_id'],
-            ]);
-            $model->fill([
-                'name' => $province['province'],
-            ]);
-            $model->save();
+        // provinces
+        if ($provinces = $rajaongkir->getProvinces()) {
+            foreach ($provinces as $province) {
+                $model = Provinces::firstOrNew([
+                    'rajaongkir_id' => $province['province_id'],
+                ]);
+                $model->fill([
+                    'name' => $province['province'],
+                ])->save();
+                $province = $model;
+                $count++;
 
-            $count++;
-        }
+                // cities = regencies
+                if ($cities = $rajaongkir->getCities(['province' => $province->rajaongkir_id])) {
+                    foreach ($cities as $city) {
+                        $model = Regencies::firstOrNew([
+                            'rajaongkir_id' => $city['city_id'],
+                        ]);
+                        $model->fill([
+                            'name' => $city['type'].' '.$city['city_name'],
+                            'postal_code' => $city['postal_code'],
+                            'parent_id' => $province->id,
+                        ])->save();
+                        $regency = $model;
+                        $count++;
 
-        foreach ($cities = $rajaongkir->getCities() as $city) {
-            $province = Provinces::where('rajaongkir_id', $city['province_id'])->first();
+                        // subdistricts = regencies
+                        if ($subdistricts = $rajaongkir->getSubdistricts(['city' => $regency->rajaongkir_id])) {
+                            foreach ($subdistricts as $subdistrict) {
+                                $model = Regencies::firstOrNew([
+                                    'rajaongkir_id' => $subdistrict['subdistrict_id'],
+                                ]);
+                                $model->fill([
+                                    'name' => $subdistrict['subdistrict_name'],
+                                    'postal_code' => '',
+                                    'parent_id' => $regency->id,
+                                ])->save();
 
-            $model = Regencies::firstOrNew([
-                'rajaongkir_id' => $city['city_id'],
-            ]);
-            $model->fill([
-                'name' => $city['type'].' '.$city['city_name'],
-                'postal_code' => $city['postal_code'],
-                'parent_id' => $province->id,
-            ]);
-            $model->save();
-
-            $count++;
+                                $count++;
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         return $count;

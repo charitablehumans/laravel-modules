@@ -1,14 +1,20 @@
 <?php
 
-namespace Modules\Rajaongkir\Http\Requests\Api\Cost;
+namespace Modules\Rajaongkir\Http\Requests\Api\V1\Rajaongkir\Cost;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Modules\Geocodes\Models\Geocodes;
-use Modules\Rajaongkir\Models\Rajaongkir;
 
-class CourierStoreRequest extends FormRequest
+class StoreRequest extends FormRequest
 {
+    protected $geocode;
+
+    public function __construct()
+    {
+        $this->geocode = new Geocodes;
+    }
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -16,26 +22,20 @@ class CourierStoreRequest extends FormRequest
      */
     public function rules()
     {
-        $couriers = (new Rajaongkir)->getCouriersId();
-
         return [
             'origin' => [
                 'required', 'integer',
-                Rule::exists((new Geocodes)->getTable(), 'rajaongkir_id')->where(function ($query) {
+                Rule::exists($this->geocode->getTable(), 'rajaongkir_id')->where(function ($query) {
                     $query->where('type', 'regency');
                 }),
             ],
             'destination' => [
                 'required', 'integer',
-                Rule::exists((new Geocodes)->getTable(), 'rajaongkir_id')->where(function ($query) {
+                Rule::exists($this->geocode->getTable(), 'rajaongkir_id')->where(function ($query) {
                     $query->where('type', 'regency');
                 }),
             ],
             'weight' => ['required', 'integer'],
-            'courier' => [
-                'required',
-                Rule::in($couriers),
-            ],
         ];
     }
 
