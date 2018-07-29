@@ -13,6 +13,10 @@ class ValidateVoucherController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param  Request $request
+     * $_POST =
+     * [
+     *      'transaction_deductible' => 1,  // nilai voucher yang digunakan
+     * ]
      * @return Response
      */
     public function store(Request $request)
@@ -30,7 +34,10 @@ class ValidateVoucherController extends Controller
                 new \Modules\Ravintola\Rules\VoucherNewVerificationNumberPhoneNumberCheck($request->input()),
             ],
             'transaction_amount' => ['required', 'integer'],
-            'transaction_deductible' => ['required', 'integer'],
+            'transaction_deductible' => [
+                'required', 'integer',
+                new \Modules\Ravintola\Rules\TransactionDeductibleCheck($request->input()),
+            ],
             'signature' => [
                 'required', 'between:0,64',
                 new \Modules\Ravintola\Rules\SignatureCheck($request->input()),
@@ -49,28 +56,23 @@ class ValidateVoucherController extends Controller
             );
         }
 
-        // 3. Select user and set discount
+        // 3. Select user
         $user = \Modules\Users\Models\Users::where(['phone_number' => $request->input('phone_number'), 'verification_code' => $request->input('verification_number')])->firstOrFail();
-        if ($user->balance >= $request->input('transaction_amount')) {
-            $discount = $request->input('transaction_amount');
-        } else {
-            $discount = $user->balance;
-        }
 
         // 4. Update ravintola_user_voucher
         $ravintolaUserVoucher = RavintolaUserVouchers::where('user_id', $user->id)->where('status', 'new')->firstOrFail();
         $ravintolaUserVoucher->fill($request->input());
-        $ravintolaUserVoucher->value = $user->balance - $discount;
+        $ravintolaUserVoucher->value = $user->balance - $request->input('transaction_deductible');
         $ravintolaUserVoucher->used_time = date('Y-m-d H:i:s');
-        $ravintolaUserVoucher->used_outlet = $request->input('outlet_code');
+        // $ravintolaUserVoucher->used_outlet = $request->input('outlet_code');
         $ravintolaUserVoucher->status = 'used';
-        $ravintolaUserVoucher->transaction_deductible = $discount;
-        $ravintolaUserVoucher->transaction_remaining_amount = $request->input('transaction_amount') - $discount;
+        // $ravintolaUserVoucher->transaction_deductible = $request->input('transaction_deductible');
+        $ravintolaUserVoucher->transaction_remaining_amount = $request->input('transaction_amount') - $request->input('transaction_deductible');
         $ravintolaUserVoucher->data = json_encode($request->input());
         $ravintolaUserVoucher->save();
 
         // 5. Insert user_balance_histories, update users.balance
-        $user->balance = $user->balance - $discount;
+        $user->balance = $user->balance - $request->input('transaction_deductible');
         $user->userBalanceHistoryCreate(['type' => 'ravintola_voucher', 'reference_id' => $ravintolaUserVoucher->id]);
         $user->save();
 
@@ -83,7 +85,7 @@ class ValidateVoucherController extends Controller
         return response()->json([
             'status' => 'ok',
             'voucher' => new \Modules\Ravintola\Http\Resources\Api\v1\VoucherResource($ravintolaUserVoucher),
-            'transaction_deductible' => $discount,
+            'transaction_deductible' => $ravintolaUserVoucher->transaction_deductible,
         ]);
     }
 }

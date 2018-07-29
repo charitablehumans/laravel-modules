@@ -3,6 +3,7 @@
 namespace Modules\Ravintola\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\Users\Models\Users;
 
 class RavintolaUserVouchers extends Model
 {
@@ -11,7 +12,6 @@ class RavintolaUserVouchers extends Model
     ];
 
     protected $fillable = [
-        // 'id',
         'user_id',
         'uuid',
         'pos_id',
@@ -34,4 +34,9 @@ class RavintolaUserVouchers extends Model
     ];
 
     protected $table = 'ravintola_user_vouchers';
+
+    public function user()
+    {
+        return $this->belongsTo(Users::class, 'user_id');
+    }
 }
