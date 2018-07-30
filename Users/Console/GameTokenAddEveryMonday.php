@@ -48,6 +48,7 @@ class GameTokenAddEveryMonday extends Command
             if ($users = Users::all()) {
                 foreach ($users as $user) {
                     $user->game_token += $option->value;
+                    $user->userGameTokenHistoryCreate(['type' => 'Modules/Users/Console/GameTokenAddEveryMonday']);
                     $this->info('Add game_token: '.$option->value.', from game_token: '.$user->getOriginal('game_token').', to game_token: '.$user->game_token.', on user_id: '.$user->id);
                     $user->save();
                 }
