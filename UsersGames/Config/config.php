@@ -1,5 +1,7 @@
 <?php
 
 return [
-    'name' => 'UsersGames'
+    'name' => 'UsersGames',
+
+    'secret_key' => env('USERSGAMES_SECRET_KEY', ''),
 ];

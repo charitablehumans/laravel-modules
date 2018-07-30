@@ -28,6 +28,7 @@ class SignatureCheck implements Rule
     public function passes($attribute, $value)
     {
         $signature = '';
+        $signature .= config('usersgames.secret_key');
         $signature .= isset($this->attributes['id']) ? $this->attributes['id'] : '';
         $signature .= isset($this->attributes['balance']) ? $this->attributes['balance'] : '';
 
