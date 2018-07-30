@@ -40,6 +40,8 @@ class Transactions extends Model
     public static $paymentStatusFalse = '0';
     public static $paymentStatusTrue = '1';
     public static $statusNew = 'new';
+    public static $statusReceived = 'received';
+    public static $statusSent = 'sent';
 
     public function getGrandTotal()
     {

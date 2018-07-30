@@ -562,7 +562,7 @@
 					"urlencoded": [
 						{
 							"key": "token",
-							"value": "100",
+							"value": "1",
 							"type": "text"
 						}
 					]
@@ -573,6 +573,26 @@
 		},
 		{
 			"name": "users-games/play",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"// http://www.xorbin.com/tools/sha256-hash-calculator",
+							"",
+							"// ie.",
+							"// salt=chicknroll123",
+							"// id=1",
+							"// balance=10000",
+							"",
+							"// sha256saltidbalance",
+							"// sha256(chicknroll123110000)",
+							""
+						]
+					}
+				}
+			],
 			"request": {
 				"url": "{{APP_URL}}/api/users-games/play",
 				"method": "PUT",
@@ -603,12 +623,18 @@
 					"urlencoded": [
 						{
 							"key": "id",
-							"value": "1",
+							"value": "4",
 							"type": "text"
 						},
 						{
 							"key": "balance",
-							"value": "1000",
+							"value": "10000",
+							"type": "text"
+						},
+						{
+							"key": "signature",
+							"value": "a9eaa38ed18fbed1c2cdae91d42b83b6b749f468fea99cf7c9232c6c65e0c8a8",
+							"description": "sha256(saltidbalance)",
 							"type": "text"
 						}
 					]
