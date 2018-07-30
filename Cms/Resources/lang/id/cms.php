@@ -219,6 +219,7 @@ return [
     'showcase' => 'Memamerkan',
     'sign_in' => 'Masuk',
     'sign_up' => 'Daftar',
+    'signature_is_invalid' => 'Tanda Tangan tidak valid',
     'size' => 'Ukuran',
     'size_guide' => 'Panduan Ukuran',
     'sort' => 'Urut',

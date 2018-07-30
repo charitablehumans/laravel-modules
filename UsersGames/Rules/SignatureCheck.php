@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Ravintola\Rules;
+namespace Modules\UsersGames\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
@@ -28,13 +28,8 @@ class SignatureCheck implements Rule
     public function passes($attribute, $value)
     {
         $signature = '';
-        $signature .= \Config::get('ravintola.SECRET_KEY');
-        $signature .= isset($this->attributes['pos_id']) ? $this->attributes['pos_id'] : '';
-        $signature .= isset($this->attributes['outlet_code']) ? $this->attributes['outlet_code'] : '';
-        $signature .= isset($this->attributes['verification_number']) ? $this->attributes['verification_number'] : '';
-        $signature .= isset($this->attributes['phone_number']) ? $this->attributes['phone_number'] : '';
-        $signature .= isset($this->attributes['transaction_amount']) ? $this->attributes['transaction_amount'] : '';
-        $signature .= isset($this->attributes['transaction_deductible']) ? $this->attributes['transaction_deductible'] : '';
+        $signature .= isset($this->attributes['id']) ? $this->attributes['id'] : '';
+        $signature .= isset($this->attributes['balance']) ? $this->attributes['balance'] : '';
 
         if (hash('sha256', $signature) != $value) {
             return false;

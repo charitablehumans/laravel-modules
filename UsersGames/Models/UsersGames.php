@@ -11,6 +11,8 @@ class UsersGames extends Model
         'token',
         'finished',
         'balance',
+
+        'signature',
     ];
 
     protected $table = 'users_games';

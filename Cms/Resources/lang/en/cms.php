@@ -219,6 +219,7 @@ return [
     'showcase' => 'Showcase',
     'sign_in' => 'Sign In',
     'sign_up' => 'Sign Up',
+    'signature_is_invalid' => 'Signature is invalid',
     'size' => 'Size',
     'size_guide' => 'Size Guide',
     'sort' => 'Sort',
