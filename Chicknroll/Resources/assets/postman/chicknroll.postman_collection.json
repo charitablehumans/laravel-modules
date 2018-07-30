@@ -2253,6 +2253,34 @@
 			"response": []
 		},
 		{
+			"name": "options/api/v1/name/{name}",
+			"request": {
+				"url": "{{APP_URL}}/options/api/v1/name/APP_ENV",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {},
+				"description": "options/api/v1/name/APP_ENV, \noptions/api/v1/name/APP_ENV_MOBILE_ANDROID, \noptions/api/v1/name/APP_ENV_MOBILE_IOS, \noptions/api/v1/name/APP_URL"
+			},
+			"response": []
+		},
+		{
 			"name": "api/ravintola/v1/voucher/query_voucher",
 			"event": [
 				{
@@ -2290,7 +2318,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \n\t\"pos_id\": \"1\",\n\t\"outlet_code\": \"2\",\n\t\"verification_number\": 123456,\n\t\"phone_number\": \"087877118199\",\n\t\"signature\": \"71c93d79093a99c258aa6a6fc245e4165ad167553b70083c44e37811c3ea0166\"\n}"
+					"raw": "{ \n\t\"pos_id\": \"1\",\n\t\"outlet_code\": \"2\",\n\t\"verification_number\": 507092,\n\t\"phone_number\": \"456789123456\",\n\t\"signature\": \"bc07bc1476f76a870d46d208230424bf4878e3e95e6c49d425dd060d679ba3db\"\n}"
 				},
 				"description": null
 			},
@@ -2333,7 +2361,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{ \n\t\"pos_id\": \"1\",\n\t\"outlet_code\": \"2\",\n\t\"verification_number\": 123456,\n\t\"phone_number\": \"087877118199\",\n\t\"transaction_amount\": 1000000,\n\t\"transaction_deductible\": 10000,\n\t\"signature\": \"a5bbc9a81b57ddef2e51eed6d748afaecc7378eeb4ae1d0b1736e08cc6eba4bc\"\n}"
+					"raw": "{ \n\t\"pos_id\": \"1\",\n\t\"outlet_code\": \"2\",\n\t\"verification_number\": 507092,\n\t\"phone_number\": \"456789123456\",\n\t\"transaction_amount\": 60000,\n\t\"transaction_deductible\": 0,\n\t\"signature\": \"ab8a8bb2337578141692a0794db2a53328c34d15db7e344ba1a92e412b99c593\"\n}"
 				},
 				"description": null
 			},

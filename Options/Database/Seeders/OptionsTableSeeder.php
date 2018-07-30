@@ -19,6 +19,8 @@ class OptionsTableSeeder extends Seeder
 
         $options = [
             ['type' => 'APP_ENV', 'name' => 'APP_ENV', 'value' => 'local'],
+            ['type' => 'APP_ENV', 'name' => 'APP_ENV_MOBILE_ANDROID', 'value' => 'local'],
+            ['type' => 'APP_ENV', 'name' => 'APP_ENV_MOBILE_IOS', 'value' => 'local'],
             ['type' => 'url', 'name' => 'APP_URL', 'value' => 'https://laravel.com'],
             ['type' => 'text', 'name' => 'application_version', 'value' => '1'],
             ['type' => 'number', 'name' => 'cms.users.balance_default', 'value' => '0'],
