@@ -61,7 +61,7 @@ class QueryVoucherController extends Controller
             'user_id' => $user->id,
             'uuid' => \Ramsey\Uuid\Uuid::uuid1(),
             'expiry' => \Carbon\Carbon::now()->addDay()->toDateString(),
-            'value' => $user->balance,
+            'value' => $user->balance >= $ravintolaUserVoucher->getValueMaxOption() ? $ravintolaUserVoucher->getValueMaxOption() : $user->balance,
             'data' => json_encode($request->input()),
         ]);
         $ravintolaUserVoucher->save();

@@ -3,6 +3,7 @@
 namespace Modules\Ravintola\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Modules\Options\Models\Options;
 use Modules\Users\Models\Users;
 
 class RavintolaUserVouchers extends Model
@@ -34,6 +35,17 @@ class RavintolaUserVouchers extends Model
     ];
 
     protected $table = 'ravintola_user_vouchers';
+
+    public function getValueMaxOption()
+    {
+        $valueMaxOption = 0;
+
+        if ($option = Options::firstByName('Modules/Ravintola/Http/Controllers/Api/V1/Voucher/QueryVoucherController/ValueMax')) {
+            $valueMaxOption = $option->value;
+        }
+
+        return $valueMaxOption;
+    }
 
     public function user()
     {

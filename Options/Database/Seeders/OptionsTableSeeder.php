@@ -28,6 +28,7 @@ class OptionsTableSeeder extends Seeder
             ['type' => 'page_id', 'name' => 'frontend_home_popup', 'value' => ''],
             ['type' => 'page_id', 'name' => 'frontend_home_popup_button_text', 'value' => ''],
             ['type' => 'page_id', 'name' => 'frontend_home_popup_button_url', 'value' => ''],
+            ['type' => 'number', 'name' => 'Modules/Ravintola/Http/Controllers/Api/V1/Voucher/QueryVoucherController/ValueMax', 'value' => '0'],
             ['type' => 'number', 'name' => 'Modules/Users/Console/GameTokenAddEveryMonday', 'value' => '0'],
             ['type' => 'number', 'name' => 'Modules/Users/Console/GameTokenAddEverySunday', 'value' => '0'],
             ['type' => 'number', 'name' => 'Modules/Users/Models/Users/BalanceDefault', 'value' => '0'],
