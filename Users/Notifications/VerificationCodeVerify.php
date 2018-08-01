@@ -3,8 +3,8 @@
 namespace Modules\Users\Notifications;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Notification;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class VerificationCodeVerify extends Notification implements ShouldQueue
@@ -42,10 +42,20 @@ class VerificationCodeVerify extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
+        $view = 'frontend/default/mail/modules/users/verification_code_verify';
+
+        if (view()->exists($view)) {
+            app()->setLocale('id');
+            $data['actionText'] = trans('cms::cms.verify');
+            $data['actionUrl'] = route('frontend.authentication.verify', ['email' => $this->user->email]);
+            $data['user'] = $this->user;
+            return (new MailMessage)->view($view, $data);
+        }
+
         return (new MailMessage)
-                    ->line('Please verify and use this verification code: '.$this->user->verification_code.'.')
-                    ->action(trans('cms::cms.verify'), route('frontend.authentication.verify', ['email' => $this->user->email]))
-                    ->line('Thank you for using our application!');
+            ->line('Please verify and use this verification code: '.$this->user->verification_code.'.')
+            ->action(trans('cms::cms.verify'), route('frontend.authentication.verify', ['email' => $this->user->email]))
+            ->line('Thank you for using our application!');
     }
 
     /**
