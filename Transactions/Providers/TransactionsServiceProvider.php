@@ -4,6 +4,7 @@ namespace Modules\Transactions\Providers;
 
 use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\ServiceProvider;
+use Modules\Transactions\Models\Transactions\Sales as TransactionsSales;
 use Modules\Transactions\Models\Transactions;
 use Modules\Transactions\Observers\TransactionObserver;
 
@@ -30,6 +31,7 @@ class TransactionsServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         Transactions::observe(TransactionObserver::class);
+        TransactionsSales::observe(TransactionObserver::class);
     }
 
     /**

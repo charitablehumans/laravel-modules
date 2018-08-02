@@ -7,6 +7,10 @@ use Modules\Users\Models\Users;
 
 class Transactions extends Model
 {
+    protected $attributes = [
+        'status' => 'pending',
+    ];
+
     protected $fillable = [
         // 'id',
         'type', // { purchase, sales }
@@ -40,6 +44,7 @@ class Transactions extends Model
     public static $paymentStatusFalse = '0';
     public static $paymentStatusTrue = '1';
     public static $statusNew = 'new';
+    public static $statusPending = 'pending';
     public static $statusReceived = 'received';
     public static $statusSent = 'sent';
 
@@ -257,7 +262,7 @@ class Transactions extends Model
     public function send($id)
     {
         $transaction = self::where('id', $id)->whereIn('status', ['processed', 'sent'])->firstOrFail();
-        $transaction->status = 'sent';
+        $transaction->status = self::$statusSent;
         $transaction->save();
         return $transaction;
     }
