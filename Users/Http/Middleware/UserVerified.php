@@ -4,7 +4,6 @@ namespace Modules\Users\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 
 class UserVerified
 {
@@ -17,7 +16,7 @@ class UserVerified
      */
     public function handle($request, Closure $next)
     {
-        $user = Auth::user();
+        $user = auth()->user();
 
         if (! $user->verified) {
             $user->notify(new \Modules\Users\Notifications\VerificationCodeVerify($user));

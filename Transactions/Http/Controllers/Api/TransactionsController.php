@@ -133,7 +133,13 @@ class TransactionsController extends Controller
             // 5.3 Update transactions
             $transaction->number = $transaction->id;
             $transaction->sync();
-            $transaction->status = $transaction->grand_total > 0 ? 'pending' : 'new';
+
+            if ($transaction->grand_total > 0) {
+                $transaction->status = Transactions::$statusNew;
+                $transaction->payment_date = date('Y-m-d H:i:s');
+                $transaction->payment_status = 1;
+            }
+
             $transaction->save();
 
             $transaction = Transactions::findOrfail($transaction->id);

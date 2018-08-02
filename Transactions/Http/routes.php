@@ -16,8 +16,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::group(['middleware' => ['permission:backend transactions sales']], function () {
             Route::get('backend/transactions/sales/{id}/process', ['as' => 'backend.transactions.sales.process', 'uses' => '\Modules\Transactions\Http\Controllers\Backend\Transactions\SalesController@process']);
             Route::get('backend/transactions/sales/{id}/reject', ['as' => 'backend.transactions.sales.reject', 'uses' => '\Modules\Transactions\Http\Controllers\Backend\Transactions\SalesController@reject']);
-            Route::resource('backend/transactions/sales', '\Modules\Transactions\Http\Controllers\Backend\Transactions\SalesController', ['as' => 'backend.transactions'])
-                ->except(['create', 'edit', 'destroy']);
+            Route::resource('backend/transactions/sales', '\Modules\Transactions\Http\Controllers\Backend\Transactions\SalesController', ['as' => 'backend.transactions'])->only(['index', 'store', 'show', 'update']);
         });
     });
     Route::get('frontend/transactions/purchases/payment/confirmation', ['as' => 'frontend.transactions.purchases.payment.confirmation.index', 'uses' => '\Modules\Transactions\Http\Controllers\Frontend\Transactions\Purchases\Payment\ConfirmationController@index']);

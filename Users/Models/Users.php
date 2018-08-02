@@ -112,7 +112,12 @@ class Users extends \App\User
 
     public function store()
     {
-        return $this->belongsTo('\Modules\Users\Models\Users', 'store_id');
+        return $this->belongsTo(self::class, 'store_id');
+    }
+
+    public function storeUsers()
+    {
+        return $this->hasMany(self::class, 'store_id');
     }
 
     public function syncPermissions(...$permissions)
