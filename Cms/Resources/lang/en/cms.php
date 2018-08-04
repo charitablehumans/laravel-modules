@@ -256,6 +256,7 @@ return [
     'transaction_shipment' => 'Transaction Shipment',
     'transactions' => 'Transactions',
     'trash' => 'Trash',
+    'under_maintenance' => 'Under maintenance',
     'update' => 'Update',
     'updated' => 'Updated',
     'use_voucher_code' => 'Use voucher code',

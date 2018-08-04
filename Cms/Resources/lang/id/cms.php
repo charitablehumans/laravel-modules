@@ -256,6 +256,7 @@ return [
     'transaction_shipment' => 'Pengiriman Transaksi',
     'transactions' => 'Transaksi',
     'trash' => 'Sampah',
+    'under_maintenance' => 'Dalam perbaikan',
     'update' => 'Perbarui',
     'updated' => 'Diperbarui',
     'use_voucher_code' => 'Gunakan kode voucher',
