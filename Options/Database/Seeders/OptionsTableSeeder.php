@@ -18,6 +18,7 @@ class OptionsTableSeeder extends Seeder
         Model::unguard();
 
         $options = [
+            ['type' => 'APP_ENV', 'name' => 'API/Cnr/UsersGamesController@play', 'value' => 'production'],
             ['type' => 'APP_ENV', 'name' => 'APP_ENV', 'value' => 'local'],
             ['type' => 'APP_ENV', 'name' => 'APP_ENV_MOBILE_ANDROID', 'value' => 'local'],
             ['type' => 'APP_ENV', 'name' => 'APP_ENV_MOBILE_IOS', 'value' => 'local'],
