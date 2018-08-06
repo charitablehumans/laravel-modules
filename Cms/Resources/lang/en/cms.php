@@ -65,6 +65,7 @@ return [
     'edited' => 'Edited',
     'enter_password' => 'Enter Password',
     'enter_payment_detail' => 'Enter payment detail',
+    'export_to_csv' => 'Export to Csv',
     'export_to_excel' => 'Export to Excel',
     'extension' => 'Extension',
     'faq' => 'FAQ',

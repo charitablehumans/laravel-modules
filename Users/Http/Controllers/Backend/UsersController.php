@@ -120,12 +120,33 @@ class UsersController extends Controller
     public function indexAction(Request $request)
     {
         if ($request->query('action') == 'delete' && $actionId = $request->query('action_id')) {
-            $users = Users::search($request->query())->whereIn('id', $actionId)->paginate($request->query('limit'));
+            $users = Users::search($request->query())->whereIn('id', $actionId)->get();
             $users->each(function ($user) { $user->delete(); });
             flash(trans('cms::cms.deleted').' ('.$users->count().')')->success()->important();
             return redirect()->back();
+        } else if ($request->query('action') == 'export_to_csv') {
+            $fields = ['name' => trans('validation.attributes.name')];
+            $fields += ['email' => trans('validation.attributes.email')];
+            $fields += ['phone_number' => trans('validation.attributes.phone_number')];
+            $fields += ['verified' => trans('validation.attributes.verified')];
+            $fields += ['date_of_birth' => trans('validation.attributes.date_of_birth')];
+            $fields += ['gender' => trans('validation.attributes.gender')];
+            $fields += ['address' => trans('validation.attributes.address')];
+            if (config('cms.users.balance')) {
+                $fields += ['balance' => trans('cms::cms.balance')];
+            }
+            if (config('cms.users.game_token')) {
+                $fields += ['balance' => trans('validation.attributes.game_token')];
+            }
+            $fields += ['created_at' => trans('validation.attributes.created_at')];
+            $fields += ['updated_at' => trans('validation.attributes.updated_at')];
+
+            $users = Users::search($request->query())->get();
+
+            $csvExporter = new \Laracsv\Export();
+            return $csvExporter->build($users, $fields)->download($this->model->getTable().'-'.date('YmdHis').'.csv');
         } else if ($request->query('action') == 'export_to_excel') {
-            $users = Users::search($request->query())->paginate($request->query('limit'));
+            $users = Users::search($request->query())->get();
 
             return \Excel::download(
                 new UserExcel($users),

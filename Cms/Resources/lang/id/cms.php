@@ -65,6 +65,7 @@ return [
     'edited' => 'Disunting',
     'enter_password' => 'Masukkan Kata Sandi',
     'enter_payment_detail' => 'Masukan detail pembayaran',
+    'export_to_csv' => 'Ekspor ke Csv',
     'export_to_excel' => 'Ekspor ke Excel',
     'extension' => 'Ekstensi',
     'faq' => 'FAQ',

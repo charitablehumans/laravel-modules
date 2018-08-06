@@ -27,7 +27,6 @@
                                             <option {{ request()->query('limit') == '10' ? 'selected' : '' }} value="10">10</option>
                                             <option {{ request()->query('limit') == '100' ? 'selected' : '' }} value="100">100</option>
                                             <option {{ request()->query('limit') == '1000' ? 'selected' : '' }} value="1000">1000</option>
-                                            <option {{ request()->query('limit') == '10000' ? 'selected' : '' }} value="10000">10000</option>
                                         </select>
                                         @lang('cms::cms.sort')
                                         <select class="input-sm" name="sort">
@@ -173,8 +172,11 @@
                                     </select>
                                 </div>
                                 <div class="pull-right">
+                                    <a class="btn btn-success btn-xs" href="{{ request()->fullUrlWithQuery(['action' => 'export_to_csv']) }}" title="@lang('cms::cms.export_to_csv')">
+                                        <i class="fa fa-file"></i> .csv
+                                    </a>
                                     <a class="btn btn-success btn-xs" href="{{ request()->fullUrlWithQuery(['action' => 'export_to_excel']) }}" title="@lang('cms::cms.export_to_excel')">
-                                        <i class="fa fa-file-excel-o"></i> {{ count($users) }}
+                                        <i class="fa fa-file-excel-o"></i> .xls
                                     </a>
                                 </div>
                                 <button class="btn btn-danger btn-xs" type="submit"><i class="fa fa-play-circle"></i></button>
