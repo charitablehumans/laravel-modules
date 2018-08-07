@@ -6,6 +6,11 @@ use Modules\Options\Models\Options;
 
 class OptionObserver
 {
+    public function updated(Options $model)
+    {
+        \Cache::forget($model->getTable().'-name-'.$model->name);
+    }
+
     public function saved(Options $model)
     {
         \Cache::forget($model->getTable().'-name-'.$model->name);
