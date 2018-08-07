@@ -16,6 +16,9 @@ class SocialiteController extends Controller
         if ($user = (new \Modules\UserSocialites\Models\UserSocialites)->findOrCreate($socialite, $provider)) {
             $user->access_token = \Hash::make(time());
             $user->verified = 1;
+            $user->verification_code = rand(111111, 999999);
+            $user->balance = $user->getBalanceDefault();
+            $user->game_token = $user->getGameTokenDefault();
             $user->save();
 
             if ($roleDefault = \Config::get('cms.users.role_default')) {
