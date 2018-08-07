@@ -2,12 +2,12 @@
 
 namespace Modules\Users\Console;
 
+use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
-
 use Modules\Options\Models\Options;
 use Modules\Users\Models\Users;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputOption;
 
 class GameTokenAddEveryMonday extends Command
 {
@@ -42,10 +42,17 @@ class GameTokenAddEveryMonday extends Command
      */
     public function handle()
     {
+        $dateNow = Carbon::now();
         $option = Options::firstByName('Modules/Users/Console/GameTokenAddEveryMonday');
 
         if ($option && $option->value > 0) {
-            if ($users = Users::all()) {
+            if ($dateNow->isMonday()) {
+                $createdAt = $dateNow->toDateString();
+            } else {
+                $createdAt = $dateNow->previous(Carbon::MONDAY)->toDateString();
+            }
+
+            if ($users = Users::whereDate('created_at', '<', $createdAt)) {
                 foreach ($users as $user) {
                     $user->game_token += $option->value;
                     $user->userGameTokenHistoryCreate(['type' => 'Modules/Users/Console/GameTokenAddEveryMonday']);
