@@ -52,7 +52,7 @@ class GameTokenAddEveryMonday extends Command
                 $createdAt = $dateNow->previous(Carbon::MONDAY)->toDateString();
             }
 
-            if ($users = Users::whereDate('created_at', '<', $createdAt)) {
+            if ($users = Users::whereDate('created_at', '<', $createdAt)->get()) {
                 foreach ($users as $user) {
                     $user->game_token += $option->value;
                     $user->userGameTokenHistoryCreate(['type' => 'Modules/Users/Console/GameTokenAddEveryMonday']);
