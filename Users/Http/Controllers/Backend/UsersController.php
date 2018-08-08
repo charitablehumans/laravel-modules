@@ -144,7 +144,8 @@ class UsersController extends Controller
             $users = Users::search($request->query())->get();
 
             $csvExporter = new \Laracsv\Export();
-            return $csvExporter->build($users, $fields)->download($this->model->getTable().'-'.date('YmdHis').'.csv');
+            $csvExporter->build($users, $fields)->download($this->model->getTable().'-'.date('YmdHis').'.csv');
+            die;
         } else if ($request->query('action') == 'export_to_excel') {
             $users = Users::search($request->query())->get();
 

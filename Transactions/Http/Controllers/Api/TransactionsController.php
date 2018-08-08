@@ -134,7 +134,7 @@ class TransactionsController extends Controller
             $transaction->number = $transaction->id;
             $transaction->sync();
 
-            if ($transaction->grand_total > 0) {
+            if ($transaction->grand_total == 0) {
                 $transaction->status = Transactions::$statusNew;
                 $transaction->payment_date = date('Y-m-d H:i:s');
                 $transaction->payment_status = 1;
