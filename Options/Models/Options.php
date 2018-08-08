@@ -16,7 +16,6 @@ class Options extends Model
      * @var array
      */
     protected $fillable = [
-        // 'id',
         'type',
         'name',
         'value',

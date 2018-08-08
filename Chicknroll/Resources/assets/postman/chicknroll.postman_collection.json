@@ -2,7 +2,7 @@
 	"variables": [],
 	"info": {
 		"name": "chicknroll",
-		"_postman_id": "32700945-6cbe-4165-a6a7-d5685b5e0727",
+		"_postman_id": "81d5b918-bd55-bcc0-b630-fd9cf42abd3f",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -64,7 +64,7 @@
 						}
 					]
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -138,7 +138,7 @@
 						}
 					]
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -179,7 +179,7 @@
 						}
 					]
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -215,7 +215,7 @@
 						}
 					]
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -266,7 +266,7 @@
 						}
 					]
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -323,7 +323,7 @@
 						}
 					]
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -349,8 +349,11 @@
 						"description": ""
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -376,8 +379,11 @@
 						"description": ""
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -445,7 +451,7 @@
 						}
 					]
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -471,8 +477,11 @@
 						"description": ""
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -498,8 +507,11 @@
 						"description": ""
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -525,8 +537,11 @@
 						"description": ""
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -567,7 +582,7 @@
 						}
 					]
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -639,7 +654,7 @@
 						}
 					]
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -665,8 +680,11 @@
 						"description": ""
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -692,8 +710,11 @@
 						"description": ""
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -719,8 +740,11 @@
 						"description": ""
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -765,8 +789,11 @@
 						"description": ""
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -811,8 +838,11 @@
 						"description": ""
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -857,8 +887,11 @@
 						"description": ""
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -903,8 +936,11 @@
 						"description": ""
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -949,8 +985,11 @@
 						"description": ""
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -995,8 +1034,11 @@
 						"description": ""
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -1022,8 +1064,11 @@
 						"description": ""
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -1079,8 +1124,11 @@
 						"description": ""
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -1106,8 +1154,11 @@
 						"description": ""
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -1153,7 +1204,7 @@
 						}
 					]
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -1207,7 +1258,7 @@
 						}
 					]
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -1254,7 +1305,7 @@
 						}
 					]
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -1296,7 +1347,7 @@
 						}
 					]
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -1429,7 +1480,7 @@
 						}
 					]
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -1593,7 +1644,10 @@
 						"description": ""
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []
@@ -1625,7 +1679,10 @@
 						"description": ""
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": ""
 			},
 			"response": []
@@ -1997,7 +2054,7 @@
 					"mode": "raw",
 					"raw": "{ \n\t\"sender_id\": 4,\n\t\"balance\": 1000,\n\t\"notes\": \"Semoga cepat sampai\",\n\t\"transaction_details\": [\n\t\t{\n\t\t\t\"quantity\": 10,\n\t\t\t\"product_id\": 77\n\t\t},\n\t\t{\n\t\t\t\"quantity\": 10,\n\t\t\t\"product_id\": 77\n\t\t}\n\t],\n\t\"transaction_shipment\": {\n\t\t\"code\": \"jne\",\n\t\t\"name\": \"Nugraha Ekakurir (JNE)\",\n\t\t\"service\": \"OKE\",\n\t\t\"description\": \"Ongkos Kirim Ekonomis\",\n        \"cost\": 24000\n\t},\n\t\"transaction_shipping_address\": {\n\t\t\"user_address_id\": 1\n\t}\n}"
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -2028,8 +2085,11 @@
 						"description": ""
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -2060,8 +2120,11 @@
 						"description": ""
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -2092,8 +2155,11 @@
 						"description": ""
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -2139,7 +2205,7 @@
 					"mode": "raw",
 					"raw": "{ \n\t\"sender_id\": 4,\n\t\"notes\": \"Semoga cepat sampai\",\n\t\"transaction_details\": [\n\t\t{\n\t\t\t\"quantity\": 10,\n\t\t\t\"product_id\": 68\n\t\t},\n\t\t{\n\t\t\t\"quantity\": 10,\n\t\t\t\"product_id\": 68\n\t\t}\n\t],\n\t\"transaction_shipment\": {\n\t\t\"code\": \"jne\",\n\t\t\"name\": \"Nugraha Ekakurir (JNE)\",\n\t\t\"service\": \"OKE\",\n\t\t\"description\": \"Ongkos Kirim Ekonomis\",\n        \"cost\": 24000\n\t},\n\t\"transaction_shipping_address\": {\n\t\t\"user_address_id\": 1\n\t}\n}"
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -2166,7 +2232,7 @@
 						}
 					]
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -2199,7 +2265,7 @@
 						}
 					]
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -2226,8 +2292,11 @@
 						"disabled": true
 					}
 				],
-				"body": {},
-				"description": null
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
 			},
 			"response": []
 		},
@@ -2273,7 +2342,10 @@
 						"disabled": true
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": "api/options/show?id=1,\napi/options/show?name=application_version"
 			},
 			"response": []
@@ -2301,8 +2373,59 @@
 						"disabled": true
 					}
 				],
-				"body": {},
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
 				"description": "options/api/v1/name/APP_ENV, \noptions/api/v1/name/APP_ENV_MOBILE_ANDROID, \noptions/api/v1/name/APP_ENV_MOBILE_IOS, \noptions/api/v1/name/APP_URL"
+			},
+			"response": []
+		},
+		{
+			"name": "options/api/v2/name?name={name}",
+			"request": {
+				"url": {
+					"raw": "{{APP_URL}}/options/api/v2/name?name=Modules/Transactions/Http/Controllers/Api/TransactionsController/Store/BalanceMax",
+					"host": [
+						"{{APP_URL}}"
+					],
+					"path": [
+						"options",
+						"api",
+						"v2",
+						"name"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Modules/Transactions/Http/Controllers/Api/TransactionsController/Store/BalanceMax",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"description": ""
+					},
+					{
+						"key": "Access-Token",
+						"value": "{{access_token}}",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {},
+				"description": "options/api/v2/name?name=ModulesModules/Transactions/Http/Controllers/Api/TransactionsController/Store/BalanceMax"
 			},
 			"response": []
 		},
@@ -2346,7 +2469,7 @@
 					"mode": "raw",
 					"raw": "{ \n\t\"pos_id\": \"1\",\n\t\"outlet_code\": \"2\",\n\t\"verification_number\": 507092,\n\t\"phone_number\": \"456789123456\",\n\t\"signature\": \"bc07bc1476f76a870d46d208230424bf4878e3e95e6c49d425dd060d679ba3db\"\n}"
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -2389,7 +2512,7 @@
 					"mode": "raw",
 					"raw": "{ \n\t\"pos_id\": \"1\",\n\t\"outlet_code\": \"2\",\n\t\"verification_number\": 507092,\n\t\"phone_number\": \"456789123456\",\n\t\"transaction_amount\": 60000,\n\t\"transaction_deductible\": 0,\n\t\"signature\": \"ab8a8bb2337578141692a0794db2a53328c34d15db7e344ba1a92e412b99c593\"\n}"
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -2425,7 +2548,7 @@
 						}
 					]
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		},
@@ -2471,7 +2594,7 @@
 						}
 					]
 				},
-				"description": null
+				"description": ""
 			},
 			"response": []
 		}

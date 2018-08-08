@@ -4,6 +4,7 @@ Route::group(['middleware' => ['api']], function () {
     Route::resource('api/options', '\Modules\Options\Http\Controllers\Api\OptionsController', ['as' => 'api'])->only(['index', 'show']);
     Route::get('api/options/show', ['as' => 'api.options.show', 'uses' => '\Modules\Options\Http\Controllers\Api\OptionsController@show']);
     Route::get('options/api/v1/name/{name}', ['as' => 'options.api.v1.name.show', 'uses' => '\Modules\Options\Http\Controllers\Api\V1\Options\NameController@show']);
+    Route::get('options/api/v2/name', ['as' => 'options.api.v2.name.show', 'uses' => '\Modules\Options\Http\Controllers\Api\V2\Options\NameController@show']);
 });
 
 Route::group(['middleware' => ['web']], function () {

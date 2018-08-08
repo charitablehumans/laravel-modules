@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Options\Http\Controllers\Api\V1\Options;
+namespace Modules\Options\Http\Controllers\Api\V2\Options;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -13,9 +13,9 @@ class NameController extends Controller
      * Show the specified resource.
      * @return Response
      */
-    public function show($name)
+    public function show(Request $request)
     {
-        $option = Options::firstByName($name);
+        $option = Options::firstByName($request->query('name'));
         return response()->json($option);
     }
 }
