@@ -40,6 +40,13 @@ return [
             ],
         ],
     ],
+    'posts' => [
+        'postmetas' => [
+            'template_options' => [
+                'example' => false,
+            ],
+        ],
+    ],
     'products' => [
         'postmetas' => [
             'template' => ['default' => 'default'],

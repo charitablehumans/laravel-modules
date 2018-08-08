@@ -78,10 +78,15 @@ class Posts extends \Illuminate\Database\Eloquent\Model
 
     public function getTemplateOptions()
     {
-        $options = [
-            'default' => trans('cms::cms.default'),
-        ];
-        return $options;
+        $templateOptions['default'] = trans('cms::cms.default');
+
+        if ($additionalTemplateOptions = \Config::get('cms.posts.postmetas.template_options')) {
+            foreach ($additionalTemplateOptions as $template => $enable) {
+                $enable ? $templateOptions[$template] = trans('cms::cms.'.$template) : '';
+            }
+        }
+
+        return $templateOptions;
     }
 
     public function parent()
