@@ -34,16 +34,16 @@ class Sales extends \Modules\Transactions\Models\Transactions
 
         // 3.1 Return balance to user balance
         if ($user = \Modules\Users\Models\Users::find($transaction->receiver_id)) {
-            $user->balance += $transaction->balance;
 
-            // 3.2 If status in new, processed, sent, then return grand total to user balance
+            // 3.2 If status in new, processed, sent, then return balance, grand total to user balance
             if (in_array($transaction->status, ['new', 'processed', 'sent'])) {
+                $user->balance += $transaction->balance;
                 $user->balance += $transaction->grand_total;
-            }
 
-            // 3.3 Insert user_balance_histories, update user
-            $user->userBalanceHistoryCreate(['type' => 'transaction_returned', 'reference_id' => $transaction->id]);
-            $user->save();
+                // 3.3 Insert user_balance_histories, update user
+                $user->userBalanceHistoryCreate(['type' => 'transaction_returned', 'reference_id' => $transaction->id]);
+                $user->save();
+            }
         }
 
         // 4. Update transaction set status = 'returned'
