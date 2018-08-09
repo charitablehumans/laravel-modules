@@ -13,6 +13,14 @@ trait OptionValueTrait
         ];
     }
 
+    public function getBooleanOptions()
+    {
+        return [
+            '0' => 'false',
+            '1' => 'true',
+        ];
+    }
+
     public function getPages()
     {
         return \Modules\Pages\Models\Pages::search(['status' => 'publish', 'sort' => 'title:asc'])->get();
