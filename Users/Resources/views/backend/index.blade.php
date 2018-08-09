@@ -175,7 +175,7 @@
                                     <a class="btn btn-success btn-xs" href="{{ request()->fullUrlWithQuery(['action' => 'export_to_csv']) }}" title="@lang('cms::cms.export_to_csv')">
                                         <i class="fa fa-file"></i> .csv
                                     </a>
-                                    <a class="btn btn-success btn-xs" href="{{ request()->fullUrlWithQuery(['action' => 'export_to_excel']) }}" title="@lang('cms::cms.export_to_excel')">
+                                    <a class="btn btn-success btn-xs hidden" href="{{ request()->fullUrlWithQuery(['action' => 'export_to_excel']) }}" title="@lang('cms::cms.export_to_excel')">
                                         <i class="fa fa-file-excel-o"></i> .xls
                                     </a>
                                 </div>

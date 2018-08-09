@@ -136,7 +136,7 @@ class UsersController extends Controller
                 $fields += ['balance' => trans('cms::cms.balance')];
             }
             if (config('cms.users.game_token')) {
-                $fields += ['balance' => trans('validation.attributes.game_token')];
+                $fields += ['game_token' => trans('validation.attributes.game_token')];
             }
             $fields += ['created_at' => trans('validation.attributes.created_at')];
             $fields += ['updated_at' => trans('validation.attributes.updated_at')];
