@@ -74,7 +74,7 @@ class MediaController extends \Modules\Posts\Http\Controllers\Backend\PostsContr
         return redirect()->back();
     }
 
-    public function upload(Request $request)
+    public function upload(\Modules\Media\Http\Requests\Backend\Media\UploadRequest $request)
     {
         if ($file = $request->file('qqfile')) {
             $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);

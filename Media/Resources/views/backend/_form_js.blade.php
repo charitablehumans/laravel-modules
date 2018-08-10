@@ -1,6 +1,11 @@
 @push('scripts')
     <script>
     var galleryMediaer = new qq.FineUploader({
+        callbacks: {
+            onError: function(id, name, errorReason, xhrOrXdr) {
+                alert(qq.format('{} {}', name, xhrOrXdr.responseText));
+            }
+        },
         element: document.getElementById('fine-uploader-gallery'),
         request: {
             customHeaders: {

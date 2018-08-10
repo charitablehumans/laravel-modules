@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\Users\Rules;
+namespace Modules\Media\Rules;
 
-use Modules\Users\Models\Users;
 use Illuminate\Contracts\Validation\Rule;
 
-class EmailVerificationCodeCheck implements Rule
+class QqfileMimesAllowed implements Rule
 {
     protected $attributes;
+    protected $extensionNotAllowed = ['mov'];
 
     /**
      * Create a new rule instance.
@@ -19,7 +19,7 @@ class EmailVerificationCodeCheck implements Rule
         $this->attributes = $attributes;
     }
 
-     /**
+    /**
      * Determine if the validation rule passes.
      *
      * @param  string  $attribute
@@ -28,11 +28,13 @@ class EmailVerificationCodeCheck implements Rule
      */
     public function passes($attribute, $value)
     {
-        if (Users::where('email', $this->attributes['email'])->where('verification_code', $value)->exists()) {
-            return true;
+        $extension = $this->attributes[$attribute]->getClientOriginalExtension();
+
+        if (in_array($extension, $this->extensionNotAllowed)) {
+            return false;
         }
 
-        return false;
+        return true;
     }
 
     /**
@@ -42,6 +44,6 @@ class EmailVerificationCodeCheck implements Rule
      */
     public function message()
     {
-        return trans('validation.custom.users.verification_code_is_invalid');
+        return 'This mime is not allowed.';
     }
 }
