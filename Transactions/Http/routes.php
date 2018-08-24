@@ -1,8 +1,14 @@
 <?php
 
+use Modules\Transactions\Http\Middleware\ApiTransactionsStoreTrue;
+
 Route::group(['middleware' => ['api']], function () {
     Route::group(['middleware' => ['authApi']], function () {
-        Route::resource('api/transactions', '\Modules\Transactions\Http\Controllers\Api\TransactionsController', ['as' => 'api.transactions'])->only(['store']);
+        Route::post('api/transactions', [
+            'as' => 'api.transactions.store',
+            'middleware' => [ApiTransactionsStoreTrue::class],
+            'uses' => '\Modules\Transactions\Http\Controllers\Api\TransactionsController@store',
+        ]);
         Route::put('api/transactions/purchases/{id}/reject', ['as' => 'api.transactions.purchases.reject', 'uses' => '\Modules\Transactions\Http\Controllers\Api\Transactions\PurchasesController@reject']);
         Route::resource('api/transactions/purchases', '\Modules\Transactions\Http\Controllers\Api\Transactions\PurchasesController', ['as' => 'api.transactions.purchases'])
             ->except(['create', 'store', 'edit', 'update', 'destroy']);

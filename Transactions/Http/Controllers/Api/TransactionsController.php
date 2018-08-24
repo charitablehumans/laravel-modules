@@ -12,24 +12,6 @@ use Modules\Transactions\Models\Transactions;
 class TransactionsController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     * @return Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      * @param  Request $request
      * @return Response
@@ -145,41 +127,5 @@ class TransactionsController extends Controller
             $transaction = Transactions::findOrfail($transaction->id);
             return response()->json(new \Modules\Transactions\Http\Resources\Api\TransactionResource($transaction));
         });
-    }
-
-    /**
-     * Show the specified resource.
-     * @return Response
-     */
-    public function show()
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @return Response
-     */
-    public function edit()
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * @param  Request $request
-     * @return Response
-     */
-    public function update(Request $request)
-    {
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     * @return Response
-     */
-    public function destroy()
-    {
-        //
     }
 }
