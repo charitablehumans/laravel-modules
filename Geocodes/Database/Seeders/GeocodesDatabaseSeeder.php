@@ -4,7 +4,6 @@ namespace Modules\Geocodes\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use Modules\Geocodes\Models\Geocodes;
 
 class GeocodesDatabaseSeeder extends Seeder
 {
@@ -16,8 +15,5 @@ class GeocodesDatabaseSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-
-        $model = new Geocodes;
-        $model->sync();
     }
 }
