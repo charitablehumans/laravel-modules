@@ -64,6 +64,7 @@ return [
     'easily_using' => 'Easily Using',
     'edit' => 'Edit',
     'edited' => 'Edited',
+    'email' => 'Email',
     'enter_password' => 'Enter Password',
     'enter_payment_detail' => 'Enter payment detail',
     'export_to_csv' => 'Export to Csv',

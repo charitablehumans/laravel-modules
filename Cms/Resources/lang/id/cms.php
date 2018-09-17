@@ -64,6 +64,7 @@ return [
     'easily_using' => 'Mudah Menggunakan',
     'edit' => 'Sunting',
     'edited' => 'Disunting',
+    'email' => 'Email',
     'enter_password' => 'Masukkan Kata Sandi',
     'enter_payment_detail' => 'Masukan detail pembayaran',
     'export_to_csv' => 'Ekspor ke Csv',
