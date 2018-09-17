@@ -128,6 +128,7 @@ return [
     'new_user' => 'New User',
     'newer' => 'Newer',
     'newest' => 'Newest',
+    'news' => 'News',
     'next' => 'Next',
     'no' => 'No',
     'no_data' => 'No data',

@@ -128,6 +128,7 @@ return [
     'new_user' => 'Pengguna Baru',
     'newer' => 'Lebih Baru',
     'newest' => 'Terbaru',
+    'news' => 'Berita',
     'next' => 'Berikutnya',
     'no' => 'Tidak',
     'no_data' => 'Tidak ada data',
